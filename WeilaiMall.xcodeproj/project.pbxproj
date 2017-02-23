@@ -1,0 +1,625 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		97D80AD24A110D684E5E87A0 /* Pods_WeilaiMall.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BE5254FD0591D5EEAF8A7 /* Pods_WeilaiMall.framework */; };
+		D52084011E5F2C1200BE031B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52084001E5F2C1200BE031B /* AppDelegate.swift */; };
+		D52084031E5F2C1200BE031B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52084021E5F2C1200BE031B /* ViewController.swift */; };
+		D52084061E5F2C1200BE031B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D52084041E5F2C1200BE031B /* Main.storyboard */; };
+		D52084091E5F2C1200BE031B /* WeilaiMall.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D52084071E5F2C1200BE031B /* WeilaiMall.xcdatamodeld */; };
+		D520840B1E5F2C1200BE031B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D520840A1E5F2C1200BE031B /* Assets.xcassets */; };
+		D520840E1E5F2C1200BE031B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D520840C1E5F2C1200BE031B /* LaunchScreen.storyboard */; };
+		D52084191E5F2C1200BE031B /* WeilaiMallTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52084181E5F2C1200BE031B /* WeilaiMallTests.swift */; };
+		D52084241E5F2C1200BE031B /* WeilaiMallUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52084231E5F2C1200BE031B /* WeilaiMallUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D52084151E5F2C1200BE031B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D52083F51E5F2C1200BE031B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D52083FC1E5F2C1200BE031B;
+			remoteInfo = WeilaiMall;
+		};
+		D52084201E5F2C1200BE031B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D52083F51E5F2C1200BE031B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D52083FC1E5F2C1200BE031B;
+			remoteInfo = WeilaiMall;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2165B2DCADD397E65CB507D4 /* Pods-WeilaiMall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeilaiMall.release.xcconfig"; path = "Pods/Target Support Files/Pods-WeilaiMall/Pods-WeilaiMall.release.xcconfig"; sourceTree = "<group>"; };
+		865602186F2BDB5AE69031E0 /* Pods-WeilaiMall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeilaiMall.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeilaiMall/Pods-WeilaiMall.debug.xcconfig"; sourceTree = "<group>"; };
+		D52083FD1E5F2C1200BE031B /* WeilaiMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeilaiMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D52084001E5F2C1200BE031B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D52084021E5F2C1200BE031B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D52084051E5F2C1200BE031B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D52084081E5F2C1200BE031B /* WeilaiMall.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeilaiMall.xcdatamodel; sourceTree = "<group>"; };
+		D520840A1E5F2C1200BE031B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D520840D1E5F2C1200BE031B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D520840F1E5F2C1200BE031B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D52084141E5F2C1200BE031B /* WeilaiMallTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeilaiMallTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D52084181E5F2C1200BE031B /* WeilaiMallTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeilaiMallTests.swift; sourceTree = "<group>"; };
+		D520841A1E5F2C1200BE031B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D520841F1E5F2C1200BE031B /* WeilaiMallUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeilaiMallUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D52084231E5F2C1200BE031B /* WeilaiMallUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeilaiMallUITests.swift; sourceTree = "<group>"; };
+		D52084251E5F2C1200BE031B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F23BE5254FD0591D5EEAF8A7 /* Pods_WeilaiMall.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeilaiMall.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D52083FA1E5F2C1200BE031B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97D80AD24A110D684E5E87A0 /* Pods_WeilaiMall.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D52084111E5F2C1200BE031B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D520841C1E5F2C1200BE031B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0D26F7F67203F43DC57052BB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F23BE5254FD0591D5EEAF8A7 /* Pods_WeilaiMall.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4A496C0D154CDF06D318014A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				865602186F2BDB5AE69031E0 /* Pods-WeilaiMall.debug.xcconfig */,
+				2165B2DCADD397E65CB507D4 /* Pods-WeilaiMall.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D52083F41E5F2C1200BE031B = {
+			isa = PBXGroup;
+			children = (
+				D52083FF1E5F2C1200BE031B /* WeilaiMall */,
+				D52084171E5F2C1200BE031B /* WeilaiMallTests */,
+				D52084221E5F2C1200BE031B /* WeilaiMallUITests */,
+				D52083FE1E5F2C1200BE031B /* Products */,
+				4A496C0D154CDF06D318014A /* Pods */,
+				0D26F7F67203F43DC57052BB /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		D52083FE1E5F2C1200BE031B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D52083FD1E5F2C1200BE031B /* WeilaiMall.app */,
+				D52084141E5F2C1200BE031B /* WeilaiMallTests.xctest */,
+				D520841F1E5F2C1200BE031B /* WeilaiMallUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D52083FF1E5F2C1200BE031B /* WeilaiMall */ = {
+			isa = PBXGroup;
+			children = (
+				D52084001E5F2C1200BE031B /* AppDelegate.swift */,
+				D52084021E5F2C1200BE031B /* ViewController.swift */,
+				D52084041E5F2C1200BE031B /* Main.storyboard */,
+				D520840A1E5F2C1200BE031B /* Assets.xcassets */,
+				D520840C1E5F2C1200BE031B /* LaunchScreen.storyboard */,
+				D520840F1E5F2C1200BE031B /* Info.plist */,
+				D52084071E5F2C1200BE031B /* WeilaiMall.xcdatamodeld */,
+			);
+			path = WeilaiMall;
+			sourceTree = "<group>";
+		};
+		D52084171E5F2C1200BE031B /* WeilaiMallTests */ = {
+			isa = PBXGroup;
+			children = (
+				D52084181E5F2C1200BE031B /* WeilaiMallTests.swift */,
+				D520841A1E5F2C1200BE031B /* Info.plist */,
+			);
+			path = WeilaiMallTests;
+			sourceTree = "<group>";
+		};
+		D52084221E5F2C1200BE031B /* WeilaiMallUITests */ = {
+			isa = PBXGroup;
+			children = (
+				D52084231E5F2C1200BE031B /* WeilaiMallUITests.swift */,
+				D52084251E5F2C1200BE031B /* Info.plist */,
+			);
+			path = WeilaiMallUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D52083FC1E5F2C1200BE031B /* WeilaiMall */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D52084281E5F2C1300BE031B /* Build configuration list for PBXNativeTarget "WeilaiMall" */;
+			buildPhases = (
+				6F8A02C76BB7B290DC58F85F /* [CP] Check Pods Manifest.lock */,
+				D52083F91E5F2C1200BE031B /* Sources */,
+				D52083FA1E5F2C1200BE031B /* Frameworks */,
+				D52083FB1E5F2C1200BE031B /* Resources */,
+				13018172FC6D359DE295F854 /* [CP] Embed Pods Frameworks */,
+				6D80E7115524042AB1489465 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WeilaiMall;
+			productName = WeilaiMall;
+			productReference = D52083FD1E5F2C1200BE031B /* WeilaiMall.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D52084131E5F2C1200BE031B /* WeilaiMallTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D520842B1E5F2C1300BE031B /* Build configuration list for PBXNativeTarget "WeilaiMallTests" */;
+			buildPhases = (
+				D52084101E5F2C1200BE031B /* Sources */,
+				D52084111E5F2C1200BE031B /* Frameworks */,
+				D52084121E5F2C1200BE031B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D52084161E5F2C1200BE031B /* PBXTargetDependency */,
+			);
+			name = WeilaiMallTests;
+			productName = WeilaiMallTests;
+			productReference = D52084141E5F2C1200BE031B /* WeilaiMallTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D520841E1E5F2C1200BE031B /* WeilaiMallUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D520842E1E5F2C1300BE031B /* Build configuration list for PBXNativeTarget "WeilaiMallUITests" */;
+			buildPhases = (
+				D520841B1E5F2C1200BE031B /* Sources */,
+				D520841C1E5F2C1200BE031B /* Frameworks */,
+				D520841D1E5F2C1200BE031B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D52084211E5F2C1200BE031B /* PBXTargetDependency */,
+			);
+			name = WeilaiMallUITests;
+			productName = WeilaiMallUITests;
+			productReference = D520841F1E5F2C1200BE031B /* WeilaiMallUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D52083F51E5F2C1200BE031B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = 24hmb;
+				TargetAttributes = {
+					D52083FC1E5F2C1200BE031B = {
+						CreatedOnToolsVersion = 8.2;
+						ProvisioningStyle = Automatic;
+					};
+					D52084131E5F2C1200BE031B = {
+						CreatedOnToolsVersion = 8.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = D52083FC1E5F2C1200BE031B;
+					};
+					D520841E1E5F2C1200BE031B = {
+						CreatedOnToolsVersion = 8.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = D52083FC1E5F2C1200BE031B;
+					};
+				};
+			};
+			buildConfigurationList = D52083F81E5F2C1200BE031B /* Build configuration list for PBXProject "WeilaiMall" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D52083F41E5F2C1200BE031B;
+			productRefGroup = D52083FE1E5F2C1200BE031B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D52083FC1E5F2C1200BE031B /* WeilaiMall */,
+				D52084131E5F2C1200BE031B /* WeilaiMallTests */,
+				D520841E1E5F2C1200BE031B /* WeilaiMallUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D52083FB1E5F2C1200BE031B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D520840E1E5F2C1200BE031B /* LaunchScreen.storyboard in Resources */,
+				D520840B1E5F2C1200BE031B /* Assets.xcassets in Resources */,
+				D52084061E5F2C1200BE031B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D52084121E5F2C1200BE031B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D520841D1E5F2C1200BE031B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		13018172FC6D359DE295F854 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WeilaiMall/Pods-WeilaiMall-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6D80E7115524042AB1489465 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WeilaiMall/Pods-WeilaiMall-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6F8A02C76BB7B290DC58F85F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D52083F91E5F2C1200BE031B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D52084091E5F2C1200BE031B /* WeilaiMall.xcdatamodeld in Sources */,
+				D52084031E5F2C1200BE031B /* ViewController.swift in Sources */,
+				D52084011E5F2C1200BE031B /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D52084101E5F2C1200BE031B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D52084191E5F2C1200BE031B /* WeilaiMallTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D520841B1E5F2C1200BE031B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D52084241E5F2C1200BE031B /* WeilaiMallUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D52084161E5F2C1200BE031B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D52083FC1E5F2C1200BE031B /* WeilaiMall */;
+			targetProxy = D52084151E5F2C1200BE031B /* PBXContainerItemProxy */;
+		};
+		D52084211E5F2C1200BE031B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D52083FC1E5F2C1200BE031B /* WeilaiMall */;
+			targetProxy = D52084201E5F2C1200BE031B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D52084041E5F2C1200BE031B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D52084051E5F2C1200BE031B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D520840C1E5F2C1200BE031B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D520840D1E5F2C1200BE031B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D52084261E5F2C1300BE031B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D52084271E5F2C1300BE031B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D52084291E5F2C1300BE031B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 865602186F2BDB5AE69031E0 /* Pods-WeilaiMall.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = WeilaiMall/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ash.WeilaiMall;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		D520842A1E5F2C1300BE031B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2165B2DCADD397E65CB507D4 /* Pods-WeilaiMall.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = WeilaiMall/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ash.WeilaiMall;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		D520842C1E5F2C1300BE031B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = WeilaiMallTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ash.WeilaiMallTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WeilaiMall.app/WeilaiMall";
+			};
+			name = Debug;
+		};
+		D520842D1E5F2C1300BE031B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = WeilaiMallTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ash.WeilaiMallTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WeilaiMall.app/WeilaiMall";
+			};
+			name = Release;
+		};
+		D520842F1E5F2C1300BE031B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = WeilaiMallUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ash.WeilaiMallUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = WeilaiMall;
+			};
+			name = Debug;
+		};
+		D52084301E5F2C1300BE031B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = WeilaiMallUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = ash.WeilaiMallUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = WeilaiMall;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D52083F81E5F2C1200BE031B /* Build configuration list for PBXProject "WeilaiMall" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D52084261E5F2C1300BE031B /* Debug */,
+				D52084271E5F2C1300BE031B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D52084281E5F2C1300BE031B /* Build configuration list for PBXNativeTarget "WeilaiMall" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D52084291E5F2C1300BE031B /* Debug */,
+				D520842A1E5F2C1300BE031B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D520842B1E5F2C1300BE031B /* Build configuration list for PBXNativeTarget "WeilaiMallTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D520842C1E5F2C1300BE031B /* Debug */,
+				D520842D1E5F2C1300BE031B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D520842E1E5F2C1300BE031B /* Build configuration list for PBXNativeTarget "WeilaiMallUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D520842F1E5F2C1300BE031B /* Debug */,
+				D52084301E5F2C1300BE031B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D52084071E5F2C1200BE031B /* WeilaiMall.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D52084081E5F2C1200BE031B /* WeilaiMall.xcdatamodel */,
+			);
+			currentVersion = D52084081E5F2C1200BE031B /* WeilaiMall.xcdatamodel */;
+			path = WeilaiMall.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = D52083F51E5F2C1200BE031B /* Project object */;
+}
