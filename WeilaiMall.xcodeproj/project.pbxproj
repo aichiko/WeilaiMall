@@ -16,6 +16,14 @@
 		D520840E1E5F2C1200BE031B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D520840C1E5F2C1200BE031B /* LaunchScreen.storyboard */; };
 		D52084191E5F2C1200BE031B /* WeilaiMallTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52084181E5F2C1200BE031B /* WeilaiMallTests.swift */; };
 		D52084241E5F2C1200BE031B /* WeilaiMallUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52084231E5F2C1200BE031B /* WeilaiMallUITests.swift */; };
+		D5E3C7BC1E62EA890012FD7C /* CCTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E3C7BB1E62EA890012FD7C /* CCTabBar.swift */; };
+		D5E3C7FA1E62F5680012FD7C /* CCTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E3C7F91E62F5680012FD7C /* CCTabBarController.swift */; };
+		D5E3C7FC1E6302460012FD7C /* CCWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E3C7FB1E6302460012FD7C /* CCWebViewController.swift */; };
+		D5E3C80D1E630CD80012FD7C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E3C80C1E630CD80012FD7C /* HomeViewController.swift */; };
+		D5E3C80F1E630CE70012FD7C /* ClassifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E3C80E1E630CE70012FD7C /* ClassifyViewController.swift */; };
+		D5E3C8111E630CF30012FD7C /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E3C8101E630CF30012FD7C /* MineViewController.swift */; };
+		D5E3C8131E630D090012FD7C /* ShoppingCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E3C8121E630D090012FD7C /* ShoppingCartViewController.swift */; };
+		D5E3C8151E630D160012FD7C /* WeilaiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E3C8141E630D160012FD7C /* WeilaiViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +60,14 @@
 		D520841F1E5F2C1200BE031B /* WeilaiMallUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeilaiMallUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D52084231E5F2C1200BE031B /* WeilaiMallUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeilaiMallUITests.swift; sourceTree = "<group>"; };
 		D52084251E5F2C1200BE031B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D5E3C7BB1E62EA890012FD7C /* CCTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCTabBar.swift; sourceTree = "<group>"; };
+		D5E3C7F91E62F5680012FD7C /* CCTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCTabBarController.swift; sourceTree = "<group>"; };
+		D5E3C7FB1E6302460012FD7C /* CCWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCWebViewController.swift; sourceTree = "<group>"; };
+		D5E3C80C1E630CD80012FD7C /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		D5E3C80E1E630CE70012FD7C /* ClassifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassifyViewController.swift; sourceTree = "<group>"; };
+		D5E3C8101E630CF30012FD7C /* MineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
+		D5E3C8121E630D090012FD7C /* ShoppingCartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingCartViewController.swift; sourceTree = "<group>"; };
+		D5E3C8141E630D160012FD7C /* WeilaiViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeilaiViewController.swift; sourceTree = "<group>"; };
 		F23BE5254FD0591D5EEAF8A7 /* Pods_WeilaiMall.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeilaiMall.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -123,6 +139,8 @@
 		D52083FF1E5F2C1200BE031B /* WeilaiMall */ = {
 			isa = PBXGroup;
 			children = (
+				D5E3C7B61E62EA160012FD7C /* Class */,
+				D5E3C7B71E62EA160012FD7C /* Other */,
 				D52084001E5F2C1200BE031B /* AppDelegate.swift */,
 				D52084021E5F2C1200BE031B /* ViewController.swift */,
 				D52084041E5F2C1200BE031B /* Main.storyboard */,
@@ -150,6 +168,172 @@
 				D52084251E5F2C1200BE031B /* Info.plist */,
 			);
 			path = WeilaiMallUITests;
+			sourceTree = "<group>";
+		};
+		D5E3C7B61E62EA160012FD7C /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				D5E3C7FD1E630CB20012FD7C /* Classify */,
+				D5E3C8001E630CB20012FD7C /* Home */,
+				D5E3C8031E630CB20012FD7C /* mine */,
+				D5E3C8061E630CB20012FD7C /* Shoppingcart */,
+				D5E3C8091E630CB20012FD7C /* Weilai */,
+			);
+			path = Class;
+			sourceTree = "<group>";
+		};
+		D5E3C7B71E62EA160012FD7C /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				D5E3C7B81E62EA730012FD7C /* Controllers */,
+				D5E3C7B91E62EA730012FD7C /* Source */,
+				D5E3C7BA1E62EA730012FD7C /* Views */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		D5E3C7B81E62EA730012FD7C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D5E3C7F91E62F5680012FD7C /* CCTabBarController.swift */,
+				D5E3C7FB1E6302460012FD7C /* CCWebViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D5E3C7B91E62EA730012FD7C /* Source */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		D5E3C7BA1E62EA730012FD7C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D5E3C7BB1E62EA890012FD7C /* CCTabBar.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D5E3C7FD1E630CB20012FD7C /* Classify */ = {
+			isa = PBXGroup;
+			children = (
+				D5E3C7FE1E630CB20012FD7C /* Controllers */,
+				D5E3C7FF1E630CB20012FD7C /* Views */,
+			);
+			path = Classify;
+			sourceTree = "<group>";
+		};
+		D5E3C7FE1E630CB20012FD7C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D5E3C80E1E630CE70012FD7C /* ClassifyViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D5E3C7FF1E630CB20012FD7C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D5E3C8001E630CB20012FD7C /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				D5E3C8011E630CB20012FD7C /* Controllers */,
+				D5E3C8021E630CB20012FD7C /* Views */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		D5E3C8011E630CB20012FD7C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D5E3C80C1E630CD80012FD7C /* HomeViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D5E3C8021E630CB20012FD7C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D5E3C8031E630CB20012FD7C /* mine */ = {
+			isa = PBXGroup;
+			children = (
+				D5E3C8041E630CB20012FD7C /* Controllers */,
+				D5E3C8051E630CB20012FD7C /* Views */,
+			);
+			path = mine;
+			sourceTree = "<group>";
+		};
+		D5E3C8041E630CB20012FD7C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D5E3C8101E630CF30012FD7C /* MineViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D5E3C8051E630CB20012FD7C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D5E3C8061E630CB20012FD7C /* Shoppingcart */ = {
+			isa = PBXGroup;
+			children = (
+				D5E3C8071E630CB20012FD7C /* Controllers */,
+				D5E3C8081E630CB20012FD7C /* Views */,
+			);
+			path = Shoppingcart;
+			sourceTree = "<group>";
+		};
+		D5E3C8071E630CB20012FD7C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D5E3C8121E630D090012FD7C /* ShoppingCartViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D5E3C8081E630CB20012FD7C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D5E3C8091E630CB20012FD7C /* Weilai */ = {
+			isa = PBXGroup;
+			children = (
+				D5E3C80A1E630CB20012FD7C /* Controllers */,
+				D5E3C80B1E630CB20012FD7C /* Views */,
+			);
+			path = Weilai;
+			sourceTree = "<group>";
+		};
+		D5E3C80A1E630CB20012FD7C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D5E3C8141E630D160012FD7C /* WeilaiViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D5E3C80B1E630CB20012FD7C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -339,7 +523,15 @@
 			files = (
 				D52084091E5F2C1200BE031B /* WeilaiMall.xcdatamodeld in Sources */,
 				D52084031E5F2C1200BE031B /* ViewController.swift in Sources */,
+				D5E3C8111E630CF30012FD7C /* MineViewController.swift in Sources */,
 				D52084011E5F2C1200BE031B /* AppDelegate.swift in Sources */,
+				D5E3C8131E630D090012FD7C /* ShoppingCartViewController.swift in Sources */,
+				D5E3C7FC1E6302460012FD7C /* CCWebViewController.swift in Sources */,
+				D5E3C8151E630D160012FD7C /* WeilaiViewController.swift in Sources */,
+				D5E3C80F1E630CE70012FD7C /* ClassifyViewController.swift in Sources */,
+				D5E3C7BC1E62EA890012FD7C /* CCTabBar.swift in Sources */,
+				D5E3C80D1E630CD80012FD7C /* HomeViewController.swift in Sources */,
+				D5E3C7FA1E62F5680012FD7C /* CCTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
