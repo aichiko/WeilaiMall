@@ -44,18 +44,14 @@ class LoginViewController: ViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.red
         // Do any additional setup after loading the view.
+        
+        subviewsAttribute()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        self.view.endEditing(true)
-    }
-    
 
     @IBAction func loginAction(_ sender: Any) {
         
@@ -72,6 +68,26 @@ class LoginViewController: ViewController {
 
 }
 
+extension LoginViewController {
+    
+    /// 设置 控件属性
+    func subviewsAttribute() {
+        let leftview = UIImageView(frame: CGRect.init(x: 0, y: 0, width: 40, height: 40))
+        let rightview = UIImageView(frame: CGRect.init(x: 0, y: 0, width: 40, height: 40))
+        userTextField.leftView = leftview
+        passwordTextFeild.leftView = rightview
+        userTextField.leftViewMode = .always
+        passwordTextFeild.leftViewMode = .always
+        
+        userView.layer.masksToBounds = true
+        userView.layer.borderWidth = 1
+        userView.layer.borderColor = UIColor.white.cgColor
+        passwordView.layer.masksToBounds = true
+        passwordView.layer.borderWidth = 1
+        passwordView.layer.borderColor = UIColor.white.cgColor
+    }
+}
+
 extension LoginViewController: UITextFieldDelegate {
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField.isEqual(userTextField) {
@@ -81,5 +97,10 @@ extension LoginViewController: UITextFieldDelegate {
             print("登录")
         }
         return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        self.view.endEditing(true)
     }
 }

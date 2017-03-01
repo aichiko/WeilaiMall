@@ -14,14 +14,13 @@ class CCWebViewController: ViewController {
 
     var webView = WKWebView(frame: CGRect.zero, configuration: WKWebViewConfiguration.init())
     
+    var progress = UIProgressView(progressViewStyle: .default)
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
-        view.addSubview(webView)
-        webView.load(URLRequest.init(url: URL.init(string: "https://www.baidu.com")!))
+        loadWebview()
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,6 +28,12 @@ class CCWebViewController: ViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    deinit {
+        webView.removeObserver(self, forKeyPath: "loading")
+        webView.removeObserver(self, forKeyPath: "estimatedProgress")
+        webView.removeObserver(self, forKeyPath: "title")
+        progress.removeFromSuperview()
+    }
 
     /*
     // MARK: - Navigation
@@ -40,4 +45,36 @@ class CCWebViewController: ViewController {
     }
     */
 
+}
+
+extension CCWebViewController {
+    fileprivate func loadWebview() {
+        
+        self.navigationController?.navigationBar.subviews.first?.addSubview(progress)
+        progress.snp.updateConstraints { (make) in
+            make.left.right.bottom.equalTo(0)
+        }
+        view.addSubview(webView)
+        
+        webView.snp.updateConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        webView.load(URLRequest.init(url: URL.init(string: "https://www.baidu.com")!))
+        
+        webView.addObserver(self, forKeyPath: "loading", options: .new, context: nil)
+        webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
+        webView.addObserver(self, forKeyPath: "title", options: .new, context: nil)
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath=="estimatedProgress" {
+            DispatchQueue.main.async {
+                self.progress.setProgress(change?[NSKeyValueChangeKey.newKey] as! Float, animated: true)
+            }
+            self.progress.isHidden = (change?[NSKeyValueChangeKey.newKey] as! Float) == 1
+        }else if keyPath == "title" {
+            self.navigationItem.title = self.webView.title;
+        }
+    }
+    
 }
