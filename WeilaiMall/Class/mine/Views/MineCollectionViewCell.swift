@@ -10,6 +10,16 @@ import UIKit
 
 class MineCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var imageView: UIImageView!
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    var title: String? {
+        didSet {
+            titleLabel.text = title
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

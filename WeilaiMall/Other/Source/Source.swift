@@ -15,9 +15,10 @@ extension UIFont {
     class func CCsetfont(_ size: CGFloat) -> UIFont? {
         let realSize = (UIScreen.main.bounds.width>375) ? (size*414.0/375.0): size
         
-        let family = "PingFang-SC-Regular"
-        let font = UIFont.init(name: family, size: realSize)
-        return font!
+        //let family = "PingFang-SC-Regular"
+        //let font = UIFont.init(name: family, size: realSize)
+        let font = UIFont.systemFont(ofSize: realSize)
+        return font
     }
     
     class func CCsetfont(_ size: CGFloat, _ fontFamily: String?) -> UIFont? {

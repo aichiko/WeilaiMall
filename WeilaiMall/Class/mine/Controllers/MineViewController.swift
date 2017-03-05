@@ -26,12 +26,15 @@ class MineViewController: ViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
+    var titles = ["转账", "结算支付", "订单中心", "操作记录", "邀请注册", "充值", "设置", "关于"]
+    var imageTitles = ["", "", "", "", "", "", "", ""]
+    
     var headView = MineHeadView()
     var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         self.navigationController?.isNavigationBarHidden = true
         configSubviews()
@@ -59,7 +62,7 @@ extension MineViewController {
     fileprivate func configSubviews() {
         self.view.addSubview(headView)
         self.view.addSubview(collectionView)
-        
+        headView.style = .logged
         headView.snp.updateConstraints { (make) in
             make.top.left.right.equalToSuperview()
             make.height.equalTo(230)
@@ -83,7 +86,7 @@ extension MineViewController: UICollectionViewDelegate, UICollectionViewDataSour
     @available(iOS 6.0, *)
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: width-1, height: width)
+        return CGSize(width: width-1, height: 100)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -103,13 +106,17 @@ extension MineViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
+        return titles.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
-        cell.backgroundColor = UIColor.white
-        return cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? MineCollectionViewCell
+        cell?.backgroundColor = UIColor.white
+        let view = UIView()
+        view.backgroundColor = UIColor.lightGray
+        cell?.selectedBackgroundView = view
+        cell?.title = titles[indexPath.item]
+        return cell!
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
