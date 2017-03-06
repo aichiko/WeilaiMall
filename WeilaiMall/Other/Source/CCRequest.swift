@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import Alamofire
 
 //也可以为 URLSessionClient 添加一个单例来减少请求时的创建开销
 struct URLSessionClient: Client {
@@ -32,27 +33,13 @@ struct URLSessionClient: Client {
         task.resume()
     }
     
-    /*
+    
      internal func alamofireSend<T : CCRequest>(_ r: T, handler: @escaping ([T.Response?], Error?) -> Void) {
-     let url = URL(string: host.appending(r.path))!
-     Alamofire.request(url, method: .post, parameters: r.parameter).responseJSON { (response) in
-     debugPrint("data === \(response.data)")
-     if response.result.isSuccess {
-     let value = JSON(response.result.value!)
-     debugPrint("value ==== \(value)")
-     if let res = r.JSONParse(jsonData: value["data"]) {
-     DispatchQueue.main.async { handler(res, response.result.error) }
+        
+        handler([], nil)
      }
-     }else {
-     NSLog("error === \(response.result.error)")
-     DispatchQueue.main.async { handler([], response.result.error) }
-     }
-     }
-     }
-     */
+    
 }
-
-
 
 protocol Decodable {
     /// 返回一个model

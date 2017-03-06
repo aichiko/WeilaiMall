@@ -10,6 +10,16 @@ import Foundation
 import UIKit
 import SnapKit
 
+// 常用字体颜色
+let CCGrayTextColor = UIColor.colorWithString("#999999")
+let CCTitleTextColor = UIColor.colorWithString("#333333")
+// 购买按钮背景颜色 以及 价格数字的颜色
+let CCOrangeColor = UIColor.colorWithString("#FF6B26")
+// 常用字体
+let CCTextFont = UIFont.CCsetfont(14)
+
+typealias CCButtonAction = (_ button: UIButton) -> Void
+
 extension UIFont {
     
     class func CCsetfont(_ size: CGFloat) -> UIFont? {
@@ -63,3 +73,11 @@ extension UIColor {
         return UIColor.colorWithString((rgb, 1.0))
     }
 }
+
+/// tableView 的协议（每次都写一遍真是太麻烦了）
+protocol CCTableViewProtocol {
+    var tableView: UITableView { get set }
+    
+    func configTableView() -> Void
+}
+
