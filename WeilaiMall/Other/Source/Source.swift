@@ -15,6 +15,9 @@ let CCGrayTextColor = UIColor.colorWithString("#999999")
 let CCTitleTextColor = UIColor.colorWithString("#333333")
 // 购买按钮背景颜色 以及 价格数字的颜色
 let CCOrangeColor = UIColor.colorWithString("#FF6B26")
+// button 不可用 时的背景颜色
+let CCButtonGrayColor = UIColor(red:0.80, green:0.81, blue:0.81, alpha:1.00)
+
 // 常用字体
 let CCTextFont = UIFont.CCsetfont(14)
 

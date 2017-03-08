@@ -8,6 +8,18 @@
 
 import UIKit
 
+enum PushIdentifier: String {
+    case transfer = "transfer"
+    case clearing = "clearing"
+    case myorder = "myorder"
+    case record = "record"
+    case register = "invitedRegister"
+    case Recharge = "Recharge"
+    case settingup = "settingup"
+    case about = "about"
+}
+
+
 let width = UIScreen.main.bounds.width/4
 
 let CCbackgroundColor = UIColor(red:0.94, green:0.95, blue:0.96, alpha:1.00)
@@ -27,7 +39,9 @@ class MineViewController: ViewController {
     }
     
     var titles = ["转账", "结算支付", "订单中心", "操作记录", "邀请注册", "充值", "设置", "关于"]
-    var imageTitles = ["", "", "", "", "", "", "", ""]
+    var imageTitles = ["transfer_icon", "account_icon", "order_icon", "record_icon", "inviteRegister_icon", "recharge_icon", "setup_icon", "about_icon"]
+    
+    var identifiers = ["transfer", "clearing", "myorder", "record", "invitedRegister", "Recharge", "settingup", "about"]
     
     var headView = MineHeadView()
     var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
@@ -116,11 +130,14 @@ extension MineViewController: UICollectionViewDelegate, UICollectionViewDataSour
         view.backgroundColor = UIColor.lightGray
         cell?.selectedBackgroundView = view
         cell?.title = titles[indexPath.item]
+        cell?.imageView.image = UIImage.init(named: imageTitles[indexPath.item])
         return cell!
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath)
+        collectionView.deselectItem(at: indexPath, animated: true)
+        self.performSegue(withIdentifier: identifiers[indexPath.item], sender: self)
     }
     
 }

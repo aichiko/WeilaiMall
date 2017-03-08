@@ -11,6 +11,9 @@
 		D517FC101E65B1E60050AE99 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D517FC0F1E65B1E60050AE99 /* LoginViewController.swift */; };
 		D517FC141E65C9B10050AE99 /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = D517FC131E65C9B10050AE99 /* Source.swift */; };
 		D517FC161E65C9C40050AE99 /* CCRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D517FC151E65C9C40050AE99 /* CCRequest.swift */; };
+		D51D84161E703A500059496D /* SettingupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51D84151E703A500059496D /* SettingupViewController.swift */; };
+		D51D84181E7044FB0059496D /* ChangeLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51D84171E7044FB0059496D /* ChangeLoginViewController.swift */; };
+		D51D841A1E7045130059496D /* ChangePayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51D84191E7045130059496D /* ChangePayViewController.swift */; };
 		D52084011E5F2C1200BE031B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52084001E5F2C1200BE031B /* AppDelegate.swift */; };
 		D52084031E5F2C1200BE031B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52084021E5F2C1200BE031B /* ViewController.swift */; };
 		D52084061E5F2C1200BE031B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D52084041E5F2C1200BE031B /* Main.storyboard */; };
@@ -61,6 +64,9 @@
 		D517FC0F1E65B1E60050AE99 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D517FC131E65C9B10050AE99 /* Source.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
 		D517FC151E65C9C40050AE99 /* CCRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCRequest.swift; sourceTree = "<group>"; };
+		D51D84151E703A500059496D /* SettingupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingupViewController.swift; sourceTree = "<group>"; };
+		D51D84171E7044FB0059496D /* ChangeLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeLoginViewController.swift; sourceTree = "<group>"; };
+		D51D84191E7045130059496D /* ChangePayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePayViewController.swift; sourceTree = "<group>"; };
 		D52083FD1E5F2C1200BE031B /* WeilaiMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeilaiMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D52084001E5F2C1200BE031B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D52084021E5F2C1200BE031B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -304,6 +310,9 @@
 			children = (
 				D5E3C8101E630CF30012FD7C /* MineViewController.swift */,
 				D517FC0F1E65B1E60050AE99 /* LoginViewController.swift */,
+				D51D84151E703A500059496D /* SettingupViewController.swift */,
+				D51D84171E7044FB0059496D /* ChangeLoginViewController.swift */,
+				D51D84191E7045130059496D /* ChangePayViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -562,9 +571,11 @@
 				D517FC101E65B1E60050AE99 /* LoginViewController.swift in Sources */,
 				D545FF2B1E6D940B0081EAF8 /* ShoppingCartViewController.swift in Sources */,
 				D517FC161E65C9C40050AE99 /* CCRequest.swift in Sources */,
+				D51D84181E7044FB0059496D /* ChangeLoginViewController.swift in Sources */,
 				D545FF351E6D94770081EAF8 /* CCShoppingNumberView.swift in Sources */,
 				D545FF341E6D94770081EAF8 /* CCShoppingCarHeadView.swift in Sources */,
 				D545FF2A1E6D940B0081EAF8 /* ShoppingCar+UITableView.swift in Sources */,
+				D51D841A1E7045130059496D /* ChangePayViewController.swift in Sources */,
 				D52084091E5F2C1200BE031B /* WeilaiMall.xcdatamodeld in Sources */,
 				D545FF311E6D94770081EAF8 /* CCShoppingBar.swift in Sources */,
 				D52084031E5F2C1200BE031B /* ViewController.swift in Sources */,
@@ -575,6 +586,7 @@
 				D5E3C7FC1E6302460012FD7C /* CCWebViewController.swift in Sources */,
 				D5E3C8151E630D160012FD7C /* WeilaiViewController.swift in Sources */,
 				D5E3C80F1E630CE70012FD7C /* ClassifyViewController.swift in Sources */,
+				D51D84161E703A500059496D /* SettingupViewController.swift in Sources */,
 				D57992B01E6717BA00A82DBC /* MineHeadView.swift in Sources */,
 				D5E3C7BC1E62EA890012FD7C /* CCTabBar.swift in Sources */,
 				D517FC141E65C9B10050AE99 /* Source.swift in Sources */,
