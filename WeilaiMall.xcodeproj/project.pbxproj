@@ -14,6 +14,8 @@
 		D51D84161E703A500059496D /* SettingupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51D84151E703A500059496D /* SettingupViewController.swift */; };
 		D51D84181E7044FB0059496D /* ChangeLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51D84171E7044FB0059496D /* ChangeLoginViewController.swift */; };
 		D51D841A1E7045130059496D /* ChangePayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51D84191E7045130059496D /* ChangePayViewController.swift */; };
+		D51F3AB31E71A0CC0092B85B /* OrderCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51F3AB21E71A0CC0092B85B /* OrderCenterViewController.swift */; };
+		D51F3AB51E71A5E20092B85B /* OrderHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51F3AB41E71A5E20092B85B /* OrderHeadView.swift */; };
 		D52084011E5F2C1200BE031B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52084001E5F2C1200BE031B /* AppDelegate.swift */; };
 		D52084031E5F2C1200BE031B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52084021E5F2C1200BE031B /* ViewController.swift */; };
 		D52084061E5F2C1200BE031B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D52084041E5F2C1200BE031B /* Main.storyboard */; };
@@ -67,6 +69,8 @@
 		D51D84151E703A500059496D /* SettingupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingupViewController.swift; sourceTree = "<group>"; };
 		D51D84171E7044FB0059496D /* ChangeLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeLoginViewController.swift; sourceTree = "<group>"; };
 		D51D84191E7045130059496D /* ChangePayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePayViewController.swift; sourceTree = "<group>"; };
+		D51F3AB21E71A0CC0092B85B /* OrderCenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderCenterViewController.swift; sourceTree = "<group>"; };
+		D51F3AB41E71A5E20092B85B /* OrderHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderHeadView.swift; sourceTree = "<group>"; };
 		D52083FD1E5F2C1200BE031B /* WeilaiMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeilaiMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D52084001E5F2C1200BE031B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D52084021E5F2C1200BE031B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -313,6 +317,7 @@
 				D51D84151E703A500059496D /* SettingupViewController.swift */,
 				D51D84171E7044FB0059496D /* ChangeLoginViewController.swift */,
 				D51D84191E7045130059496D /* ChangePayViewController.swift */,
+				D51F3AB21E71A0CC0092B85B /* OrderCenterViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -323,6 +328,7 @@
 				D57992AF1E6717BA00A82DBC /* MineHeadView.swift */,
 				D57992B11E671E8C00A82DBC /* MineCollectionViewCell.swift */,
 				D57992B21E671E8C00A82DBC /* MineCollectionViewCell.xib */,
+				D51F3AB41E71A5E20092B85B /* OrderHeadView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -575,12 +581,14 @@
 				D545FF351E6D94770081EAF8 /* CCShoppingNumberView.swift in Sources */,
 				D545FF341E6D94770081EAF8 /* CCShoppingCarHeadView.swift in Sources */,
 				D545FF2A1E6D940B0081EAF8 /* ShoppingCar+UITableView.swift in Sources */,
+				D51F3AB51E71A5E20092B85B /* OrderHeadView.swift in Sources */,
 				D51D841A1E7045130059496D /* ChangePayViewController.swift in Sources */,
 				D52084091E5F2C1200BE031B /* WeilaiMall.xcdatamodeld in Sources */,
 				D545FF311E6D94770081EAF8 /* CCShoppingBar.swift in Sources */,
 				D52084031E5F2C1200BE031B /* ViewController.swift in Sources */,
 				D5E3C8111E630CF30012FD7C /* MineViewController.swift in Sources */,
 				D545FF321E6D94770081EAF8 /* CCShoppingCarCell.swift in Sources */,
+				D51F3AB31E71A0CC0092B85B /* OrderCenterViewController.swift in Sources */,
 				D52084011E5F2C1200BE031B /* AppDelegate.swift in Sources */,
 				D57992B31E671E8C00A82DBC /* MineCollectionViewCell.swift in Sources */,
 				D5E3C7FC1E6302460012FD7C /* CCWebViewController.swift in Sources */,

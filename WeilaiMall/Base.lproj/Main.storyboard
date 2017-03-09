@@ -200,7 +200,7 @@
         <!--订单中心-->
         <scene sceneID="tCS-xa-jNB">
             <objects>
-                <viewController title="订单中心" hidesBottomBarWhenPushed="YES" id="OEW-ES-nJH" sceneMemberID="viewController">
+                <viewController title="订单中心" hidesBottomBarWhenPushed="YES" id="OEW-ES-nJH" customClass="OrderCenterViewController" customModule="WeilaiMall" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pzw-Jj-Zei"/>
                         <viewControllerLayoutGuide type="bottom" id="YDm-gm-Z7z"/>
