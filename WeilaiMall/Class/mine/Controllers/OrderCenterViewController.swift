@@ -8,6 +8,86 @@
 
 import UIKit
 
+fileprivate class HeadButton: UIButton {
+    
+    var Label: UILabel = UILabel()
+    
+    var image: UIImageView = UIImageView(image: UIImage.init(named: "info_arrow"))
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        addSubview(Label)
+        addSubview(image)
+        Label.text = "未来加商城"
+        Label.font = UIFont.CCsetfont(16)
+        
+        Label.snp.updateConstraints({ (make) in
+            make.left.equalTo(10)
+            make.height.centerY.equalToSuperview()
+        })
+        
+        image.snp.makeConstraints({ (make) in
+            make.left.equalTo(self.Label.snp.right).offset(5)
+            make.centerY.equalToSuperview()
+        })
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+class OrderCellHeadView: UITableViewHeaderFooterView {
+
+    var titleButton: UIButton = HeadButton(type: .system)
+    
+    var statusLabel = UILabel()
+    
+    
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        
+        configSubviews()
+    }
+    
+    private func configSubviews() {
+        addSubview(titleButton)
+        addSubview(statusLabel)
+        
+        titleButton.snp.makeConstraints { (make) in
+            make.centerY.equalToSuperview()
+            make.left.height.equalToSuperview()
+            make.width.equalTo(100)
+        }
+        
+        statusLabel.snp.updateConstraints { (make) in
+            make.right.equalTo(-10)
+            make.centerY.height.equalToSuperview()
+        }
+        
+        statusLabel.text = "卖家已发货"
+        statusLabel.textColor = UIColor.orange
+        statusLabel.font = UIFont.CCsetfont(14)
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+class OrderCellFootView: UITableViewHeaderFooterView {
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+
 class OrderScrollView: UIScrollView, UIGestureRecognizerDelegate {
     
     /// 全部 tableview
@@ -79,7 +159,11 @@ class OrderScrollView: UIScrollView, UIGestureRecognizerDelegate {
 /// 订单中心
 class OrderCenterViewController: ViewController {
 
-    var scrollView = OrderScrollView()
+    let headIdentifier = "headViewIdentifier"
+    let cellIdentifier = "cellIdentifier"
+    let footIdentifier = "footViewIdentifier"
+    
+    var scrollView = OrderScrollView(frame: CGRect.zero)
     
     lazy var headView: OrderHeadView = OrderHeadView()
     
@@ -92,18 +176,25 @@ class OrderCenterViewController: ViewController {
         loadSubviews()
         
         self.view.backgroundColor = UIColor.white
-        self.automaticallyAdjustsScrollViewInsets = false
+        
     }
     
     
     private func loadSubviews() {
         self.view.addSubview(headView)
         self.view.addSubview(scrollView)
-        
+        self.automaticallyAdjustsScrollViewInsets = false
         headView.snp.updateConstraints { (make) in
             make.top.equalTo(64)
             make.left.width.right.equalToSuperview()
             make.height.equalTo(40)
+        }
+        
+        headView.changeContent = {
+            [unowned self] location in
+            UIView.animate(withDuration: 0.2, animations: {
+                self.scrollView.contentOffset = CGPoint(x: UIScreen.main.bounds.width * CGFloat(location.rawValue), y: 0)
+            })
         }
         
         scrollView.snp.updateConstraints { (make) in
@@ -115,6 +206,20 @@ class OrderCenterViewController: ViewController {
         scrollView.isPagingEnabled = true
         scrollView.contentSize = CGSize(width: self.view.bounds.size.width * 4, height: 0)
         scrollView.showsHorizontalScrollIndicator = false
+        
+        tableViewAttribute(scrollView.allTableView)
+        tableViewAttribute(scrollView.notDeliverTableView)
+        tableViewAttribute(scrollView.notrReceivingTableView)
+        tableViewAttribute(scrollView.receivingTableView)
+    }
+    
+    
+    private func tableViewAttribute(_ tableView: UITableView) {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.contentInset = UIEdgeInsetsMake(-36, 0, 0, 0);
+        tableView.register(OrderCellHeadView.self, forHeaderFooterViewReuseIdentifier: headIdentifier)
+        tableView.register(OrderCellFootView.self, forHeaderFooterViewReuseIdentifier: footIdentifier)
     }
 
     override func didReceiveMemoryWarning() {
@@ -137,19 +242,38 @@ class OrderCenterViewController: ViewController {
 
 }
 
+// MARK: - UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate
 extension OrderCenterViewController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
-    func changeScrollContent(location: SlipperLocation) {
-        scrollView.contentOffset = CGPoint(x: UIScreen.main.bounds.width * CGFloat(location.rawValue), y: 0)
+    @available(iOS 2.0, *)
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headview = tableView.dequeueReusableHeaderFooterView(withIdentifier: headIdentifier)
+        return headview
     }
     
-    @available(iOS 2.0, *)
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 30
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footView = tableView.dequeueReusableHeaderFooterView(withIdentifier: footIdentifier)
+        return footView
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 5
+    }
+    
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 86
+        return 100
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return section == 0 ?1:2
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -158,11 +282,13 @@ extension OrderCenterViewController: UITableViewDelegate, UITableViewDataSource,
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = UITableViewCell.init(style: .default, reuseIdentifier: "")
+        let cell = UITableViewCell.init(style: .default, reuseIdentifier: cellIdentifier)
         //cell?.planOrHistory = .plan
         //cell?.model = self.dataArray[headView.slipperLocation.rawValue][indexPath.row]
         return cell
     }
+    
+    
     // MARK: - UIScrollViewDelegate
     @available(iOS 2.0, *)
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -174,9 +300,9 @@ extension OrderCenterViewController: UITableViewDelegate, UITableViewDataSource,
             return
         }
         NSLog("scrollView content === %f", scrollView.contentOffset.x)
-//        let originalContent = self.view.bounds.width*CGFloat(headView.slipperLocation.rawValue)
-//        let originCenterX = self.view.bounds.width/8 + self.view.bounds.width*CGFloat(headView.slipperLocation.rawValue)/4
-//        headView.slipper.center.x = originCenterX + (scrollView.contentOffset.x - originalContent)/3
+        let originalContent = self.view.bounds.width*CGFloat(headView.slipperLocation.rawValue)
+        let originCenterX = self.view.bounds.width/8 + self.view.bounds.width*CGFloat(headView.slipperLocation.rawValue)/4
+        headView.slipper.center.x = originCenterX + (scrollView.contentOffset.x - originalContent)/4
     }
     
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {

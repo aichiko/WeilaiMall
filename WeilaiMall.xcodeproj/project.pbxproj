@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		97D80AD24A110D684E5E87A0 /* Pods_WeilaiMall.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BE5254FD0591D5EEAF8A7 /* Pods_WeilaiMall.framework */; };
+		D516C2301E72EE0200BC5B60 /* OrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D516C22E1E72EE0200BC5B60 /* OrderTableViewCell.swift */; };
+		D516C2311E72EE0200BC5B60 /* OrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D516C22F1E72EE0200BC5B60 /* OrderTableViewCell.xib */; };
 		D517FC101E65B1E60050AE99 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D517FC0F1E65B1E60050AE99 /* LoginViewController.swift */; };
 		D517FC141E65C9B10050AE99 /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = D517FC131E65C9B10050AE99 /* Source.swift */; };
 		D517FC161E65C9C40050AE99 /* CCRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D517FC151E65C9C40050AE99 /* CCRequest.swift */; };
@@ -63,6 +65,8 @@
 /* Begin PBXFileReference section */
 		2165B2DCADD397E65CB507D4 /* Pods-WeilaiMall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeilaiMall.release.xcconfig"; path = "Pods/Target Support Files/Pods-WeilaiMall/Pods-WeilaiMall.release.xcconfig"; sourceTree = "<group>"; };
 		865602186F2BDB5AE69031E0 /* Pods-WeilaiMall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeilaiMall.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeilaiMall/Pods-WeilaiMall.debug.xcconfig"; sourceTree = "<group>"; };
+		D516C22E1E72EE0200BC5B60 /* OrderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderTableViewCell.swift; sourceTree = "<group>"; };
+		D516C22F1E72EE0200BC5B60 /* OrderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderTableViewCell.xib; sourceTree = "<group>"; };
 		D517FC0F1E65B1E60050AE99 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D517FC131E65C9B10050AE99 /* Source.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
 		D517FC151E65C9C40050AE99 /* CCRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCRequest.swift; sourceTree = "<group>"; };
@@ -329,6 +333,8 @@
 				D57992B11E671E8C00A82DBC /* MineCollectionViewCell.swift */,
 				D57992B21E671E8C00A82DBC /* MineCollectionViewCell.xib */,
 				D51F3AB41E71A5E20092B85B /* OrderHeadView.swift */,
+				D516C22E1E72EE0200BC5B60 /* OrderTableViewCell.swift */,
+				D516C22F1E72EE0200BC5B60 /* OrderTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -497,6 +503,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D516C2311E72EE0200BC5B60 /* OrderTableViewCell.xib in Resources */,
 				D545FF331E6D94770081EAF8 /* CCShoppingCarCell.xib in Resources */,
 				D520840E1E5F2C1200BE031B /* LaunchScreen.storyboard in Resources */,
 				D520840B1E5F2C1200BE031B /* Assets.xcassets in Resources */,
@@ -598,6 +605,7 @@
 				D57992B01E6717BA00A82DBC /* MineHeadView.swift in Sources */,
 				D5E3C7BC1E62EA890012FD7C /* CCTabBar.swift in Sources */,
 				D517FC141E65C9B10050AE99 /* Source.swift in Sources */,
+				D516C2301E72EE0200BC5B60 /* OrderTableViewCell.swift in Sources */,
 				D5E3C80D1E630CD80012FD7C /* HomeViewController.swift in Sources */,
 				D5E3C7FA1E62F5680012FD7C /* CCTabBarController.swift in Sources */,
 			);
