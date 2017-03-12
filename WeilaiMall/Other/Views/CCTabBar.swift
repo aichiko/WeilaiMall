@@ -56,9 +56,9 @@ class CCTabBar: UITabBar {
             item?.itemAttribute(titles[i], image: images[i], selectedImage: selectImages[i])
         }
         
-        let centerItemWidth = centerSize*375.0/UIScreen.main.bounds.width
+        let centerItemWidth = centerSize*UIScreen.main.bounds.width/375.0
         
-        let itemWidth = 0.25*(375.0-centerSize)*375.0/UIScreen.main.bounds.width
+        let itemWidth = 0.25*(375.0-centerSize)*UIScreen.main.bounds.width/375.0
         
         let itemHeight = self.bounds.height
         

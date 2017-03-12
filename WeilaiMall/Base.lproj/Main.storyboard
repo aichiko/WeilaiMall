@@ -159,6 +159,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="hhq-j8-oeo">
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="Pzc-9W-eBk" kind="relationship" relationship="rootViewController" id="r1u-od-OaT"/>
                     </connections>
@@ -170,7 +174,7 @@
         <!--Mine View Controller-->
         <scene sceneID="YgG-j5-dcX">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="Pzc-9W-eBk" customClass="MineViewController" customModule="WeilaiMall" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Pzc-9W-eBk" customClass="MineViewController" customModule="WeilaiMall" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PDn-Vp-2E3"/>
                         <viewControllerLayoutGuide type="bottom" id="Qac-Wj-odw"/>
@@ -218,7 +222,7 @@
         <!--操作记录-->
         <scene sceneID="xR1-dk-Qih">
             <objects>
-                <viewController title="操作记录" hidesBottomBarWhenPushed="YES" id="d3r-le-2Uu" sceneMemberID="viewController">
+                <viewController title="操作记录" hidesBottomBarWhenPushed="YES" id="d3r-le-2Uu" customClass="OperationRecordViewController" customModule="WeilaiMall" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7Gd-Cn-J6S"/>
                         <viewControllerLayoutGuide type="bottom" id="Hdv-ui-bG2"/>
@@ -272,7 +276,7 @@
         <!--转账-->
         <scene sceneID="Omy-wM-phE">
             <objects>
-                <viewController title="转账" hidesBottomBarWhenPushed="YES" id="J8A-Ks-gBE" sceneMemberID="viewController">
+                <viewController title="转账" hidesBottomBarWhenPushed="YES" id="J8A-Ks-gBE" customClass="TransferViewController" customModule="WeilaiMall" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="A1J-nU-Pkl"/>
                         <viewControllerLayoutGuide type="bottom" id="EUe-9V-Wbw"/>
@@ -290,7 +294,7 @@
         <!--结算支付-->
         <scene sceneID="QBx-90-tCx">
             <objects>
-                <viewController title="结算支付" hidesBottomBarWhenPushed="YES" id="CzY-rO-7sj" sceneMemberID="viewController">
+                <viewController title="结算支付" hidesBottomBarWhenPushed="YES" id="CzY-rO-7sj" customClass="ClearingPayViewController" customModule="WeilaiMall" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mIX-az-sKH"/>
                         <viewControllerLayoutGuide type="bottom" id="6iW-fh-1xr"/>

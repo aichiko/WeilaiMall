@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 class ChangeLoginViewController: ViewController {
 
     @IBOutlet weak var oldTextField: UITextField!
