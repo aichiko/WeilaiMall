@@ -143,6 +143,8 @@ class MineHeadView: UIView {
     let loginButton = UIButton(type: .custom)
     
     let detailButton = MineMessageButton(type: .custom)
+    
+    var click: (() -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -179,6 +181,7 @@ extension MineHeadView {
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 33
         imageView.image = UIImage.init(named: "login")
+        imageView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(tapAction(_:))))
         
         headView.addSubview(loginButton)
         headView.addSubview(detailButton)
@@ -190,6 +193,7 @@ extension MineHeadView {
             make.left.equalTo(self.imageView.snp.right).offset(20)
             make.centerY.equalToSuperview()
         }
+        loginButton.addTarget(self, action: #selector(clickAction(_:)), for: .touchUpInside)
         
         detailButton.snp.updateConstraints { (make) in
             make.right.equalTo(-10)
@@ -200,6 +204,18 @@ extension MineHeadView {
         
         labelAttribute()
         headShow(with: style)
+    }
+    
+    @objc private func clickAction(_ button: UIButton) {
+        if click != nil {
+            click!()
+        }
+    }
+    
+    @objc private func tapAction(_ tap: UITapGestureRecognizer) {
+        if click != nil {
+            click!()
+        }
     }
     
     private func labelAttribute() {

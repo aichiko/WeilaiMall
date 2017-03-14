@@ -42,7 +42,7 @@ class LoginViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.red
+        addBackItem()
         // Do any additional setup after loading the view.
         
         subviewsAttribute()
@@ -72,8 +72,16 @@ extension LoginViewController {
     
     /// 设置 控件属性
     func subviewsAttribute() {
-        let leftview = UIImageView(frame: CGRect.init(x: 0, y: 0, width: 40, height: 40))
-        let rightview = UIImageView(frame: CGRect.init(x: 0, y: 0, width: 40, height: 40))
+        let leftview = UIView(frame: CGRect.init(x: 0, y: 0, width: 40, height: 20))
+        let imageView1 = UIImageView.init(image: UIImage.init(named: "user_icon"))
+        leftview.addSubview(imageView1)
+        imageView1.center = leftview.center
+        let rightview = UIView(frame: CGRect.init(x: 0, y: 0, width: 40, height: 40))
+
+        let imageView2 = UIImageView.init(image: UIImage.init(named: "psw_icon"))
+        rightview.addSubview(imageView2)
+        imageView2.center = rightview.center
+        
         userTextField.leftView = leftview
         passwordTextFeild.leftView = rightview
         userTextField.leftViewMode = .always

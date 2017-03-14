@@ -76,10 +76,18 @@ extension MineViewController {
     fileprivate func configSubviews() {
         self.view.addSubview(headView)
         self.view.addSubview(collectionView)
-        headView.style = .logged
+        headView.style = .notlogin
         headView.snp.updateConstraints { (make) in
             make.top.left.right.equalToSuperview()
             make.height.equalTo(230)
+        }
+        
+        headView.click = {
+            [unowned self] in
+            if self.headView.style == .notlogin {
+                let loginVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "login")
+                self.navigationController?.pushViewController(loginVC, animated: true)
+            }
         }
         
         collectionView.snp.updateConstraints { (make) in

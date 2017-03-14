@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -725,7 +726,7 @@
         <!--登录-->
         <scene sceneID="oih-iY-nAp">
             <objects>
-                <viewController title="登录" hidesBottomBarWhenPushed="YES" id="SYp-fd-5rF" customClass="LoginViewController" customModule="WeilaiMall" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="login" title="登录" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="SYp-fd-5rF" customClass="LoginViewController" customModule="WeilaiMall" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="I9q-Pv-gbQ"/>
                         <viewControllerLayoutGuide type="bottom" id="oWi-7c-SPE"/>
@@ -753,6 +754,7 @@
                                         </connections>
                                     </textField>
                                 </subviews>
+                                <color key="backgroundColor" red="0.93333333333333335" green="0.34509803921568627" blue="0.11764705882352941" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="UJa-Cd-038"/>
                                 </constraints>
@@ -776,6 +778,7 @@
                                         </connections>
                                     </textField>
                                 </subviews>
+                                <color key="backgroundColor" red="0.93333333333333335" green="0.34509803921568627" blue="0.11764705882352941" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipm-ds-5dA" customClass="LoginButton" customModule="WeilaiMall" customModuleProvider="target">
                                 <rect key="frame" x="20" y="380" width="335" height="40"/>
@@ -803,8 +806,15 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_logo" translatesAutoresizingMaskIntoConstraints="NO" id="NN5-wl-FDN">
+                                <rect key="frame" x="88" y="45" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="Aue-yX-nck"/>
+                                    <constraint firstAttribute="width" secondItem="NN5-wl-FDN" secondAttribute="height" multiplier="1:1" id="Hir-tf-3aZ"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.9137254901960784" green="0.26666666666666666" blue="0.10588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="ga7-sY-GaZ" firstAttribute="top" secondItem="L2R-KO-Xf9" secondAttribute="bottom" constant="15" id="0Bv-PT-IZ3"/>
                             <constraint firstAttribute="trailingMargin" secondItem="32u-pW-5j3" secondAttribute="trailing" constant="4" id="3sg-dY-Jvp"/>
@@ -813,8 +823,10 @@
                             <constraint firstItem="ipm-ds-5dA" firstAttribute="top" secondItem="ga7-sY-GaZ" secondAttribute="bottom" constant="35" id="J1H-JJ-J6Y"/>
                             <constraint firstItem="L2R-KO-Xf9" firstAttribute="leading" secondItem="0aB-rs-0Jb" secondAttribute="leadingMargin" constant="24" id="LSR-Fg-fpH"/>
                             <constraint firstItem="ga7-sY-GaZ" firstAttribute="width" secondItem="L2R-KO-Xf9" secondAttribute="width" id="Shs-1c-bXV"/>
+                            <constraint firstItem="NN5-wl-FDN" firstAttribute="centerX" secondItem="0aB-rs-0Jb" secondAttribute="centerX" id="UST-Xz-mBu"/>
                             <constraint firstAttribute="trailingMargin" secondItem="L2R-KO-Xf9" secondAttribute="trailing" constant="24" id="XZT-k7-nuc"/>
                             <constraint firstItem="UKT-EO-6sI" firstAttribute="top" secondItem="ipm-ds-5dA" secondAttribute="bottom" constant="27" id="YMz-o6-qJj"/>
+                            <constraint firstItem="L2R-KO-Xf9" firstAttribute="top" secondItem="NN5-wl-FDN" secondAttribute="bottom" constant="5" id="ZqB-1E-0ca"/>
                             <constraint firstItem="ga7-sY-GaZ" firstAttribute="leading" secondItem="L2R-KO-Xf9" secondAttribute="leading" id="bND-EF-4pN"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ipm-ds-5dA" secondAttribute="trailing" constant="4" id="eE1-tt-UlN"/>
                             <constraint firstAttribute="leadingMargin" secondItem="UKT-EO-6sI" secondAttribute="leading" id="eNP-YC-Bbr"/>
@@ -822,6 +834,7 @@
                             <constraint firstItem="ipm-ds-5dA" firstAttribute="leading" secondItem="0aB-rs-0Jb" secondAttribute="leadingMargin" constant="4" id="wJJ-dz-cIS"/>
                         </constraints>
                     </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="passwordTextFeild" destination="PL9-E1-fMs" id="7vY-uv-x00"/>
                         <outlet property="passwordView" destination="ga7-sY-GaZ" id="Rwc-wB-qUS"/>
@@ -888,4 +901,7 @@
             <point key="canvasLocation" x="206" y="575"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="login_logo" width="200" height="200"/>
+    </resources>
 </document>
