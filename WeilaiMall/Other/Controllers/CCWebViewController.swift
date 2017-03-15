@@ -19,6 +19,7 @@ class CCWebViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        addBackItem()
         // Do any additional setup after loading the view.
         loadWebview()
     }

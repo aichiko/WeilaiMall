@@ -259,7 +259,7 @@
         <!--充值-->
         <scene sceneID="27x-Y7-2H8">
             <objects>
-                <viewController title="充值" hidesBottomBarWhenPushed="YES" id="UZO-5f-ehb" sceneMemberID="viewController">
+                <viewController title="充值" hidesBottomBarWhenPushed="YES" id="UZO-5f-ehb" customClass="RechargeViewController" customModule="WeilaiMall" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="A6r-XZ-M1Z"/>
                         <viewControllerLayoutGuide type="bottom" id="xPB-Ge-FBI"/>
@@ -754,7 +754,7 @@
                                         </connections>
                                     </textField>
                                 </subviews>
-                                <color key="backgroundColor" red="0.93333333333333335" green="0.34509803921568627" blue="0.11764705882352941" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.92549019607843142" green="0.34901960784313724" blue="0.17254901960784313" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="UJa-Cd-038"/>
                                 </constraints>
@@ -778,7 +778,7 @@
                                         </connections>
                                     </textField>
                                 </subviews>
-                                <color key="backgroundColor" red="0.93333333333333335" green="0.34509803921568627" blue="0.11764705882352941" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.92549019607843142" green="0.34901960784313724" blue="0.17254901960784313" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipm-ds-5dA" customClass="LoginButton" customModule="WeilaiMall" customModuleProvider="target">
                                 <rect key="frame" x="20" y="380" width="335" height="40"/>
@@ -786,7 +786,15 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="hdh-2Q-BBd"/>
                                 </constraints>
-                                <state key="normal" title="登录"/>
+                                <state key="normal" title="登录">
+                                    <color key="titleColor" red="0.92549019607843142" green="0.27450980392156865" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="loginAction:" destination="SYp-fd-5rF" eventType="touchUpInside" id="d9I-VZ-ObK"/>
                                 </connections>

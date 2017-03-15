@@ -181,6 +181,7 @@ extension MineHeadView {
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 33
         imageView.image = UIImage.init(named: "login")
+        imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(tapAction(_:))))
         
         headView.addSubview(loginButton)

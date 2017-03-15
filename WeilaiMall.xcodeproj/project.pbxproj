@@ -16,6 +16,7 @@
 		D517FC101E65B1E60050AE99 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D517FC0F1E65B1E60050AE99 /* LoginViewController.swift */; };
 		D517FC141E65C9B10050AE99 /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = D517FC131E65C9B10050AE99 /* Source.swift */; };
 		D517FC161E65C9C40050AE99 /* CCRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D517FC151E65C9C40050AE99 /* CCRequest.swift */; };
+		D51A71D81E798B51007B104B /* RechargeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51A71D71E798B51007B104B /* RechargeViewController.swift */; };
 		D51D84161E703A500059496D /* SettingupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51D84151E703A500059496D /* SettingupViewController.swift */; };
 		D51D84181E7044FB0059496D /* ChangeLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51D84171E7044FB0059496D /* ChangeLoginViewController.swift */; };
 		D51D841A1E7045130059496D /* ChangePayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51D84191E7045130059496D /* ChangePayViewController.swift */; };
@@ -79,6 +80,7 @@
 		D517FC0F1E65B1E60050AE99 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D517FC131E65C9B10050AE99 /* Source.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
 		D517FC151E65C9C40050AE99 /* CCRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCRequest.swift; sourceTree = "<group>"; };
+		D51A71D71E798B51007B104B /* RechargeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RechargeViewController.swift; sourceTree = "<group>"; };
 		D51D84151E703A500059496D /* SettingupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingupViewController.swift; sourceTree = "<group>"; };
 		D51D84171E7044FB0059496D /* ChangeLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeLoginViewController.swift; sourceTree = "<group>"; };
 		D51D84191E7045130059496D /* ChangePayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePayViewController.swift; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 				D52627961E74DBBF00AC0B2B /* TransferViewController.swift */,
 				D52627981E750F6D00AC0B2B /* ClearingPayViewController.swift */,
 				D512BDA91E754E53001B7004 /* OperationRecordViewController.swift */,
+				D51A71D71E798B51007B104B /* RechargeViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -629,6 +632,7 @@
 				D52627951E74D53F00AC0B2B /* TextFieldTableViewCell.swift in Sources */,
 				D517FC141E65C9B10050AE99 /* Source.swift in Sources */,
 				D52627971E74DBBF00AC0B2B /* TransferViewController.swift in Sources */,
+				D51A71D81E798B51007B104B /* RechargeViewController.swift in Sources */,
 				D516C2301E72EE0200BC5B60 /* OrderTableViewCell.swift in Sources */,
 				D5E3C80D1E630CD80012FD7C /* HomeViewController.swift in Sources */,
 				D5E3C7FA1E62F5680012FD7C /* CCTabBarController.swift in Sources */,
