@@ -12,7 +12,7 @@ fileprivate class HeadButton: UIButton {
     
     var Label: UILabel = UILabel()
     
-    var image: UIImageView = UIImageView(image: UIImage.init(named: "info_arrow"))
+    var image: UIImageView = UIImageView(image: UIImage.init(named: "right_icon"))
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -44,6 +44,7 @@ class OrderCellHeadView: UITableViewHeaderFooterView {
     
     var statusLabel = UILabel()
     
+    let whiteView = UIView()
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -52,9 +53,16 @@ class OrderCellHeadView: UITableViewHeaderFooterView {
     }
     
     private func configSubviews() {
-        addSubview(titleButton)
-        addSubview(statusLabel)
+        contentView.addSubview(whiteView)
+        whiteView.backgroundColor = UIColor.white
         
+        whiteView.snp.updateConstraints { (make) in
+            make.left.right.bottom.equalToSuperview()
+            make.height.equalTo(40)
+        }
+        
+        whiteView.addSubview(titleButton)
+        whiteView.addSubview(statusLabel)
         titleButton.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.left.height.equalToSuperview()
@@ -78,8 +86,25 @@ class OrderCellHeadView: UITableViewHeaderFooterView {
 }
 
 class OrderCellFootView: UITableViewHeaderFooterView {
+    
+    let footLabel = UILabel()
+    
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
+        loadSubviews()
+    }
+    
+    private func loadSubviews() {
+        contentView.backgroundColor = UIColor.white
+        contentView.addSubview(footLabel)
+        footLabel.snp.updateConstraints { (make) in
+            make.right.equalTo(-15)
+            make.centerY.equalToSuperview()
+        }
+        
+        footLabel.textColor = UIColor.colorWithString("868686")
+        footLabel.font = UIFont.CCsetfont(13)
+        footLabel.text = String.init(format: "共%d件商品 合计：¥ %.2f （%d积分）", 1, 239.0, 9000)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -220,6 +245,7 @@ class OrderCenterViewController: ViewController {
         tableView.contentInset = UIEdgeInsetsMake(-36, 0, 0, 0);
         tableView.register(OrderCellHeadView.self, forHeaderFooterViewReuseIdentifier: headIdentifier)
         tableView.register(OrderCellFootView.self, forHeaderFooterViewReuseIdentifier: footIdentifier)
+        tableView.register(UINib.init(nibName: "OrderTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
     }
 
     override func didReceiveMemoryWarning() {
@@ -252,7 +278,7 @@ extension OrderCenterViewController: UITableViewDelegate, UITableViewDataSource,
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        return 50
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -278,11 +304,11 @@ extension OrderCenterViewController: UITableViewDelegate, UITableViewDataSource,
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+        self.performSegue(withIdentifier: "orderDetail", sender: self)
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell.init(style: .default, reuseIdentifier: cellIdentifier)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         //cell?.planOrHistory = .plan
         //cell?.model = self.dataArray[headView.slipperLocation.rawValue][indexPath.row]
         return cell

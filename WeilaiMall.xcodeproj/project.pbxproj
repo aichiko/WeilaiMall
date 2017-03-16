@@ -40,6 +40,7 @@
 		D545FF331E6D94770081EAF8 /* CCShoppingCarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D545FF2E1E6D94770081EAF8 /* CCShoppingCarCell.xib */; };
 		D545FF341E6D94770081EAF8 /* CCShoppingCarHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D545FF2F1E6D94770081EAF8 /* CCShoppingCarHeadView.swift */; };
 		D545FF351E6D94770081EAF8 /* CCShoppingNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D545FF301E6D94770081EAF8 /* CCShoppingNumberView.swift */; };
+		D57769981E7AD687001EF6D7 /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57769971E7AD687001EF6D7 /* OrderDetailViewController.swift */; };
 		D57992B01E6717BA00A82DBC /* MineHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57992AF1E6717BA00A82DBC /* MineHeadView.swift */; };
 		D57992B31E671E8C00A82DBC /* MineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57992B11E671E8C00A82DBC /* MineCollectionViewCell.swift */; };
 		D57992B41E671E8C00A82DBC /* MineCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D57992B21E671E8C00A82DBC /* MineCollectionViewCell.xib */; };
@@ -110,6 +111,7 @@
 		D545FF2E1E6D94770081EAF8 /* CCShoppingCarCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CCShoppingCarCell.xib; sourceTree = "<group>"; };
 		D545FF2F1E6D94770081EAF8 /* CCShoppingCarHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCShoppingCarHeadView.swift; sourceTree = "<group>"; };
 		D545FF301E6D94770081EAF8 /* CCShoppingNumberView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCShoppingNumberView.swift; sourceTree = "<group>"; };
+		D57769971E7AD687001EF6D7 /* OrderDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetailViewController.swift; sourceTree = "<group>"; };
 		D57992AF1E6717BA00A82DBC /* MineHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineHeadView.swift; sourceTree = "<group>"; };
 		D57992B11E671E8C00A82DBC /* MineCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineCollectionViewCell.swift; sourceTree = "<group>"; };
 		D57992B21E671E8C00A82DBC /* MineCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 				D51D84171E7044FB0059496D /* ChangeLoginViewController.swift */,
 				D51D84191E7045130059496D /* ChangePayViewController.swift */,
 				D51F3AB21E71A0CC0092B85B /* OrderCenterViewController.swift */,
+				D57769971E7AD687001EF6D7 /* OrderDetailViewController.swift */,
 				D52627961E74DBBF00AC0B2B /* TransferViewController.swift */,
 				D52627981E750F6D00AC0B2B /* ClearingPayViewController.swift */,
 				D512BDA91E754E53001B7004 /* OperationRecordViewController.swift */,
@@ -629,6 +632,7 @@
 				D57992B01E6717BA00A82DBC /* MineHeadView.swift in Sources */,
 				D512BDAA1E754E53001B7004 /* OperationRecordViewController.swift in Sources */,
 				D5E3C7BC1E62EA890012FD7C /* CCTabBar.swift in Sources */,
+				D57769981E7AD687001EF6D7 /* OrderDetailViewController.swift in Sources */,
 				D52627951E74D53F00AC0B2B /* TextFieldTableViewCell.swift in Sources */,
 				D517FC141E65C9B10050AE99 /* Source.swift in Sources */,
 				D52627971E74DBBF00AC0B2B /* TransferViewController.swift in Sources */,
