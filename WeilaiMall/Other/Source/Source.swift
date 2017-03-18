@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import SnapKit
+import SwiftyJSON
 
 // 常用字体颜色
 let CCGrayTextColor = UIColor.colorWithString("#999999")
@@ -83,4 +84,42 @@ protocol CCTableViewProtocol {
     
     func configTableView() -> Void
 }
+
+extension String {
+    
+    func MD5() -> String {
+        
+        let str = self.cString(using: .utf8)
+        let strLen = CC_LONG(self.lengthOfBytes(using: .utf8))
+        let digestLen = Int(CC_MD5_DIGEST_LENGTH)
+        let result = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity: digestLen)
+        CC_MD5(str!, strLen, result)
+        let hash = NSMutableString()
+        for i in 0 ..< digestLen {
+            hash.appendFormat("%02x", result[i])
+        }
+        result.deinitialize()
+        return String(format: hash as String)
+ 
+    }
+    
+    static func MD5(with parameter: [String: Any]) -> String {
+        
+        let dic = parameter
+        var array: [String] = []
+        if dic.first?.key == "type" {
+            
+        }
+        for item in dic {
+            array.append("\(item.key)=\(item.value)")
+        }
+        array.sort()
+        var resultStr: String = array.joined(separator: "&")
+        resultStr.append("&key=weilai8088")
+        
+        return resultStr.MD5()
+    }
+}
+
+
 

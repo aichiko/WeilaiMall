@@ -47,7 +47,7 @@ class CCShoppingCarHeadView: UITableViewHeaderFooterView {
 extension CCShoppingCarHeadView {
     fileprivate func loadSubviews() {
         contentView.addSubview(whiteView)
-        whiteView.backgroundColor = UIColor.white
+        whiteView.backgroundColor = UIColor.colorWithString("fafafa")
         
         whiteView.snp.updateConstraints { (make) in
             make.left.right.bottom.equalTo(0)
@@ -71,7 +71,7 @@ extension CCShoppingCarHeadView {
             make.left.equalTo(self.button.snp.right).offset(0)
         }
         
-        titleLabel.text = "全球肥胖会议主办方"
+        titleLabel.text = "未来加商城"
         titleLabel.textColor = UIColor.colorWithString("#555555")
         titleLabel.font = UIFont.CCsetfont(13)
         

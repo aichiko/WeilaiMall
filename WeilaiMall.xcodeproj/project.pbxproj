@@ -41,6 +41,7 @@
 		D545FF341E6D94770081EAF8 /* CCShoppingCarHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D545FF2F1E6D94770081EAF8 /* CCShoppingCarHeadView.swift */; };
 		D545FF351E6D94770081EAF8 /* CCShoppingNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D545FF301E6D94770081EAF8 /* CCShoppingNumberView.swift */; };
 		D57769981E7AD687001EF6D7 /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57769971E7AD687001EF6D7 /* OrderDetailViewController.swift */; };
+		D577699A1E7AECC6001EF6D7 /* OrderDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57769991E7AECC6001EF6D7 /* OrderDetailCell.swift */; };
 		D57992B01E6717BA00A82DBC /* MineHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57992AF1E6717BA00A82DBC /* MineHeadView.swift */; };
 		D57992B31E671E8C00A82DBC /* MineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57992B11E671E8C00A82DBC /* MineCollectionViewCell.swift */; };
 		D57992B41E671E8C00A82DBC /* MineCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D57992B21E671E8C00A82DBC /* MineCollectionViewCell.xib */; };
@@ -82,6 +83,7 @@
 		D517FC131E65C9B10050AE99 /* Source.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
 		D517FC151E65C9C40050AE99 /* CCRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCRequest.swift; sourceTree = "<group>"; };
 		D51A71D71E798B51007B104B /* RechargeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RechargeViewController.swift; sourceTree = "<group>"; };
+		D51C8F191E7D157500C77921 /* WeilaiMall-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WeilaiMall-Bridging-Header.h"; sourceTree = "<group>"; };
 		D51D84151E703A500059496D /* SettingupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingupViewController.swift; sourceTree = "<group>"; };
 		D51D84171E7044FB0059496D /* ChangeLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeLoginViewController.swift; sourceTree = "<group>"; };
 		D51D84191E7045130059496D /* ChangePayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePayViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 		D545FF2F1E6D94770081EAF8 /* CCShoppingCarHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCShoppingCarHeadView.swift; sourceTree = "<group>"; };
 		D545FF301E6D94770081EAF8 /* CCShoppingNumberView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCShoppingNumberView.swift; sourceTree = "<group>"; };
 		D57769971E7AD687001EF6D7 /* OrderDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetailViewController.swift; sourceTree = "<group>"; };
+		D57769991E7AECC6001EF6D7 /* OrderDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetailCell.swift; sourceTree = "<group>"; };
 		D57992AF1E6717BA00A82DBC /* MineHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineHeadView.swift; sourceTree = "<group>"; };
 		D57992B11E671E8C00A82DBC /* MineCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineCollectionViewCell.swift; sourceTree = "<group>"; };
 		D57992B21E671E8C00A82DBC /* MineCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -166,6 +169,13 @@
 				2165B2DCADD397E65CB507D4 /* Pods-WeilaiMall.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		D51C8F201E7D27B400C77921 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		D52083F41E5F2C1200BE031B = {
@@ -239,6 +249,7 @@
 		D5E3C7B71E62EA160012FD7C /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				D51C8F201E7D27B400C77921 /* CoreData */,
 				D5E3C7B81E62EA730012FD7C /* Controllers */,
 				D5E3C7B91E62EA730012FD7C /* Source */,
 				D5E3C7BA1E62EA730012FD7C /* Views */,
@@ -260,6 +271,7 @@
 			children = (
 				D517FC131E65C9B10050AE99 /* Source.swift */,
 				D517FC151E65C9C40050AE99 /* CCRequest.swift */,
+				D51C8F191E7D157500C77921 /* WeilaiMall-Bridging-Header.h */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -356,6 +368,7 @@
 				D51F3AB41E71A5E20092B85B /* OrderHeadView.swift */,
 				D516C22E1E72EE0200BC5B60 /* OrderTableViewCell.swift */,
 				D516C22F1E72EE0200BC5B60 /* OrderTableViewCell.xib */,
+				D57769991E7AECC6001EF6D7 /* OrderDetailCell.swift */,
 				D52627941E74D53F00AC0B2B /* TextFieldTableViewCell.swift */,
 				D512BDAB1E7550F9001B7004 /* OperationRecordCell.swift */,
 				D512BDAC1E7550F9001B7004 /* OperationRecordCell.xib */,
@@ -488,6 +501,7 @@
 				TargetAttributes = {
 					D52083FC1E5F2C1200BE031B = {
 						CreatedOnToolsVersion = 8.2;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 					D52084131E5F2C1200BE031B = {
@@ -606,6 +620,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D577699A1E7AECC6001EF6D7 /* OrderDetailCell.swift in Sources */,
 				D517FC101E65B1E60050AE99 /* LoginViewController.swift in Sources */,
 				D545FF2B1E6D940B0081EAF8 /* ShoppingCartViewController.swift in Sources */,
 				D517FC161E65C9C40050AE99 /* CCRequest.swift in Sources */,
@@ -790,11 +805,14 @@
 			baseConfigurationReference = 865602186F2BDB5AE69031E0 /* Pods-WeilaiMall.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = WeilaiMall/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ash.WeilaiMall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WeilaiMall/Other/Source/WeilaiMall-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -804,11 +822,13 @@
 			baseConfigurationReference = 2165B2DCADD397E65CB507D4 /* Pods-WeilaiMall.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = WeilaiMall/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ash.WeilaiMall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "WeilaiMall/Other/Source/WeilaiMall-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

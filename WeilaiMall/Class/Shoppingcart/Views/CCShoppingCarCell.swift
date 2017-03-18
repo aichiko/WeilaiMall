@@ -37,6 +37,8 @@ class CCShoppingCarCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
+        packageLabel.isHidden = true
+        
         numberView.changeText = {
             [unowned self] text in
             if self.changeText != nil {

@@ -13,8 +13,11 @@ class OrderDetailViewController: ViewController {
     var tableView: UITableView = UITableView.init(frame: CGRect.zero, style: .grouped)
     
     let headIdentifier = "headViewIdentifier"
-    let cellIdentifier = "detailCell"
+    let cellIdentifier = "orderDetailCell"
     let footIdentifier = "footViewIdentifier"
+    
+    let defaultCell = "defaultCell"
+    let detailCell = "detailCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,10 +119,38 @@ extension OrderDetailViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        //cell?.planOrHistory = .plan
-        //cell?.model = self.dataArray[headView.slipperLocation.rawValue][indexPath.row]
-        return cell
+        if indexPath.section == 0 {
+            var cell = tableView.dequeueReusableCell(withIdentifier: defaultCell)
+            if cell == nil {
+                cell = UITableViewCell.init(style: .value1, reuseIdentifier: defaultCell)
+                defaultCell(with: cell, row: indexPath.row)
+            }
+            return cell!
+        }else if indexPath.section == 1 || indexPath.section == 3 {
+            var cell = tableView.dequeueReusableCell(withIdentifier: detailCell)
+            if cell == nil {
+                cell = OrderDetailCell.init(style: indexPath.section == 1 ?.address:.logistics, reuseIdentifier: detailCell)
+            }
+            return cell!
+        }else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+            //cell?.planOrHistory = .plan
+            //cell?.model = self.dataArray[headView.slipperLocation.rawValue][indexPath.row]
+            return cell
+        }
+    }
+    
+    private func defaultCell(with cell: UITableViewCell?, row: Int) {
+        cell?.textLabel?.font = UIFont.CCsetfont(14)
+        cell?.detailTextLabel?.font = UIFont.CCsetfont(13)
+        cell?.detailTextLabel?.textColor = CCOrangeColor
+        if row == 0 {
+            cell?.textLabel?.textColor = UIColor.black
+            cell?.detailTextLabel?.text = "卖家已发货"
+            cell?.textLabel?.text = "订单编号：" + "123123123123123"
+        }else if row == 1 {
+            cell?.textLabel?.textColor = CCGrayTextColor
+            cell?.textLabel?.text = "订单编号：" + "2017-02-15 09:44:13"
+        }
     }
 }

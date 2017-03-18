@@ -52,6 +52,9 @@ class MineViewController: ViewController {
         // Do any additional setup after loading the view.
         self.navigationController?.isNavigationBarHidden = true
         configSubviews()
+        
+        let dic: [String: Any] = ["mobile_phone": "15172386472", "type": 1,]
+        print(String.MD5(with: dic))
     }
 
     override func didReceiveMemoryWarning() {

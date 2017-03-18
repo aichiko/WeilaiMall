@@ -62,7 +62,7 @@ class ShoppingCartViewController: ViewController, CCTableViewProtocol {
         rightButton.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         rightButton.setTitle("编辑", for: .normal)
         rightButton.setTitle("完成", for: .selected)
-        rightButton.setTitleColor(UIColor.white, for: .normal)
+        rightButton.setTitleColor(UIColor.colorWithString("7e7e7e"), for: .normal)
         rightButton.setTitleColor(UIColor.lightGray, for: .highlighted)
         rightButton.addTarget(self, action: #selector(editing(_:)), for: .touchUpInside)
         let rightItem = UIBarButtonItem(customView: rightButton)
@@ -189,6 +189,19 @@ extension ShoppingCartViewController: UITableViewDelegate, UITableViewDataSource
 
 // MARK: - calculatePrice
 extension ShoppingCartViewController {
+    /*
+    func updatePriceDictionary(_ array: [CCShoppingCarModel]) {
+        
+        for section in 0..<array.count {
+            for row in 0..<array[section].productList.count {
+                let indexPath = IndexPath.init(row: row, section: section)
+                let price: Float = array[section].productList[row].Fee
+                
+                pricesDictionary.updateValue(price, forKey: indexPath)
+            }
+        }
+    }
+    */
     func calculatePrice() {
         print("selectedCells == \(selectedCells)")
         let values = selectedCells.values
@@ -204,3 +217,82 @@ extension ShoppingCartViewController {
         print("totalPrice === \(totalPrice)")
     }
 }
+
+
+/*
+// MARK: - OperateBuyCar
+extension CCShoppingCartViewController {
+    
+    /// 删除单个cell
+    ///
+    /// - Parameter indexPath: indexPath
+    func requestDeleteGood(with indexPath: IndexPath) {
+        let model = self.dataArray[indexPath.section].productList[indexPath.row]
+        let data = try? JSONSerialization.data(withJSONObject: [model.ID], options: .prettyPrinted)
+        let str = String.init(data: data!, encoding: .utf8)
+        let parameters = ["type": 1, "buycarids": str!] as [String : Any]
+        let request = CCOperateBuyCarRequset(parameters: parameters, path: "OperateBuyCar")
+        MeetURLSessionClient().send(request, handler: { [unowned self] (datas, error) in
+            if error == nil {
+                self.deleteGoods(indexPath)
+            }else {
+                MBProgressHUD.showErrorAdded(message: "修改失败", to: self.view)
+            }
+        })
+    }
+    
+    /// 删除多个cell
+    ///
+    /// - Parameter indexPath: [indexPath]
+    func requestDeleteGoods(with deleteModels: [CCShopProductList]) {
+        var IDArray: [String] = []
+        for model in deleteModels {
+            IDArray.append(model.ID)
+        }
+        let data = try? JSONSerialization.data(withJSONObject: IDArray, options: .prettyPrinted)
+        let str = String.init(data: data!, encoding: .utf8)
+        
+        let parameters = ["type": 1, "buycarids": str!] as [String : Any]
+        let request = CCOperateBuyCarRequset(parameters: parameters, path: "OperateBuyCar")
+        MeetURLSessionClient().send(request, handler: { [unowned self] (datas, error) in
+            if error == nil {
+                self.deleteGoods(with: deleteModels)
+            }else {
+                MBProgressHUD.showErrorAdded(message: "修改失败", to: self.view)
+            }
+        })
+    }
+    
+    /// 选中cell进行结算
+    ///
+    /// - Parameter indexPath: [indexPath]
+    func createOrderBuycar(with selectedModels: [CCShopProductList]) {
+        var IDArray: [String] = []
+        for model in selectedModels {
+            IDArray.append(model.ID)
+        }
+        let data = try? JSONSerialization.data(withJSONObject: IDArray, options: .prettyPrinted)
+        let str = String.init(data: data!, encoding: .utf8)
+        let parameters = ["userid": ShareUserValue.init().userID, "buycarids": str!] as [String : Any]
+        let request = CCClearBuyCarRequset(parameters: parameters, path: "CreateOrderByBuycar")
+        MeetURLSessionClient().send(request, handler: { [unowned self] (models, error) in
+            if error == nil {
+                if models.count > 0 {
+                    let confirmVC = CCConfirmOrderViewController()
+                    confirmVC.dataArray = models as! [CCMeetOrderModel]
+                    self.navigationController?.pushViewController(confirmVC, animated: true)
+                    self.selectedCells.removeAll()
+                    self.deleteGoods(with: selectedModels)
+                    self.updateBarStatus(false)
+                    DispatchQueue.global().sync {
+                        self.updateDictionary()
+                        self.calculatePrice()
+                    }
+                }
+            }else {
+                MBProgressHUD.showErrorAdded(message: "请重试..", to: self.view)
+            }
+        })
+    }
+}
+*/
