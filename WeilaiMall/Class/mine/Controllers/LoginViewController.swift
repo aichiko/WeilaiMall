@@ -54,7 +54,23 @@ class LoginViewController: ViewController {
     }
 
     @IBAction func loginAction(_ sender: Any) {
+        guard let user = userTextField.text else {
+            print("账号密码不可为空")
+            return
+        }
+        guard let password = passwordTextFeild.text else {
+            print("账号密码不可为空")
+            return
+        }
         
+        let request = LoginRequest(parameter: ["mobile_phone": user, "password": password])
+        URLSessionClient().alamofireSend(request) { (models, error) in
+            if error == nil {
+                
+            }else {
+                print((error?.info())!)
+            }
+        }
     }
     /*
     // MARK: - Navigation

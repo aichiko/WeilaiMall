@@ -22,6 +22,8 @@ let CCButtonGrayColor = UIColor(red:0.80, green:0.81, blue:0.81, alpha:1.00)
 // 常用字体
 let CCTextFont = UIFont.CCsetfont(14)
 
+let access_token = "4297f44b13955235245b2497399d7a93"
+
 typealias CCButtonAction = (_ button: UIButton) -> Void
 
 extension UIFont {

@@ -53,8 +53,7 @@ class MineViewController: ViewController {
         self.navigationController?.isNavigationBarHidden = true
         configSubviews()
         
-        let dic: [String: Any] = ["mobile_phone": "15172386472", "type": 1,]
-        print(String.MD5(with: dic))
+        getUserInfo()
     }
 
     override func didReceiveMemoryWarning() {
@@ -76,6 +75,21 @@ class MineViewController: ViewController {
 }
 
 extension MineViewController {
+    
+    func getUserInfo() {
+        let request = UserInfoRequest(parameter: ["access_token": access_token])
+        URLSessionClient().alamofireSend(request) { [unowned self] (models, error) in
+            if error == nil && models.count > 0 {
+                //存储用户数据
+                CoreDataManager().updateData(user: models[0]!)
+                self.headView.style = .logged
+                self.headView.userModel = models[0]
+            }else {
+                
+            }
+        }
+    }
+    
     fileprivate func configSubviews() {
         self.view.addSubview(headView)
         self.view.addSubview(collectionView)

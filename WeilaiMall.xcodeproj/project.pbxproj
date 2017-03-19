@@ -17,6 +17,8 @@
 		D517FC141E65C9B10050AE99 /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = D517FC131E65C9B10050AE99 /* Source.swift */; };
 		D517FC161E65C9C40050AE99 /* CCRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D517FC151E65C9C40050AE99 /* CCRequest.swift */; };
 		D51A71D81E798B51007B104B /* RechargeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51A71D71E798B51007B104B /* RechargeViewController.swift */; };
+		D51C8F281E7E3A2600C77921 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51C8F271E7E3A2600C77921 /* CoreDataManager.swift */; };
+		D51C8F2B1E7E627400C77921 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51C8F2A1E7E627400C77921 /* UserModel.swift */; };
 		D51D84161E703A500059496D /* SettingupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51D84151E703A500059496D /* SettingupViewController.swift */; };
 		D51D84181E7044FB0059496D /* ChangeLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51D84171E7044FB0059496D /* ChangeLoginViewController.swift */; };
 		D51D841A1E7045130059496D /* ChangePayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51D84191E7045130059496D /* ChangePayViewController.swift */; };
@@ -84,6 +86,8 @@
 		D517FC151E65C9C40050AE99 /* CCRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCRequest.swift; sourceTree = "<group>"; };
 		D51A71D71E798B51007B104B /* RechargeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RechargeViewController.swift; sourceTree = "<group>"; };
 		D51C8F191E7D157500C77921 /* WeilaiMall-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WeilaiMall-Bridging-Header.h"; sourceTree = "<group>"; };
+		D51C8F271E7E3A2600C77921 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		D51C8F2A1E7E627400C77921 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		D51D84151E703A500059496D /* SettingupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingupViewController.swift; sourceTree = "<group>"; };
 		D51D84171E7044FB0059496D /* ChangeLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeLoginViewController.swift; sourceTree = "<group>"; };
 		D51D84191E7045130059496D /* ChangePayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePayViewController.swift; sourceTree = "<group>"; };
@@ -174,8 +178,17 @@
 		D51C8F201E7D27B400C77921 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				D51C8F271E7E3A2600C77921 /* CoreDataManager.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		D51C8F291E7E616600C77921 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D51C8F2A1E7E627400C77921 /* UserModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		D52083F41E5F2C1200BE031B = {
@@ -335,6 +348,7 @@
 		D5E3C8031E630CB20012FD7C /* mine */ = {
 			isa = PBXGroup;
 			children = (
+				D51C8F291E7E616600C77921 /* Models */,
 				D5E3C8041E630CB20012FD7C /* Controllers */,
 				D5E3C8051E630CB20012FD7C /* Views */,
 			);
@@ -626,6 +640,8 @@
 				D517FC161E65C9C40050AE99 /* CCRequest.swift in Sources */,
 				D51D84181E7044FB0059496D /* ChangeLoginViewController.swift in Sources */,
 				D512BDAD1E7550F9001B7004 /* OperationRecordCell.swift in Sources */,
+				D51C8F281E7E3A2600C77921 /* CoreDataManager.swift in Sources */,
+				D51C8F2B1E7E627400C77921 /* UserModel.swift in Sources */,
 				D545FF351E6D94770081EAF8 /* CCShoppingNumberView.swift in Sources */,
 				D545FF341E6D94770081EAF8 /* CCShoppingCarHeadView.swift in Sources */,
 				D545FF2A1E6D940B0081EAF8 /* ShoppingCar+UITableView.swift in Sources */,

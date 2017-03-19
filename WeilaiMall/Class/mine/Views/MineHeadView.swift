@@ -130,6 +130,13 @@ class MineHeadView: UIView {
         }
     }
     
+    var userModel: UserModel? {
+        didSet {
+            nameLabel.text = userModel?.user_name
+            moneyLabel.text = String.init(format: "余额：%.2f", (userModel?.user_money)!)
+        }
+    }
+    
     let titleArray = ["待返积分", "总消费额", "推广额度", "推广赠送"]
     
     let headView = UIView()
