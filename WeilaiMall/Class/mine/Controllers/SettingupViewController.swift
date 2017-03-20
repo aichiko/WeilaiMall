@@ -50,6 +50,7 @@ class SettingupViewController: ViewController {
         button.titleLabel?.font = UIFont.CCsetfont(14)
         button.layer.masksToBounds = true
         button.layer.cornerRadius = 4
+        button.isHidden = !isLogin
     }
     
 

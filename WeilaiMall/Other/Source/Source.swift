@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import SnapKit
 import SwiftyJSON
+import MBProgressHUD
 
 // 常用字体颜色
 let CCGrayTextColor = UIColor.colorWithString("#999999")
@@ -23,6 +24,9 @@ let CCButtonGrayColor = UIColor(red:0.80, green:0.81, blue:0.81, alpha:1.00)
 let CCTextFont = UIFont.CCsetfont(14)
 
 let access_token = "4297f44b13955235245b2497399d7a93"
+
+/// 用户是否登录
+let isLogin = UserDefaults.init().value(forKey: "isLogin") as? Bool ?? false
 
 typealias CCButtonAction = (_ button: UIButton) -> Void
 
@@ -79,6 +83,36 @@ extension UIColor {
         return UIColor.colorWithString((rgb, 1.0))
     }
 }
+
+// MARK: - MBProgressHUD 的扩展方法
+extension MBProgressHUD {
+    
+    class func  showErrorAdded(message: String, to view: UIView?) {
+        self.showErrorAdded(message: message, image: nil, to: view)
+    }
+    
+    class func  showErrorAdded(message: String ,image imageName: String?, to view: UIView?) {
+        var hudView = view
+        if hudView == nil {
+            hudView = UIApplication.shared.keyWindow
+        }
+        let hud = MBProgressHUD.showAdded(to: hudView!, animated: true)
+        hud.mode = .customView
+        if imageName != nil {
+            let imageView = UIImageView.init(image: UIImage.init(named: imageName!))
+            hud.customView = imageView
+        }
+        hud.label.text = message
+        hud.hide(animated: true, afterDelay: 2)
+        hud.removeFromSuperViewOnHide = true
+        if message.characters.count > 10 {
+            hud.label.text = ""
+            hud.detailsLabel.text = message
+            hud.detailsLabel.font = UIFont.init(name: "PingFang-SC-Regular", size: 16)!
+        }
+    }
+}
+
 
 /// tableView 的协议（每次都写一遍真是太麻烦了）
 protocol CCTableViewProtocol {

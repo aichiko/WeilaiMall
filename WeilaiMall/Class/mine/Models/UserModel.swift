@@ -63,6 +63,21 @@ struct UserModel {
     var highreward: Float
     var pay_points: Float
     
+    init?(user: User) {
+        user_id = Int(user.user_id)
+        user_name = user.user_name!
+        real_name = user.real_name!
+        mobile_phone = Int(user.mobile_phone)
+        sex = Int(user.sex)
+        email = user.email!
+        birthday = user.birthday!
+        user_money = user.user_money
+        rebate = user.rebate
+        payin = user.payin
+        highreward = user.highreward
+        pay_points = user.pay_points
+    }
+    
     init(value: JSON) {
         let data = value["data"]
         user_id = data["user_id"].intValue

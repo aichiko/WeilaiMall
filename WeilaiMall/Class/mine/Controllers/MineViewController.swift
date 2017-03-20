@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 enum PushIdentifier: String {
     case transfer = "transfer"
@@ -52,8 +53,13 @@ class MineViewController: ViewController {
         // Do any additional setup after loading the view.
         self.navigationController?.isNavigationBarHidden = true
         configSubviews()
-        
-        getUserInfo()
+        if isLogin {
+            if let userModel = CoreDataManager().getUserModel() {
+                self.headView.style = .logged
+                self.headView.userModel = userModel
+            }
+            getUserInfo()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -83,9 +89,10 @@ extension MineViewController {
                 //存储用户数据
                 CoreDataManager().updateData(user: models[0]!)
                 self.headView.style = .logged
+                UserDefaults.init().setValue(true, forKey: "isLogin")
                 self.headView.userModel = models[0]
             }else {
-                
+                MBProgressHUD.showErrorAdded(message: error!.info(), to: self.view)
             }
         }
     }

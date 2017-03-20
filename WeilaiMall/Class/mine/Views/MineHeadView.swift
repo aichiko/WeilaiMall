@@ -130,10 +130,21 @@ class MineHeadView: UIView {
         }
     }
     
-    var userModel: UserModel? {
+    var userModel: UserModel! {
         didSet {
-            nameLabel.text = userModel?.user_name
+            nameLabel.text = userModel.user_name
             moneyLabel.text = String.init(format: "余额：%.2f", (userModel?.user_money)!)
+            var integrals = [userModel.rebate, userModel.pay_points, userModel.highreward, userModel.payin]
+            for i in 100..<104 {
+                let view = self.viewWithTag(i) as! IntegralView
+                if style == .notlogin {
+                    view.type = -1
+                }else {
+                    view.type = i - 100
+                }
+                view.integral = integrals[i-100]
+                view.integralAttribute()
+            }
         }
     }
     

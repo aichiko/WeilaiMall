@@ -47,6 +47,7 @@
 		D57992B01E6717BA00A82DBC /* MineHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57992AF1E6717BA00A82DBC /* MineHeadView.swift */; };
 		D57992B31E671E8C00A82DBC /* MineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57992B11E671E8C00A82DBC /* MineCollectionViewCell.swift */; };
 		D57992B41E671E8C00A82DBC /* MineCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D57992B21E671E8C00A82DBC /* MineCollectionViewCell.xib */; };
+		D5CF305E1E801F9C00E471F2 /* HomeSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CF305D1E801F9C00E471F2 /* HomeSearchViewController.swift */; };
 		D5E3C7BC1E62EA890012FD7C /* CCTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E3C7BB1E62EA890012FD7C /* CCTabBar.swift */; };
 		D5E3C7FA1E62F5680012FD7C /* CCTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E3C7F91E62F5680012FD7C /* CCTabBarController.swift */; };
 		D5E3C7FC1E6302460012FD7C /* CCWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E3C7FB1E6302460012FD7C /* CCWebViewController.swift */; };
@@ -122,6 +123,7 @@
 		D57992AF1E6717BA00A82DBC /* MineHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineHeadView.swift; sourceTree = "<group>"; };
 		D57992B11E671E8C00A82DBC /* MineCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineCollectionViewCell.swift; sourceTree = "<group>"; };
 		D57992B21E671E8C00A82DBC /* MineCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineCollectionViewCell.xib; sourceTree = "<group>"; };
+		D5CF305D1E801F9C00E471F2 /* HomeSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSearchViewController.swift; sourceTree = "<group>"; };
 		D5E3C7BB1E62EA890012FD7C /* CCTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCTabBar.swift; sourceTree = "<group>"; };
 		D5E3C7F91E62F5680012FD7C /* CCTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCTabBarController.swift; sourceTree = "<group>"; };
 		D5E3C7FB1E6302460012FD7C /* CCWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCWebViewController.swift; sourceTree = "<group>"; };
@@ -334,6 +336,7 @@
 			isa = PBXGroup;
 			children = (
 				D5E3C80C1E630CD80012FD7C /* HomeViewController.swift */,
+				D5CF305D1E801F9C00E471F2 /* HomeSearchViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -641,6 +644,7 @@
 				D51D84181E7044FB0059496D /* ChangeLoginViewController.swift in Sources */,
 				D512BDAD1E7550F9001B7004 /* OperationRecordCell.swift in Sources */,
 				D51C8F281E7E3A2600C77921 /* CoreDataManager.swift in Sources */,
+				D5CF305E1E801F9C00E471F2 /* HomeSearchViewController.swift in Sources */,
 				D51C8F2B1E7E627400C77921 /* UserModel.swift in Sources */,
 				D545FF351E6D94770081EAF8 /* CCShoppingNumberView.swift in Sources */,
 				D545FF341E6D94770081EAF8 /* CCShoppingCarHeadView.swift in Sources */,

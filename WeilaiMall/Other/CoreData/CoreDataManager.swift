@@ -92,7 +92,14 @@ class CoreDataManager: NSObject {
         
     }
     
-    func synchronization(userEntity: inout User, user: UserModel) {
+    func getUserModel() -> UserModel? {
+        if let user = getCoreData() {
+            return UserModel(user: user)
+        }
+        return nil
+    }
+    
+    private func synchronization(userEntity: inout User, user: UserModel) {
         userEntity.user_id = Int64(user.user_id)
         userEntity.user_name = user.user_name
         userEntity.real_name = user.real_name
