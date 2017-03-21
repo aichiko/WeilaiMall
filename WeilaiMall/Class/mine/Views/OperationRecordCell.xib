@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="179.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="179"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cow-jt-HLq">
@@ -73,15 +73,9 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="转账支付给用户[1022][15157393979]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nIo-RN-bTa">
-                        <rect key="frame" x="97.5" y="10" width="241" height="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="转账支付给用户[1022][15157393979]" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nIo-RN-bTa">
+                        <rect key="frame" x="98" y="10" width="241" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="积分：200" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AXk-zm-9eL">
-                        <rect key="frame" x="97.5" y="32" width="64" height="16"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -130,7 +124,6 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="opq-DB-Zja" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" id="0Uz-2W-QYr"/>
-                    <constraint firstItem="AXk-zm-9eL" firstAttribute="leading" secondItem="nIo-RN-bTa" secondAttribute="leading" id="0Wf-A4-e6W"/>
                     <constraint firstAttribute="trailingMargin" secondItem="jrJ-HK-Eah" secondAttribute="trailing" constant="8" id="1iY-Je-z6Q"/>
                     <constraint firstItem="Cow-jt-HLq" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="2la-Sd-n2o"/>
                     <constraint firstItem="HkB-eK-oVn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="12" id="3qk-uI-JUq"/>
@@ -148,7 +141,7 @@
                     <constraint firstItem="P0k-oJ-VAv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="12" id="I29-uO-x6m"/>
                     <constraint firstItem="nIo-RN-bTa" firstAttribute="leading" secondItem="P0k-oJ-VAv" secondAttribute="trailing" constant="20" id="KMe-Jy-xeZ"/>
                     <constraint firstItem="zrO-jm-4Ce" firstAttribute="top" secondItem="dWf-L4-coR" secondAttribute="bottom" constant="11" id="P20-sl-Fk6"/>
-                    <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="nIo-RN-bTa" secondAttribute="trailing" constant="2" id="TIz-fy-roX"/>
+                    <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="nIo-RN-bTa" secondAttribute="trailing" constant="5" id="TIz-fy-roX"/>
                     <constraint firstItem="P0k-oJ-VAv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="12" id="WDT-vR-Jc9"/>
                     <constraint firstItem="5Tb-YB-d3v" firstAttribute="top" secondItem="opq-DB-Zja" secondAttribute="bottom" constant="11" id="Xta-BO-ZDI"/>
                     <constraint firstItem="4v4-rl-gkY" firstAttribute="centerY" secondItem="djP-07-FhM" secondAttribute="centerY" id="YCI-Xw-SHq"/>
@@ -157,7 +150,6 @@
                     <constraint firstItem="HkB-eK-oVn" firstAttribute="top" secondItem="dWf-L4-coR" secondAttribute="bottom" constant="11" id="eJO-f2-pSR"/>
                     <constraint firstItem="5Qu-qV-moK" firstAttribute="leading" secondItem="5Tb-YB-d3v" secondAttribute="trailing" constant="20" id="evu-q4-7hj"/>
                     <constraint firstItem="5Tb-YB-d3v" firstAttribute="centerY" secondItem="djP-07-FhM" secondAttribute="centerY" id="ffo-Ce-rvU"/>
-                    <constraint firstItem="AXk-zm-9eL" firstAttribute="top" secondItem="nIo-RN-bTa" secondAttribute="bottom" constant="5" id="ftw-2Q-aaD"/>
                     <constraint firstItem="djP-07-FhM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="12" id="hlt-qC-pH5"/>
                     <constraint firstItem="zrO-jm-4Ce" firstAttribute="centerY" secondItem="HkB-eK-oVn" secondAttribute="centerY" id="i29-Nl-6ta"/>
                     <constraint firstItem="dWf-L4-coR" firstAttribute="centerX" secondItem="opq-DB-Zja" secondAttribute="centerX" id="i7O-6z-R9X"/>
@@ -177,7 +169,6 @@
                 <outlet property="backintergralLabel" destination="5Tb-YB-d3v" id="zBp-iP-w54"/>
                 <outlet property="cumulativeLabel" destination="4v4-rl-gkY" id="xLo-Yf-xbH"/>
                 <outlet property="incomingsLabel" destination="jrJ-HK-Eah" id="6gs-nN-Cmr"/>
-                <outlet property="integralLabel" destination="AXk-zm-9eL" id="mRk-pT-JGJ"/>
             </connections>
             <point key="canvasLocation" x="33.5" y="84"/>
         </tableViewCell>

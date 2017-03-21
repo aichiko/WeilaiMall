@@ -22,7 +22,6 @@ class ChangeLoginViewController: ViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        addBackItem()
         
         oldTextField.becomeFirstResponder()
         

@@ -14,6 +14,17 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         view.backgroundColor = CCbackgroundColor
+        if (navigationController?.viewControllers.count)! > 1 {
+            addBackItem()
+        }
+    }
+    
+    func addBackItem() {
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.init(named: "back_icon")?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(backAction(_:)))
+    }
+    
+    @objc private func backAction(_ item: UIBarButtonItem) {
+        _ = self.navigationController?.popViewController(animated: true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,12 +35,3 @@ class ViewController: UIViewController {
 }
 
 
-extension ViewController {
-    func addBackItem() {
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.init(named: "back_icon")?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(backAction(_:)))
-    }
-    
-    @objc private func backAction(_ item: UIBarButtonItem) {
-        _ = self.navigationController?.popViewController(animated: true)
-    }
-}

@@ -10,6 +10,15 @@ import Foundation
 import SwiftyJSON
 import Alamofire
 
+/// 请求的风格
+///
+/// - refreshData: 刷新数据 index_page=1
+/// - moreData: 加载更多数据 index_page+=1
+enum CCRequestStyle {
+    case refreshData
+    case moreData
+}
+
 
 /*
  -1    	 系统繁忙，稍后再试
@@ -89,10 +98,12 @@ struct URLSessionClient: Client {
         newDic.updateValue(sign, forKey: "sign")
         let url = host.appending(r.path)
         Alamofire.request(url, method: .post, parameters: newDic).responseJSON { (response) in
-            debugPrint("data === \(response.data)")
             if response.result.isSuccess {
                 let value = JSON(response.result.value!)
-                debugPrint("value ==== \(value)")
+                
+                let str = String.init(format: "requestUrl === %@\nparameter === %@\n", url, newDic)
+                print(str)
+                print(value)
                 if value["status"].intValue == 0 {
                     print("请求成功")
                     if let models = r.JSONParse(value: value) {
@@ -122,15 +133,16 @@ protocol Client {
 protocol CCRequest {
     var path: String { get }
     
-    //var method: CCHTTPMethod { get }
     var parameter: [String: Any] { get }
     associatedtype Response
-    
     /// 使用SwiftyJSON 进行解析 返回一个model数组，适用于列表显示
     func JSONParse(value: JSON) -> [Response?]?
 }
 
 extension CCRequest {
+    
+    //typealias Error = RequestError
+    
     func JSONParse(value: JSON) -> [Response?]? {
         return nil
     }

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import MBProgressHUD
 
 class OperationCellHeadView: UITableViewHeaderFooterView {
     
@@ -15,8 +15,17 @@ class OperationCellHeadView: UITableViewHeaderFooterView {
     
     var timeLabel = UILabel()
     
+    var date: Date {
+        didSet {
+            let formatter = DateFormatter.init()
+            formatter.dateFormat = "yyyy年MM月dd日 hh:mm:ss"
+            let str = formatter.string(from: date)
+            timeLabel.text = str
+        }
+    }
     
     override init(reuseIdentifier: String?) {
+        date = Date()
         super.init(reuseIdentifier: reuseIdentifier)
         
         configSubviews()
@@ -24,7 +33,6 @@ class OperationCellHeadView: UITableViewHeaderFooterView {
     
     private func configSubviews() {
         addSubview(grayView)
-        
         
         grayView.snp.updateConstraints { (make) in
             make.left.bottom.right.equalToSuperview()
@@ -39,15 +47,6 @@ class OperationCellHeadView: UITableViewHeaderFooterView {
             make.right.equalTo(-10)
             make.centerY.height.equalToSuperview()
         }
-        
-        
-        let formatter = DateFormatter.init()
-        formatter.dateFormat = "yyyy年MM月dd日 hh:mm:ss"
-        
-        let date = formatter.date(from: "2017年02月25日 09:28:00")
-        let interval = TimeZone.current.secondsFromGMT(for: date!)
-        let newDate = date?.addingTimeInterval(TimeInterval(interval))
-        print(newDate!)
         
         timeLabel.text = "2017年02月25日 09:28:00"
         timeLabel.font = UIFont.CCsetfont(14)
@@ -67,15 +66,20 @@ class OperationRecordViewController: ViewController {
     let cellIdentifier = "OperationCell"
     let headIdentifier = "headViewIdentifier"
     
+    var parameters: [String: Any] = [:]
+    
+    var dataArray: [OperationRecordModel] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        addBackItem()
         
         configTableView()
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(image: UIImage.init(named: "mine_calander")?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(calendarAction(_:)))
+        
+        prepareData(.refreshData)
     }
 
     private func configTableView() {
@@ -92,7 +96,30 @@ class OperationRecordViewController: ViewController {
         tableView.register(OperationCellHeadView.self, forHeaderFooterViewReuseIdentifier: headIdentifier)
     }
     
+    
+    private func prepareData(_ style: CCRequestStyle) {
+        var page: Int = parameters["p"] as? Int ?? 1
+        if style == .refreshData {
+            page = 1
+            parameters.updateValue(page, forKey: "p")
+        }else if style == .moreData {
+            page += 1
+            parameters.updateValue(page, forKey: "p")
+        }
+        parameters.updateValue(access_token, forKey: "access_token")
+        
+        URLSessionClient().alamofireSend(OperationRecordRequest(parameter: parameters), handler: { [weak self] (models, error) in
+            if error == nil {
+                self?.dataArray = models as! [OperationRecordModel]
+                self?.tableView.reloadData()
+            }else {
+                MBProgressHUD.showErrorAdded(message: error!.info(), to: self?.view)
+            }
+        })
+    }
+    
     @objc private func calendarAction(_ item: UIBarButtonItem) {
+        
         
     }
     
@@ -119,8 +146,10 @@ extension OperationRecordViewController: UITableViewDelegate, UITableViewDataSou
     @available(iOS 2.0, *)
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: headIdentifier)
-        return view
+        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: headIdentifier) as? OperationCellHeadView
+        let model = dataArray[section]
+        view?.date = model.change_time
+        return view!
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -132,7 +161,7 @@ extension OperationRecordViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return dataArray.count
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -159,10 +188,12 @@ extension OperationRecordViewController: UITableViewDelegate, UITableViewDataSou
 
 extension OperationRecordViewController {
     func cellAttribute(with cell: OperationRecordCell, _ indexPath: IndexPath) {
-        cell.amount = 20000
-        cell.amountGive = 200
-        cell.backintergral = 2000
-        cell.cumulative = -200
-        cell.incomings = -200
+        let model = dataArray[indexPath.section]
+        cell.incomings = model.user_money
+        cell.amount = model.highreward
+        cell.amountGive = model.payin
+        cell.backintergral = model.rebate
+        cell.cumulative = model.pay_points
+        cell.accountLabel.text = model.change_desc
     }
 }

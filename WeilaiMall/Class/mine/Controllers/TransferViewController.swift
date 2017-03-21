@@ -60,7 +60,6 @@ class TransferViewController: ViewController {
 
         // Do any additional setup after loading the view.
         configTableView()
-        addBackItem()
     }
     
     

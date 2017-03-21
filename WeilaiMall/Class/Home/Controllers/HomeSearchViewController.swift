@@ -10,6 +10,9 @@ import UIKit
 
 class HomeSearchViewController: ViewController {
 
+    lazy var searchBar = UISearchBar.init()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,11 +38,27 @@ class HomeSearchViewController: ViewController {
     }
     */
 
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "search_result" {
+            let controller = segue.destination as! SearchResultViewController
+            searchBar.delegate = nil
+            searchBar.delegate = controller
+            controller.searchKey = searchBar.text
+            controller.resetDelegate = {
+                [unowned self] in
+                self.searchBar.delegate = self
+            }
+        }
+    }
 }
 
 extension HomeSearchViewController {
     func navigationAttribute() {
-        let searchBar = UISearchBar.init()
+        
         searchBar.showsCancelButton = true
         searchBar.delegate = self
         navigationController?.navigationBar.addSubview(searchBar)
@@ -54,6 +73,10 @@ extension HomeSearchViewController {
 extension HomeSearchViewController: UISearchBarDelegate {
     public func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        _ = self.navigationController?.popToRootViewController(animated: true)
+        self.dismiss(animated: false, completion: nil)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.performSegue(withIdentifier: "search_result", sender: self)
     }
 }

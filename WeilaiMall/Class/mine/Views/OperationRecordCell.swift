@@ -13,9 +13,6 @@ class OperationRecordCell: UITableViewCell {
     /// 账户
     @IBOutlet weak var accountLabel: UILabel!
     
-    /// 积分
-    @IBOutlet weak var integralLabel: UILabel!
-    
     /// 收入支出
     @IBOutlet weak var incomingsLabel: UILabel!
     
@@ -31,6 +28,7 @@ class OperationRecordCell: UITableViewCell {
     /// 推广赠送
     @IBOutlet weak var amountGiveLabel: UILabel!
     
+    /// 收入支出
     var incomings: Float = 0 {
         didSet {
             incomingsLabel.textColor =  (incomings >= 0) ?UIColor.colorWithString("009900") :UIColor.colorWithString("cc3300")
@@ -38,7 +36,7 @@ class OperationRecordCell: UITableViewCell {
             incomingsLabel.text = str+String.init(format: "%.2f", str, incomings)
         }
     }
-    
+    /// 带返积分
     var backintergral: Float = 0 {
         didSet {
             backintergralLabel.textColor =  (backintergral >= 0) ?UIColor.colorWithString("009900") :UIColor.colorWithString("cc3300")
@@ -46,7 +44,7 @@ class OperationRecordCell: UITableViewCell {
             backintergralLabel.text = str+String.init(format: "%.0f", str, backintergral)
         }
     }
-    
+    /// 累计消费
     var cumulative: Float = 0 {
         didSet {
             cumulativeLabel.textColor =  (cumulative >= 0) ?UIColor.colorWithString("009900") :UIColor.colorWithString("cc3300")
@@ -54,7 +52,7 @@ class OperationRecordCell: UITableViewCell {
             cumulativeLabel.text = str+String.init(format: "%.2f", str, cumulative)
         }
     }
-    
+    /// 推广额度
     var amount: Float = 0 {
         didSet {
             amountLabel.textColor =  (amount >= 0) ?UIColor.colorWithString("009900") :UIColor.colorWithString("cc3300")
@@ -62,7 +60,7 @@ class OperationRecordCell: UITableViewCell {
             amountLabel.text = str+String.init(format: "%.0f", str, amount)
         }
     }
-    
+    /// 推广赠送
     var amountGive: Float = 0 {
         didSet {
             amountGiveLabel.textColor =  (amountGive >= 0) ?UIColor.colorWithString("009900") :UIColor.colorWithString("cc3300")

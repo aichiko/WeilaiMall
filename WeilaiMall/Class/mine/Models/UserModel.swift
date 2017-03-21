@@ -10,6 +10,9 @@ import Foundation
 import SwiftyJSON
 
 struct LoginRequest: CCRequest {
+    //internal var Error: RequestError
+
+    //typealias Error = RequestError
     let path: String = "Rest/auth/login"
     
     var parameter: [String: Any]
@@ -21,6 +24,7 @@ struct LoginRequest: CCRequest {
 }
 
 struct UserInfoRequest: CCRequest {
+    typealias Error = RequestError
     let path: String = "Rest/user/getinfo"
     
     var parameter: [String: Any]

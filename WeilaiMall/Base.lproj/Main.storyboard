@@ -74,7 +74,7 @@
                     <tabBarItem key="tabBarItem" title="首页" id="ht5-Se-2EX"/>
                     <navigationItem key="navigationItem" id="jsm-Q9-gJw"/>
                     <connections>
-                        <segue destination="FOo-Mh-nxZ" kind="show" identifier="home_search" animates="NO" id="ZWc-nH-jzz"/>
+                        <segue destination="FOo-Mh-nxZ" kind="presentation" identifier="home_search" animates="NO" id="ZWc-nH-jzz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="etC-j6-qNG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -95,15 +95,35 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="2xt-Df-QYE"/>
+                    <connections>
+                        <segue destination="9hq-dP-lea" kind="show" identifier="search_result" animates="NO" id="O0x-Bg-DrR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ilv-CA-8vC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1841" y="-1540"/>
         </scene>
+        <!--Search Result View Controller-->
+        <scene sceneID="rfr-nH-AAl">
+            <objects>
+                <viewController id="9hq-dP-lea" customClass="SearchResultViewController" customModule="WeilaiMall" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="teB-WG-Yy0"/>
+                        <viewControllerLayoutGuide type="bottom" id="ziq-th-u1F"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YJr-SX-Zhc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yf8-QY-eBv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2561" y="-1546"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="VDa-Rf-XxR">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YGR-9p-qeb" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="FOo-Mh-nxZ" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="iOa-n2-hif">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -113,6 +133,7 @@
                         <segue destination="7ZE-M5-0OE" kind="relationship" relationship="rootViewController" id="g4y-Yu-xEi"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YGR-9p-qeb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1022" y="-1540"/>
         </scene>

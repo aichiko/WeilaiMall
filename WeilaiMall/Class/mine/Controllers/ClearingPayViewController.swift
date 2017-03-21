@@ -86,7 +86,6 @@ class ClearingPayViewController: ViewController {
         // Do any additional setup after loading the view.
         
         configTableView()
-        addBackItem()
     }
 
     override func didReceiveMemoryWarning() {
