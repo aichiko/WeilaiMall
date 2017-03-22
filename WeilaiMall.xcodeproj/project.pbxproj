@@ -45,6 +45,7 @@
 		D545FF331E6D94770081EAF8 /* CCShoppingCarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D545FF2E1E6D94770081EAF8 /* CCShoppingCarCell.xib */; };
 		D545FF341E6D94770081EAF8 /* CCShoppingCarHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D545FF2F1E6D94770081EAF8 /* CCShoppingCarHeadView.swift */; };
 		D545FF351E6D94770081EAF8 /* CCShoppingNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D545FF301E6D94770081EAF8 /* CCShoppingNumberView.swift */; };
+		D55A7B601E82BA28000490CA /* RechargeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55A7B5F1E82BA28000490CA /* RechargeModel.swift */; };
 		D57769981E7AD687001EF6D7 /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57769971E7AD687001EF6D7 /* OrderDetailViewController.swift */; };
 		D577699A1E7AECC6001EF6D7 /* OrderDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57769991E7AECC6001EF6D7 /* OrderDetailCell.swift */; };
 		D57992B01E6717BA00A82DBC /* MineHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57992AF1E6717BA00A82DBC /* MineHeadView.swift */; };
@@ -124,6 +125,7 @@
 		D545FF2E1E6D94770081EAF8 /* CCShoppingCarCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CCShoppingCarCell.xib; sourceTree = "<group>"; };
 		D545FF2F1E6D94770081EAF8 /* CCShoppingCarHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCShoppingCarHeadView.swift; sourceTree = "<group>"; };
 		D545FF301E6D94770081EAF8 /* CCShoppingNumberView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCShoppingNumberView.swift; sourceTree = "<group>"; };
+		D55A7B5F1E82BA28000490CA /* RechargeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RechargeModel.swift; sourceTree = "<group>"; };
 		D57769971E7AD687001EF6D7 /* OrderDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetailViewController.swift; sourceTree = "<group>"; };
 		D57769991E7AECC6001EF6D7 /* OrderDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetailCell.swift; sourceTree = "<group>"; };
 		D57992AF1E6717BA00A82DBC /* MineHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineHeadView.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				D51C8F2A1E7E627400C77921 /* UserModel.swift */,
 				D50C2A241E814DA50002AF0F /* OperationRecordModel.swift */,
 				D50C2A261E816B230002AF0F /* OrderRelatedModel.swift */,
+				D55A7B5F1E82BA28000490CA /* RechargeModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -668,6 +671,7 @@
 				D50C2A271E816B230002AF0F /* OrderRelatedModel.swift in Sources */,
 				D51F3AB31E71A0CC0092B85B /* OrderCenterViewController.swift in Sources */,
 				D52084011E5F2C1200BE031B /* AppDelegate.swift in Sources */,
+				D55A7B601E82BA28000490CA /* RechargeModel.swift in Sources */,
 				D57992B31E671E8C00A82DBC /* MineCollectionViewCell.swift in Sources */,
 				D5E3C7FC1E6302460012FD7C /* CCWebViewController.swift in Sources */,
 				D52627991E750F6D00AC0B2B /* ClearingPayViewController.swift in Sources */,

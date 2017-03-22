@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class LoginButton : UIButton {
     override init(frame: CGRect) {
@@ -43,7 +44,7 @@ class LoginViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+        self.view.backgroundColor = UIColor.colorWithString("f14501")
         subviewsAttribute()
     }
 
@@ -55,10 +56,12 @@ class LoginViewController: ViewController {
     @IBAction func loginAction(_ sender: Any) {
         guard let user = userTextField.text else {
             print("账号密码不可为空")
+            MBProgressHUD.showErrorAdded(message: "账号密码不可为空", to: self.view)
             return
         }
         guard let password = passwordTextFeild.text else {
             print("账号密码不可为空")
+            MBProgressHUD.showErrorAdded(message: "账号密码不可为空", to: self.view)
             return
         }
         
@@ -67,7 +70,7 @@ class LoginViewController: ViewController {
             if error == nil {
                 
             }else {
-                print((error?.info())!)
+                MBProgressHUD.showErrorAdded(message: (error as! RequestError).info(), to: self.view)
             }
         }
     }
@@ -118,6 +121,7 @@ extension LoginViewController: UITextFieldDelegate {
         } else {
             self.view.endEditing(true)
             print("登录")
+            loginAction("")
         }
         return true
     }

@@ -66,7 +66,6 @@ enum RequestError: Int, Error {
     }
 }
 
-
 //也可以为 URLSessionClient 添加一个单例来减少请求时的创建开销
 struct URLSessionClient: Client {
 
@@ -92,7 +91,7 @@ struct URLSessionClient: Client {
     }
     */
     
-     internal func alamofireSend<T : CCRequest>(_ r: T, handler: @escaping ([T.Response?], RequestError?) -> Void) {
+     internal func alamofireSend<T : CCRequest>(_ r: T, handler: @escaping ([T.Response?], Error?) -> Void) {
         let sign = String.MD5(with: r.parameter)
         var newDic = r.parameter
         newDic.updateValue(sign, forKey: "sign")
@@ -110,27 +109,35 @@ struct URLSessionClient: Client {
                         DispatchQueue.main.async { handler(models, nil) }
                     }
                 }else {
-                    DispatchQueue.main.async { handler([], RequestError.init(rawValue: value["status"].intValue)) }
+                    DispatchQueue.main.async { handler([], r.parse(status: value["status"].intValue)) }
                 }
             }else {
                 NSLog("error === \(response.result.error)")
-                DispatchQueue.main.async { handler([], RequestError(rawValue: 1007)) }
+                DispatchQueue.main.async { handler([], r.parse(status: -1000)) }
             }
         }
      }
 }
 
-protocol Decodable {
-    /// 返回一个model
-    //func parse(data: Data) -> Self?
+
+/// 解析一个 Error
+protocol DecodableError {
+    /// 返回一个Error
+    func parse(status: Int) -> Error?
+}
+
+extension DecodableError {
+    func parse(status: Int) -> Error? {
+        return RequestError.init(rawValue: status)
+    }
 }
 
 protocol Client {
     var host: String { get }
-    func alamofireSend<T: CCRequest>(_ r: T, handler: @escaping([T.Response?], RequestError?) -> Void)
+    func alamofireSend<T: CCRequest>(_ r: T, handler: @escaping([T.Response?], Error?) -> Void)
 }
 
-protocol CCRequest {
+protocol CCRequest: DecodableError {
     var path: String { get }
     
     var parameter: [String: Any] { get }

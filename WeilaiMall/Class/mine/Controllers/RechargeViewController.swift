@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 /// 充值 页面
 class RechargeViewController: ViewController {
@@ -23,7 +24,20 @@ class RechargeViewController: ViewController {
         // Do any additional setup after loading the view.
         
         configTableView()
+        
+        prepareData()
     }
+    
+    private func prepareData() {
+        URLSessionClient().alamofireSend(UserBalanceRequest(parameter: ["access_token": access_token]),  handler: { [weak self] (models, error) in
+            if error == nil {
+                
+            }else {
+                MBProgressHUD.showErrorAdded(message: (error as! RequestError).info(), to: self?.view)
+            }
+        })
+    }
+    
     
     private func configTableView() {
         self.view.addSubview(tableView)

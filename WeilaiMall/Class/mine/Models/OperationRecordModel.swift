@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 
 struct OperationRecordRequest: CCRequest {
-    typealias Error = RequestError
+    
     let path: String = "Rest/user/accountlog"
     
     var parameter: [String: Any]

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 fileprivate class cellHeadView: UITableViewHeaderFooterView {
     
@@ -18,8 +19,16 @@ fileprivate class cellHeadView: UITableViewHeaderFooterView {
     
     let number: Int
     
+    var pay_attri: (Float, Int) {
+        didSet {
+            multipleLabel.text = "支付倍数  当前系统\(pay_attri.1)倍结算"
+            balanceLabel.text =  String.init(format: "当前余额%.0f积分", pay_attri.0)
+        }
+    }
+    
     init(_ payNumber: Int) {
         number = payNumber
+        pay_attri = (8000.0, 2)
         super.init(reuseIdentifier: "")
         
         configSubviews()
@@ -36,6 +45,7 @@ fileprivate class cellHeadView: UITableViewHeaderFooterView {
         balanceLabel.font = UIFont.CCsetfont(14)
         multipleLabel.textColor = UIColor(red:0.42, green:0.42, blue:0.42, alpha:1.00)
         balanceLabel.textColor = UIColor(red:0.88, green:0.05, blue:0.00, alpha:1.00)
+        
         multipleLabel.text = "支付倍数  当前系统2倍结算"
         balanceLabel.text = "当前余额8000积分"
         
@@ -80,17 +90,34 @@ class ClearingPayViewController: ViewController {
     let celltexts = ["对方账号", "店铺名称", "现金结算额", "支付密码"]
     let placeholders = ["请输入对方手机号或店铺ID", "请输入店铺名称", "请输入现金价值", "请输入支付密码"]
     
+    var balance: Float = 0
+    var pay_ratio: Int = 2
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
         configTableView()
+        
+        prepareData()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    private func prepareData() {
+        URLSessionClient().alamofireSend(UserBalanceRequest(parameter: ["access_token": access_token]),  handler: { [weak self] (models, error) in
+            if error == nil {
+                self?.balance = models[0]!.user_money
+                self?.pay_ratio = models[0]!.pay_ratio
+                self?.tableView.reloadSections(IndexSet.init(integer: 1), with: .automatic)
+            }else {
+                MBProgressHUD.showErrorAdded(message: (error as! RequestError).info(), to: self?.view)
+            }
+        })
     }
     
     private func configTableView() {
@@ -132,6 +159,7 @@ extension ClearingPayViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 1 {
             let headview = cellHeadView.init(2000)
+            headview.pay_attri = (balance, pay_ratio)
             return headview
         }else {
             let view = UITableViewHeaderFooterView.init()

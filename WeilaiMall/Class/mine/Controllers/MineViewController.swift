@@ -92,7 +92,7 @@ extension MineViewController {
                 UserDefaults.init().setValue(true, forKey: "isLogin")
                 self.headView.userModel = models[0]
             }else {
-                MBProgressHUD.showErrorAdded(message: error!.info(), to: self.view)
+                MBProgressHUD.showErrorAdded(message: (error as! RequestError).info(), to: self.view)
             }
         }
     }
