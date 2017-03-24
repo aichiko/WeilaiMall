@@ -15,8 +15,6 @@ enum SlipperLocation: Int {
     case receiving
 }
 
-
-
 class OrderHeadView: UIView {
 
     /*

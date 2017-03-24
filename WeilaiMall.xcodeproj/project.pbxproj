@@ -51,6 +51,7 @@
 		D57992B01E6717BA00A82DBC /* MineHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57992AF1E6717BA00A82DBC /* MineHeadView.swift */; };
 		D57992B31E671E8C00A82DBC /* MineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57992B11E671E8C00A82DBC /* MineCollectionViewCell.swift */; };
 		D57992B41E671E8C00A82DBC /* MineCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D57992B21E671E8C00A82DBC /* MineCollectionViewCell.xib */; };
+		D58D47B31E83F7B4008B390B /* MineInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58D47B21E83F7B4008B390B /* MineInfoViewController.swift */; };
 		D5CF305E1E801F9C00E471F2 /* HomeSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CF305D1E801F9C00E471F2 /* HomeSearchViewController.swift */; };
 		D5E3C7BC1E62EA890012FD7C /* CCTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E3C7BB1E62EA890012FD7C /* CCTabBar.swift */; };
 		D5E3C7FA1E62F5680012FD7C /* CCTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E3C7F91E62F5680012FD7C /* CCTabBarController.swift */; };
@@ -131,6 +132,7 @@
 		D57992AF1E6717BA00A82DBC /* MineHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineHeadView.swift; sourceTree = "<group>"; };
 		D57992B11E671E8C00A82DBC /* MineCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineCollectionViewCell.swift; sourceTree = "<group>"; };
 		D57992B21E671E8C00A82DBC /* MineCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MineCollectionViewCell.xib; sourceTree = "<group>"; };
+		D58D47B21E83F7B4008B390B /* MineInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineInfoViewController.swift; sourceTree = "<group>"; };
 		D5CF305D1E801F9C00E471F2 /* HomeSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSearchViewController.swift; sourceTree = "<group>"; };
 		D5E3C7BB1E62EA890012FD7C /* CCTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCTabBar.swift; sourceTree = "<group>"; };
 		D5E3C7F91E62F5680012FD7C /* CCTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCTabBarController.swift; sourceTree = "<group>"; };
@@ -374,6 +376,7 @@
 			isa = PBXGroup;
 			children = (
 				D5E3C8101E630CF30012FD7C /* MineViewController.swift */,
+				D58D47B21E83F7B4008B390B /* MineInfoViewController.swift */,
 				D517FC0F1E65B1E60050AE99 /* LoginViewController.swift */,
 				D51D84151E703A500059496D /* SettingupViewController.swift */,
 				D51D84171E7044FB0059496D /* ChangeLoginViewController.swift */,
@@ -691,6 +694,7 @@
 				D5E3C80D1E630CD80012FD7C /* HomeViewController.swift in Sources */,
 				D50C2A231E8121850002AF0F /* SearchResultViewController.swift in Sources */,
 				D5E3C7FA1E62F5680012FD7C /* CCTabBarController.swift in Sources */,
+				D58D47B31E83F7B4008B390B /* MineInfoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -221,6 +221,8 @@ extension MineHeadView {
             make.height.equalToSuperview()
         }
         
+        detailButton.addTarget(self, action: #selector(clickAction(_:)), for: .touchUpInside)
+        
         labelAttribute()
         headShow(with: style)
     }

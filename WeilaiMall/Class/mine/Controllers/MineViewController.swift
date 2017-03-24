@@ -45,6 +45,9 @@ class MineViewController: ViewController {
     var identifiers = ["transfer", "clearing", "myorder", "record", "invitedRegister", "Recharge", "settingup", "about"]
     
     var headView = MineHeadView()
+    
+    var userModel: UserModel?
+    
     var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
     override func viewDidLoad() {
@@ -57,6 +60,7 @@ class MineViewController: ViewController {
             if let userModel = CoreDataManager().getUserModel() {
                 self.headView.style = .logged
                 self.headView.userModel = userModel
+                self.userModel = userModel
             }
             getUserInfo()
         }
@@ -77,6 +81,20 @@ class MineViewController: ViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "mineInfo" {
+            guard let model = userModel else {
+                return
+            }
+            let viewController = segue.destination as! MineInfoViewController
+            viewController.model = model
+        }
+    }
 
 }
 
@@ -91,6 +109,7 @@ extension MineViewController {
                 self.headView.style = .logged
                 UserDefaults.init().setValue(true, forKey: "isLogin")
                 self.headView.userModel = models[0]
+                self.userModel = models[0]
             }else {
                 MBProgressHUD.showErrorAdded(message: (error as! RequestError).info(), to: self.view)
             }
@@ -111,6 +130,8 @@ extension MineViewController {
             if self.headView.style == .notlogin {
                 let loginVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "login")
                 self.navigationController?.pushViewController(loginVC, animated: true)
+            }else {
+                self.performSegue(withIdentifier: "mineInfo", sender:self)
             }
         }
         

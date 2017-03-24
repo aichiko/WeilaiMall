@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="99"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RiK-Qy-quV">
@@ -61,6 +61,12 @@
                     <constraint firstItem="RiK-Qy-quV" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="wSN-1v-yMa"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="goodImageView" destination="RiK-Qy-quV" id="QQq-q4-fzq"/>
+                <outlet property="goodnameLabel" destination="aB5-M7-Szs" id="CNk-qP-O15"/>
+                <outlet property="goodnumberLabel" destination="O40-7o-NA4" id="Jt7-KU-Gs9"/>
+                <outlet property="goodpriceLabel" destination="jit-uo-19C" id="cV2-j0-eso"/>
+            </connections>
             <point key="canvasLocation" x="33.5" y="84"/>
         </tableViewCell>
     </objects>

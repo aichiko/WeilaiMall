@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 fileprivate class HeadButton: UIButton {
     
@@ -161,6 +162,17 @@ class OrderScrollView: UIScrollView, UIGestureRecognizerDelegate {
         }
     }
     
+    func reloadData(location: SlipperLocation) {
+        DispatchQueue.main.async {
+            switch location {
+                case .all: self.allTableView.reloadData()
+                case .notDeliver: self.notDeliverTableView.reloadData()
+                case .notrReceiving: self.notrReceivingTableView.reloadData()
+                case .receiving: self.receivingTableView.reloadData()
+            }
+        }
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -192,6 +204,10 @@ class OrderCenterViewController: ViewController {
     
     lazy var headView: OrderHeadView = OrderHeadView()
     
+    var parameters: [String: Any] = [:]
+    
+    var dataArray: [OrderListModel] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -201,8 +217,36 @@ class OrderCenterViewController: ViewController {
         
         self.view.backgroundColor = UIColor.white
         
+        prepareData(.refreshData)
     }
     
+    func prepareData(_ style: CCRequestStyle, state: Int = -1) {
+        
+        if state == -1 {
+            parameters.removeValue(forKey: "state")
+        }else {
+            parameters.updateValue(state, forKey: "state")
+        }
+        
+        var page: Int = parameters["p"] as? Int ?? 1
+        if style == .refreshData {
+            page = 1
+            parameters.updateValue(page, forKey: "p")
+        }else if style == .moreData {
+            page += 1
+            parameters.updateValue(page, forKey: "p")
+        }
+        parameters.updateValue(access_token, forKey: "access_token")
+        
+        URLSessionClient().alamofireSend(OrderListRequest(parameter: parameters), handler: { [weak self] (models, error) in
+            if error == nil {
+                self?.dataArray = models as! [OrderListModel]
+                self?.scrollView.reloadData(location: SlipperLocation(rawValue: state+1)!)
+            }else {
+                MBProgressHUD.showErrorAdded(message: (error as! RequestError).info(), to: self?.view)
+            }
+        })
+    }
     
     private func loadSubviews() {
         self.view.addSubview(headView)
@@ -219,6 +263,9 @@ class OrderCenterViewController: ViewController {
             UIView.animate(withDuration: 0.2, animations: {
                 self.scrollView.contentOffset = CGPoint(x: UIScreen.main.bounds.width * CGFloat(location.rawValue), y: 0)
             })
+            
+            let state = location.rawValue - 1
+            self.prepareData(.refreshData, state: state)
         }
         
         scrollView.snp.updateConstraints { (make) in
@@ -254,6 +301,11 @@ class OrderCenterViewController: ViewController {
         
     }
     
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
 
     /*
     // MARK: - Navigation
@@ -290,7 +342,7 @@ extension OrderCenterViewController: UITableViewDelegate, UITableViewDataSource,
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return dataArray.count
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -298,7 +350,7 @@ extension OrderCenterViewController: UITableViewDelegate, UITableViewDataSource,
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ?1:2
+        return dataArray[section].order_goods.count
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -307,9 +359,8 @@ extension OrderCenterViewController: UITableViewDelegate, UITableViewDataSource,
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        //cell?.planOrHistory = .plan
-        //cell?.model = self.dataArray[headView.slipperLocation.rawValue][indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! OrderTableViewCell
+        cell.model = dataArray[indexPath.section].order_goods[indexPath.row]
         return cell
     }
     
@@ -336,5 +387,6 @@ extension OrderCenterViewController: UITableViewDelegate, UITableViewDataSource,
         }
         NSLog("=== scrollView End ===")
         headView.buttonAction(headView.viewWithTag(Int(scrollView.contentOffset.x/self.view.bounds.width)+100) as! UIButton)
+        
     }
 }

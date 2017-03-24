@@ -255,6 +255,7 @@
                         <segue destination="9ms-BZ-A3k" kind="show" identifier="invitedRegister" id="Xqu-ot-Df1"/>
                         <segue destination="UZO-5f-ehb" kind="show" identifier="Recharge" id="Qgv-qv-7Q5"/>
                         <segue destination="WQS-fa-pbJ" kind="show" identifier="about" id="FjL-Vq-a1N"/>
+                        <segue destination="zac-td-2OB" kind="show" identifier="mineInfo" id="Iee-qv-zfO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p9U-hk-qUv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -802,6 +803,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q8i-ya-djJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3266" y="2821"/>
+        </scene>
+        <!--个人信息-->
+        <scene sceneID="tYd-sb-o9m">
+            <objects>
+                <viewController title="个人信息" hidesBottomBarWhenPushed="YES" id="zac-td-2OB" customClass="MineInfoViewController" customModule="WeilaiMall" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dtD-1l-jAC"/>
+                        <viewControllerLayoutGuide type="bottom" id="zcb-kh-CBg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1zO-Pn-63w">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LeJ-FJ-46G" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1148" y="574"/>
         </scene>
         <!--登录-->
         <scene sceneID="oih-iY-nAp">
