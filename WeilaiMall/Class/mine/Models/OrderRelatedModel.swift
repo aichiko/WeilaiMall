@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 
 struct OrderListRequest: CCRequest {
-    let path: String = "Rest/order/orderlist"
+    let path: String = orderlist
     
     var parameter: [String: Any]
     typealias Response = OrderListModel
@@ -24,6 +24,20 @@ struct OrderListRequest: CCRequest {
     }
 }
 
+struct OrderDetailRequest: CCRequest {
+    let path: String = orderinfo
+    
+    var parameter: [String: Any]
+    typealias Response = OrderListModel
+    
+    func JSONParse(value: JSON) -> [OrderListModel?]? {
+        var models: [OrderListModel] = []
+        for json in value["data"].arrayValue {
+            models.append(OrderListModel.init(value: json))
+        }
+        return models
+    }
+}
 
 struct OrderListModel {
     
@@ -48,6 +62,33 @@ struct OrderListModel {
         
         order_goods = OrderGoodsModel.goods(with: value["order_goods"])
     }
+}
+
+struct OrderDetailModel {
+    var shop_id: Int
+    var shop_name: String
+    var order_id: Int
+    /// 订单编号
+    var order_sn: Int
+    var goods_num: Int
+    var goods_price: Float
+    /// 0：待发货  1:待收货 2:已收货
+    var state: Int
+    
+    /// 订单时间
+    var add_time: String
+    
+    var mobile_phone: String
+    /// 收货地址
+    var address: String
+    
+    /// 快递名称
+    var shipping_name: String
+    /// 快递单号
+    var invoice_no: Int
+    
+    var user_name: String
+    var order_goods: [OrderGoodsModel]
 }
 
 struct OrderGoodsModel {

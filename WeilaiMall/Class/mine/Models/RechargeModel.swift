@@ -61,7 +61,7 @@ enum RechangeError: Int, Error {
 
 
 struct UserBalanceRequest: CCRequest {
-    let path: String = "Rest/user/getusermoney"
+    let path: String = getusermoney
     
     var parameter: [String: Any]
     typealias Response = AccountBalance

@@ -69,7 +69,7 @@ enum RequestError: Int, Error {
 //也可以为 URLSessionClient 添加一个单例来减少请求时的创建开销
 struct URLSessionClient: Client {
 
-    let host = "http://114.215.19.98/api/web/"
+    let host = requestHost
     /*
     internal func send<T : CCRequest>(_ r: T, handler: @escaping ([T.Response?], Error?) -> Void) {
         let url = URL(string: host.appending(r.path))!

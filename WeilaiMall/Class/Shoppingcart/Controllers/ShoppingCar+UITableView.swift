@@ -14,7 +14,6 @@ extension ShoppingCartViewController {
     func cellAttribute(_ cell: CCShoppingCarCell, _ indexPath: IndexPath) {
         
         
-        
         if numberDictionary[indexPath] != nil {
             let value = numberDictionary[indexPath]
             cell.textFieldText = value

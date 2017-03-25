@@ -45,6 +45,7 @@
 		D545FF331E6D94770081EAF8 /* CCShoppingCarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D545FF2E1E6D94770081EAF8 /* CCShoppingCarCell.xib */; };
 		D545FF341E6D94770081EAF8 /* CCShoppingCarHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D545FF2F1E6D94770081EAF8 /* CCShoppingCarHeadView.swift */; };
 		D545FF351E6D94770081EAF8 /* CCShoppingNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D545FF301E6D94770081EAF8 /* CCShoppingNumberView.swift */; };
+		D54B1D771E8516FB00DAD246 /* WeilaiMall-API.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54B1D761E8516FB00DAD246 /* WeilaiMall-API.swift */; };
 		D55A7B601E82BA28000490CA /* RechargeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55A7B5F1E82BA28000490CA /* RechargeModel.swift */; };
 		D57769981E7AD687001EF6D7 /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57769971E7AD687001EF6D7 /* OrderDetailViewController.swift */; };
 		D577699A1E7AECC6001EF6D7 /* OrderDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57769991E7AECC6001EF6D7 /* OrderDetailCell.swift */; };
@@ -126,6 +127,7 @@
 		D545FF2E1E6D94770081EAF8 /* CCShoppingCarCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CCShoppingCarCell.xib; sourceTree = "<group>"; };
 		D545FF2F1E6D94770081EAF8 /* CCShoppingCarHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCShoppingCarHeadView.swift; sourceTree = "<group>"; };
 		D545FF301E6D94770081EAF8 /* CCShoppingNumberView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCShoppingNumberView.swift; sourceTree = "<group>"; };
+		D54B1D761E8516FB00DAD246 /* WeilaiMall-API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WeilaiMall-API.swift"; sourceTree = "<group>"; };
 		D55A7B5F1E82BA28000490CA /* RechargeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RechargeModel.swift; sourceTree = "<group>"; };
 		D57769971E7AD687001EF6D7 /* OrderDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetailViewController.swift; sourceTree = "<group>"; };
 		D57769991E7AECC6001EF6D7 /* OrderDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetailCell.swift; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 			children = (
 				D517FC131E65C9B10050AE99 /* Source.swift */,
 				D517FC151E65C9C40050AE99 /* CCRequest.swift */,
+				D54B1D761E8516FB00DAD246 /* WeilaiMall-API.swift */,
 				D51C8F191E7D157500C77921 /* WeilaiMall-Bridging-Header.h */,
 			);
 			path = Source;
@@ -671,6 +674,7 @@
 				D52084031E5F2C1200BE031B /* ViewController.swift in Sources */,
 				D5E3C8111E630CF30012FD7C /* MineViewController.swift in Sources */,
 				D545FF321E6D94770081EAF8 /* CCShoppingCarCell.swift in Sources */,
+				D54B1D771E8516FB00DAD246 /* WeilaiMall-API.swift in Sources */,
 				D50C2A271E816B230002AF0F /* OrderRelatedModel.swift in Sources */,
 				D51F3AB31E71A0CC0092B85B /* OrderCenterViewController.swift in Sources */,
 				D52084011E5F2C1200BE031B /* AppDelegate.swift in Sources */,

@@ -13,7 +13,7 @@ struct LoginRequest: CCRequest {
     //internal var Error: RequestError
 
     //typealias Error = RequestError
-    let path: String = "Rest/auth/login"
+    let path: String = login
     
     var parameter: [String: Any]
     typealias Response = String
@@ -25,7 +25,7 @@ struct LoginRequest: CCRequest {
 
 struct UserInfoRequest: CCRequest {
     typealias Error = RequestError
-    let path: String = "Rest/user/getinfo"
+    let path: String = getinfo
     
     var parameter: [String: Any]
     typealias Response = UserModel

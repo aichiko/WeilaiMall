@@ -8,6 +8,7 @@
 
 import UIKit
 import MBProgressHUD
+import MJRefresh
 
 fileprivate class HeadButton: UIButton {
     
@@ -41,11 +42,20 @@ fileprivate class HeadButton: UIButton {
 
 class OrderCellHeadView: UITableViewHeaderFooterView {
 
-    var titleButton: UIButton = HeadButton(type: .system)
+    private var titleButton: HeadButton = HeadButton(type: .system)
     
     var statusLabel = UILabel()
     
     let whiteView = UIView()
+    
+    let goodStateTitles = ["卖家还未发货", "卖家已发货", "已确认收货"]
+    
+    var goodState: (String, Int) = ("未来加商城", 2) {
+        didSet {
+            titleButton.Label.text = goodState.0
+            statusLabel.text = goodStateTitles[goodState.1]
+        }
+    }
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -89,6 +99,12 @@ class OrderCellHeadView: UITableViewHeaderFooterView {
 class OrderCellFootView: UITableViewHeaderFooterView {
     
     let footLabel = UILabel()
+    
+    var goodAttribute: (Int, Float) = (1, 0.0) {
+        didSet {
+            footLabel.text = String.init(format: "共%d件商品 合计：¥ %.2f （%.0f积分）", goodAttribute.0, goodAttribute.1, goodAttribute.1*10)
+        }
+    }
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -173,6 +189,68 @@ class OrderScrollView: UIScrollView, UIGestureRecognizerDelegate {
         }
     }
     
+    func endRefresh(location: SlipperLocation, isNodata: Bool = false) {
+        if #available(iOS 10.0, *) {
+            DispatchQueue.main.async {
+                switch location {
+                case .all:
+                    self.allTableView.refreshControl?.endRefreshing()
+                case .notDeliver:
+                    self.notDeliverTableView.refreshControl?.endRefreshing()
+                case .notrReceiving:
+                    self.notrReceivingTableView.refreshControl?.endRefreshing()
+                case .receiving:
+                    self.receivingTableView.refreshControl?.endRefreshing()
+                }
+            }
+        }else {
+            DispatchQueue.main.async {
+                switch location {
+                case .all:
+                    self.allTableView.mj_header.endRefreshing()
+                case .notDeliver:
+                    self.notDeliverTableView.mj_header.endRefreshing()
+                case .notrReceiving:
+                    self.notrReceivingTableView.mj_header.endRefreshing()
+                case .receiving:
+                    self.receivingTableView.mj_header.endRefreshing()
+                }
+            }
+        }
+        
+        if isNodata {
+            DispatchQueue.main.async {
+                switch location {
+                case .all:
+                    self.allTableView.mj_footer.endRefreshingWithNoMoreData()
+                case .notDeliver:
+                    self.notDeliverTableView.mj_footer.endRefreshingWithNoMoreData()
+                case .notrReceiving:
+                    self.notrReceivingTableView.mj_footer.endRefreshingWithNoMoreData()
+                case .receiving:
+                    self.receivingTableView.mj_footer.endRefreshingWithNoMoreData()
+                }
+            }
+        }else {
+            DispatchQueue.main.async {
+                switch location {
+                case .all:
+                    self.allTableView.mj_footer.endRefreshing()
+                case .notDeliver:
+                    self.notDeliverTableView.mj_footer.endRefreshing()
+                case .notrReceiving:
+                    self.notrReceivingTableView.mj_footer.endRefreshing()
+                case .receiving:
+                    self.receivingTableView.mj_footer.endRefreshing()
+                }
+            }
+        }
+        
+        
+    }
+    
+    
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -240,11 +318,19 @@ class OrderCenterViewController: ViewController {
         
         URLSessionClient().alamofireSend(OrderListRequest(parameter: parameters), handler: { [weak self] (models, error) in
             if error == nil {
-                self?.dataArray = models as! [OrderListModel]
+                if style == .refreshData {
+                    self?.dataArray = models as! [OrderListModel]
+                }else {
+                    for model in models {
+                        self?.dataArray.append(model!)
+                    }
+                }
                 self?.scrollView.reloadData(location: SlipperLocation(rawValue: state+1)!)
             }else {
                 MBProgressHUD.showErrorAdded(message: (error as! RequestError).info(), to: self?.view)
             }
+            
+            self?.scrollView.endRefresh(location: SlipperLocation(rawValue: state+1)!, isNodata: models.count==0)
         })
     }
     
@@ -292,6 +378,31 @@ class OrderCenterViewController: ViewController {
         tableView.register(OrderCellHeadView.self, forHeaderFooterViewReuseIdentifier: headIdentifier)
         tableView.register(OrderCellFootView.self, forHeaderFooterViewReuseIdentifier: footIdentifier)
         tableView.register(UINib.init(nibName: "OrderTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
+        
+        if #available(iOS 10.0, *) {
+            let refreshControl = UIRefreshControl.init()
+            refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+            tableView.refreshControl = refreshControl
+        } else {
+            // Fallback on earlier versions
+            //iOS 8.0 使用MJRefresh
+            tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: { 
+                [unowned self] in
+                self.prepareData(.refreshData)
+            })
+            
+        }
+        
+        tableView.mj_footer = MJRefreshAutoNormalFooter.init(refreshingBlock: {
+            [unowned self] in
+            self.prepareData(.moreData)
+        })
+        tableView.mj_footer.isAutomaticallyHidden = true
+        
+    }
+    
+    func refreshData() {
+        prepareData(.refreshData)
     }
 
     override func didReceiveMemoryWarning() {
@@ -324,7 +435,8 @@ extension OrderCenterViewController: UITableViewDelegate, UITableViewDataSource,
     
     @available(iOS 2.0, *)
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headview = tableView.dequeueReusableHeaderFooterView(withIdentifier: headIdentifier)
+        let headview = tableView.dequeueReusableHeaderFooterView(withIdentifier: headIdentifier) as! OrderCellHeadView
+        headview.goodState = (dataArray[section].shop_name, dataArray[section].state)
         return headview
     }
     
@@ -337,7 +449,8 @@ extension OrderCenterViewController: UITableViewDelegate, UITableViewDataSource,
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footView = tableView.dequeueReusableHeaderFooterView(withIdentifier: footIdentifier)
+        let footView = tableView.dequeueReusableHeaderFooterView(withIdentifier: footIdentifier) as! OrderCellFootView
+        footView.goodAttribute = (dataArray[section].goods_num, dataArray[section].goods_price)
         return footView
     }
     

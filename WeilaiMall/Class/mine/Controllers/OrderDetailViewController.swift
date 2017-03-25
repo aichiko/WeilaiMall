@@ -32,6 +32,11 @@ class OrderDetailViewController: ViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    func prepareData() {
+        
+    }
+    
     func configTableView() {
         self.view.addSubview(tableView)
         tableView.delegate = self

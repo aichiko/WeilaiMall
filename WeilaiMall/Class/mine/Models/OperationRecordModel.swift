@@ -11,7 +11,7 @@ import SwiftyJSON
 
 struct OperationRecordRequest: CCRequest {
     
-    let path: String = "Rest/user/accountlog"
+    let path: String = accountlog
     
     var parameter: [String: Any]
     typealias Response = OperationRecordModel
