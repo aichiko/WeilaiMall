@@ -28,14 +28,11 @@ struct OrderDetailRequest: CCRequest {
     let path: String = orderinfo
     
     var parameter: [String: Any]
-    typealias Response = OrderListModel
+    typealias Response = OrderDetailModel
     
-    func JSONParse(value: JSON) -> [OrderListModel?]? {
-        var models: [OrderListModel] = []
-        for json in value["data"].arrayValue {
-            models.append(OrderListModel.init(value: json))
-        }
-        return models
+    func JSONParse(value: JSON) -> [OrderDetailModel?]? {
+        
+        return [OrderDetailModel.init(value: value["data"])]
     }
 }
 
@@ -75,10 +72,10 @@ struct OrderDetailModel {
     /// 0：待发货  1:待收货 2:已收货
     var state: Int
     
-    /// 订单时间
-    var add_time: String
+    var mobile: Int
     
-    var mobile_phone: String
+    /// 订单时间
+    var add_time: Date
     /// 收货地址
     var address: String
     
@@ -89,6 +86,30 @@ struct OrderDetailModel {
     
     var user_name: String
     var order_goods: [OrderGoodsModel]
+    
+    init(value: JSON) {
+        order_id = value["order_id"].intValue
+        state = value["state"].intValue
+        goods_price = value["goods_price"].floatValue
+        goods_num = value["goods_num"].intValue
+        shop_id = value["shop_id"].intValue
+        shop_name = value["shop_name"].stringValue
+        
+        order_sn = value["order_sn"].intValue
+        mobile = value["mobile"].intValue
+        var date = Date.init(timeIntervalSince1970: TimeInterval.init(value["add_time"].intValue))
+        let interval = TimeZone.current.secondsFromGMT()
+        date.addTimeInterval(TimeInterval(interval))
+        add_time = date
+        address = value["address"].stringValue
+        shipping_name = value["shipping_name"].stringValue
+        invoice_no = value["invoice_no"].intValue
+        user_name = value["user_name"].stringValue
+        
+        order_goods = OrderGoodsModel.goods(with: value["order_goods"])
+        
+        
+    }
 }
 
 struct OrderGoodsModel {

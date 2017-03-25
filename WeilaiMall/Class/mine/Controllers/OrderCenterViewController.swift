@@ -416,6 +416,11 @@ class OrderCenterViewController: ViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "orderDetail" {
+            let controller = segue.destination as! OrderDetailViewController
+            controller.orderid = sender as! Int
+        }
     }
 
     /*
@@ -468,7 +473,8 @@ extension OrderCenterViewController: UITableViewDelegate, UITableViewDataSource,
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        self.performSegue(withIdentifier: "orderDetail", sender: self)
+        
+        self.performSegue(withIdentifier: "orderDetail", sender: dataArray[indexPath.section].order_id)
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

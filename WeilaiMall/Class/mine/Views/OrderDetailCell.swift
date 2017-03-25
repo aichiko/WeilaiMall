@@ -19,13 +19,33 @@ class OrderDetailCell: UITableViewCell {
         case logistics
     }
     
+    let headWidth: Float = {
+        let dic = [NSFontAttributeName: UIFont.CCsetfont(14)]
+        let str: NSString = "收货信息："
+        let width = str.boundingRect(with: CGSize(width: 0, height: 0), options: .usesLineFragmentOrigin, attributes: dic, context: nil).width
+        return Float(width)
+    }()
+    
     var style: DetailCellStyle {
         didSet {
             detailLabel.textColor = style == .address ?CCGrayTextColor:UIColor.black
         }
     }
     
-    
+    var model: OrderDetailModel? {
+        didSet {
+            if  model == nil {
+                return
+            }
+            let styleHead = style == .address ?"收货信息：":"物流方式："
+            if style == .address {
+                styleLabel.text = styleHead + "\((model?.user_name)!) \((model?.mobile)!)"
+            }else {
+                styleLabel.text = styleHead + (model?.shipping_name)!
+            }
+            detailLabel.text = style == .address ?model?.address:"物流单号：\((model?.invoice_no)!)"
+        }
+    }
     
     let styleLabel = UILabel()
     let detailLabel = UILabel()
@@ -46,7 +66,7 @@ class OrderDetailCell: UITableViewCell {
         }
         
         detailLabel.snp.updateConstraints { (make) in
-            make.left.equalTo(self.styleLabel.snp.left).offset(style == .address ?70:0)
+            make.left.equalTo(self.styleLabel.snp.left).offset(style == .address ?headWidth:0)
             make.top.equalTo(self.styleLabel.snp.bottom).offset(10)
             make.right.lessThanOrEqualTo(0)
         }

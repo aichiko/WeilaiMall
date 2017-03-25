@@ -109,7 +109,7 @@ struct URLSessionClient: Client {
                         DispatchQueue.main.async { handler(models, nil) }
                     }
                 }else {
-                    DispatchQueue.main.async { handler([], r.parse(status: value["status"].intValue)) }
+                    DispatchQueue.main.async { handler(r.JSONParse(value: value) ?? [], r.parse(status: value["status"].intValue)) }
                 }
             }else {
                 NSLog("error === \(response.result.error)")

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class ChangeLoginViewController: ViewController {
 
@@ -35,6 +36,27 @@ class ChangeLoginViewController: ViewController {
     
     @IBAction func commitAction(_ sender: UIButton) {
         
+        guard let newText = newTextField.text, let againText = againTextField.text, newText == againText else {
+            MBProgressHUD.showErrorAdded(message: "两次输入的密码不一致", to: self.view)
+            return
+        }
+        
+        let oldText = oldTextField.text
+        
+        let request = UpdatePassRequest(parameter: ["access_token": access_token, "old_pass": oldText!, "new_pass": newText])
+        URLSessionClient().alamofireSend(request) { [weak self] (messages, error) in
+            if let message = messages[0] {
+                if message.status == 0 {
+                    //修改成功，改掉本地的 access_token
+                }else {
+                    if message.info.characters.count == 0 {
+                        MBProgressHUD.showErrorAdded(message: (error as! RequestError).info(), to: self?.view)
+                    }else {
+                        MBProgressHUD.showErrorAdded(message: message.info, to: self?.view)
+                    }
+                }
+            }
+        }
     }
 
     deinit {
