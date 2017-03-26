@@ -26,6 +26,13 @@ let updatepass = "Rest/auth/updatepass"
 /// 修改支付密码
 let updatepaypass = "Rest/auth/updatepaypass"
 
+/// 检查用户获取用户姓名
+let getrealname = "Rest/user/getrealname"
+
+/// 转账
+let accounts = "Rest/user/accounts"
+
+
 /// 操作记录
 let accountlog = "Rest/user/accountlog"
 /// 订单列表

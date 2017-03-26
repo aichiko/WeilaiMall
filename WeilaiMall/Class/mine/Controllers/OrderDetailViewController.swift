@@ -65,6 +65,12 @@ class OrderDetailViewController: ViewController {
         tableView.register(UINib.init(nibName: "OrderTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         tableView.register(OrderCellHeadView.self, forHeaderFooterViewReuseIdentifier: headIdentifier)
         tableView.register(OrderCellFootView.self, forHeaderFooterViewReuseIdentifier: footIdentifier)
+        
+        /// 0：待发货  1:待收货 2:已收货
+        
+        let footView = UIView(frame: CGRect.init(x: 0, y: 0, width: tableView.bounds.width, height: 50))
+        footView.backgroundColor = UIColor.red
+        tableView.tableFooterView = footView
     }
 
     /*

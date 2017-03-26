@@ -62,6 +62,7 @@
 		D5E3C80F1E630CE70012FD7C /* ClassifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E3C80E1E630CE70012FD7C /* ClassifyViewController.swift */; };
 		D5E3C8111E630CF30012FD7C /* MineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E3C8101E630CF30012FD7C /* MineViewController.swift */; };
 		D5E3C8151E630D160012FD7C /* WeilaiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E3C8141E630D160012FD7C /* WeilaiViewController.swift */; };
+		D5F4C1371E87A31C001D2BED /* TransferUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F4C1361E87A31C001D2BED /* TransferUserModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,6 +146,7 @@
 		D5E3C80E1E630CE70012FD7C /* ClassifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassifyViewController.swift; sourceTree = "<group>"; };
 		D5E3C8101E630CF30012FD7C /* MineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineViewController.swift; sourceTree = "<group>"; };
 		D5E3C8141E630D160012FD7C /* WeilaiViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeilaiViewController.swift; sourceTree = "<group>"; };
+		D5F4C1361E87A31C001D2BED /* TransferUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferUserModel.swift; sourceTree = "<group>"; };
 		F23BE5254FD0591D5EEAF8A7 /* Pods_WeilaiMall.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeilaiMall.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -207,6 +209,7 @@
 				D50C2A261E816B230002AF0F /* OrderRelatedModel.swift */,
 				D55A7B5F1E82BA28000490CA /* RechargeModel.swift */,
 				D598979A1E864CC20034C5FA /* ChangePasswordModel.swift */,
+				D5F4C1361E87A31C001D2BED /* TransferUserModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -695,6 +698,7 @@
 				D57769981E7AD687001EF6D7 /* OrderDetailViewController.swift in Sources */,
 				D52627951E74D53F00AC0B2B /* TextFieldTableViewCell.swift in Sources */,
 				D517FC141E65C9B10050AE99 /* Source.swift in Sources */,
+				D5F4C1371E87A31C001D2BED /* TransferUserModel.swift in Sources */,
 				D52627971E74DBBF00AC0B2B /* TransferViewController.swift in Sources */,
 				D51A71D81E798B51007B104B /* RechargeViewController.swift in Sources */,
 				D516C2301E72EE0200BC5B60 /* OrderTableViewCell.swift in Sources */,

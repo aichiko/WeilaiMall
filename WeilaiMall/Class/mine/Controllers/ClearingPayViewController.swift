@@ -85,13 +85,20 @@ class ClearingPayViewController: ViewController {
     
     var tableView = UITableView(frame: CGRect.zero, style: .grouped)
     
-    let nextButton: CCSureButton = CCSureButton.init("下一步")
+    let nextButton: CCSureButton = CCSureButton.init("确定支付")
     
     let celltexts = ["对方账号", "店铺名称", "现金结算额", "支付密码"]
     let placeholders = ["请输入对方手机号或店铺ID", "请输入店铺名称", "请输入现金价值", "请输入支付密码"]
     
     var balance: Float = 0
     var pay_ratio: Int = 2
+    
+    
+    /// 是否验证 转账前需要先填写用户手机号，确认后才能进行后续的转账
+    var isVerification = false
+    
+    /// 已经验证的手机号， 如果用户更改了验证的手机号，则需要重新验证
+    var verificatedPhone: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,8 +108,21 @@ class ClearingPayViewController: ViewController {
         configTableView()
         
         prepareData()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(textChange(not:)), name: .UITextFieldTextDidChange, object: nil)
     }
 
+    @objc private func textChange(not: Notification) {
+        let cell1 = tableView.cellForRow(at: IndexPath.init(row: 2, section: 0)) as! TextFieldTableViewCell
+        let cell2 = tableView.cellForRow(at: IndexPath.init(row: 0, section: 1)) as! TextFieldTableViewCell
+        
+        if (cell1.textField.text?.characters.count)! > 0 && (cell2.textField.text?.characters.count)! > 0   {
+            nextButton.buttonDisabled = true
+        }else {
+            nextButton.buttonDisabled = false
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -211,6 +231,9 @@ extension ClearingPayViewController: UITableViewDelegate, UITableViewDataSource 
             cell = TextFieldTableViewCell.init(cellText: (celltexts[getIndex()], placeholders[getIndex()]), reuseIdentifier: cellIdentifier)
             cell?.selectionStyle = .none
             cell?.textField.tag = 100+getIndex()
+            if indexPath.section == 0 && indexPath.row == 1 {
+                cell?.textField.removeFromSuperview()
+            }
         }
         if indexPath.section == 1&&indexPath.row == 0 {
             cell?.textField.isSecureTextEntry = true
@@ -225,4 +248,25 @@ extension ClearingPayViewController: UITableViewDelegate, UITableViewDataSource 
         return cell!
     }
 }
+
+extension ClearingPayViewController: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if !isVerification && textField.tag != 100 {
+            MBProgressHUD.showErrorAdded(message: "请先验证手机号", to: self.view)
+            textField.endEditing(true)
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField.tag == 100 {
+            // 点击完成后，验证手机号
+            //verificatePhone(phoneNum: textField.text!, textField: textField)
+        }
+        
+        return true
+    }
+}
+
 

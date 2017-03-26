@@ -11,7 +11,7 @@ import SwiftyJSON
 
 
 /// status 1007: 支付密码为空，请先设置支付密码  1008: 余额不足   1009: 支付密码不正确
-/// 转账 相关错误
+/// 结账 相关错误
 enum RechangeError: Int, Error {
     case busyError = -1
     case otherError = -1000
@@ -57,7 +57,6 @@ enum RechangeError: Int, Error {
         }
     }
 }
-
 
 
 struct UserBalanceRequest: CCRequest {

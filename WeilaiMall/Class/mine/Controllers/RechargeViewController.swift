@@ -67,6 +67,11 @@ class RechargeViewController: ViewController {
         print("充值！！！")
     }
 
+    
+    @objc  fileprivate func hideKeyborad() {
+        self.view.endEditing(true)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -109,13 +114,64 @@ extension RechargeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        func configTextField(cell: UITableViewCell?) {
+            
+            /// 增加 inputAccessoryView 方便键盘的回收
+            func addInputView(textField: UITextField) {
+                let accessoryView = UIView()
+                accessoryView.backgroundColor = UIColor(red:0.98, green:0.98, blue:0.98, alpha:1.00)
+                accessoryView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 40)
+                textField.inputAccessoryView = accessoryView
+                
+                let blurEffect = UIBlurEffect.init(style: UIBlurEffectStyle.extraLight)
+                let visualEffectView = UIVisualEffectView.init(effect: blurEffect)
+                visualEffectView.frame = accessoryView.bounds
+                accessoryView.addSubview(visualEffectView)
+                
+                let completionButton = UIButton.init(type: .custom)
+                completionButton.setTitle("完成", for: .normal)
+                completionButton.titleLabel?.font = UIFont.CCsetfont(15, nil)
+                completionButton.setTitleColor(UIColor(red:0.99, green:0.25, blue:0.00, alpha:1.00), for: .normal)
+                completionButton.setTitleColor(UIColor.lightGray, for: .highlighted)
+                accessoryView.addSubview(completionButton)
+                
+                completionButton.snp.updateConstraints { (make) in
+                    make.right.top.equalToSuperview()
+                    make.centerY.equalTo(accessoryView)
+                    make.height.equalTo(40)
+                    make.width.equalTo(60)
+                }
+                
+                completionButton.addTarget(self, action: #selector(hideKeyborad), for: .touchUpInside)
+            }
+            
+            
+            if indexPath.row == 0 {
+                let textField = UITextField.init()
+                cell?.contentView.addSubview(textField)
+                textField.keyboardType = .numberPad
+                textField.font = UIFont.CCsetfont(16)
+                textField.placeholder = "3000"
+                textField.snp.updateConstraints({ (make) in
+                    make.left.equalTo((cell?.textLabel?.snp.right)!).offset(10)
+                    make.right.equalTo(-10)
+                    make.height.equalToSuperview()
+                })
+                
+                addInputView(textField: textField)
+            }
+        }
+        
         var cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)
         if cell == nil {
             cell = UITableViewCell.init(style: .value1, reuseIdentifier: cellIdentifier)
             cell?.accessoryType = indexPath.row == 0 ?.none:.disclosureIndicator
+            
+            configTextField(cell: cell)
         }
         cell?.textLabel?.text = titles[indexPath.row]
-        cell?.detailTextLabel?.text = indexPath.row == 0 ?"3000":"支付宝"
+        cell?.detailTextLabel?.text = indexPath.row == 0 ?nil:"支付宝"
         cell?.selectionStyle = .none
         return cell!
     }

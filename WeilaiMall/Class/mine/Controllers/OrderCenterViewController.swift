@@ -100,9 +100,19 @@ class OrderCellFootView: UITableViewHeaderFooterView {
     
     let footLabel = UILabel()
     
+    let lineLabel = UILabel()
+    
+    let sureButton = UIButton(type: .system)
+    
     var goodAttribute: (Int, Float) = (1, 0.0) {
         didSet {
             footLabel.text = String.init(format: "共%d件商品 合计：¥ %.2f （%.0f积分）", goodAttribute.0, goodAttribute.1, goodAttribute.1*10)
+        }
+    }
+    
+    var state: Int = 0 {
+        didSet {
+            
         }
     }
     
@@ -116,12 +126,36 @@ class OrderCellFootView: UITableViewHeaderFooterView {
         contentView.addSubview(footLabel)
         footLabel.snp.updateConstraints { (make) in
             make.right.equalTo(-15)
-            make.centerY.equalToSuperview()
+            make.top.equalToSuperview()
+            make.height.equalTo(30)
         }
         
         footLabel.textColor = UIColor.colorWithString("868686")
         footLabel.font = UIFont.CCsetfont(13)
         footLabel.text = String.init(format: "共%d件商品 合计：¥ %.2f （%d积分）", 1, 239.0, 9000)
+        
+        contentView.addSubview(lineLabel)
+        lineLabel.backgroundColor = UIColor.groupTableViewBackground
+        lineLabel.snp.updateConstraints { (make) in
+            make.width.left.equalToSuperview()
+            make.height.equalTo(1)
+            make.top.equalTo(self.footLabel.snp.bottom)
+        }
+        
+        sureButton.backgroundColor = CCOrangeColor
+        sureButton.setTitle("确认收货", for: .normal)
+        sureButton.setTitleColor(UIColor.white, for: .normal)
+        sureButton.layer.masksToBounds = true
+        sureButton.layer.cornerRadius = 4
+        contentView.addSubview(sureButton)
+        
+        sureButton.snp.updateConstraints { (make) in
+            make.right.equalTo(-15)
+            make.height.equalTo(30)
+            make.width.equalTo(100)
+            make.top.equalTo(self.footLabel.snp.bottom).offset(5)
+        }
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -435,6 +469,13 @@ class OrderCenterViewController: ViewController {
 
 }
 
+extension OrderCenterViewController {
+    func affirmorder(_ button: UIButton) {
+        
+    }
+}
+
+
 // MARK: - UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate
 extension OrderCenterViewController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
@@ -450,7 +491,7 @@ extension OrderCenterViewController: UITableViewDelegate, UITableViewDataSource,
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 30
+        return dataArray[section].state == 2 ?70:30
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class CCSureButton: UIButton {
     
@@ -50,18 +51,36 @@ class TransferViewController: ViewController {
     
     var tableView = UITableView(frame: CGRect.zero, style: .grouped)
     
-    let nextButton: CCSureButton = CCSureButton.init("下一步")
+    let nextButton: CCSureButton = CCSureButton.init("确定转账")
     
     let celltexts = ["对方账号", "真实姓名", "转账积分", "支付密码"]
     let placeholders = ["请输入对方手机号", "请输入真实姓名", "请输入转账积分", "请输入支付密码"]
+    
+    /// 是否验证 转账前需要先填写用户手机号，确认后才能进行后续的转账
+    var isVerification = false
+    
+    /// 已经验证的手机号， 如果用户更改了验证的手机号，则需要重新验证
+    var verificatedPhone: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         configTableView()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(textChange(not:)), name: .UITextFieldTextDidChange, object: nil)
     }
     
+    @objc private func textChange(not: Notification) {
+        let cell1 = tableView.cellForRow(at: IndexPath.init(row: 2, section: 0)) as! TextFieldTableViewCell
+        let cell2 = tableView.cellForRow(at: IndexPath.init(row: 0, section: 1)) as! TextFieldTableViewCell
+        
+        if (cell1.textField.text?.characters.count)! > 0 && (cell2.textField.text?.characters.count)! > 0   {
+            nextButton.buttonDisabled = true
+        }else {
+            nextButton.buttonDisabled = false
+        }
+    }
     
     private func configTableView() {
         self.view.addSubview(tableView)
@@ -82,6 +101,9 @@ class TransferViewController: ViewController {
             make.height.equalTo(40)
             make.top.equalTo(260)
         }
+        
+        nextButton.addTarget(self, action: #selector(transferAction(_:)), for: .touchUpInside)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -165,7 +187,11 @@ extension TransferViewController: UITableViewDelegate, UITableViewDataSource {
         if cell == nil {
             cell = TextFieldTableViewCell.init(cellText: (celltexts[getIndex()], placeholders[getIndex()]), reuseIdentifier: cellIdentifier)
             cell?.textField.tag = 100+getIndex()
+            cell?.textField.delegate = self
             cell?.selectionStyle = .none
+            if indexPath.section == 0 && indexPath.row == 1 {
+                cell?.textField.removeFromSuperview()
+            }
         }
         if indexPath.section == 1&&indexPath.row == 0 {
             cell?.textField.isSecureTextEntry = true
@@ -182,7 +208,84 @@ extension TransferViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension TransferViewController: UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if !isVerification && textField.tag != 100 {
+            MBProgressHUD.showErrorAdded(message: "请先验证手机号", to: self.view)
+            textField.endEditing(true)
+        }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField.tag == 100 {
+            // 点击完成后，验证手机号
+            verificatePhone(phoneNum: textField.text!, textField: textField)
+        }else if textField.tag == 102 {
+            // 输入积分
+            return valid(textField: textField)
+        }
+        
         return true
     }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        if textField.tag == 102 {
+            // 输入积分 如果大于8000 则返回失败
+            return valid(textField: textField)
+        }
+        return true
+    }
+    
+    func valid(textField: UITextField) -> Bool {
+        if let num = Float(textField.text!), num > 8000.0 {
+            MBProgressHUD.showErrorAdded(message: "您最多可转账8000积分", to: self.view)
+            return false
+        }
+        return true
+    }
+    
+}
+
+// MARK: - request
+extension TransferViewController {
+    
+    func verificatePhone(phoneNum: String, textField: UITextField) {
+        let request = VerificationRequest(parameter: ["access_token": access_token, "mobile_phone": phoneNum])
+        URLSessionClient().alamofireSend(request) { [weak self] (models, error) in
+            if error == nil {
+                self?.isVerification = true
+                self?.verificatedPhone = (models[0]?.real_name)!
+                let cell = self?.tableView.cellForRow(at: IndexPath.init(row: 1, section: 0)) as! TextFieldTableViewCell
+                cell.real_name = (models[0]?.real_name)!
+                textField.isEnabled = false
+            }else {
+                MBProgressHUD.showErrorAdded(message: (error as! VerificateError).info(), to: self?.view)
+            }
+        }
+    }
+    
+    
+    @objc func transferAction(_ button: UIButton) {
+        let cell1 = tableView.cellForRow(at: IndexPath.init(row: 2, section: 0)) as! TextFieldTableViewCell
+        let cell2 = tableView.cellForRow(at: IndexPath.init(row: 0, section: 1)) as! TextFieldTableViewCell
+        let user_money = cell1.textField.text!
+        let pay_pass = cell2.textField.text!
+        
+        let request = TransferRequest(parameter: ["access_token": access_token, "mobile_phone": verificatedPhone, "user_money": user_money, "pay_pass": pay_pass])
+        
+        URLSessionClient().alamofireSend(request) { [weak self] (models, error) in
+            if error == nil {
+                MBProgressHUD.showErrorAdded(message: "转账成功", to: self?.view)
+                
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: { 
+                    _ = self?.navigationController?.popViewController(animated: true)
+                })
+                
+            }else {
+                MBProgressHUD.showErrorAdded(message: (error as! TransferError).info(), to: self?.view)
+            }
+        }
+    }
+    
 }
