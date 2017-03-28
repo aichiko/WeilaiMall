@@ -99,6 +99,22 @@ class CoreDataManager: NSObject {
         return nil
     }
     
+    func updateUser(with parameters: [String: Any]) throws {
+        if let user = getCoreData() {
+            
+            let keys = ["real_name", "birthday", "sex", "user_picture"]
+            
+            for item in parameters {
+                if keys.contains(item.key) {
+                    user.setValue(item.value, forKey: item.key)
+                }else {
+                    throw NSError.init(domain: "参数错误", code: 0, userInfo: nil)
+                }
+            }
+        }
+    }
+    
+    
     private func synchronization(userEntity: inout User, user: UserModel) {
         userEntity.user_id = Int64(user.user_id)
         userEntity.user_name = user.user_name
@@ -112,6 +128,7 @@ class CoreDataManager: NSObject {
         userEntity.highreward = user.highreward
         userEntity.payin = user.payin
         userEntity.pay_points = user.pay_points
+        userEntity.user_picture = user.user_picture
     }
     
 }

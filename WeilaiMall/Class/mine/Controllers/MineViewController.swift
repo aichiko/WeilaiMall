@@ -64,6 +64,12 @@ class MineViewController: ViewController {
             }
             getUserInfo()
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshInfo), name: RefreshInfo, object: nil)
+    }
+    
+    func refreshInfo() {
+        getUserInfo()
     }
 
     override func didReceiveMemoryWarning() {
@@ -88,6 +94,9 @@ class MineViewController: ViewController {
         // Pass the selected object to the new view controller.
         
         if segue.identifier == "mineInfo" {
+            if let userModel = CoreDataManager().getUserModel() {
+                self.userModel = userModel
+            }
             guard let model = userModel else {
                 return
             }
@@ -111,6 +120,7 @@ extension MineViewController {
                 self.headView.userModel = models[0]
                 self.userModel = models[0]
             }else {
+                if error == nil { return }
                 MBProgressHUD.showErrorAdded(message: (error as! RequestError).info(), to: self.view)
             }
         }

@@ -66,11 +66,19 @@ class LoginViewController: ViewController {
         }
         
         let request = LoginRequest(parameter: ["mobile_phone": user, "password": password])
-        URLSessionClient().alamofireSend(request) { (models, error) in
+        URLSessionClient().alamofireSend(request) { [weak self] (models, error) in
             if error == nil {
+                UserDefaults.init().setValue(models[0]?.access_token, forKey: "access_token")
+                MBProgressHUD.showErrorAdded(message: "登录成功", to: self?.view)
+                //UserDefaults.init().setValue(true, forKey: "isLogin")
+                //登录成功后发送通知，让我的页面刷新数据
+                NotificationCenter.default.post(name: RefreshInfo, object: nil)
                 
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: { 
+                    _ = self?.navigationController?.popViewController(animated: true)
+                })
             }else {
-                MBProgressHUD.showErrorAdded(message: (error as! RequestError).info(), to: self.view)
+                MBProgressHUD.showErrorAdded(message: (error as! RequestError).info(), to: self?.view)
             }
         }
     }

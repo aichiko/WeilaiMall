@@ -21,6 +21,9 @@ let obtaincode = "Rest/auth/obtaincode"
 let login = "Rest/auth/login"
 /// 个人信息
 let getinfo = "Rest/user/getinfo"
+/// 修改用户信息
+let updateuser = "Rest/user/updateuser"
+
 /// 修改登录密码
 let updatepass = "Rest/auth/updatepass"
 /// 修改支付密码
@@ -28,10 +31,14 @@ let updatepaypass = "Rest/auth/updatepaypass"
 
 /// 检查用户获取用户姓名
 let getrealname = "Rest/user/getrealname"
-
 /// 转账
 let accounts = "Rest/user/accounts"
 
+/// 获取店铺名称
+let getshopname = "Rest/user/getshopname"
+
+/// 支付结算
+let payment = "Rest/user/payment"
 
 /// 操作记录
 let accountlog = "Rest/user/accountlog"

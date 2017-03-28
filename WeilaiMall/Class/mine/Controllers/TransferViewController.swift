@@ -103,7 +103,6 @@ class TransferViewController: ViewController {
         }
         
         nextButton.addTarget(self, action: #selector(transferAction(_:)), for: .touchUpInside)
-        
     }
 
     override func didReceiveMemoryWarning() {

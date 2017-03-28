@@ -50,9 +50,26 @@ class SettingupViewController: ViewController {
         button.layer.masksToBounds = true
         button.layer.cornerRadius = 4
         button.isHidden = !isLogin
+        
+        button.addTarget(self, action: #selector(exit), for: .touchUpInside)
     }
     
-
+    @objc private func exit() {
+        
+        let alertController = UIAlertController.init(title: "提示", message: "确定要退出登录？", preferredStyle: .alert)
+        
+        let sureAction = UIAlertAction.init(title: "确定", style: .default) { (action) in
+            UserDefaults.init().setValue(false, forKey: "isLogin")
+        }
+        let cancelAction = UIAlertAction.init(title: "取消", style: .cancel, handler: nil)
+        
+        alertController.addAction(sureAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
+        
+    }
+    
+    
     /*
     // MARK: - Navigation
 
@@ -84,7 +101,12 @@ extension SettingupViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == 2 {
             
         }else {
-            self.performSegue(withIdentifier: identifiers[indexPath.row], sender: self)
+            if isLogin {
+                self.performSegue(withIdentifier: identifiers[indexPath.row], sender: self)
+            }else {
+                let loginVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "login")
+                self.navigationController?.pushViewController(loginVC, animated: true)
+            }
         }
     }
 }

@@ -40,7 +40,7 @@ enum RequestError: Int, Error {
     case noAccess = 1004
     case passWordError = 1005
     case accountFreeze = 1006
-    case otherError
+    case otherError = -1000
     
     func info() -> String {
         switch self {

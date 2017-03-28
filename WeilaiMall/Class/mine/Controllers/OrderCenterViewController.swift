@@ -112,7 +112,11 @@ class OrderCellFootView: UITableViewHeaderFooterView {
     
     var state: Int = 0 {
         didSet {
-            
+            if state == 1 {
+                sureButton.isHidden = false
+            }else {
+                sureButton.isHidden = true
+            }
         }
     }
     
@@ -155,6 +159,7 @@ class OrderCellFootView: UITableViewHeaderFooterView {
             make.width.equalTo(100)
             make.top.equalTo(self.footLabel.snp.bottom).offset(5)
         }
+        sureButton.isHidden = state == 1
         
     }
     
@@ -491,11 +496,12 @@ extension OrderCenterViewController: UITableViewDelegate, UITableViewDataSource,
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return dataArray[section].state == 2 ?70:30
+        return dataArray[section].state == 1 ?70:30
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footView = tableView.dequeueReusableHeaderFooterView(withIdentifier: footIdentifier) as! OrderCellFootView
+        footView.state = dataArray[section].state
         footView.goodAttribute = (dataArray[section].goods_num, dataArray[section].goods_price)
         return footView
     }

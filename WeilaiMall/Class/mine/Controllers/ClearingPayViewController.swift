@@ -17,7 +17,11 @@ fileprivate class cellHeadView: UITableViewHeaderFooterView {
     
     var balanceLabel = UILabel()
     
-    let number: Int
+    var number: Int {
+        didSet {
+            payLabel.attributedText = attributeNumber(number: number*pay_attri.1)
+        }
+    }
     
     var pay_attri: (Float, Int) {
         didSet {
@@ -33,6 +37,17 @@ fileprivate class cellHeadView: UITableViewHeaderFooterView {
         
         configSubviews()
     }
+    
+    func attributeNumber(number: Int) -> NSMutableAttributedString {
+        let dic1 = [NSFontAttributeName: UIFont.CCsetfont(14), NSForegroundColorAttributeName: UIColor(red:0.42, green:0.42, blue:0.42, alpha:1.00)]
+        let dic2 = [NSFontAttributeName: UIFont.CCsetfont(14), NSForegroundColorAttributeName: UIColor(red:0.88, green:0.05, blue:0.00, alpha:1.00)]
+        let text = String.init(format: "应付积分  %d", number)
+        let attString = NSMutableAttributedString.init(string: text)
+        attString.addAttributes(dic1, range: NSRange.init(location: 0, length: 5))
+        attString.addAttributes(dic2, range: NSRange.init(location: 5, length: text.characters.count-5))
+        return attString
+    }
+    
     
     private func configSubviews() {
         
@@ -121,6 +136,18 @@ class ClearingPayViewController: ViewController {
         }else {
             nextButton.buttonDisabled = false
         }
+        
+        if let textField = not.object as? UITextField, textField.tag == 102 {
+            //print(textField.text!)
+            if textField.text == "" || textField.text == nil {
+                let headview = tableView.headerView(forSection: 1) as! cellHeadView
+                headview.number = 0
+                return
+            }
+            let headview = tableView.headerView(forSection: 1) as! cellHeadView
+            headview.number = Int(textField.text!)!
+        }
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -159,6 +186,8 @@ class ClearingPayViewController: ViewController {
             make.height.equalTo(40)
             make.top.equalTo(330)
         }
+        
+        nextButton.addTarget(self, action: #selector(paymentAction(_:)), for: .touchUpInside)
     }
 
     /*
@@ -178,7 +207,7 @@ extension ClearingPayViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 1 {
-            let headview = cellHeadView.init(2000)
+            let headview = cellHeadView.init(0)
             headview.pay_attri = (balance, pay_ratio)
             return headview
         }else {
@@ -234,6 +263,7 @@ extension ClearingPayViewController: UITableViewDelegate, UITableViewDataSource 
             if indexPath.section == 0 && indexPath.row == 1 {
                 cell?.textField.removeFromSuperview()
             }
+            cell?.textField.delegate = self
         }
         if indexPath.section == 1&&indexPath.row == 0 {
             cell?.textField.isSecureTextEntry = true
@@ -251,9 +281,25 @@ extension ClearingPayViewController: UITableViewDelegate, UITableViewDataSource 
 
 extension ClearingPayViewController: UITextFieldDelegate {
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField.tag == 102, var text: String = textField.text {
+            if string == "" {
+                //remove
+                //text.remove(at: text.endIndex)
+            }else {
+                text.append(string)
+            }
+            if text.characters.count > 8 {
+                return false
+            }
+        }
+        return true
+    }
+    
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if !isVerification && textField.tag != 100 {
-            MBProgressHUD.showErrorAdded(message: "请先验证手机号", to: self.view)
+            MBProgressHUD.showErrorAdded(message: "请先验证手机号／店铺ID", to: self.view)
             textField.endEditing(true)
         }
     }
@@ -262,11 +308,56 @@ extension ClearingPayViewController: UITextFieldDelegate {
         
         if textField.tag == 100 {
             // 点击完成后，验证手机号
-            //verificatePhone(phoneNum: textField.text!, textField: textField)
+            verificatePhone(phoneNum: textField.text!, textField: textField)
         }
-        
         return true
     }
 }
 
+
+// MARK: - request
+extension ClearingPayViewController {
+    
+    func verificatePhone(phoneNum: String, textField: UITextField) {
+        if phoneNum == "" {
+            return
+        }
+        let request = VerificationShopRequest(parameter: ["access_token": access_token, "mobile_phone": phoneNum])
+        URLSessionClient().alamofireSend(request) { [weak self] (models, error) in
+            if error == nil {
+                self?.isVerification = true
+                self?.verificatedPhone = (models[0]?.shop_name)!
+                let cell = self?.tableView.cellForRow(at: IndexPath.init(row: 1, section: 0)) as! TextFieldTableViewCell
+                cell.real_name = (models[0]?.shop_name)!
+                textField.isEnabled = false
+            }else {
+                MBProgressHUD.showErrorAdded(message: (error as! VerificateShopError).info(), to: self?.view)
+            }
+        }
+    }
+    
+    
+    @objc func paymentAction(_ button: UIButton) {
+        let cell1 = tableView.cellForRow(at: IndexPath.init(row: 2, section: 0)) as! TextFieldTableViewCell
+        let cell2 = tableView.cellForRow(at: IndexPath.init(row: 0, section: 1)) as! TextFieldTableViewCell
+        let user_money = cell1.textField.text!
+        let pay_pass = cell2.textField.text!
+        
+        let request = PaymentRequest(parameter: ["access_token": access_token, "mobile_phone": verificatedPhone, "user_money": user_money, "pay_pass": pay_pass])
+        
+        URLSessionClient().alamofireSend(request) { [weak self] (models, error) in
+            if error == nil {
+                MBProgressHUD.showErrorAdded(message: "支付成功", to: self?.view)
+                
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: {
+                    _ = self?.navigationController?.popViewController(animated: true)
+                })
+                
+            }else {
+                MBProgressHUD.showErrorAdded(message: (error as! PaymentError).info(), to: self?.view)
+            }
+        }
+    }
+    
+}
 

@@ -24,6 +24,8 @@ class OrderDetailViewController: ViewController {
     
     var model: OrderDetailModel?
     
+    var detailButton = UIButton.init(type: .system)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -46,6 +48,7 @@ class OrderDetailViewController: ViewController {
                 if models.count > 0{
                     self?.model = models[0]
                     self?.tableView.reloadData()
+                    self?.configFootview(state: (self?.model?.state)!)
                 }
             }else {
                 MBProgressHUD.showErrorAdded(message: (error as! RequestError).info(), to: self?.view)
@@ -67,11 +70,40 @@ class OrderDetailViewController: ViewController {
         tableView.register(OrderCellFootView.self, forHeaderFooterViewReuseIdentifier: footIdentifier)
         
         /// 0：待发货  1:待收货 2:已收货
-        
         let footView = UIView(frame: CGRect.init(x: 0, y: 0, width: tableView.bounds.width, height: 50))
-        footView.backgroundColor = UIColor.red
+        //footView.backgroundColor = UIColor.red
+        
+        footView.addSubview(detailButton)
+        detailButton.backgroundColor = CCOrangeColor
+        detailButton.setTitle("", for: .normal)
+        detailButton.setTitleColor(UIColor.white, for: .normal)
+        detailButton.layer.masksToBounds = true
+        detailButton.layer.cornerRadius = 4
+        
+        detailButton.snp.updateConstraints { (make) in
+            make.right.equalTo(-10)
+            make.height.equalTo(30)
+            make.width.equalTo(100)
+            make.centerY.equalToSuperview()
+        }
+        detailButton.isHidden = true
+        
         tableView.tableFooterView = footView
     }
+    
+    private func configFootview(state: Int) {
+        /// 0：待发货  1:待收货 2:已收货
+        let titles = ["", "确认收货", "确认收货"]
+        detailButton.isHidden = state != 1
+        detailButton.setTitle(titles[state], for: .normal)
+        
+        detailButton.addTarget(self, action: #selector(detailAction(_:)), for: .touchUpInside)
+    }
+    
+    @objc private func detailAction(_ button: UIButton) {
+        
+    }
+    
 
     /*
     // MARK: - Navigation
@@ -117,6 +149,7 @@ extension OrderDetailViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if section == 2 {
             let footView = tableView.dequeueReusableHeaderFooterView(withIdentifier: footIdentifier) as! OrderCellFootView
+            footView.state = 0
             if model != nil {
                 footView.goodAttribute = ((model?.goods_num)!, (model?.goods_price)!)
             }

@@ -10,21 +10,22 @@ import Foundation
 import SwiftyJSON
 
 struct LoginRequest: CCRequest {
-    //internal var Error: RequestError
-
-    //typealias Error = RequestError
+    
+    struct LoginMessage {
+        var access_token: String
+    }
+    
     let path: String = login
     
     var parameter: [String: Any]
-    typealias Response = String
+    typealias Response = LoginMessage
     
-    func JSONParse(value: JSON) -> [Response?]? {
-        return nil
+    func JSONParse(value: JSON) -> [LoginMessage?]? {
+        return [LoginMessage(access_token: value["data"]["access_token"].stringValue)]
     }
 }
 
 struct UserInfoRequest: CCRequest {
-    typealias Error = RequestError
     let path: String = getinfo
     
     var parameter: [String: Any]
@@ -35,6 +36,20 @@ struct UserInfoRequest: CCRequest {
         return [UserModel.init(value: value)]
     }
 }
+
+struct UpdateInfoRequest: CCRequest {
+    
+    let path: String = updateuser
+    
+    var parameter: [String: Any]
+    typealias Response = UserModel
+    
+    func JSONParse(value: JSON) -> [UserModel?]? {
+        
+        return [UserModel.init(value: value)]
+    }
+}
+
 
 
 /*
@@ -59,12 +74,20 @@ struct UserModel {
     var real_name: String
     var mobile_phone: Int
     var email: String
+    
+    var user_picture: String
+    /// 0 保密 1.男 2.女
     var sex: Int
     var birthday: String
     var user_money: Float
+    
+    /// 待返积分
     var rebate: Float
+    /// 推广赠送
     var payin: Float
+    /// 推广额度
     var highreward: Float
+    /// 累计消费
     var pay_points: Float
     
     init?(user: User) {
@@ -80,6 +103,10 @@ struct UserModel {
         payin = user.payin
         highreward = user.highreward
         pay_points = user.pay_points
+        if user.user_picture != nil {
+            user_picture = user.user_picture!
+        }
+        user_picture = ""
     }
     
     init(value: JSON) {
@@ -96,5 +123,6 @@ struct UserModel {
         payin = data["payin"].floatValue
         highreward = data["highreward"].floatValue
         pay_points = data["pay_points"].floatValue
+        user_picture = data["user_picture"].stringValue
     }
 }
