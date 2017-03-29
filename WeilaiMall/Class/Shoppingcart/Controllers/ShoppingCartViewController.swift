@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import MBProgressHUD
+import MJRefresh
 
 private let cellIdentifier = "CCShoppingCarCell"
 
@@ -25,7 +27,7 @@ class ShoppingCartViewController: ViewController, CCTableViewProtocol {
     var numberDictionary :[IndexPath: String] = [:]
     
     /// 商品单价的字典， 记录cell中的单价，防止cell复用带来的问题（请求完成后进行赋值）
-    var pricesDictionary :[IndexPath: String] = [:]
+    var pricesDictionary :[IndexPath: Float] = [:]
     
     /// cellButton， 记录cellButton的选中状态，防止cell复用带来的问题
     var cellButtonStatus :[IndexPath: Bool] = [:]
@@ -46,9 +48,9 @@ class ShoppingCartViewController: ViewController, CCTableViewProtocol {
     var deleteOne: IndexPath?
     
     /// 要删除的cells 的indexpath
-    var deleteCells: [String] = []
+    var deleteCells: [ShoppingCartGoods] = []
     
-    var dataArray = [["1", "2"], ["3"], ["4"], ["5"], ["6"]]
+    var dataArray: [ShoppingCartListModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +58,7 @@ class ShoppingCartViewController: ViewController, CCTableViewProtocol {
         // Do any additional setup after loading the view.
         //self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.init(named: "btn_back")?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(backAction(_:)))
 
-        
+        /*
         let rightButton = UIButton(type: .custom)
         rightButton.titleLabel?.font = UIFont.CCsetfont(16)
         rightButton.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
@@ -67,13 +69,42 @@ class ShoppingCartViewController: ViewController, CCTableViewProtocol {
         rightButton.addTarget(self, action: #selector(editing(_:)), for: .touchUpInside)
         let rightItem = UIBarButtonItem(customView: rightButton)
         self.navigationItem.rightBarButtonItem = rightItem
-        
+        */
         self.navigationItem.title = "我的购物车"
         configTableView()
         configToolBar()
         
+        prepareData(.refreshData)
     }
 
+    func prepareData(_ style: CCRequestStyle){
+        
+        guard isLogin else {
+            return
+        }
+        
+        let request = ShoppingCartListRequest(parameter: ["access_token": access_token])
+        URLSessionClient().alamofireSend(request) { [weak self] (models, error) in
+            if error == nil {
+                self?.dataArray = models as! [ShoppingCartListModel]
+                self?.updatePriceDictionary((self?.dataArray)!)
+                self?.tableView.reloadData()
+            }else {
+                MBProgressHUD.showErrorAdded(message: (error as! RequestError).info(), to: self?.view)
+            }
+            
+            if #available(iOS 10.0, *) {
+                self?.tableView.refreshControl?.endRefreshing()
+            } else {
+                // Fallback on earlier versions
+                //iOS 8.0 使用MJRefresh
+                self?.tableView.mj_header.endRefreshing()
+            }
+        }
+    }
+    
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -107,6 +138,24 @@ class ShoppingCartViewController: ViewController, CCTableViewProtocol {
         tableView.tableFooterView = UIView()
         tableView.register(UINib.init(nibName: "CCShoppingCarCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         tableView.register(CCShoppingCarHeadView.self, forHeaderFooterViewReuseIdentifier: headIdentifier)
+        
+        if #available(iOS 10.0, *) {
+            let refreshControl = UIRefreshControl.init()
+            refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+            tableView.refreshControl = refreshControl
+        } else {
+            // Fallback on earlier versions
+            //iOS 8.0 使用MJRefresh
+            tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
+                [unowned self] in
+                self.prepareData(.refreshData)
+            })
+            
+        }
+    }
+    
+    func refreshData() {
+        prepareData(.refreshData)
     }
     
     private func configToolBar() {
@@ -164,7 +213,7 @@ extension ShoppingCartViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataArray[section].count
+        return dataArray[section].cart_goods.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -189,19 +238,19 @@ extension ShoppingCartViewController: UITableViewDelegate, UITableViewDataSource
 
 // MARK: - calculatePrice
 extension ShoppingCartViewController {
-    /*
-    func updatePriceDictionary(_ array: [CCShoppingCarModel]) {
+    
+    func updatePriceDictionary(_ array: [ShoppingCartListModel]) {
         
         for section in 0..<array.count {
-            for row in 0..<array[section].productList.count {
+            for row in 0..<array[section].cart_goods.count {
                 let indexPath = IndexPath.init(row: row, section: section)
-                let price: Float = array[section].productList[row].Fee
+                let price: Float = array[section].cart_goods[row].goods_price
                 
                 pricesDictionary.updateValue(price, forKey: indexPath)
             }
         }
     }
-    */
+ 
     func calculatePrice() {
         print("selectedCells == \(selectedCells)")
         let values = selectedCells.values
@@ -219,28 +268,25 @@ extension ShoppingCartViewController {
 }
 
 
-/*
+
 // MARK: - OperateBuyCar
-extension CCShoppingCartViewController {
+extension ShoppingCartViewController {
     
     /// 删除单个cell
     ///
     /// - Parameter indexPath: indexPath
     func requestDeleteGood(with indexPath: IndexPath) {
-        let model = self.dataArray[indexPath.section].productList[indexPath.row]
-        let data = try? JSONSerialization.data(withJSONObject: [model.ID], options: .prettyPrinted)
-        let str = String.init(data: data!, encoding: .utf8)
-        let parameters = ["type": 1, "buycarids": str!] as [String : Any]
-        let request = CCOperateBuyCarRequset(parameters: parameters, path: "OperateBuyCar")
-        MeetURLSessionClient().send(request, handler: { [unowned self] (datas, error) in
+        let model = self.dataArray[indexPath.section].cart_goods[indexPath.row]
+        let request = CartDeleteRequest(parameter: ["access_token": access_token, "rec_id": model.rec_id])
+        URLSessionClient().alamofireSend(request) { [weak self] (modela, error) in
             if error == nil {
-                self.deleteGoods(indexPath)
+                self?.deleteGoods(indexPath)
             }else {
-                MBProgressHUD.showErrorAdded(message: "修改失败", to: self.view)
+                MBProgressHUD.showErrorAdded(message: "删除失败", to: self?.view)
             }
-        })
+        }
     }
-    
+    /*
     /// 删除多个cell
     ///
     /// - Parameter indexPath: [indexPath]
@@ -262,7 +308,8 @@ extension CCShoppingCartViewController {
             }
         })
     }
-    
+    */
+    /*
     /// 选中cell进行结算
     ///
     /// - Parameter indexPath: [indexPath]
@@ -294,5 +341,6 @@ extension CCShoppingCartViewController {
             }
         })
     }
+     */
 }
-*/
+

@@ -8,11 +8,11 @@
 
 import Foundation
 import UIKit
+import MBProgressHUD
 
 // MARK: - cellAttribute
 extension ShoppingCartViewController {
     func cellAttribute(_ cell: CCShoppingCarCell, _ indexPath: IndexPath) {
-        
         
         if numberDictionary[indexPath] != nil {
             let value = numberDictionary[indexPath]
@@ -21,6 +21,8 @@ extension ShoppingCartViewController {
             cell.textFieldText = "1"
             numberDictionary[indexPath] = "1"
         }
+        
+        cell.model = dataArray[indexPath.section].cart_goods[indexPath.row]
         
         
         func cellStatus(_ cellButtonStatus: inout [IndexPath: Bool]) {
@@ -42,14 +44,25 @@ extension ShoppingCartViewController {
         cell.changeText = {
             [unowned self] text in
             print("text === \(text)")
-            self.numberDictionary[indexPath] = text
-            if let value = self.selectedCells[indexPath] {
-                let number = Int(text)!
-                let price = value.1
-                self.selectedCells[indexPath] = (number, price)
-            }
-            self.updateDictionary()
-            self.calculatePrice()
+            
+            let model = self.dataArray[indexPath.section].cart_goods[indexPath.row]
+            let parameters = ["access_token": access_token, "rec_id": model.rec_id, "num": text] as [String : Any]
+            let request = CartChangenumRequest(parameter: parameters)
+            
+            URLSessionClient().alamofireSend(request, handler: { [weak self] (datas, error) in
+                if error == nil {
+                    self?.numberDictionary[indexPath] = text
+                    if let value = self?.selectedCells[indexPath] {
+                        let number = Int(text)!
+                        let price = value.1
+                        self?.selectedCells[indexPath] = (number, price)
+                    }
+                    self?.updateDictionary()
+                    self?.calculatePrice()
+                }else {
+                    MBProgressHUD.showErrorAdded(message: "修改失败", to: self?.view)
+                }
+            })
         }
         //button的点击
         cell.buttonAction = {
@@ -102,6 +115,7 @@ extension ShoppingCartViewController {
 extension ShoppingCartViewController {
     
     func headAttribute(_ headView: CCShoppingCarHeadView, _ section: Int) {
+        headView.title = dataArray[section].shop_name
         
         func headStatus(_ headButtonStatus: inout [Int: Bool]) {
             if headButtonStatus[section] != nil {
@@ -216,9 +230,9 @@ extension ShoppingCartViewController {
     /// - Parameter indexPath: cell的indexPath
     func deleteGoods(_ indexPath: IndexPath) {
         print("delete === \(indexPath)")
-        let deleteArr = dataArray[indexPath.section]
+        let deleteArr = dataArray[indexPath.section].cart_goods
         deleteOne = indexPath
-        dataArray[indexPath.section].remove(at: indexPath.row)
+        dataArray[indexPath.section].cart_goods.remove(at: indexPath.row)
         
         tableView.deleteRows(at: [indexPath], with: .automatic)
         
@@ -237,14 +251,13 @@ extension ShoppingCartViewController {
                 let j = keys.index(of: key)!
                 cellStatus[key] = values[j+1]
             }
-            
         }
         deleteCell(&cellButtonStatus)
         deleteCell(&deleteCellButtonStatus)
         // 如果分区的cell个数为 0 ，则删除整个分区
         var deleteSection: Int?
         for i in 0..<dataArray.count {
-            let arr = dataArray[i]
+            let arr = dataArray[i].cart_goods
             if arr.count == 0 {
                 deleteSection = i
             }
@@ -296,17 +309,20 @@ extension ShoppingCartViewController {
 
 // MARK: - 通过 删除 多个cell
 extension ShoppingCartViewController{
-    func deleteGoods(with cells: [String]) {
+    func deleteGoods(with cells: [ShoppingCartGoods]) {
         for cell in cells {
-            for i in 0..<dataArray.count {
+            for section in 0..<dataArray.count {
                 //var j = 0
-                if dataArray[i].contains(cell) {
-                    dataArray[i].remove(at: dataArray[i].index(of: cell)!)
+                var models = dataArray[section].cart_goods
+                if models.contains(where: {$0 == cell}) {
+                    let index = models.index(where:{ $0==cell})
+                    models.remove(at: index!)
+                    dataArray[section].cart_goods = models
                 }
             }
         }
         dataArray = dataArray.filter({ (arr) -> Bool in
-            return arr.count>0
+            return arr.cart_goods.count>0
         })
         deleteCellButtonStatus.removeAll()
         deleteHeadButtonStatus.removeAll()
@@ -330,9 +346,9 @@ extension ShoppingCartViewController {
                     var price: Float
                     var number: Int
                     if pricesDictionary[indexPath] == nil{
-                        price = 499.00
+                        price = 0
                     }else {
-                        price = Float.init(pricesDictionary[indexPath]!)!
+                        price = Float.init(pricesDictionary[indexPath]!)
                     }
                     if numberDictionary[indexPath] == nil{
                         number = 1
@@ -356,7 +372,7 @@ extension ShoppingCartViewController {
             for row in 0..<rowNum {
                 let indexPath = IndexPath(row: row, section: section)
                 if let status = deleteCellButtonStatus[indexPath], status == true {
-                    deleteCells.append(dataArray[section][row])
+                    deleteCells.append(dataArray[section].cart_goods[row])
                 }
             }
         }

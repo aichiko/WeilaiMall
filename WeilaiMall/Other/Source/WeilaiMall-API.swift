@@ -48,3 +48,10 @@ let orderlist = "Rest/order/orderlist"
 let orderinfo = "Rest/order/orderinfo"
 /// 用户余额
 let getusermoney = "Rest/user/getusermoney"
+
+/// 购物车
+let cartlist = "Rest/order/cartlist"
+/// 购物车更改数量
+let changenum = "Rest/order/changenum"
+/// 删除订单
+let cartdel = "Rest/order/cartdel"

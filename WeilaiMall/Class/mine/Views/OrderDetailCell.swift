@@ -20,7 +20,7 @@ class OrderDetailCell: UITableViewCell {
     }
     
     let headWidth: Float = {
-        let dic = [NSFontAttributeName: UIFont.CCsetfont(14)]
+        let dic = [NSFontAttributeName: UIFont.CCsetfont(14)!]
         let str: NSString = "收货信息："
         let width = str.boundingRect(with: CGSize(width: 0, height: 0), options: .usesLineFragmentOrigin, attributes: dic, context: nil).width
         return Float(width)

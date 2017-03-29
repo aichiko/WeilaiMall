@@ -39,8 +39,8 @@ fileprivate class cellHeadView: UITableViewHeaderFooterView {
     }
     
     func attributeNumber(number: Int) -> NSMutableAttributedString {
-        let dic1 = [NSFontAttributeName: UIFont.CCsetfont(14), NSForegroundColorAttributeName: UIColor(red:0.42, green:0.42, blue:0.42, alpha:1.00)]
-        let dic2 = [NSFontAttributeName: UIFont.CCsetfont(14), NSForegroundColorAttributeName: UIColor(red:0.88, green:0.05, blue:0.00, alpha:1.00)]
+        let dic1 = [NSFontAttributeName: UIFont.CCsetfont(14)!, NSForegroundColorAttributeName: UIColor(red:0.42, green:0.42, blue:0.42, alpha:1.00)]
+        let dic2 = [NSFontAttributeName: UIFont.CCsetfont(14)!, NSForegroundColorAttributeName: UIColor(red:0.88, green:0.05, blue:0.00, alpha:1.00)]
         let text = String.init(format: "应付积分  %d", number)
         let attString = NSMutableAttributedString.init(string: text)
         attString.addAttributes(dic1, range: NSRange.init(location: 0, length: 5))
@@ -64,8 +64,8 @@ fileprivate class cellHeadView: UITableViewHeaderFooterView {
         multipleLabel.text = "支付倍数  当前系统2倍结算"
         balanceLabel.text = "当前余额8000积分"
         
-        let dic1 = [NSFontAttributeName: UIFont.CCsetfont(14), NSForegroundColorAttributeName: UIColor(red:0.42, green:0.42, blue:0.42, alpha:1.00)]
-        let dic2 = [NSFontAttributeName: UIFont.CCsetfont(14), NSForegroundColorAttributeName: UIColor(red:0.88, green:0.05, blue:0.00, alpha:1.00)]
+        let dic1 = [NSFontAttributeName: UIFont.CCsetfont(14)!, NSForegroundColorAttributeName: UIColor(red:0.42, green:0.42, blue:0.42, alpha:1.00)]
+        let dic2 = [NSFontAttributeName: UIFont.CCsetfont(14)!, NSForegroundColorAttributeName: UIColor(red:0.88, green:0.05, blue:0.00, alpha:1.00)]
         let text = String.init(format: "应付积分  %d", self.number)
         let attString = NSMutableAttributedString.init(string: text)
         attString.addAttributes(dic1, range: NSRange.init(location: 0, length: 5))

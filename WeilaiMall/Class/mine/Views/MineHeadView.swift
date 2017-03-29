@@ -69,8 +69,8 @@ class IntegralView: UIView {
         }else {
             let string = String(format: "%.2f", integral)
             let attributeText = NSMutableAttributedString.init(string: string)
-            let dic1 = [NSFontAttributeName: UIFont.CCsetfont(13), NSForegroundColorAttributeName: UIColor(red:0.99, green:0.23, blue:0.12, alpha:1.00)]
-            let dic2 = [NSFontAttributeName: UIFont.CCsetfont(11), NSForegroundColorAttributeName: UIColor(red:0.99, green:0.23, blue:0.12, alpha:1.00)]
+            let dic1 = [NSFontAttributeName: UIFont.CCsetfont(13)!, NSForegroundColorAttributeName: UIColor(red:0.99, green:0.23, blue:0.12, alpha:1.00)]
+            let dic2 = [NSFontAttributeName: UIFont.CCsetfont(11)!, NSForegroundColorAttributeName: UIColor(red:0.99, green:0.23, blue:0.12, alpha:1.00)]
             
             attributeText.addAttributes(dic1, range: NSRange.init(location: 0, length: string.characters.count-2))
             attributeText.addAttributes(dic2, range: NSRange.init(location: string.characters.count-2, length: 2))

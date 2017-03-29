@@ -139,13 +139,13 @@ extension CCShoppingBar {
 extension CCShoppingBar {
     fileprivate func priceLabelAttributeText(_ newPrice: Float) {
         
-        let attributeText = NSMutableAttributedString.init(string: String.init(format: "合计：¥ %.2f", price))
-        let dic1 = [NSFontAttributeName: UIFont.CCsetfont(12), NSForegroundColorAttributeName: CCTitleTextColor]
+        let attributeText = NSMutableAttributedString.init(string: String.init(format: "合计：%.2f 积分", price))
+        let dic1 = [NSFontAttributeName: UIFont.CCsetfont(12)!, NSForegroundColorAttributeName: CCTitleTextColor]
         attributeText.addAttributes(dic1, range: NSRange.init(location: 0, length: 3))
-        let dic2 = [NSFontAttributeName: UIFont.CCsetfont(12), NSForegroundColorAttributeName: CCOrangeColor]
-        attributeText.addAttributes(dic2, range: NSRange.init(location: 3, length: 1))
-        let dic3 = [NSFontAttributeName: UIFont.CCsetfont(16), NSForegroundColorAttributeName: CCOrangeColor]
-        attributeText.addAttributes(dic3, range: NSRange.init(location: 4, length: attributeText.length-4))
+//        let dic2 = [NSFontAttributeName: UIFont.CCsetfont(12)!, NSForegroundColorAttributeName: CCOrangeColor]
+//        attributeText.addAttributes(dic2, range: NSRange.init(location: 3, length: 1))
+        let dic3 = [NSFontAttributeName: UIFont.CCsetfont(16)!, NSForegroundColorAttributeName: CCOrangeColor]
+        attributeText.addAttributes(dic3, range: NSRange.init(location: 3, length: attributeText.length-3))
         
         totalpricesLabel.attributedText = attributeText
     }

@@ -9,7 +9,60 @@
 import Foundation
 import SwiftyJSON
 
-struct ShoppingCartGoods {
+struct ShoppingCartListRequest: CCRequest {
+    let path: String = cartlist
+    
+    var parameter: [String: Any]
+    typealias Response = ShoppingCartListModel
+    
+    func JSONParse(value: JSON) -> [ShoppingCartListModel?]? {
+        var models: [ShoppingCartListModel] = []
+        for item in value["data"].arrayValue {
+            let model = ShoppingCartListModel.init(value: item)
+            models.append(model)
+        }
+        return models
+    }
+}
+
+
+struct CartChangenumRequest: CCRequest {
+    let path: String = changenum
+    
+    var parameter: [String: Any]
+    typealias Response = ShoppingCartListModel
+    
+    func JSONParse(value: JSON) -> [ShoppingCartListModel?]? {
+        var models: [ShoppingCartListModel] = []
+        for item in value["data"].arrayValue {
+            let model = ShoppingCartListModel.init(value: item)
+            models.append(model)
+        }
+        return models
+    }
+}
+
+struct CartDeleteRequest: CCRequest {
+    let path: String = cartdel
+    
+    var parameter: [String: Any]
+    typealias Response = ShoppingCartListModel
+    
+    func JSONParse(value: JSON) -> [ShoppingCartListModel?]? {
+        var models: [ShoppingCartListModel] = []
+        for item in value["data"].arrayValue {
+            let model = ShoppingCartListModel.init(value: item)
+            models.append(model)
+        }
+        return models
+    }
+}
+
+
+
+
+
+struct ShoppingCartGoods: Equatable {
     
     /// 购物车记录id
     var rec_id: Int
@@ -18,6 +71,10 @@ struct ShoppingCartGoods {
     var goods_num: Int
     var goods_price: Float
     var goods_img: String
+    
+    public static func ==(lhs: ShoppingCartGoods, rhs: ShoppingCartGoods) -> Bool {
+        return lhs.rec_id==rhs.rec_id
+    }
     
     init(value: JSON) {
         rec_id = value["rec_id"].intValue

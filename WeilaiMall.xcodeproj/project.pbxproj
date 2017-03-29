@@ -443,8 +443,8 @@
 		D5E3C8071E630CB20012FD7C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D545FF281E6D940B0081EAF8 /* ShoppingCar+UITableView.swift */,
 				D545FF291E6D940B0081EAF8 /* ShoppingCartViewController.swift */,
+				D545FF281E6D940B0081EAF8 /* ShoppingCar+UITableView.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

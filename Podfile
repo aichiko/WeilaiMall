@@ -17,4 +17,6 @@ pod 'Kingfisher'
 
 pod 'MJRefresh'
 
+pod 'IQKeyboardManager'
+
 end

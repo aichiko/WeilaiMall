@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="109"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="109.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q63-2h-yeh">
@@ -37,26 +37,26 @@
                             <constraint firstAttribute="width" constant="90" id="ryV-0M-vRv"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2016全国肥胖与体重管理学术会议暨健康生活方式与心脏代谢风…" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="40q-LU-2sv">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="2016全国肥胖与体重管理学术会议暨健康生活方式与心脏代谢风…" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="40q-LU-2sv">
                         <rect key="frame" x="140" y="10" width="229" height="42"/>
                         <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="15"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="类型:培训;套餐:会议门票＋酒店首晚" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LrQ-jP-CY2">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="类型:培训;套餐:会议门票＋酒店首晚" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LrQ-jP-CY2">
                         <rect key="frame" x="140" y="54" width="229" height="20"/>
                         <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥499.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csa-w6-dt3">
-                        <rect key="frame" x="140" y="79" width="62" height="22.5"/>
+                        <rect key="frame" x="140" y="79" width="62" height="21"/>
                         <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="16"/>
                         <color key="textColor" red="1" green="0.41960784313725491" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="clf-ix-Xx5" customClass="CCShoppingNumberView" customModule="WeilaiMall" customModuleProvider="target">
-                        <rect key="frame" x="280" y="79" width="85" height="22"/>
+                    <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="clf-ix-Xx5" customClass="CCShoppingNumberView" customModule="WeilaiMall" customModuleProvider="target">
+                        <rect key="frame" x="280" y="79" width="85" height="20.5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="85" id="pHY-Bh-ADM"/>
                         </constraints>
@@ -75,6 +75,7 @@
                     <constraint firstItem="csa-w6-dt3" firstAttribute="top" secondItem="LrQ-jP-CY2" secondAttribute="bottom" constant="5" id="ZCM-6J-ZdI"/>
                     <constraint firstItem="clf-ix-Xx5" firstAttribute="top" secondItem="LrQ-jP-CY2" secondAttribute="bottom" constant="5" id="aUR-xy-w05"/>
                     <constraint firstItem="40q-LU-2sv" firstAttribute="leading" secondItem="DaI-fi-2OG" secondAttribute="trailing" constant="10" id="eYo-2k-Ggx"/>
+                    <constraint firstItem="csa-w6-dt3" firstAttribute="bottom" secondItem="DaI-fi-2OG" secondAttribute="bottom" id="glL-kx-Rv4"/>
                     <constraint firstItem="LrQ-jP-CY2" firstAttribute="leading" secondItem="DaI-fi-2OG" secondAttribute="trailing" constant="10" id="lks-j1-SiC"/>
                     <constraint firstItem="LrQ-jP-CY2" firstAttribute="top" secondItem="40q-LU-2sv" secondAttribute="bottom" constant="2" id="mwl-Qm-3ot"/>
                     <constraint firstItem="q63-2h-yeh" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="xzn-ze-uRQ"/>

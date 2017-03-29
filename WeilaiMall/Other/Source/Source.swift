@@ -23,9 +23,9 @@ let CCButtonGrayColor = UIColor(red:0.80, green:0.81, blue:0.81, alpha:1.00)
 // 常用字体
 let CCTextFont = UIFont.CCsetfont(14)
 
-//let access_token = UserDefaults.init().value(forKey: "access_token") as! String
+let access_token = UserDefaults.init().value(forKey: "access_token") as! String
 
-let access_token = "bfd812da81ebbdcba2f9a57aedeec0a1"
+//let access_token = "bfd812da81ebbdcba2f9a57aedeec0a1"
 
 /// 用户是否登录
 let isLogin = UserDefaults.init().value(forKey: "isLogin") as? Bool ?? false
