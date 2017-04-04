@@ -9,6 +9,7 @@
 import UIKit
 import MBProgressHUD
 import MJRefresh
+import SwiftyJSON
 
 private let cellIdentifier = "CCShoppingCarCell"
 
@@ -170,15 +171,24 @@ class ShoppingCartViewController: ViewController, CCTableViewProtocol {
         shoppingBar.clearingButton.addTarget(self, action: #selector(clearingAction(_:)), for: .touchUpInside)
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "orderClear" {
+            let controller = segue.destination as! OrderClearViewController
+            guard let dic = sender as? [String: Any] else {
+                return
+            }
+            controller.clearRec_id = dic["rec_id"] as! String
+            let arr = dic["dataArray"] as! [ShoppingClearModel]
+            controller.clearModel = arr[0]
+        }
     }
-    */
+ 
 }
 
 extension ShoppingCartViewController {
@@ -188,7 +198,12 @@ extension ShoppingCartViewController {
             updateDeleteCells()
             deleteGoods(with: deleteCells)
         }else {
-            
+            var selectedModels: [ShoppingCartGoods] = []
+            for indexPath in selectedCells.keys {
+                let model = dataArray[indexPath.section].cart_goods[indexPath.row]
+                selectedModels.append(model)
+            }
+            createOrderBuycar(with: selectedModels)
         }
     }
 }
@@ -309,38 +324,40 @@ extension ShoppingCartViewController {
         })
     }
     */
-    /*
+    
     /// 选中cell进行结算
     ///
     /// - Parameter indexPath: [indexPath]
-    func createOrderBuycar(with selectedModels: [CCShopProductList]) {
+    func createOrderBuycar(with selectedModels: [ShoppingCartGoods]) {
+        
+        guard selectedModels.count > 0 else {
+            MBProgressHUD.showErrorAdded(message: "请选择一项商品", to: self.view)
+            return
+        }
+        
         var IDArray: [String] = []
         for model in selectedModels {
-            IDArray.append(model.ID)
+            IDArray.append(String(model.rec_id))
         }
-        let data = try? JSONSerialization.data(withJSONObject: IDArray, options: .prettyPrinted)
-        let str = String.init(data: data!, encoding: .utf8)
-        let parameters = ["userid": ShareUserValue.init().userID, "buycarids": str!] as [String : Any]
-        let request = CCClearBuyCarRequset(parameters: parameters, path: "CreateOrderByBuycar")
-        MeetURLSessionClient().send(request, handler: { [unowned self] (models, error) in
+        let str = IDArray.joined(separator: ",")
+        
+        let request = CarGoListRequest(parameter: ["access_token":access_token ,"rec_id":str])
+        URLSessionClient().alamofireSend(request) { [weak self] (models, error) in
             if error == nil {
-                if models.count > 0 {
-                    let confirmVC = CCConfirmOrderViewController()
-                    confirmVC.dataArray = models as! [CCMeetOrderModel]
-                    self.navigationController?.pushViewController(confirmVC, animated: true)
-                    self.selectedCells.removeAll()
-                    self.deleteGoods(with: selectedModels)
-                    self.updateBarStatus(false)
-                    DispatchQueue.global().sync {
-                        self.updateDictionary()
-                        self.calculatePrice()
-                    }
+                self?.selectedCells.removeAll()
+                self?.deleteGoods(with: selectedModels)
+                self?.updateBarStatus(false)
+                DispatchQueue.global().async {
+                    self?.updateDictionary()
+                    self?.calculatePrice()
                 }
+                self?.performSegue(withIdentifier: "orderClear", sender: ["rec_id": str, "dataArray": models])
+                
             }else {
-                MBProgressHUD.showErrorAdded(message: "请重试..", to: self.view)
+                MBProgressHUD.showErrorAdded(message: (error as! RequestError).info(), to: self?.view)
             }
-        })
+        }
     }
-     */
+ 
 }
 

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="5dy-Mm-lEM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="5dy-Mm-lEM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -57,6 +57,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IM3-I5-tpt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="206" y="-123"/>
+        </scene>
+        <!--订单结算-->
+        <scene sceneID="ojy-1r-lcQ">
+            <objects>
+                <viewController title="订单结算" hidesBottomBarWhenPushed="YES" id="RBR-In-XPx" customClass="OrderClearViewController" customModule="WeilaiMall" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="AaD-FO-Oa5"/>
+                        <viewControllerLayoutGuide type="bottom" id="fOT-3V-vQS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pcE-xA-0mi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Oz-90-t6R" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1148" y="-89"/>
         </scene>
         <!--首页-->
         <scene sceneID="U6v-fQ-hdz">
@@ -1041,6 +1059,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </view>
                     <navigationItem key="navigationItem" id="RNk-hU-uIF"/>
+                    <connections>
+                        <segue destination="RBR-In-XPx" kind="show" identifier="orderClear" id="HEG-sJ-cjB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9u6-LJ-xzH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

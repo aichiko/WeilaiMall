@@ -58,10 +58,6 @@ struct CartDeleteRequest: CCRequest {
     }
 }
 
-
-
-
-
 struct ShoppingCartGoods: Equatable {
     
     /// 购物车记录id

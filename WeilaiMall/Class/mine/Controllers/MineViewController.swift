@@ -121,6 +121,11 @@ extension MineViewController {
                 self.userModel = models[0]
             }else {
                 if error == nil { return }
+                if (error as! RequestError) == .invalidToken {
+                    //invalidToken 则需要重新登录
+                    self.headView.style = .notlogin
+                    UserDefaults.init().setValue(false, forKey: "isLogin")
+                }
                 MBProgressHUD.showErrorAdded(message: (error as! RequestError).info(), to: self.view)
             }
         }
@@ -200,7 +205,12 @@ extension MineViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath)
         collectionView.deselectItem(at: indexPath, animated: true)
-        self.performSegue(withIdentifier: identifiers[indexPath.item], sender: self)
+        if isLogin {
+            self.performSegue(withIdentifier: identifiers[indexPath.item], sender: self)
+        }else {
+            let loginVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "login")
+            self.navigationController?.pushViewController(loginVC, animated: true)
+        }
     }
     
 }

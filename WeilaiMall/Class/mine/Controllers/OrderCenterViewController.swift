@@ -106,7 +106,7 @@ class OrderCellFootView: UITableViewHeaderFooterView {
     
     var goodAttribute: (Int, Float) = (1, 0.0) {
         didSet {
-            footLabel.text = String.init(format: "共%d件商品 合计：¥ %.2f （%.0f积分）", goodAttribute.0, goodAttribute.1, goodAttribute.1*10)
+            footLabel.text = String.init(format: "共%d件商品 合计：%.0f积分", goodAttribute.0, goodAttribute.1)
         }
     }
     

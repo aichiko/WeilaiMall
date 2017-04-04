@@ -36,6 +36,9 @@
 		D520840E1E5F2C1200BE031B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D520840C1E5F2C1200BE031B /* LaunchScreen.storyboard */; };
 		D52084191E5F2C1200BE031B /* WeilaiMallTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52084181E5F2C1200BE031B /* WeilaiMallTests.swift */; };
 		D52084241E5F2C1200BE031B /* WeilaiMallUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52084231E5F2C1200BE031B /* WeilaiMallUITests.swift */; };
+		D522F7D61E9230ED00ED6C03 /* AdressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D522F7D51E9230ED00ED6C03 /* AdressTableViewCell.swift */; };
+		D524A84F1E8F783B004157BB /* ShoppingCarClearModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D524A84E1E8F783B004157BB /* ShoppingCarClearModel.swift */; };
+		D524A8511E8F8893004157BB /* OrderClearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D524A8501E8F8893004157BB /* OrderClearViewController.swift */; };
 		D52627951E74D53F00AC0B2B /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52627941E74D53F00AC0B2B /* TextFieldTableViewCell.swift */; };
 		D52627971E74DBBF00AC0B2B /* TransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52627961E74DBBF00AC0B2B /* TransferViewController.swift */; };
 		D52627991E750F6D00AC0B2B /* ClearingPayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52627981E750F6D00AC0B2B /* ClearingPayViewController.swift */; };
@@ -122,6 +125,9 @@
 		D520841F1E5F2C1200BE031B /* WeilaiMallUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeilaiMallUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D52084231E5F2C1200BE031B /* WeilaiMallUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeilaiMallUITests.swift; sourceTree = "<group>"; };
 		D52084251E5F2C1200BE031B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D522F7D51E9230ED00ED6C03 /* AdressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdressTableViewCell.swift; sourceTree = "<group>"; };
+		D524A84E1E8F783B004157BB /* ShoppingCarClearModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingCarClearModel.swift; sourceTree = "<group>"; };
+		D524A8501E8F8893004157BB /* OrderClearViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderClearViewController.swift; sourceTree = "<group>"; };
 		D52627941E74D53F00AC0B2B /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		D52627961E74DBBF00AC0B2B /* TransferViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferViewController.swift; sourceTree = "<group>"; };
 		D52627981E750F6D00AC0B2B /* ClearingPayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClearingPayViewController.swift; sourceTree = "<group>"; };
@@ -445,6 +451,7 @@
 			children = (
 				D545FF291E6D940B0081EAF8 /* ShoppingCartViewController.swift */,
 				D545FF281E6D940B0081EAF8 /* ShoppingCar+UITableView.swift */,
+				D524A8501E8F8893004157BB /* OrderClearViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -457,6 +464,7 @@
 				D545FF2E1E6D94770081EAF8 /* CCShoppingCarCell.xib */,
 				D545FF2F1E6D94770081EAF8 /* CCShoppingCarHeadView.swift */,
 				D545FF301E6D94770081EAF8 /* CCShoppingNumberView.swift */,
+				D522F7D51E9230ED00ED6C03 /* AdressTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -489,6 +497,7 @@
 			isa = PBXGroup;
 			children = (
 				D5F0D5201E8A6C4F006CBBA4 /* ShoppingCarListModel.swift */,
+				D524A84E1E8F783B004157BB /* ShoppingCarClearModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -686,6 +695,7 @@
 				D5F0D5211E8A6C4F006CBBA4 /* ShoppingCarListModel.swift in Sources */,
 				D577699A1E7AECC6001EF6D7 /* OrderDetailCell.swift in Sources */,
 				D517FC101E65B1E60050AE99 /* LoginViewController.swift in Sources */,
+				D522F7D61E9230ED00ED6C03 /* AdressTableViewCell.swift in Sources */,
 				D545FF2B1E6D940B0081EAF8 /* ShoppingCartViewController.swift in Sources */,
 				D517FC161E65C9C40050AE99 /* CCRequest.swift in Sources */,
 				D51D84181E7044FB0059496D /* ChangeLoginViewController.swift in Sources */,
@@ -706,9 +716,11 @@
 				D54B1D771E8516FB00DAD246 /* WeilaiMall-API.swift in Sources */,
 				D50C2A271E816B230002AF0F /* OrderRelatedModel.swift in Sources */,
 				D51F3AB31E71A0CC0092B85B /* OrderCenterViewController.swift in Sources */,
+				D524A8511E8F8893004157BB /* OrderClearViewController.swift in Sources */,
 				D52084011E5F2C1200BE031B /* AppDelegate.swift in Sources */,
 				D55A7B601E82BA28000490CA /* RechargeModel.swift in Sources */,
 				D57992B31E671E8C00A82DBC /* MineCollectionViewCell.swift in Sources */,
+				D524A84F1E8F783B004157BB /* ShoppingCarClearModel.swift in Sources */,
 				D5E3C7FC1E6302460012FD7C /* CCWebViewController.swift in Sources */,
 				D51FBF691E893F7E002BF075 /* ChangeUserInfoViewController.swift in Sources */,
 				D52627991E750F6D00AC0B2B /* ClearingPayViewController.swift in Sources */,

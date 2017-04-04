@@ -23,7 +23,7 @@ extension ShoppingCartViewController {
         }
         
         cell.model = dataArray[indexPath.section].cart_goods[indexPath.row]
-        
+        numberDictionary.updateValue(String(dataArray[indexPath.section].cart_goods[indexPath.row].goods_num), forKey: indexPath)
         
         func cellStatus(_ cellButtonStatus: inout [IndexPath: Bool]) {
             if cellButtonStatus[indexPath] != nil {

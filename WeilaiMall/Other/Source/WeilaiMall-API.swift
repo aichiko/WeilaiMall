@@ -55,3 +55,7 @@ let cartlist = "Rest/order/cartlist"
 let changenum = "Rest/order/changenum"
 /// 删除订单
 let cartdel = "Rest/order/cartdel"
+/// 结算清单
+let cargolist = "Rest/order/cargolist"
+/// 提交订单
+let suborder = "Rest/order/suborder "

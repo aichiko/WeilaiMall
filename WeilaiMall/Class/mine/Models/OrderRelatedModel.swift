@@ -114,7 +114,6 @@ struct OrderDetailModel {
 
 struct OrderGoodsModel {
     
-    
     static func goods(with goods : JSON) -> [OrderGoodsModel] {
         var models: [OrderGoodsModel] = []
         for value in goods.arrayValue {
