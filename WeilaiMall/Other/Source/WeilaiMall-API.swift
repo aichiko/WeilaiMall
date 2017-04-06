@@ -46,6 +46,8 @@ let accountlog = "Rest/user/accountlog"
 let orderlist = "Rest/order/orderlist"
 /// 订单详情
 let orderinfo = "Rest/order/orderinfo"
+/// 确认收货
+let affirmorder = "Rest/order/affirmorder"
 /// 用户余额
 let getusermoney = "Rest/user/getusermoney"
 
@@ -58,4 +60,4 @@ let cartdel = "Rest/order/cartdel"
 /// 结算清单
 let cargolist = "Rest/order/cargolist"
 /// 提交订单
-let suborder = "Rest/order/suborder "
+let suborder = "Rest/order/suborder"

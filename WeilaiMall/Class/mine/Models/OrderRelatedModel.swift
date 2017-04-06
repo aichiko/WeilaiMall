@@ -36,6 +36,18 @@ struct OrderDetailRequest: CCRequest {
     }
 }
 
+struct OrderAffirmorderRequest: CCRequest {
+    let path: String = affirmorder
+    
+    var parameter: [String: Any]
+    typealias Response = String
+    
+    func JSONParse(value: JSON) -> [String?]? {
+        return [""]
+    }
+}
+
+
 struct OrderListModel {
     
     var order_id: Int
@@ -107,8 +119,6 @@ struct OrderDetailModel {
         user_name = value["user_name"].stringValue
         
         order_goods = OrderGoodsModel.goods(with: value["order_goods"])
-        
-        
     }
 }
 

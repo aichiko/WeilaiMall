@@ -162,7 +162,7 @@ class ClearingPayViewController: ViewController {
                 self?.pay_ratio = models[0]!.pay_ratio
                 self?.tableView.reloadSections(IndexSet.init(integer: 1), with: .automatic)
             }else {
-                MBProgressHUD.showErrorAdded(message: (error as! RequestError).info(), to: self?.view)
+                MBProgressHUD.showErrorAdded(message: (error?.getInfo())!, to: self?.view)
             }
         })
     }
@@ -331,7 +331,7 @@ extension ClearingPayViewController {
                 cell.real_name = (models[0]?.shop_name)!
                 textField.isEnabled = false
             }else {
-                MBProgressHUD.showErrorAdded(message: (error as! VerificateShopError).info(), to: self?.view)
+                MBProgressHUD.showErrorAdded(message: (error?.getInfo())!, to: self?.view)
             }
         }
     }
@@ -354,7 +354,7 @@ extension ClearingPayViewController {
                 })
                 
             }else {
-                MBProgressHUD.showErrorAdded(message: (error as! PaymentError).info(), to: self?.view)
+                MBProgressHUD.showErrorAdded(message: (error?.getInfo())!, to: self?.view)
             }
         }
     }

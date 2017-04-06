@@ -71,10 +71,61 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="hhj-mD-8aN" kind="show" identifier="shopping_confirm" id="TMa-C8-HR4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Oz-90-t6R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1148" y="-89"/>
+        </scene>
+        <!--确认支付密码-->
+        <scene sceneID="dXg-9a-HfN">
+            <objects>
+                <viewController title="确认支付密码" hidesBottomBarWhenPushed="YES" id="hhj-mD-8aN" customClass="ConfirmPasswordViewController" customModule="WeilaiMall" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0Yg-DT-VeQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="RM5-oc-mI6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Vif-C1-zbd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pEX-qg-OQZ">
+                                <rect key="frame" x="0.0" y="104" width="375" height="44"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入支付密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gQg-N4-yJN">
+                                        <rect key="frame" x="20" y="0.0" width="335" height="44"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="gQg-N4-yJN" secondAttribute="trailing" constant="20" id="3OK-1E-QtU"/>
+                                    <constraint firstItem="gQg-N4-yJN" firstAttribute="leading" secondItem="pEX-qg-OQZ" secondAttribute="leading" constant="20" id="7sL-ef-C84"/>
+                                    <constraint firstItem="gQg-N4-yJN" firstAttribute="height" secondItem="pEX-qg-OQZ" secondAttribute="height" id="LlT-JI-LJz"/>
+                                    <constraint firstAttribute="height" constant="44" id="Xds-7f-xql"/>
+                                    <constraint firstItem="gQg-N4-yJN" firstAttribute="centerY" secondItem="pEX-qg-OQZ" secondAttribute="centerY" id="jeu-t8-PmM"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="pEX-qg-OQZ" firstAttribute="centerX" secondItem="Vif-C1-zbd" secondAttribute="centerX" id="M44-V4-Dba"/>
+                            <constraint firstItem="pEX-qg-OQZ" firstAttribute="top" secondItem="0Yg-DT-VeQ" secondAttribute="bottom" constant="40" id="VIJ-XC-9rN"/>
+                            <constraint firstItem="pEX-qg-OQZ" firstAttribute="width" secondItem="Vif-C1-zbd" secondAttribute="width" id="iCu-ew-JhR"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="textField" destination="gQg-N4-yJN" id="IvN-GW-WNz"/>
+                        <outlet property="textFieldView" destination="pEX-qg-OQZ" id="LKi-Ut-GJC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3sc-zt-LAJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2056.8000000000002" y="-86.806596701649184"/>
         </scene>
         <!--首页-->
         <scene sceneID="U6v-fQ-hdz">
@@ -314,6 +365,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="hhj-mD-8aN" kind="show" identifier="order_confirm" id="IwX-c2-eVb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HfS-fl-aEs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1071,4 +1125,7 @@
     <resources>
         <image name="login_logo" width="200" height="200"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="TMa-C8-HR4"/>
+    </inferredMetricsTieBreakers>
 </document>

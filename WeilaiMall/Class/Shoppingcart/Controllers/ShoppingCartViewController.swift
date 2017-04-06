@@ -83,15 +83,16 @@ class ShoppingCartViewController: ViewController, CCTableViewProtocol {
         guard isLogin else {
             return
         }
-        
+        let hub = MBProgressHUD.showAdded(to: self.view, animated: true)
         let request = ShoppingCartListRequest(parameter: ["access_token": access_token])
         URLSessionClient().alamofireSend(request) { [weak self] (models, error) in
+            hub.hide(animated: true)
             if error == nil {
                 self?.dataArray = models as! [ShoppingCartListModel]
                 self?.updatePriceDictionary((self?.dataArray)!)
                 self?.tableView.reloadData()
             }else {
-                MBProgressHUD.showErrorAdded(message: (error as! RequestError).info(), to: self?.view)
+                MBProgressHUD.showErrorAdded(message: (error?.getInfo())!, to: self?.view)
             }
             
             if #available(iOS 10.0, *) {
@@ -354,7 +355,7 @@ extension ShoppingCartViewController {
                 self?.performSegue(withIdentifier: "orderClear", sender: ["rec_id": str, "dataArray": models])
                 
             }else {
-                MBProgressHUD.showErrorAdded(message: (error as! RequestError).info(), to: self?.view)
+                MBProgressHUD.showErrorAdded(message: (error?.getInfo())!, to: self?.view)
             }
         }
     }

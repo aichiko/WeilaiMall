@@ -99,7 +99,7 @@ class ChangePayViewController: ViewController {
         let request = ObtainCodeRequest(parameter: ["mobile_phone": phoneTextField.text!, "type": 3])
         URLSessionClient().alamofireSend(request) { [weak self] (str, error) in
             if (error != nil) {
-                MBProgressHUD.showErrorAdded(message: (error as! RequestError).info(), to: self?.view)
+                MBProgressHUD.showErrorAdded(message: (error?.getInfo())!, to: self?.view)
             }
         }
         
@@ -107,18 +107,15 @@ class ChangePayViewController: ViewController {
     
 
     @IBAction func commitAction(_ sender: UIButton) {
-        let request = UpdatePassRequest(parameter: ["access_token": access_token, "code": codeTextField.text!, "new_pass": passwordTextField.text!])
+        let request = UpdatePayPassRequest(parameter: ["access_token": access_token, "code": codeTextField.text!, "new_pass": passwordTextField.text!])
         URLSessionClient().alamofireSend(request) { [weak self] (messages, error) in
-            if let message = messages[0] {
-                if message.status == 0 {
-                    //修改成功，改掉本地的 access_token
-                }else {
-                    if message.info.characters.count == 0 {
-                        MBProgressHUD.showErrorAdded(message: (error as! RequestError).info(), to: self?.view)
-                    }else {
-                        MBProgressHUD.showErrorAdded(message: message.info, to: self?.view)
-                    }
-                }
+            if error == nil {
+                MBProgressHUD.showErrorAdded(message: "修改成功", to: self?.view)
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: { 
+                    self?.navigationController?.popViewController(animated: true)
+                })
+            }else {
+                MBProgressHUD.showErrorAdded(message: (error?.getInfo())!, to: self?.view)
             }
         }
     }

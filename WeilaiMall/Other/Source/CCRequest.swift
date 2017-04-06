@@ -19,6 +19,10 @@ enum CCRequestStyle {
     case moreData
 }
 
+protocol CC_Error: Error {
+    var status: Int { get }
+    var info: String { get }
+}
 
 /*
  -1    	 系统繁忙，稍后再试
@@ -27,39 +31,45 @@ enum CCRequestStyle {
  1001    access_token非法
  1002    sign验证失败
  1003    请求参数缺失
- 1004    无操作权限
- 1005    账号或密码不正确
- 1006    账号被冻结
  */
-enum RequestError: Int, Error {
-    case busyError = -1
-    case handleFailed = 1000
-    case invalidToken = 1001
-    case invalidSign = 1002
-    case lackParameter = 1003
-    case noAccess = 1004
-    case passWordError = 1005
-    case accountFreeze = 1006
-    case otherError = -1000
+struct RequestError: CC_Error {
+    var info: String
+
+    var status: Int
+
+    init(status: Int, info: String?) {
+        
+        if status == 1000 && info == nil {
+            self.status = status
+            self.info = "处理失败"
+        }else {
+            self.status = status
+            if let newinfo = info {
+                self.info = newinfo
+            }else {
+                self.info = ""
+            }
+        }
+        
+    }
     
-    func info() -> String {
-        switch self {
-        case .busyError:
+    init(status: Int) {
+        self.init(status: status, info: nil)
+    }
+    
+    func getInfo() -> String {
+        
+        switch status {
+        case -1:
             return "系统繁忙，稍后再试"
-        case .handleFailed:
-            return "处理失败"
-        case .invalidToken:
+        case 1000:
+            return info
+        case 1001:
             return "access_token非法"
-        case .invalidSign:
+        case 1002:
             return "sign验证失败"
-        case .lackParameter:
-                return "请求参数缺失"
-        case .noAccess:
-            return "无操作权限"
-        case .passWordError:
-            return "账号或密码不正确"
-        case .accountFreeze:
-            return "账号被冻结"
+        case 1003:
+            return "请求参数缺失"
         default:
             return "网络错误"
         }
@@ -91,7 +101,7 @@ struct URLSessionClient: Client {
     }
     */
     
-     internal func alamofireSend<T : CCRequest>(_ r: T, handler: @escaping ([T.Response?], Error?) -> Void) {
+     internal func alamofireSend<T : CCRequest>(_ r: T, handler: @escaping ([T.Response?], RequestError?) -> Void) {
         let sign = String.MD5(with: r.parameter)
         var newDic = r.parameter
         newDic.updateValue(sign, forKey: "sign")
@@ -108,12 +118,18 @@ struct URLSessionClient: Client {
                     if let models = r.JSONParse(value: value) {
                         DispatchQueue.main.async { handler(models, nil) }
                     }
+                }else if value["status"].intValue == 1000 {
+                    DispatchQueue.main.async { handler([], RequestError.init(status: value["status"].intValue, info: value["info"].stringValue)) }
                 }else {
-                    DispatchQueue.main.async { handler(r.JSONParse(value: value) ?? [], r.parse(status: value["status"].intValue)) }
+                    if value["status"].intValue == 1001 {
+                        UserDefaults.init().setValue(false, forKey: "isLogin")
+                    }
+                    DispatchQueue.main.async { handler([], RequestError.init(status: value["status"].intValue)) }
                 }
             }else {
-                NSLog("error === \(String(describing: response.result.error))")
-                DispatchQueue.main.async { handler([], r.parse(status: -1000)) }
+                let str = String.init(format: "requestUrl === %@\nparameter === %@\n", url, newDic)
+                NSLog("\(str)error === \(String(describing: response.result.error))")
+                DispatchQueue.main.async { handler([], RequestError.init(status:-1000)) }
             }
         }
      }
@@ -128,13 +144,13 @@ protocol DecodableError {
 
 extension DecodableError {
     func parse(status: Int) -> Error? {
-        return RequestError.init(rawValue: status)
+        return RequestError.init(status: status)
     }
 }
 
 protocol Client {
     var host: String { get }
-    func alamofireSend<T: CCRequest>(_ r: T, handler: @escaping([T.Response?], Error?) -> Void)
+    func alamofireSend<T: CCRequest>(_ r: T, handler: @escaping([T.Response?], RequestError?) -> Void)
 }
 
 protocol CCRequest: DecodableError {

@@ -42,7 +42,6 @@ class OrderDetailViewController: ViewController {
     
     
     func prepareData() {
-        
         URLSessionClient().alamofireSend(OrderDetailRequest(parameter: ["access_token": access_token, "order_id": orderid]), handler: { [weak self] (models, error) in
             if error == nil {
                 if models.count > 0{
@@ -51,7 +50,7 @@ class OrderDetailViewController: ViewController {
                     self?.configFootview(state: (self?.model?.state)!)
                 }
             }else {
-                MBProgressHUD.showErrorAdded(message: (error as! RequestError).info(), to: self?.view)
+                MBProgressHUD.showErrorAdded(message: (error?.getInfo())!, to: self?.view)
             }
         })
     }
@@ -93,7 +92,7 @@ class OrderDetailViewController: ViewController {
     
     private func configFootview(state: Int) {
         /// 0：待发货  1:待收货 2:已收货
-        let titles = ["", "确认收货", "确认收货"]
+        let titles = ["确认收货", "确认收货", "确认收货"]
         detailButton.isHidden = state != 1
         detailButton.setTitle(titles[state], for: .normal)
         
@@ -101,19 +100,21 @@ class OrderDetailViewController: ViewController {
     }
     
     @objc private func detailAction(_ button: UIButton) {
-        
+        self.performSegue(withIdentifier: "order_confirm", sender: ConfirmPasswordViewController.ConfirmStyle.order(model!.order_id))
     }
-    
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "order_confirm" {
+            let controller = segue.destination as! ConfirmPasswordViewController
+            controller.style = sender as! ConfirmPasswordViewController.ConfirmStyle
+        }
     }
-    */
 }
 
 extension OrderDetailViewController: UITableViewDelegate, UITableViewDataSource {

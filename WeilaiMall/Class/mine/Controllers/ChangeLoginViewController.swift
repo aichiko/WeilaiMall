@@ -45,16 +45,25 @@ class ChangeLoginViewController: ViewController {
         
         let request = UpdatePassRequest(parameter: ["access_token": access_token, "old_pass": oldText!, "new_pass": newText])
         URLSessionClient().alamofireSend(request) { [weak self] (messages, error) in
-            if let message = messages[0] {
-                if message.status == 0 {
-                    //修改成功，改掉本地的 access_token
-                }else {
-                    if message.info.characters.count == 0 {
-                        MBProgressHUD.showErrorAdded(message: (error as! RequestError).info(), to: self?.view)
+            if error == nil {
+                if let message = messages[0] {
+                    if message.status == 0 {
+                        //修改成功，改掉本地的 access_token
+                        access_token = message.access_token
+                        MBProgressHUD.showErrorAdded(message: "修改成功", to: self?.view)
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: {
+                            self?.navigationController?.popViewController(animated: true)
+                        })
                     }else {
-                        MBProgressHUD.showErrorAdded(message: message.info, to: self?.view)
+                        if message.info.characters.count == 0 {
+                            MBProgressHUD.showErrorAdded(message: (error?.getInfo())!, to: self?.view)
+                        }else {
+                            MBProgressHUD.showErrorAdded(message: message.info, to: self?.view)
+                        }
                     }
                 }
+            }else {
+                MBProgressHUD.showErrorAdded(message: (error?.getInfo())!, to: self?.view)
             }
         }
     }

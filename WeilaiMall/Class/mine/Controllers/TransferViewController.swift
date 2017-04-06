@@ -259,7 +259,7 @@ extension TransferViewController {
                 cell.real_name = (models[0]?.real_name)!
                 textField.isEnabled = false
             }else {
-                MBProgressHUD.showErrorAdded(message: (error as! VerificateError).info(), to: self?.view)
+                MBProgressHUD.showErrorAdded(message: (error?.getInfo())!, to: self?.view)
             }
         }
     }
@@ -282,7 +282,7 @@ extension TransferViewController {
                 })
                 
             }else {
-                MBProgressHUD.showErrorAdded(message: (error as! TransferError).info(), to: self?.view)
+                MBProgressHUD.showErrorAdded(message: (error?.getInfo())!, to: self?.view)
             }
         }
     }

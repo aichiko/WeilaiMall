@@ -121,12 +121,12 @@ extension MineViewController {
                 self.userModel = models[0]
             }else {
                 if error == nil { return }
-                if (error as! RequestError) == .invalidToken {
+                if error?.status == 1001 {
                     //invalidToken 则需要重新登录
                     self.headView.style = .notlogin
                     UserDefaults.init().setValue(false, forKey: "isLogin")
                 }
-                MBProgressHUD.showErrorAdded(message: (error as! RequestError).info(), to: self.view)
+                MBProgressHUD.showErrorAdded(message: (error?.getInfo())!, to: self.view)
             }
         }
     }

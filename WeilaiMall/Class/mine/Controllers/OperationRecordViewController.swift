@@ -113,7 +113,7 @@ class OperationRecordViewController: ViewController {
                 self?.dataArray = models as! [OperationRecordModel]
                 self?.tableView.reloadData()
             }else {
-                MBProgressHUD.showErrorAdded(message: (error as! RequestError).info(), to: self?.view)
+                MBProgressHUD.showErrorAdded(message: (error?.getInfo())!, to: self?.view)
             }
         })
     }

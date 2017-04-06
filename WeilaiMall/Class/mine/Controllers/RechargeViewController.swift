@@ -33,7 +33,7 @@ class RechargeViewController: ViewController {
             if error == nil {
                 
             }else {
-                MBProgressHUD.showErrorAdded(message: (error as! RequestError).info(), to: self?.view)
+                MBProgressHUD.showErrorAdded(message: (error?.getInfo())!, to: self?.view)
             }
         })
     }

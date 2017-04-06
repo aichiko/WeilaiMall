@@ -21,7 +21,7 @@ struct CarGoListRequest: CCRequest {
     }
 }
 
-/// 结算 请求
+/// 提交订单 请求
 struct CarSuborderRequest: CCRequest {
     let path: String = suborder
     

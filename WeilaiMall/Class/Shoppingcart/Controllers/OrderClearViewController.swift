@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 private let cellIdentifier = "OrderClearCell"
 
@@ -69,6 +70,8 @@ class OrderClearViewController: ViewController, CCTableViewProtocol {
         payButton.setTitleColor(UIColor.white, for: .normal)
         payButton.layer.masksToBounds = true
         payButton.layer.cornerRadius = 4
+        payButton.addTarget(self, action: #selector(confirmPay(button:)), for: .touchUpInside)
+        
         
         payButton.snp.updateConstraints { (make) in
             make.right.equalTo(-10)
@@ -78,6 +81,29 @@ class OrderClearViewController: ViewController, CCTableViewProtocol {
         }
     }
     
+    @objc func confirmPay(button: UIButton) {
+        
+        guard clearModel.address != nil else {
+            MBProgressHUD.showErrorAdded(message: "请选择一个收货地址", to: self.view)
+            return
+        }
+        
+        func getRec_id() -> String {
+            let arr = clearModel.carts
+            var rec_idArr: [String] = []
+            for cart in arr {
+                for goods in cart.cart_goods {
+                    let str = String(goods.rec_id)
+                    rec_idArr.append(str)
+                }
+            }
+            
+            return rec_idArr.joined(separator: ",")
+        }
+        
+        self.performSegue(withIdentifier: "shopping_confirm", sender: ConfirmPasswordViewController.ConfirmStyle.shopping(getRec_id(), clearModel.address!.address_id))
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -85,15 +111,19 @@ class OrderClearViewController: ViewController, CCTableViewProtocol {
     }
     
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "shopping_confirm" {
+            let controller = segue.destination as! ConfirmPasswordViewController
+            controller.style = sender as! ConfirmPasswordViewController.ConfirmStyle
+        }
+        
     }
-    */
 }
 
 extension OrderClearViewController: UITableViewDelegate, UITableViewDataSource {
@@ -103,7 +133,8 @@ extension OrderClearViewController: UITableViewDelegate, UITableViewDataSource {
             return nil
         }else {
             let headView = tableView.dequeueReusableHeaderFooterView(withIdentifier: headIdentifier) as! OrderCellHeadView
-            headAttribute(headView, section)
+            headView.goodState = (clearModel.carts[section-1].shop_name, 0)
+            headView.statusLabel.isHidden = true
             return headView
         }
     }
@@ -161,11 +192,17 @@ extension OrderClearViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
     }
-}
-
-extension OrderClearViewController {
-    func headAttribute(_ headView: OrderCellHeadView, _ section: Int) {
-        headView.goodState = (clearModel.carts[section-1].shop_name, 0)
-        headView.statusLabel.isHidden = true
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            //没有地址则进入新建地址， 有地址则选择地址
+            let cell = tableView.cellForRow(at: indexPath) as! AdressTableViewCell
+            if cell.style == .noAdress {
+                
+            }else {
+                
+            }
+        }
     }
+    
 }

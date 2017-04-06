@@ -399,7 +399,7 @@ extension MineInfoViewController {
                     MBProgressHUD.showErrorAdded(message: (error as NSError).domain , to: self?.view)
                 }
             }else {
-                MBProgressHUD.showErrorAdded(message: (error as! RequestError).info() , to: self?.view)
+                MBProgressHUD.showErrorAdded(message: (error?.getInfo())! , to: self?.view)
             }
         }
     }
@@ -420,7 +420,7 @@ extension MineInfoViewController {
                 let cell = self?.tableView.cellForRow(at: IndexPath.init(row: 3, section: 0))
                 cell?.detailTextLabel?.text = sexTitle
             }else {
-                MBProgressHUD.showErrorAdded(message: (error as! RequestError).info() , to: self?.view)
+                MBProgressHUD.showErrorAdded(message: (error?.getInfo())! , to: self?.view)
             }
         }
     }
@@ -485,7 +485,7 @@ extension MineInfoViewController: UIImagePickerControllerDelegate, UINavigationC
             if error == nil {
                 changeImageView()
             }else {
-                MBProgressHUD.showErrorAdded(message: (error as! RequestError).info() , to: self?.view)
+                MBProgressHUD.showErrorAdded(message: (error?.getInfo())!, to: self?.view)
             }
         }
     }

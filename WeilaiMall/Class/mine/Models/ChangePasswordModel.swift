@@ -21,7 +21,6 @@ struct UpdatePassMessage: CustomCCError {
     
     let access_token: String
     
-    
     init(value: JSON) {
         info = value["info"].stringValue
         status = value["status"].intValue

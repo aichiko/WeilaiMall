@@ -78,7 +78,7 @@ class LoginViewController: ViewController {
                     _ = self?.navigationController?.popViewController(animated: true)
                 })
             }else {
-                MBProgressHUD.showErrorAdded(message: (error as! RequestError).info(), to: self?.view)
+                MBProgressHUD.showErrorAdded(message: (error?.getInfo())!, to: self?.view)
             }
         }
     }

@@ -31,7 +31,6 @@
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DaI-fi-2OG">
                         <rect key="frame" x="40" y="10" width="90" height="90"/>
-                        <color key="backgroundColor" red="1" green="0.41960784309999999" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="DaI-fi-2OG" secondAttribute="height" multiplier="1:1" id="eGn-6x-WUB"/>
                             <constraint firstAttribute="width" constant="90" id="ryV-0M-vRv"/>
