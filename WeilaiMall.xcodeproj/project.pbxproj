@@ -60,6 +60,9 @@
 		D58D47B31E83F7B4008B390B /* MineInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58D47B21E83F7B4008B390B /* MineInfoViewController.swift */; };
 		D598979B1E864CC20034C5FA /* ChangePasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D598979A1E864CC20034C5FA /* ChangePasswordModel.swift */; };
 		D5CF305E1E801F9C00E471F2 /* HomeSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CF305D1E801F9C00E471F2 /* HomeSearchViewController.swift */; };
+		D5D8541D1E9664F000DCDEC7 /* ScanCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D8541C1E9664F000DCDEC7 /* ScanCodeViewController.swift */; };
+		D5D8541F1E9671AD00DCDEC7 /* CCScanCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D8541E1E9671AD00DCDEC7 /* CCScanCodeView.swift */; };
+		D5D854211E96856A00DCDEC7 /* CCQRCode.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D5D854201E96856A00DCDEC7 /* CCQRCode.bundle */; };
 		D5E3C7BC1E62EA890012FD7C /* CCTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E3C7BB1E62EA890012FD7C /* CCTabBar.swift */; };
 		D5E3C7FA1E62F5680012FD7C /* CCTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E3C7F91E62F5680012FD7C /* CCTabBarController.swift */; };
 		D5E3C7FC1E6302460012FD7C /* CCWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E3C7FB1E6302460012FD7C /* CCWebViewController.swift */; };
@@ -150,6 +153,9 @@
 		D58D47B21E83F7B4008B390B /* MineInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineInfoViewController.swift; sourceTree = "<group>"; };
 		D598979A1E864CC20034C5FA /* ChangePasswordModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordModel.swift; sourceTree = "<group>"; };
 		D5CF305D1E801F9C00E471F2 /* HomeSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSearchViewController.swift; sourceTree = "<group>"; };
+		D5D8541C1E9664F000DCDEC7 /* ScanCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanCodeViewController.swift; sourceTree = "<group>"; };
+		D5D8541E1E9671AD00DCDEC7 /* CCScanCodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCScanCodeView.swift; sourceTree = "<group>"; };
+		D5D854201E96856A00DCDEC7 /* CCQRCode.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CCQRCode.bundle; sourceTree = "<group>"; };
 		D5E3C7BB1E62EA890012FD7C /* CCTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCTabBar.swift; sourceTree = "<group>"; };
 		D5E3C7F91E62F5680012FD7C /* CCTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCTabBarController.swift; sourceTree = "<group>"; };
 		D5E3C7FB1E6302460012FD7C /* CCWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCWebViewController.swift; sourceTree = "<group>"; };
@@ -377,9 +383,11 @@
 		D5E3C8011E630CB20012FD7C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D5D854201E96856A00DCDEC7 /* CCQRCode.bundle */,
 				D5E3C80C1E630CD80012FD7C /* HomeViewController.swift */,
 				D5CF305D1E801F9C00E471F2 /* HomeSearchViewController.swift */,
 				D50C2A221E8121850002AF0F /* SearchResultViewController.swift */,
+				D5D8541C1E9664F000DCDEC7 /* ScanCodeViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -387,6 +395,7 @@
 		D5E3C8021E630CB20012FD7C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D5D8541E1E9671AD00DCDEC7 /* CCScanCodeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -576,6 +585,7 @@
 				TargetAttributes = {
 					D52083FC1E5F2C1200BE031B = {
 						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = H5N5WYHW53;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
@@ -619,6 +629,7 @@
 				D516C2311E72EE0200BC5B60 /* OrderTableViewCell.xib in Resources */,
 				D545FF331E6D94770081EAF8 /* CCShoppingCarCell.xib in Resources */,
 				D520840E1E5F2C1200BE031B /* LaunchScreen.storyboard in Resources */,
+				D5D854211E96856A00DCDEC7 /* CCQRCode.bundle in Resources */,
 				D520840B1E5F2C1200BE031B /* Assets.xcassets in Resources */,
 				D512BDAE1E7550F9001B7004 /* OperationRecordCell.xib in Resources */,
 				D52084061E5F2C1200BE031B /* Main.storyboard in Resources */,
@@ -719,6 +730,7 @@
 				D54B1D771E8516FB00DAD246 /* WeilaiMall-API.swift in Sources */,
 				D50C2A271E816B230002AF0F /* OrderRelatedModel.swift in Sources */,
 				D51F3AB31E71A0CC0092B85B /* OrderCenterViewController.swift in Sources */,
+				D5D8541D1E9664F000DCDEC7 /* ScanCodeViewController.swift in Sources */,
 				D524A8511E8F8893004157BB /* OrderClearViewController.swift in Sources */,
 				D52084011E5F2C1200BE031B /* AppDelegate.swift in Sources */,
 				D55A7B601E82BA28000490CA /* RechargeModel.swift in Sources */,
@@ -726,6 +738,7 @@
 				D524A84F1E8F783B004157BB /* ShoppingCarClearModel.swift in Sources */,
 				D5E3C7FC1E6302460012FD7C /* CCWebViewController.swift in Sources */,
 				D51FBF691E893F7E002BF075 /* ChangeUserInfoViewController.swift in Sources */,
+				D5D8541F1E9671AD00DCDEC7 /* CCScanCodeView.swift in Sources */,
 				D52627991E750F6D00AC0B2B /* ClearingPayViewController.swift in Sources */,
 				D5E3C8151E630D160012FD7C /* WeilaiViewController.swift in Sources */,
 				D5E3C80F1E630CE70012FD7C /* ClassifyViewController.swift in Sources */,
@@ -898,11 +911,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = H5N5WYHW53;
 				INFOPLIST_FILE = WeilaiMall/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ash.WeilaiMall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WeilaiMall/Other/Source/WeilaiMall-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -915,11 +931,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = H5N5WYHW53;
 				INFOPLIST_FILE = WeilaiMall/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ash.WeilaiMall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WeilaiMall/Other/Source/WeilaiMall-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

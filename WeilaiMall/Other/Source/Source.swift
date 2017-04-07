@@ -30,8 +30,8 @@ var access_token = "31e2f89917d4d88e239142593a96f368"
 /// 用户是否登录
 var isLogin: Bool {
     get {
-        return true
-        //return UserDefaults.init().value(forKey: "isLogin") as? Bool ?? false
+        //return true
+        return UserDefaults.init().value(forKey: "isLogin") as? Bool ?? false
     }
 }
 
@@ -95,6 +95,22 @@ extension UIColor {
 
 // MARK: - MBProgressHUD 的扩展方法
 extension MBProgressHUD {
+    
+    class func showMessage(message: String?, view: UIView?) -> MBProgressHUD {
+        var hudView = view
+        if hudView == nil {
+            hudView = UIApplication.shared.keyWindow
+        }
+        let hud = MBProgressHUD.showAdded(to: hudView!, animated: true)
+        hud.label.text = message
+        hud.removeFromSuperViewOnHide = true
+        if (message?.characters.count)! > 10 {
+            hud.label.text = ""
+            hud.detailsLabel.text = message
+            hud.detailsLabel.font = UIFont.init(name: "PingFang-SC-Regular", size: 16)!
+        }
+        return hud
+    }
     
     class func  showErrorAdded(message: String, to view: UIView?) {
         self.showErrorAdded(message: message, image: nil, to: view)

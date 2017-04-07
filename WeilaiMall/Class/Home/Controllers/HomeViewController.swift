@@ -14,7 +14,7 @@ class HomeViewController: ViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.navigationItem.title = "首页"
+        //self.navigationItem.title = "首页"
         
         navigationAttribute()
     }
@@ -25,15 +25,25 @@ class HomeViewController: ViewController {
     }
     
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "scanCode" {
+            let controller = segue.destination as! ScanCodeViewController
+            controller.codeMessage = {
+                message in
+                let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
+                let action = UIAlertAction(title: "done", style: .default, handler: nil)
+                alertController.addAction(action)
+                self.present(alertController, animated: true, completion: nil)
+            }
+        }
+        
+        
     }
-    */
 
 }
 
@@ -72,7 +82,7 @@ extension HomeViewController {
     }
     
     @objc private func scanCode(item: UIBarButtonItem) {
-        
+        self.performSegue(withIdentifier: "scanCode", sender: self)
     }
     
     @objc private func catelogShow(item: UIBarButtonItem) {

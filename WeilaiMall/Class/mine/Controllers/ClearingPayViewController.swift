@@ -120,6 +120,9 @@ class ClearingPayViewController: ViewController {
 
         // Do any additional setup after loading the view.
         
+        let rightItem = UIBarButtonItem.init(image: UIImage.init(named: "scan_btn")?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(scanCode(item:)))
+        self.navigationItem.rightBarButtonItem = rightItem
+        
         configTableView()
         
         prepareData()
@@ -127,6 +130,10 @@ class ClearingPayViewController: ViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(textChange(not:)), name: .UITextFieldTextDidChange, object: nil)
     }
 
+    @objc private func scanCode(item: UIBarButtonItem) {
+        self.performSegue(withIdentifier: "clearing_code", sender: self)
+    }
+    
     @objc private func textChange(not: Notification) {
         let cell1 = tableView.cellForRow(at: IndexPath.init(row: 2, section: 0)) as! TextFieldTableViewCell
         let cell2 = tableView.cellForRow(at: IndexPath.init(row: 0, section: 1)) as! TextFieldTableViewCell
@@ -190,15 +197,26 @@ class ClearingPayViewController: ViewController {
         nextButton.addTarget(self, action: #selector(paymentAction(_:)), for: .touchUpInside)
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "clearing_code" {
+            let controller = segue.destination as! ScanCodeViewController
+            controller.codeMessage = {
+                message in
+                let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
+                let action = UIAlertAction(title: "done", style: .default, handler: nil)
+                alertController.addAction(action)
+                self.present(alertController, animated: true, completion: nil)
+            }
+        }
+        
     }
-    */
+    
 
 }
 

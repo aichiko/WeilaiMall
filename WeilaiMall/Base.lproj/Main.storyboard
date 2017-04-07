@@ -39,6 +39,24 @@
             </objects>
             <point key="canvasLocation" x="206" y="-788"/>
         </scene>
+        <!--二维码-->
+        <scene sceneID="0jO-tg-k6V">
+            <objects>
+                <viewController title="二维码" hidesBottomBarWhenPushed="YES" id="HSQ-hc-LTs" customClass="ScanCodeViewController" customModule="WeilaiMall" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="b9g-0V-3ke"/>
+                        <viewControllerLayoutGuide type="bottom" id="9VF-l9-Y1r"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="edJ-42-n7G">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CiG-sB-BrW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1148" y="-865"/>
+        </scene>
         <!--未来加-->
         <scene sceneID="llh-dg-vmP">
             <objects>
@@ -130,7 +148,7 @@
         <!--首页-->
         <scene sceneID="U6v-fQ-hdz">
             <objects>
-                <viewController title="首页" id="0N0-fX-mrR" customClass="HomeViewController" customModule="WeilaiMall" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="0N0-fX-mrR" customClass="HomeViewController" customModule="WeilaiMall" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yTP-Gy-rhi"/>
                         <viewControllerLayoutGuide type="bottom" id="ukR-us-ZEd"/>
@@ -144,6 +162,7 @@
                     <navigationItem key="navigationItem" id="jsm-Q9-gJw"/>
                     <connections>
                         <segue destination="FOo-Mh-nxZ" kind="presentation" identifier="home_search" animates="NO" id="ZWc-nH-jzz"/>
+                        <segue destination="HSQ-hc-LTs" kind="show" identifier="scanCode" id="fnj-vZ-y9Q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="etC-j6-qNG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -440,6 +459,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="HSQ-hc-LTs" kind="show" identifier="transfer_code" id="mRH-g2-izt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FNd-XV-mpZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -458,6 +480,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="HSQ-hc-LTs" kind="show" identifier="clearing_code" id="gLL-wN-91N"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QNo-2F-hFB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1127,5 +1152,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="TMa-C8-HR4"/>
+        <segue reference="gLL-wN-91N"/>
     </inferredMetricsTieBreakers>
 </document>
