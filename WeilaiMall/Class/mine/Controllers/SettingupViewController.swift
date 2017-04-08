@@ -9,7 +9,7 @@
 import UIKit
 
 class SettingupViewController: ViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     let titles = ["修改登录密码", "修改支付密码", "清除缓存"]
@@ -17,6 +17,8 @@ class SettingupViewController: ViewController {
     let identifiers = ["loginpassword", "paypassword", ""]
     
     var button = UIButton(type: .system)
+    
+    var cancelLogin: (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,8 +60,12 @@ class SettingupViewController: ViewController {
         
         let alertController = UIAlertController.init(title: "提示", message: "确定要退出登录？", preferredStyle: .alert)
         
-        let sureAction = UIAlertAction.init(title: "确定", style: .default) { (action) in
+        let sureAction = UIAlertAction.init(title: "确定", style: .default) { [weak self] (action) in
             UserDefaults.init().setValue(false, forKey: "isLogin")
+            if self?.cancelLogin != nil {
+                self?.cancelLogin!()
+            }
+            
         }
         let cancelAction = UIAlertAction.init(title: "取消", style: .cancel, handler: nil)
         
@@ -68,7 +74,6 @@ class SettingupViewController: ViewController {
         present(alertController, animated: true, completion: nil)
         
     }
-    
     
     /*
     // MARK: - Navigation
@@ -92,6 +97,7 @@ extension SettingupViewController: UITableViewDelegate, UITableViewDataSource {
         if cell == nil {
             cell = UITableViewCell.init(style: .default, reuseIdentifier: "cell")
             cell?.textLabel?.text = titles[indexPath.row]
+            cell?.textLabel?.font = UIFont.CCsetfont(16)
             cell?.accessoryType = .disclosureIndicator
         }
         return cell!

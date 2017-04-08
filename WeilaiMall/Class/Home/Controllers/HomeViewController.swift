@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import WebKit
 
 class HomeViewController: ViewController {
 
+    var webView = WKWebView(frame: CGRect.zero, configuration: WKWebViewConfiguration.init())
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -17,7 +20,17 @@ class HomeViewController: ViewController {
         //self.navigationItem.title = "首页"
         
         navigationAttribute()
+        
+        
+        webView = configWebView(requestUrl:"local")
+        
+        self.view.addSubview(webView)
+        webView.snp.updateConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -281,6 +281,7 @@ extension MineInfoViewController: UITableViewDelegate, UITableViewDataSource {
         }
         cell?.accessoryType = indexPath.row > 3 ? .none : .disclosureIndicator
         cell?.selectionStyle = indexPath.row > 3 ?.none: .default
+        cell?.textLabel?.font = UIFont.CCsetfont(16)
         cell?.textLabel?.text = titles[indexPath.row]
         cell?.detailTextLabel?.text = detailTitles[indexPath.row]
         return cell!

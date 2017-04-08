@@ -38,7 +38,7 @@ class CCShoppingCarCell: UITableViewCell {
             guard model != nil else {
                 return
             }
-            meetImageView.kf.setImage(with: URL.init(string: "http://114.215.19.98/"+(model?.goods_img)!), placeholder: UIImage.init(named: ""))
+            meetImageView.kf.setImage(with: URL.init(string: (model?.goods_img)!), placeholder: UIImage.init(named: ""))
             meetTitleLabel.text = model?.goods_name
             priceLabel.text = String.init(format: "%.0f 积分", (model?.goods_price)!)
             numberView.numberTextField.text = String(format: "%d", (model?.goods_num)!)

@@ -78,22 +78,19 @@ class MineViewController: ViewController {
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-    }
-    */
-    
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        
-        if segue.identifier == "mineInfo" {
+        if segue.identifier == "settingup" {
+            let controller = segue.destination as! SettingupViewController
+            controller.cancelLogin = {
+                self.headView.style = .notlogin
+            }
+        }else if segue.identifier == "mineInfo" {
             if let userModel = CoreDataManager().getUserModel() {
                 self.userModel = userModel
             }

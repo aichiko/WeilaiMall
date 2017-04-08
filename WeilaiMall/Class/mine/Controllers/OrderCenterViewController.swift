@@ -427,14 +427,16 @@ class OrderCenterViewController: ViewController {
             //iOS 8.0 使用MJRefresh
             tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: { 
                 [unowned self] in
-                self.prepareData(.refreshData)
+                let state = self.scrollView.contentOffset.x/self.view.bounds.width
+                self.prepareData(.refreshData, state: Int(state)-1)
             })
             
         }
         
         tableView.mj_footer = MJRefreshAutoNormalFooter.init(refreshingBlock: {
             [unowned self] in
-            self.prepareData(.moreData)
+            let state = self.scrollView.contentOffset.x/self.view.bounds.width
+            self.prepareData(.moreData, state: Int(state)-1)
         })
         tableView.mj_footer.isAutomaticallyHidden = true
         

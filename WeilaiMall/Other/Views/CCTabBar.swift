@@ -15,6 +15,7 @@ extension UITabBarItem {
         self.image = UIImage.init(named: image)?.withRenderingMode(.alwaysOriginal)
         self.selectedImage = UIImage.init(named: selectedImage)?.withRenderingMode(.alwaysOriginal)
         self.title = title
+        self.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -4)
     }
 }
 

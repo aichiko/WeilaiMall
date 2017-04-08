@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		97D80AD24A110D684E5E87A0 /* Pods_WeilaiMall.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F23BE5254FD0591D5EEAF8A7 /* Pods_WeilaiMall.framework */; };
+		D5080FE61E98C20900B7462B /* CCLaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5080FE51E98C20900B7462B /* CCLaunchViewController.swift */; };
 		D50C2A231E8121850002AF0F /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50C2A221E8121850002AF0F /* SearchResultViewController.swift */; };
 		D50C2A251E814DA50002AF0F /* OperationRecordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50C2A241E814DA50002AF0F /* OperationRecordModel.swift */; };
 		D50C2A271E816B230002AF0F /* OrderRelatedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50C2A261E816B230002AF0F /* OrderRelatedModel.swift */; };
@@ -94,6 +95,7 @@
 /* Begin PBXFileReference section */
 		2165B2DCADD397E65CB507D4 /* Pods-WeilaiMall.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeilaiMall.release.xcconfig"; path = "Pods/Target Support Files/Pods-WeilaiMall/Pods-WeilaiMall.release.xcconfig"; sourceTree = "<group>"; };
 		865602186F2BDB5AE69031E0 /* Pods-WeilaiMall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeilaiMall.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeilaiMall/Pods-WeilaiMall.debug.xcconfig"; sourceTree = "<group>"; };
+		D5080FE51E98C20900B7462B /* CCLaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCLaunchViewController.swift; sourceTree = "<group>"; };
 		D50C2A221E8121850002AF0F /* SearchResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 		D50C2A241E814DA50002AF0F /* OperationRecordModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationRecordModel.swift; sourceTree = "<group>"; };
 		D50C2A261E816B230002AF0F /* OrderRelatedModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderRelatedModel.swift; sourceTree = "<group>"; };
@@ -388,6 +390,7 @@
 				D5CF305D1E801F9C00E471F2 /* HomeSearchViewController.swift */,
 				D50C2A221E8121850002AF0F /* SearchResultViewController.swift */,
 				D5D8541C1E9664F000DCDEC7 /* ScanCodeViewController.swift */,
+				D5080FE51E98C20900B7462B /* CCLaunchViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -732,6 +735,7 @@
 				D51F3AB31E71A0CC0092B85B /* OrderCenterViewController.swift in Sources */,
 				D5D8541D1E9664F000DCDEC7 /* ScanCodeViewController.swift in Sources */,
 				D524A8511E8F8893004157BB /* OrderClearViewController.swift in Sources */,
+				D5080FE61E98C20900B7462B /* CCLaunchViewController.swift in Sources */,
 				D52084011E5F2C1200BE031B /* AppDelegate.swift in Sources */,
 				D55A7B601E82BA28000490CA /* RechargeModel.swift in Sources */,
 				D57992B31E671E8C00A82DBC /* MineCollectionViewCell.swift in Sources */,

@@ -19,6 +19,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         IQKeyboardManager.shared().isEnableAutoToolbar = false
+        
+        window?.makeKeyAndVisible()
+        
+        if firstLaunch {
+            let mainVC
+                = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "main")
+            self.window?.rootViewController = mainVC
+        }else {
+            let mainVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "main")
+            CCLaunchViewController.showLaunchView(click: { () -> UIView in
+                return mainVC.view
+            }) {
+                UserDefaults.init().set(true, forKey: "firstLaunch")
+                self.window?.rootViewController = mainVC
+            }
+        }
         return true
     }
 

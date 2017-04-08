@@ -19,4 +19,6 @@ pod 'MJRefresh'
 
 pod 'IQKeyboardManager'
 
+pod 'BaiduMapKit'
+
 end

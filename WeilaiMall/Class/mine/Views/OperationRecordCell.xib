@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="179"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="179.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cow-jt-HLq">
@@ -74,7 +74,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="转账支付给用户[1022][15157393979]" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nIo-RN-bTa">
-                        <rect key="frame" x="98" y="10" width="241" height="17"/>
+                        <rect key="frame" x="98" y="20" width="241" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -130,7 +130,6 @@
                     <constraint firstItem="zrO-jm-4Ce" firstAttribute="trailing" secondItem="5Tb-YB-d3v" secondAttribute="trailing" id="6MK-8r-7BE"/>
                     <constraint firstItem="n5O-Ts-mFt" firstAttribute="centerY" secondItem="Z2c-HO-Ym7" secondAttribute="centerY" id="Aio-Rl-CKo"/>
                     <constraint firstAttribute="trailingMargin" secondItem="4v4-rl-gkY" secondAttribute="trailing" constant="8" id="Cnm-76-xNp"/>
-                    <constraint firstItem="nIo-RN-bTa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="DfY-rh-A42"/>
                     <constraint firstItem="5Qu-qV-moK" firstAttribute="centerY" secondItem="djP-07-FhM" secondAttribute="centerY" id="FUK-cN-dKB"/>
                     <constraint firstItem="Cow-jt-HLq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="51" id="FxK-Sy-kFv"/>
                     <constraint firstItem="opq-DB-Zja" firstAttribute="centerX" secondItem="Cow-jt-HLq" secondAttribute="centerX" id="Fxl-cZ-tHJ"/>
@@ -153,6 +152,7 @@
                     <constraint firstItem="djP-07-FhM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="12" id="hlt-qC-pH5"/>
                     <constraint firstItem="zrO-jm-4Ce" firstAttribute="centerY" secondItem="HkB-eK-oVn" secondAttribute="centerY" id="i29-Nl-6ta"/>
                     <constraint firstItem="dWf-L4-coR" firstAttribute="centerX" secondItem="opq-DB-Zja" secondAttribute="centerX" id="i7O-6z-R9X"/>
+                    <constraint firstItem="nIo-RN-bTa" firstAttribute="centerY" secondItem="P0k-oJ-VAv" secondAttribute="centerY" id="in0-w3-rpr"/>
                     <constraint firstItem="dWf-L4-coR" firstAttribute="top" secondItem="opq-DB-Zja" secondAttribute="bottom" constant="39" id="jTP-go-RrD"/>
                     <constraint firstItem="dWf-L4-coR" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" id="jri-DV-SbR"/>
                     <constraint firstItem="Cow-jt-HLq" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" id="kgC-tL-3iP"/>
