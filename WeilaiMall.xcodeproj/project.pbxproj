@@ -53,6 +53,9 @@
 		D54B1D771E8516FB00DAD246 /* WeilaiMall-API.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54B1D761E8516FB00DAD246 /* WeilaiMall-API.swift */; };
 		D556B7B31E95D05E00150614 /* ConfirmPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D556B7B21E95D05E00150614 /* ConfirmPasswordViewController.swift */; };
 		D55A7B601E82BA28000490CA /* RechargeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55A7B5F1E82BA28000490CA /* RechargeModel.swift */; };
+		D56B96061E9C6D2700090C4A /* InvitationRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56B96051E9C6D2700090C4A /* InvitationRegisterViewController.swift */; };
+		D56B96081E9CD18000090C4A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D56B96071E9CD18000090C4A /* CoreLocation.framework */; };
+		D56B960A1E9D178100090C4A /* CCNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56B96091E9D178100090C4A /* CCNavigationController.swift */; };
 		D57769981E7AD687001EF6D7 /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57769971E7AD687001EF6D7 /* OrderDetailViewController.swift */; };
 		D577699A1E7AECC6001EF6D7 /* OrderDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57769991E7AECC6001EF6D7 /* OrderDetailCell.swift */; };
 		D57992B01E6717BA00A82DBC /* MineHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57992AF1E6717BA00A82DBC /* MineHeadView.swift */; };
@@ -147,6 +150,9 @@
 		D54B1D761E8516FB00DAD246 /* WeilaiMall-API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WeilaiMall-API.swift"; sourceTree = "<group>"; };
 		D556B7B21E95D05E00150614 /* ConfirmPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmPasswordViewController.swift; sourceTree = "<group>"; };
 		D55A7B5F1E82BA28000490CA /* RechargeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RechargeModel.swift; sourceTree = "<group>"; };
+		D56B96051E9C6D2700090C4A /* InvitationRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationRegisterViewController.swift; sourceTree = "<group>"; };
+		D56B96071E9CD18000090C4A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		D56B96091E9D178100090C4A /* CCNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCNavigationController.swift; sourceTree = "<group>"; };
 		D57769971E7AD687001EF6D7 /* OrderDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetailViewController.swift; sourceTree = "<group>"; };
 		D57769991E7AECC6001EF6D7 /* OrderDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDetailCell.swift; sourceTree = "<group>"; };
 		D57992AF1E6717BA00A82DBC /* MineHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MineHeadView.swift; sourceTree = "<group>"; };
@@ -175,6 +181,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D56B96081E9CD18000090C4A /* CoreLocation.framework in Frameworks */,
 				97D80AD24A110D684E5E87A0 /* Pods_WeilaiMall.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -199,6 +206,7 @@
 		0D26F7F67203F43DC57052BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D56B96071E9CD18000090C4A /* CoreLocation.framework */,
 				F23BE5254FD0591D5EEAF8A7 /* Pods_WeilaiMall.framework */,
 			);
 			name = Frameworks;
@@ -326,6 +334,7 @@
 			children = (
 				D5E3C7F91E62F5680012FD7C /* CCTabBarController.swift */,
 				D5E3C7FB1E6302460012FD7C /* CCWebViewController.swift */,
+				D56B96091E9D178100090C4A /* CCNavigationController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -429,6 +438,7 @@
 				D52627981E750F6D00AC0B2B /* ClearingPayViewController.swift */,
 				D512BDA91E754E53001B7004 /* OperationRecordViewController.swift */,
 				D51A71D71E798B51007B104B /* RechargeViewController.swift */,
+				D56B96051E9C6D2700090C4A /* InvitationRegisterViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -752,6 +762,7 @@
 				D512BDAA1E754E53001B7004 /* OperationRecordViewController.swift in Sources */,
 				D5E3C7BC1E62EA890012FD7C /* CCTabBar.swift in Sources */,
 				D50C2A251E814DA50002AF0F /* OperationRecordModel.swift in Sources */,
+				D56B960A1E9D178100090C4A /* CCNavigationController.swift in Sources */,
 				D57769981E7AD687001EF6D7 /* OrderDetailViewController.swift in Sources */,
 				D52627951E74D53F00AC0B2B /* TextFieldTableViewCell.swift in Sources */,
 				D517FC141E65C9B10050AE99 /* Source.swift in Sources */,
@@ -759,6 +770,7 @@
 				D52627971E74DBBF00AC0B2B /* TransferViewController.swift in Sources */,
 				D51A71D81E798B51007B104B /* RechargeViewController.swift in Sources */,
 				D516C2301E72EE0200BC5B60 /* OrderTableViewCell.swift in Sources */,
+				D56B96061E9C6D2700090C4A /* InvitationRegisterViewController.swift in Sources */,
 				D598979B1E864CC20034C5FA /* ChangePasswordModel.swift in Sources */,
 				D5E3C80D1E630CD80012FD7C /* HomeViewController.swift in Sources */,
 				D50C2A231E8121850002AF0F /* SearchResultViewController.swift in Sources */,
@@ -920,7 +932,7 @@
 				INFOPLIST_FILE = WeilaiMall/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ash.WeilaiMall;
+				PRODUCT_BUNDLE_IDENTIFIER = com.weilai.mall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WeilaiMall/Other/Source/WeilaiMall-Bridging-Header.h";
@@ -940,7 +952,7 @@
 				INFOPLIST_FILE = WeilaiMall/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ash.WeilaiMall;
+				PRODUCT_BUNDLE_IDENTIFIER = com.weilai.mall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WeilaiMall/Other/Source/WeilaiMall-Bridging-Header.h";

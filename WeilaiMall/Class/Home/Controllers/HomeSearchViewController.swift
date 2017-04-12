@@ -49,8 +49,11 @@ class HomeSearchViewController: ViewController {
             searchBar.delegate = controller
             controller.searchKey = searchBar.text
             controller.resetDelegate = {
-                [unowned self] in
-                self.searchBar.delegate = self
+                [weak self] in
+                guard self != nil else {
+                    return
+                }
+                self?.searchBar.delegate = self
             }
         }
     }

@@ -208,10 +208,12 @@ class ClearingPayViewController: ViewController {
             let controller = segue.destination as! ScanCodeViewController
             controller.codeMessage = {
                 message in
-                let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
-                let action = UIAlertAction(title: "done", style: .default, handler: nil)
-                alertController.addAction(action)
-                self.present(alertController, animated: true, completion: nil)
+                
+                let strIndex = message.index(message.startIndex, offsetBy: 4)
+                let phoneNum = message.substring(from: strIndex)
+                if let textFeild = self.view.viewWithTag(100) as? UITextField {
+                    self.verificatePhone(phoneNum: phoneNum, textField: textFeild)
+                }
             }
         }
         

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -20,13 +21,13 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mBO-rT-mUP">
-                        <rect key="frame" x="30.5" y="68" width="33" height="16"/>
+                        <rect key="frame" x="30.5" y="71" width="33" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4s2-K3-5rW">
-                        <rect key="frame" x="30" y="25" width="35" height="35"/>
+                        <rect key="frame" x="28.5" y="25" width="38" height="38"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="4s2-K3-5rW" secondAttribute="height" id="Vgv-C8-G7N"/>
@@ -38,8 +39,8 @@
                 <constraint firstItem="mBO-rT-mUP" firstAttribute="top" secondItem="4s2-K3-5rW" secondAttribute="bottom" constant="8" id="0xP-hD-lZ1"/>
                 <constraint firstItem="4s2-K3-5rW" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="2af-eM-I8A"/>
                 <constraint firstItem="mBO-rT-mUP" firstAttribute="centerX" secondItem="4s2-K3-5rW" secondAttribute="centerX" id="IVA-8K-hbm"/>
-                <constraint firstItem="4s2-K3-5rW" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="30" id="jkD-AD-CtA"/>
-                <constraint firstItem="4s2-K3-5rW" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="25" id="x0V-Of-mSt"/>
+                <constraint firstItem="4s2-K3-5rW" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="0.4" id="NDo-HO-mLP"/>
+                <constraint firstItem="4s2-K3-5rW" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="25" id="Siw-0O-BGP"/>
             </constraints>
             <connections>
                 <outlet property="imageView" destination="4s2-K3-5rW" id="y5J-BH-5bD"/>

@@ -29,11 +29,15 @@ class ScanCodeViewController: ViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        resetCodeScaning()
+        scanCodeView.restartAnimation()
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        scanCodeView.stopAnimate()
+        session.stopRunning()
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
@@ -69,6 +73,12 @@ class ScanCodeViewController: ViewController {
     private func setupCodeScanning() {
         // 1、获取摄像设备
         guard let device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo) else {
+            let alertController = UIAlertController(title: "提示", message: "您需要在设置中开启使用相机功能,才能使用扫码功能", preferredStyle: .alert)
+            let action = UIAlertAction(title: "确定", style: .default, handler: { (action) in
+                self.navigationController?.popViewController(animated: true)
+            })
+            alertController.addAction(action)
+            self.present(alertController, animated: true, completion: nil)
             return
         }
         // 2、创建输入流
@@ -110,9 +120,20 @@ class ScanCodeViewController: ViewController {
         session.startRunning()
     }
     
+    /// 重新设置 扫码功能
+    func resetCodeScaning() {
+        session.startRunning()
+        
+        previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+        previewLayer.frame = view.layer.bounds;
+        
+        view.layer.insertSublayer(previewLayer, at: 0)
+    }
+    
     
     @objc private func buttonbackAction(_ button: UIButton) {
         scanCodeView.stopAnimate()
+        session.stopRunning()
         self.navigationController?.popViewController(animated: true)
     }
 
@@ -121,6 +142,9 @@ class ScanCodeViewController: ViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    deinit {
+        print("\(self) deinit")
+    }
 
     /*
     // MARK: - Navigation
@@ -177,15 +201,29 @@ extension ScanCodeViewController : AVCaptureMetadataOutputObjectsDelegate
         let object = previewLayer.transformedMetadataObject(for: metadata) as! AVMetadataMachineReadableCodeObject
         print(object.stringValue)
         // 2、删除预览图层
-        previewLayer.removeFromSuperlayer()
+//        previewLayer.removeFromSuperlayer()
         
         scanCodeView.stopAnimate()
         
-        if codeMessage != nil {
-            self.navigationController?.popViewController(animated: true)
-            codeMessage!(object.stringValue)
+        if object.stringValue.hasPrefix("pay:") {
+            // 付款和结账
+            if codeMessage != nil {
+                self.navigationController?.popViewController(animated: true)
+                codeMessage!(object.stringValue)
+            }
+        }else if object.stringValue.hasPrefix("http") {
+            // 打开URL
+            let webviewVC = CCWebViewController()
+            webviewVC.requestURL = object.stringValue
+            self.navigationController?.pushViewController(webviewVC, animated: true)
+        }else {
+            let alertController = UIAlertController(title: "提示", message: "请扫描正确的二维码", preferredStyle: .alert)
+            let action = UIAlertAction(title: "确定", style: .default, handler: { (action) in
+                self.navigationController?.popViewController(animated: true)
+            })
+            alertController.addAction(action)
+            self.present(alertController, animated: true, completion: nil)
         }
-        
     }
 }
 

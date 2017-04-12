@@ -7,13 +7,34 @@
 //
 
 import UIKit
+import WebKit
 
-class ClassifyViewController: ViewController {
+class ClassifyViewController: ViewController, CCWebViewProtocol {
 
+    func push(path: String) {
+        let controller = CCWebViewController()
+        controller.path = path
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func pop(root: Bool = false) {
+        if root {
+            self.navigationController?.popToRootViewController(animated: true)
+        }else {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
+    var path: String = "classify"
+    
+    var webView = WKWebView(frame: CGRect.zero, configuration: WKWebViewConfiguration.init())
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.navigationItem.title = "分类"
         // Do any additional setup after loading the view.
+        webView = configWebView(path:path)
     }
 
     override func didReceiveMemoryWarning() {

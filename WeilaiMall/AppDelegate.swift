@@ -15,13 +15,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
+    let mapManager = BMKMapManager()
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        // 如果要关注网络及授权验证事件，请设定generalDelegate参数
+        let ret = mapManager.start("eBfIuW2Y1GMQ5fMiIXNfNAchP1HowbG3", generalDelegate: nil)
+        if ret == false {
+            NSLog("manager start failed!")
+        }
+        
         IQKeyboardManager.shared().isEnableAutoToolbar = false
         
         window?.makeKeyAndVisible()
         
+        /// 第一次进入时的引导图
         if firstLaunch {
             let mainVC
                 = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "main")

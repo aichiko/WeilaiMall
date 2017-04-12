@@ -64,8 +64,12 @@ class SearchResultViewController: ViewController {
 }
 
 extension SearchResultViewController: UISearchBarDelegate {
+    
     public func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+        if resetDelegate != nil {
+            resetDelegate!()
+        }
         self.dismiss(animated: false, completion: nil)
     }
     

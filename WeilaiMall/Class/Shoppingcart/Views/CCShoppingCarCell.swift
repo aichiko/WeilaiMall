@@ -43,8 +43,6 @@ class CCShoppingCarCell: UITableViewCell {
             priceLabel.text = String.init(format: "%.0f 积分", (model?.goods_price)!)
             numberView.numberTextField.text = String(format: "%d", (model?.goods_num)!)
         }
-        
-        
     }
     
     override func awakeFromNib() {

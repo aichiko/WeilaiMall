@@ -9,9 +9,38 @@
 import UIKit
 import WebKit
 
-class HomeViewController: ViewController {
+class HomeViewController: ViewController, CCWebViewProtocol {
 
+    func push(path: String) {
+        let controller = CCWebViewController()
+        controller.path = path
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func pop(root: Bool = false) {
+        if root {
+            self.navigationController?.popToRootViewController(animated: true)
+        }else {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+
+    var path: String = "local"
+    
     var webView = WKWebView(frame: CGRect.zero, configuration: WKWebViewConfiguration.init())
+    
+    var leftItem = UIBarButtonItem()
+    
+    var rightItem = UIBarButtonItem()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,17 +50,9 @@ class HomeViewController: ViewController {
         
         navigationAttribute()
         
-        
-        webView = configWebView(requestUrl:"local")
-        
-        self.view.addSubview(webView)
-        webView.snp.updateConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
+        webView = configWebView(path: path)
     }
     
-    
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -54,8 +75,6 @@ class HomeViewController: ViewController {
                 self.present(alertController, animated: true, completion: nil)
             }
         }
-        
-        
     }
 
 }
@@ -63,26 +82,22 @@ class HomeViewController: ViewController {
 extension HomeViewController {
     func navigationAttribute() {
         
-        let leftItem = UIBarButtonItem.init(image: UIImage.init(named: "scan_btn")?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(scanCode(item:)))
+        leftItem = UIBarButtonItem.init(image: UIImage.init(named: "scan_btn")?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(scanCode(item:)))
         
         
-        let rightItem = UIBarButtonItem.init(image: UIImage.init(named: "catelog_icon")?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(catelogShow(item:)))
-        
+        rightItem = UIBarButtonItem.init(image: UIImage.init(named: "catelog_icon")?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(catelogShow(item:)))
         self.navigationItem.leftBarButtonItem = leftItem
         self.navigationItem.rightBarButtonItem = rightItem
-        
+        addSearchView()
+    }
+    
+    func addSearchView() {
         let grayView = UIView()
         grayView.backgroundColor = UIColor(red:0.92, green:0.92, blue:0.92, alpha:1.00)
         grayView.layer.masksToBounds = true
         grayView.layer.cornerRadius = 15
-        navigationController?.navigationBar.addSubview(grayView)
-        
-        grayView.snp.updateConstraints { (make) in
-            make.center.equalToSuperview()
-            make.left.equalTo(50)
-            make.right.equalTo(-50)
-            make.height.equalTo(30)
-        }
+        //addSubview(grayView)
+        grayView.frame = CGRect(x: 0, y: 0, width: 300*self.view.bounds.width/375, height: 30)
         
         let searchIcon = UIImageView.init(image: UIImage.init(named: "search_icon"))
         grayView.addSubview(searchIcon)
@@ -92,6 +107,8 @@ extension HomeViewController {
         }
         
         grayView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(searchShow(tap:))))
+        self.navigationItem.titleView = grayView
+        
     }
     
     @objc private func scanCode(item: UIBarButtonItem) {
@@ -105,4 +122,5 @@ extension HomeViewController {
     @objc private func searchShow(tap: UITapGestureRecognizer) {
         self.performSegue(withIdentifier: "home_search", sender: self)
     }
+    
 }

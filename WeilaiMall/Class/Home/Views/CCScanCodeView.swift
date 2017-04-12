@@ -136,7 +136,7 @@ class CCScanCodeView: UIView {
     func lineAnimation() {
         
         scanContent.addSubview(scanningline)
-        scanningline.snp.updateConstraints { (make) in
+        scanningline.snp.remakeConstraints { (make) in
             make.left.top.centerX.width.equalTo(scanContent)
         }
         displayLink = CADisplayLink(target: self, selector: #selector(lineStep))
@@ -168,6 +168,10 @@ class CCScanCodeView: UIView {
                 animationStop = !animationStop
             }
         }
+    }
+    
+    func restartAnimation() {
+        lineAnimation()
     }
     
     func stopAnimate() {
