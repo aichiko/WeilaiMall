@@ -64,6 +64,7 @@ class SettingupViewController: ViewController {
             UserDefaults.init().setValue(false, forKey: "isLogin")
             if self?.cancelLogin != nil {
                 self?.cancelLogin!()
+                self?.navigationController?.popViewController(animated: true)
             }
             
         }

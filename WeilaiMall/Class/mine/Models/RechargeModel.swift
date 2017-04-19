@@ -31,11 +31,14 @@ struct AccountBalance {
     /// 0:未开通B类支付  1：开通B类支付（显示收款            二维码）
     var is_pay: Bool
     
+    var pay_phone: String
+    
     init(value: JSON) {
         user_money = value["user_money"].floatValue
         pay_ratio = value["pay_ratio"].intValue
         pay_pass = value["pay_pass"].intValue
         is_pay = value["is_pay"].boolValue
+        pay_phone = value["pay_phone"].stringValue
     }
 }
 

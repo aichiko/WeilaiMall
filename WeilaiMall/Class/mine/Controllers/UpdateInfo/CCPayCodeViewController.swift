@@ -1,61 +1,32 @@
 //
-//  InvitationRegisterViewController.swift
+//  CCPayCodeViewController.swift
 //  WeilaiMall
 //
-//  Created by 24hmb on 2017/4/11.
+//  Created by 24hmb on 2017/4/19.
 //  Copyright © 2017年 24hmb. All rights reserved.
 //
 
 import UIKit
 
-class InvitationRegisterViewController: ViewController {
+class CCPayCodeViewController: ViewController {
 
-    
-    @IBOutlet weak var scrollView: UIScrollView!
-    
     @IBOutlet weak var codeImageView: UIImageView!
+    
+    var code: String = "pay:"
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        addBackItem()
-        
         
         DispatchQueue.global().async {
-            var mobile_phone = ""
-            if let userinfo = CoreDataManager().getCoreData() {
-                mobile_phone = String(userinfo.mobile_phone)
-            }
-            let image = self.generateCode("http://139.196.124.0/#/register?invite_code="+mobile_phone)
+            let image = self.generateCode(self.code)
             DispatchQueue.main.async {
                 self.codeImageView.image = image
             }
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
-
-    @IBAction func shareCodeAction(_ sender: Any) {
-        
-    }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-}
-
-extension InvitationRegisterViewController {
     func generateCode(_ info: String, imageWidth: CGFloat = 125) -> UIImage {
         
         let QRCodeColor = UIColor.black
@@ -84,4 +55,21 @@ extension InvitationRegisterViewController {
         let image = UIImage(ciImage: transformImage!)
         return image
     }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
 }

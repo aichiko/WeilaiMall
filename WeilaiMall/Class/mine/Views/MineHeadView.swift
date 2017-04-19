@@ -132,6 +132,7 @@ class MineHeadView: UIView {
     
     var userModel: UserModel! {
         didSet {
+            imageView.kf.setImage(with: URL.init(string: userModel.user_picture), placeholder: UIImage.init(named: "login"))
             nameLabel.text = userModel.user_name
             moneyLabel.text = String.init(format: "余额：%.2f", (userModel?.user_money)!)
             var integrals = [userModel.rebate, userModel.pay_points, userModel.highreward, userModel.payin]

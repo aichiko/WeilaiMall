@@ -101,12 +101,22 @@ class ClearingPayViewController: ViewController {
     var tableView = UITableView(frame: CGRect.zero, style: .grouped)
     
     let nextButton: CCSureButton = CCSureButton.init("确定支付")
+    let footView = UIView()
+    let messageLabel = UILabel()
+    let lineLabel: UILabel = {
+        let lineLabel = UILabel()
+        lineLabel.backgroundColor = UIColor.black
+        return lineLabel
+    }()
+    let codeButton = CCSureButton.init("收款二维码")
     
     let celltexts = ["对方账号", "店铺名称", "现金结算额", "支付密码"]
     let placeholders = ["请输入对方手机号或店铺ID", "请输入店铺名称", "请输入现金价值", "请输入支付密码"]
     
     var balance: Float = 0
     var pay_ratio: Int = 2
+    
+    var codeMessage = ""
     
     
     /// 是否验证 转账前需要先填写用户手机号，确认后才能进行后续的转账
@@ -168,6 +178,8 @@ class ClearingPayViewController: ViewController {
                 self?.balance = models[0]!.user_money
                 self?.pay_ratio = models[0]!.pay_ratio
                 self?.tableView.reloadSections(IndexSet.init(integer: 1), with: .automatic)
+                self?.footViewStatus(with: models[0]!.is_pay)
+                self?.codeMessage = models[0]!.pay_phone
             }else {
                 MBProgressHUD.showErrorAdded(message: (error?.getInfo())!, to: self?.view)
             }
@@ -184,19 +196,65 @@ class ClearingPayViewController: ViewController {
             make.edges.equalToSuperview()
         }
         
-        tableView.addSubview(nextButton)
+        footView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 200)
+        footView.isUserInteractionEnabled = true
+        tableView.tableFooterView = footView
+        
+        footView.addSubview(nextButton)
         nextButton.buttonDisabled = false
         nextButton.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
             make.left.equalTo(20)
-            make.right.equalTo(-20)
+            make.width.equalTo(self.view.bounds.width-40)
             make.height.equalTo(40)
-            make.top.equalTo(330)
+            make.top.equalTo(30)
         }
         
+        footView.addSubview(lineLabel)
+        
+        lineLabel.snp.updateConstraints { (make) in
+            make.top.equalTo(nextButton.snp.bottom).offset(30)
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(0.9)
+            make.height.equalTo(0.5)
+        }
+        messageLabel.text = "您的账户已开通收款权限，点击查看您的收款二维码"
+        messageLabel.font = CCTextFont
+        messageLabel.textColor = CCGrayTextColor
+        messageLabel.textAlignment = .center
+        messageLabel.adjustsFontSizeToFitWidth = true
+        footView.addSubview(messageLabel)
+        messageLabel.snp.updateConstraints { (make) in
+            make.top.equalTo(lineLabel.snp.bottom).offset(10)
+            make.width.equalToSuperview().multipliedBy(0.9)
+            make.centerX.equalToSuperview()
+        }
+        footView.addSubview(codeButton)
+        codeButton.snp.updateConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(messageLabel.snp.bottom).offset(20)
+            make.width.equalToSuperview().multipliedBy(0.45)
+            make.height.equalTo(40)
+        }
+        codeButton.addTarget(self, action: #selector(payCodeAction(_:)), for: .touchUpInside)
         nextButton.addTarget(self, action: #selector(paymentAction(_:)), for: .touchUpInside)
+        
+        footViewStatus()
     }
-
+    
+    
+    func footViewStatus(with is_pay: Bool = false) {
+        if is_pay {
+            footView.frame.size.height = 200
+            lineLabel.isHidden = false
+            messageLabel.isHidden = false
+            codeButton.isHidden = false
+        }else {
+            footView.frame.size.height = 100
+            lineLabel.isHidden = true
+            messageLabel.isHidden = true
+            codeButton.isHidden = true
+        }
+    }
     
     // MARK: - Navigation
 
@@ -211,15 +269,31 @@ class ClearingPayViewController: ViewController {
                 
                 let strIndex = message.index(message.startIndex, offsetBy: 4)
                 let phoneNum = message.substring(from: strIndex)
-                if let textFeild = self.view.viewWithTag(100) as? UITextField {
-                    self.verificatePhone(phoneNum: phoneNum, textField: textFeild)
-                }
+                self.decode(with: phoneNum)
             }
+        }else if segue.identifier == "push_paycode" {
+            let controller = segue.destination as! CCPayCodeViewController
+            let code = sender as! String
+            controller.code.append(code)
         }
         
     }
     
-
+    func decode(with phoneNum: String) {
+        
+        let request = AesdecryptRequest(parameter: ["encrypt_phone": phoneNum])
+        URLSessionClient().alamofireSend(request) { [weak self] (phones, error) in
+            if error == nil {
+                let phoneNumber = phones[0]
+                if let textFeild = self?.view.viewWithTag(100) as? UITextField {
+                    self?.verificatePhone(phoneNum: phoneNumber!, textField: textFeild)
+                }
+            }else{
+                MBProgressHUD.showErrorAdded(message: (error?.getInfo())!, to: self?.view)
+            }
+        }
+        
+    }
 }
 
 extension ClearingPayViewController: UITableViewDelegate, UITableViewDataSource {
@@ -342,8 +416,10 @@ extension ClearingPayViewController {
         if phoneNum == "" {
             return
         }
+        let hud = MBProgressHUD.showMessage(message: "", view: self.view)
         let request = VerificationShopRequest(parameter: ["access_token": access_token, "mobile_phone": phoneNum])
         URLSessionClient().alamofireSend(request) { [weak self] (models, error) in
+            hud.hide(animated: true)
             if error == nil {
                 self?.isVerification = true
                 self?.verificatedPhone = (models[0]?.shop_name)!
@@ -377,6 +453,10 @@ extension ClearingPayViewController {
                 MBProgressHUD.showErrorAdded(message: (error?.getInfo())!, to: self?.view)
             }
         }
+    }
+    
+    @objc func payCodeAction(_ button: UIButton) {
+        self.performSegue(withIdentifier: "push_paycode", sender: codeMessage)
     }
     
 }

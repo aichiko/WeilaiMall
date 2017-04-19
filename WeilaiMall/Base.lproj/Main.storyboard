@@ -64,6 +64,10 @@
                         <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="ZWs-ub-5Pg"/>
+                    <connections>
+                        <segue destination="FOo-Mh-nxZ" kind="presentation" identifier="weilai_search" animates="NO" id="0Bk-zu-u1f"/>
+                        <segue destination="HSQ-hc-LTs" kind="show" identifier="weilai_scanCode" id="WjK-DY-eHn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IM3-I5-tpt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -364,6 +368,48 @@
             </objects>
             <point key="canvasLocation" x="-249" y="2006"/>
         </scene>
+        <!--收款二维码-->
+        <scene sceneID="Muf-Qd-C25">
+            <objects>
+                <viewController title="收款二维码" hidesBottomBarWhenPushed="YES" id="EIX-1v-prh" customClass="CCPayCodeViewController" customModule="WeilaiMall" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BhT-o7-yCB"/>
+                        <viewControllerLayoutGuide type="bottom" id="Rm6-hQ-sWG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HGO-ma-cz6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="di0-uc-FGL">
+                                <rect key="frame" x="93.5" y="240" width="187.5" height="187.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="di0-uc-FGL" secondAttribute="height" id="CRY-m0-lXg"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="扫码二维码可以进行支付" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rLj-IE-K1e">
+                                <rect key="frame" x="103" y="467.5" width="168.5" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="di0-uc-FGL" firstAttribute="centerX" secondItem="HGO-ma-cz6" secondAttribute="centerX" id="40d-w6-g7j"/>
+                            <constraint firstItem="di0-uc-FGL" firstAttribute="centerY" secondItem="HGO-ma-cz6" secondAttribute="centerY" id="Pdz-BO-wDM"/>
+                            <constraint firstItem="di0-uc-FGL" firstAttribute="width" secondItem="HGO-ma-cz6" secondAttribute="width" multiplier="0.5" id="QtS-oj-gxP"/>
+                            <constraint firstItem="rLj-IE-K1e" firstAttribute="top" secondItem="di0-uc-FGL" secondAttribute="bottom" constant="40" id="Wjs-gd-DQM"/>
+                            <constraint firstItem="rLj-IE-K1e" firstAttribute="centerX" secondItem="di0-uc-FGL" secondAttribute="centerX" id="hVM-dh-UW7"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="codeImageView" destination="di0-uc-FGL" id="bD4-LI-uNd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xbo-dN-o85" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-980" y="2712"/>
+        </scene>
         <!--订单详情-->
         <scene sceneID="3BN-xw-mXh">
             <objects>
@@ -571,6 +617,7 @@
                     </view>
                     <connections>
                         <segue destination="HSQ-hc-LTs" kind="show" identifier="clearing_code" id="gLL-wN-91N"/>
+                        <segue destination="EIX-1v-prh" kind="show" identifier="push_paycode" id="A6J-TU-Vc0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QNo-2F-hFB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1243,7 +1290,8 @@
         <image name="login_logo" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TMa-C8-HR4"/>
-        <segue reference="fnj-vZ-y9Q"/>
+        <segue reference="gLL-wN-91N"/>
+        <segue reference="IwX-c2-eVb"/>
+        <segue reference="0Bk-zu-u1f"/>
     </inferredMetricsTieBreakers>
 </document>

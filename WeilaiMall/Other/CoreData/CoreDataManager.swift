@@ -129,6 +129,7 @@ class CoreDataManager: NSObject {
         userEntity.payin = user.payin
         userEntity.pay_points = user.pay_points
         userEntity.user_picture = user.user_picture
+        
     }
     
 }

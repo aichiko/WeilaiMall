@@ -9,6 +9,18 @@
 import Foundation
 import SwiftyJSON
 
+struct AesdecryptRequest: CCRequest {
+    let path: String = aesdecrypt
+    
+    var parameter: [String: Any]
+    typealias Response = String
+    
+    func JSONParse(value: JSON) -> [String?]? {
+        return [value["data"]["phone"].stringValue]
+    }
+}
+
+
 
 struct VerificationRequest: CCRequest {
     

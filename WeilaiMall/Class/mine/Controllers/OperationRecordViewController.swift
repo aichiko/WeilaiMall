@@ -108,6 +108,8 @@ class OperationRecordViewController: ViewController {
         }
         parameters.updateValue(access_token, forKey: "access_token")
         
+        //let timeValue = Date().timeIntervalSince1970
+        
         URLSessionClient().alamofireSend(OperationRecordRequest(parameter: parameters), handler: { [weak self] (models, error) in
             if error == nil {
                 self?.dataArray = models as! [OperationRecordModel]

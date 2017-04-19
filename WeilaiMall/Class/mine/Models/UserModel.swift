@@ -105,8 +105,9 @@ struct UserModel {
         pay_points = user.pay_points
         if user.user_picture != nil {
             user_picture = user.user_picture!
+        }else {
+            user_picture = ""
         }
-        user_picture = ""
     }
     
     init(value: JSON) {

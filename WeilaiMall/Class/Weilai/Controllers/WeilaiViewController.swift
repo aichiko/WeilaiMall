@@ -32,6 +32,11 @@ class WeilaiViewController: ViewController {
     let locService = BMKLocationService()
     
     var webView = WKWebView(frame: CGRect.zero, configuration: WKWebViewConfiguration.init())
+    
+    var leftItem = UIBarButtonItem()
+    
+    var rightItem = UIBarButtonItem()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,7 +44,52 @@ class WeilaiViewController: ViewController {
         
         webView = configWebView(path: path)
         configLocation()
+        navigationAttribute()
     }
+    
+    func navigationAttribute() {
+        
+        rightItem = UIBarButtonItem.init(image: UIImage.init(named: "scan_btn")?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(scanCode(item:)))
+        
+        
+        leftItem = UIBarButtonItem.init(title: "全部", style: .done, target: self, action: nil)
+        leftItem.setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.black, NSFontAttributeName: UIFont.CCsetfont(16)!], for: .normal)
+        self.navigationItem.leftBarButtonItem = leftItem
+        self.navigationItem.rightBarButtonItem = rightItem
+        addSearchView()
+    }
+    
+    
+    func addSearchView() {
+        let grayView = UIView()
+        grayView.backgroundColor = UIColor(red:0.92, green:0.92, blue:0.92, alpha:1.00)
+        grayView.layer.masksToBounds = true
+        grayView.layer.cornerRadius = 15
+        //addSubview(grayView)
+        grayView.frame = CGRect(x: 0, y: 0, width: 300*self.view.bounds.width/375, height: 30)
+        
+        let searchIcon = UIImageView.init(image: UIImage.init(named: "search_icon"))
+        grayView.addSubview(searchIcon)
+        searchIcon.snp.updateConstraints { (make) in
+            make.centerY.equalToSuperview()
+            make.left.equalTo(10)
+        }
+        
+        grayView.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(searchShow(tap:))))
+        self.navigationItem.titleView = grayView
+        
+    }
+    
+    @objc private func scanCode(item: UIBarButtonItem) {
+        self.performSegue(withIdentifier: "weilai_scanCode", sender: self)
+    }
+    
+    @objc private func searchShow(tap: UITapGestureRecognizer) {
+        self.performSegue(withIdentifier: "weilai_search", sender: self)
+    }
+    
+    
+    
     /// 配置定位功能
     func configLocation() {
         manager.delegate = self
@@ -81,6 +131,7 @@ extension WeilaiViewController: CLLocationManagerDelegate {
                 let placemark: CLPlacemark = arr[0]
                 let city = placemark.locality
                 print("当前城市名称------\(city!)")
+                self.leftItem.title = city
                 //找到了当前位置城市后就关闭服务
                 self.manager.stopUpdatingLocation()
                 if self.path.contains("long") && self.path.contains("lat") {

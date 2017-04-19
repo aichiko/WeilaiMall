@@ -61,3 +61,5 @@ let cartdel = "Rest/order/cartdel"
 let cargolist = "Rest/order/cargolist"
 /// 提交订单
 let suborder = "Rest/order/suborder"
+/// aes解密
+let aesdecrypt = "Rest/user/aesdecrypt"

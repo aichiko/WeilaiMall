@@ -37,6 +37,16 @@ class LoginViewController: ViewController {
     @IBOutlet weak var passwordTextFeild: UITextField!
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.subviews.first?.alpha = 0
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.subviews.first?.alpha = 1
+    }
+    
     override func loadView() {
         super.loadView()
     }
@@ -64,11 +74,14 @@ class LoginViewController: ViewController {
             MBProgressHUD.showErrorAdded(message: "账号密码不可为空", to: self.view)
             return
         }
-        
+        let hud = MBProgressHUD.showMessage(message: "", view: self.view)
         let request = LoginRequest(parameter: ["mobile_phone": user, "password": password])
         URLSessionClient().alamofireSend(request) { [weak self] (models, error) in
+            hud.hide(animated: true)
             if error == nil {
                 UserDefaults.init().setValue(models[0]?.access_token, forKey: "access_token")
+                UserDefaults().synchronize()
+                access_token = (models[0]?.access_token)!
                 MBProgressHUD.showErrorAdded(message: "登录成功", to: self?.view)
                 //UserDefaults.init().setValue(true, forKey: "isLogin")
                 //登录成功后发送通知，让我的页面刷新数据

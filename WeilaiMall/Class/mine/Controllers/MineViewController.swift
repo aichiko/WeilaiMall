@@ -107,7 +107,9 @@ class MineViewController: ViewController {
 extension MineViewController {
     
     func getUserInfo() {
+        
         let request = UserInfoRequest(parameter: ["access_token": access_token])
+        
         URLSessionClient().alamofireSend(request) { [unowned self] (models, error) in
             if error == nil && models.count > 0 {
                 //存储用户数据

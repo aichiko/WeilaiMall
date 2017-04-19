@@ -25,17 +25,20 @@ let webViewHost = "http://139.196.124.0/#/"
 // 常用字体
 let CCTextFont = UIFont.CCsetfont(14)
 
-//var access_token = UserDefaults.init().value(forKey: "access_token") as! String
+var access_token: String = {
+    return UserDefaults.init().value(forKey: "access_token") as! String
+    
+}()
 
-var access_token = "4297f44b13955235245b2497399d7a93"
+//var access_token = "4297f44b13955235245b2497399d7a93"
 
 let firstLaunch = UserDefaults.init().value(forKey: "firstLaunch") as? Bool ?? false
 
 /// 用户是否登录
 var isLogin: Bool {
     get {
-        return true
-        //return UserDefaults.init().value(forKey: "isLogin") as? Bool ?? false
+        //return true
+        return UserDefaults.init().value(forKey: "isLogin") as? Bool ?? false
     }
 }
 

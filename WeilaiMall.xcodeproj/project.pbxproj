@@ -43,6 +43,7 @@
 		D52627951E74D53F00AC0B2B /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52627941E74D53F00AC0B2B /* TextFieldTableViewCell.swift */; };
 		D52627971E74DBBF00AC0B2B /* TransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52627961E74DBBF00AC0B2B /* TransferViewController.swift */; };
 		D52627991E750F6D00AC0B2B /* ClearingPayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52627981E750F6D00AC0B2B /* ClearingPayViewController.swift */; };
+		D5351AF31EA7498E005A35CD /* CCPayCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5351AF21EA7498E005A35CD /* CCPayCodeViewController.swift */; };
 		D545FF2A1E6D940B0081EAF8 /* ShoppingCar+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D545FF281E6D940B0081EAF8 /* ShoppingCar+UITableView.swift */; };
 		D545FF2B1E6D940B0081EAF8 /* ShoppingCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D545FF291E6D940B0081EAF8 /* ShoppingCartViewController.swift */; };
 		D545FF311E6D94770081EAF8 /* CCShoppingBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D545FF2C1E6D94770081EAF8 /* CCShoppingBar.swift */; };
@@ -140,6 +141,7 @@
 		D52627941E74D53F00AC0B2B /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		D52627961E74DBBF00AC0B2B /* TransferViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferViewController.swift; sourceTree = "<group>"; };
 		D52627981E750F6D00AC0B2B /* ClearingPayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClearingPayViewController.swift; sourceTree = "<group>"; };
+		D5351AF21EA7498E005A35CD /* CCPayCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCPayCodeViewController.swift; sourceTree = "<group>"; };
 		D545FF281E6D940B0081EAF8 /* ShoppingCar+UITableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ShoppingCar+UITableView.swift"; sourceTree = "<group>"; };
 		D545FF291E6D940B0081EAF8 /* ShoppingCartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingCartViewController.swift; sourceTree = "<group>"; };
 		D545FF2C1E6D94770081EAF8 /* CCShoppingBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCShoppingBar.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				D51FBF681E893F7E002BF075 /* ChangeUserInfoViewController.swift */,
+				D5351AF21EA7498E005A35CD /* CCPayCodeViewController.swift */,
 			);
 			path = UpdateInfo;
 			sourceTree = "<group>";
@@ -593,14 +596,14 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = 24hmb;
 				TargetAttributes = {
 					D52083FC1E5F2C1200BE031B = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = H5N5WYHW53;
+						DevelopmentTeam = 2YAA6DB7V2;
 						LastSwiftMigration = 0820;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					D52084131E5F2C1200BE031B = {
 						CreatedOnToolsVersion = 8.2;
@@ -723,6 +726,7 @@
 				D577699A1E7AECC6001EF6D7 /* OrderDetailCell.swift in Sources */,
 				D517FC101E65B1E60050AE99 /* LoginViewController.swift in Sources */,
 				D522F7D61E9230ED00ED6C03 /* AdressTableViewCell.swift in Sources */,
+				D5351AF31EA7498E005A35CD /* CCPayCodeViewController.swift in Sources */,
 				D545FF2B1E6D940B0081EAF8 /* ShoppingCartViewController.swift in Sources */,
 				D517FC161E65C9C40050AE99 /* CCRequest.swift in Sources */,
 				D51D84181E7044FB0059496D /* ChangeLoginViewController.swift in Sources */,
@@ -925,16 +929,20 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 865602186F2BDB5AE69031E0 /* Pods-WeilaiMall.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = H5N5WYHW53;
+				DEVELOPMENT_TEAM = 2YAA6DB7V2;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = WeilaiMall/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.weilai.mall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "38431621-65f3-4bd8-b218-74ecf2437e68";
+				PROVISIONING_PROFILE_SPECIFIER = weilai_Development;
 				SWIFT_OBJC_BRIDGING_HEADER = "WeilaiMall/Other/Source/WeilaiMall-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -945,16 +953,20 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2165B2DCADD397E65CB507D4 /* Pods-WeilaiMall.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = H5N5WYHW53;
+				DEVELOPMENT_TEAM = 2YAA6DB7V2;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = WeilaiMall/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.weilai.mall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "38431621-65f3-4bd8-b218-74ecf2437e68";
+				PROVISIONING_PROFILE_SPECIFIER = weilai_Development;
 				SWIFT_OBJC_BRIDGING_HEADER = "WeilaiMall/Other/Source/WeilaiMall-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
