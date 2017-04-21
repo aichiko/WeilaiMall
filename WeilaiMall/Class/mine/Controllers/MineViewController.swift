@@ -66,6 +66,13 @@ class MineViewController: ViewController {
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(refreshInfo), name: RefreshInfo, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadHeadView), name: ReloadHeadView, object: nil)
+        
+    }
+    
+    func reloadHeadView() {
+        headView.style = isLogin ? .logged: .notlogin
     }
     
     func refreshInfo() {

@@ -83,7 +83,8 @@ class LoginViewController: ViewController {
                 UserDefaults().synchronize()
                 access_token = (models[0]?.access_token)!
                 MBProgressHUD.showErrorAdded(message: "登录成功", to: self?.view)
-                //UserDefaults.init().setValue(true, forKey: "isLogin")
+                isLogin = true
+                UserDefaults.init().setValue(true, forKey: "isLogin")
                 //登录成功后发送通知，让我的页面刷新数据
                 NotificationCenter.default.post(name: RefreshInfo, object: nil)
                 

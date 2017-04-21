@@ -122,6 +122,8 @@ struct URLSessionClient: Client {
                     DispatchQueue.main.async { handler([], RequestError.init(status: value["status"].intValue, info: value["info"].stringValue)) }
                 }else {
                     if value["status"].intValue == 1001 {
+                        isLogin = false
+                        NotificationCenter.default.post(name: ReloadHeadView, object: nil)
                         UserDefaults.init().setValue(false, forKey: "isLogin")
                     }
                     DispatchQueue.main.async { handler([], RequestError.init(status: value["status"].intValue)) }

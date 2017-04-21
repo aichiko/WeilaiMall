@@ -24,6 +24,12 @@ class OperationCellHeadView: UITableViewHeaderFooterView {
         }
     }
     
+    var time: String = "" {
+        didSet{
+            timeLabel.text = time
+        }
+    }
+    
     override init(reuseIdentifier: String?) {
         date = Date()
         super.init(reuseIdentifier: reuseIdentifier)
@@ -121,8 +127,7 @@ class OperationRecordViewController: ViewController {
     }
     
     @objc private func calendarAction(_ item: UIBarButtonItem) {
-        
-        
+        self.performSegue(withIdentifier: "calendar_select", sender: self)
     }
     
     
@@ -150,7 +155,7 @@ extension OperationRecordViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: headIdentifier) as? OperationCellHeadView
         let model = dataArray[section]
-        view?.date = model.change_time
+        view?.time = model.change_time
         return view!
     }
     

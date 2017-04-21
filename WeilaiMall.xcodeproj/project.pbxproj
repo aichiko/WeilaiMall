@@ -17,6 +17,11 @@
 		D512BDAE1E7550F9001B7004 /* OperationRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D512BDAC1E7550F9001B7004 /* OperationRecordCell.xib */; };
 		D516C2301E72EE0200BC5B60 /* OrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D516C22E1E72EE0200BC5B60 /* OrderTableViewCell.swift */; };
 		D516C2311E72EE0200BC5B60 /* OrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D516C22F1E72EE0200BC5B60 /* OrderTableViewCell.xib */; };
+		D517BE591EA8A4DA00CE7A2A /* CACalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D517BE551EA8A4DA00CE7A2A /* CACalendar.swift */; };
+		D517BE5A1EA8A4DA00CE7A2A /* CACalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D517BE561EA8A4DA00CE7A2A /* CACalendarCell.swift */; };
+		D517BE5B1EA8A4DA00CE7A2A /* CACalendarLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D517BE571EA8A4DA00CE7A2A /* CACalendarLayout.swift */; };
+		D517BE5C1EA8A4DA00CE7A2A /* CACalendarWeekdayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D517BE581EA8A4DA00CE7A2A /* CACalendarWeekdayView.swift */; };
+		D517BE5E1EA8A70400CE7A2A /* CAlendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D517BE5D1EA8A70400CE7A2A /* CAlendarViewController.swift */; };
 		D517FC101E65B1E60050AE99 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D517FC0F1E65B1E60050AE99 /* LoginViewController.swift */; };
 		D517FC141E65C9B10050AE99 /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = D517FC131E65C9B10050AE99 /* Source.swift */; };
 		D517FC161E65C9C40050AE99 /* CCRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D517FC151E65C9C40050AE99 /* CCRequest.swift */; };
@@ -108,6 +113,11 @@
 		D512BDAC1E7550F9001B7004 /* OperationRecordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OperationRecordCell.xib; sourceTree = "<group>"; };
 		D516C22E1E72EE0200BC5B60 /* OrderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderTableViewCell.swift; sourceTree = "<group>"; };
 		D516C22F1E72EE0200BC5B60 /* OrderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderTableViewCell.xib; sourceTree = "<group>"; };
+		D517BE551EA8A4DA00CE7A2A /* CACalendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CACalendar.swift; sourceTree = "<group>"; };
+		D517BE561EA8A4DA00CE7A2A /* CACalendarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CACalendarCell.swift; sourceTree = "<group>"; };
+		D517BE571EA8A4DA00CE7A2A /* CACalendarLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CACalendarLayout.swift; sourceTree = "<group>"; };
+		D517BE581EA8A4DA00CE7A2A /* CACalendarWeekdayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CACalendarWeekdayView.swift; sourceTree = "<group>"; };
+		D517BE5D1EA8A70400CE7A2A /* CAlendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAlendarViewController.swift; sourceTree = "<group>"; };
 		D517FC0F1E65B1E60050AE99 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		D517FC131E65C9B10050AE99 /* Source.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
 		D517FC151E65C9C40050AE99 /* CCRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCRequest.swift; sourceTree = "<group>"; };
@@ -223,6 +233,17 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		D517BE541EA8A4DA00CE7A2A /* CACalendar */ = {
+			isa = PBXGroup;
+			children = (
+				D517BE551EA8A4DA00CE7A2A /* CACalendar.swift */,
+				D517BE561EA8A4DA00CE7A2A /* CACalendarCell.swift */,
+				D517BE571EA8A4DA00CE7A2A /* CACalendarLayout.swift */,
+				D517BE581EA8A4DA00CE7A2A /* CACalendarWeekdayView.swift */,
+			);
+			path = CACalendar;
+			sourceTree = "<group>";
+		};
 		D51C8F201E7D27B400C77921 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -249,6 +270,7 @@
 			children = (
 				D51FBF681E893F7E002BF075 /* ChangeUserInfoViewController.swift */,
 				D5351AF21EA7498E005A35CD /* CCPayCodeViewController.swift */,
+				D517BE5D1EA8A70400CE7A2A /* CAlendarViewController.swift */,
 			);
 			path = UpdateInfo;
 			sourceTree = "<group>";
@@ -324,6 +346,7 @@
 		D5E3C7B71E62EA160012FD7C /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				D517BE541EA8A4DA00CE7A2A /* CACalendar */,
 				D51C8F201E7D27B400C77921 /* CoreData */,
 				D5E3C7B81E62EA730012FD7C /* Controllers */,
 				D5E3C7B91E62EA730012FD7C /* Source */,
@@ -727,7 +750,9 @@
 				D517FC101E65B1E60050AE99 /* LoginViewController.swift in Sources */,
 				D522F7D61E9230ED00ED6C03 /* AdressTableViewCell.swift in Sources */,
 				D5351AF31EA7498E005A35CD /* CCPayCodeViewController.swift in Sources */,
+				D517BE5A1EA8A4DA00CE7A2A /* CACalendarCell.swift in Sources */,
 				D545FF2B1E6D940B0081EAF8 /* ShoppingCartViewController.swift in Sources */,
+				D517BE5E1EA8A70400CE7A2A /* CAlendarViewController.swift in Sources */,
 				D517FC161E65C9C40050AE99 /* CCRequest.swift in Sources */,
 				D51D84181E7044FB0059496D /* ChangeLoginViewController.swift in Sources */,
 				D512BDAD1E7550F9001B7004 /* OperationRecordCell.swift in Sources */,
@@ -735,8 +760,10 @@
 				D5CF305E1E801F9C00E471F2 /* HomeSearchViewController.swift in Sources */,
 				D51C8F2B1E7E627400C77921 /* UserModel.swift in Sources */,
 				D545FF351E6D94770081EAF8 /* CCShoppingNumberView.swift in Sources */,
+				D517BE591EA8A4DA00CE7A2A /* CACalendar.swift in Sources */,
 				D545FF341E6D94770081EAF8 /* CCShoppingCarHeadView.swift in Sources */,
 				D545FF2A1E6D940B0081EAF8 /* ShoppingCar+UITableView.swift in Sources */,
+				D517BE5B1EA8A4DA00CE7A2A /* CACalendarLayout.swift in Sources */,
 				D51F3AB51E71A5E20092B85B /* OrderHeadView.swift in Sources */,
 				D51D841A1E7045130059496D /* ChangePayViewController.swift in Sources */,
 				D52084091E5F2C1200BE031B /* WeilaiMall.xcdatamodeld in Sources */,
@@ -756,6 +783,7 @@
 				D524A84F1E8F783B004157BB /* ShoppingCarClearModel.swift in Sources */,
 				D5E3C7FC1E6302460012FD7C /* CCWebViewController.swift in Sources */,
 				D51FBF691E893F7E002BF075 /* ChangeUserInfoViewController.swift in Sources */,
+				D517BE5C1EA8A4DA00CE7A2A /* CACalendarWeekdayView.swift in Sources */,
 				D5D8541F1E9671AD00DCDEC7 /* CCScanCodeView.swift in Sources */,
 				D52627991E750F6D00AC0B2B /* ClearingPayViewController.swift in Sources */,
 				D5E3C8151E630D160012FD7C /* WeilaiViewController.swift in Sources */,
@@ -933,7 +961,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 2YAA6DB7V2;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = WeilaiMall/Info.plist;
@@ -941,8 +969,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.weilai.mall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "38431621-65f3-4bd8-b218-74ecf2437e68";
-				PROVISIONING_PROFILE_SPECIFIER = weilai_Development;
+				PROVISIONING_PROFILE = "35139c8a-1d6c-4c8c-84fd-4c02879ce69b";
+				PROVISIONING_PROFILE_SPECIFIER = weilai_Distribution_beta;
 				SWIFT_OBJC_BRIDGING_HEADER = "WeilaiMall/Other/Source/WeilaiMall-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -957,7 +985,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 2YAA6DB7V2;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = WeilaiMall/Info.plist;
@@ -965,8 +993,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.weilai.mall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "38431621-65f3-4bd8-b218-74ecf2437e68";
-				PROVISIONING_PROFILE_SPECIFIER = weilai_Development;
+				PROVISIONING_PROFILE = "35139c8a-1d6c-4c8c-84fd-4c02879ce69b";
+				PROVISIONING_PROFILE_SPECIFIER = weilai_Distribution_beta;
 				SWIFT_OBJC_BRIDGING_HEADER = "WeilaiMall/Other/Source/WeilaiMall-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

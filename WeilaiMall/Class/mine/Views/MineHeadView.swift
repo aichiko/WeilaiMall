@@ -56,6 +56,7 @@ class IntegralView: UIView {
     }
     
     func integralAttribute() {
+        
         if type == 0 {
             integralLabel.textColor = UIColor(red:0.99, green:0.23, blue:0.12, alpha:1.00)
             integralLabel.text = String(format: "%.0f", integral)
@@ -125,6 +126,10 @@ class MineHeadView: UIView {
     
     var style: LoginStyle = .notlogin {
         didSet {
+            if style == .logged {
+            }else {
+                imageView.image = UIImage.init(named: "login")
+            }
             headShow(with: style)
             reloadViewAttribute()
         }

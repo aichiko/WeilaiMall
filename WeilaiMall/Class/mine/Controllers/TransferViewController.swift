@@ -51,6 +51,8 @@ class TransferViewController: ViewController {
     
     var tableView = UITableView(frame: CGRect.zero, style: .grouped)
     
+    var balance: Float = 0
+    
     let nextButton: CCSureButton = CCSureButton.init("确定转账")
     
     let celltexts = ["对方账号", "真实姓名", "转账积分", "支付密码"]
@@ -67,13 +69,25 @@ class TransferViewController: ViewController {
 
         // Do any additional setup after loading the view.
         configTableView()
-        
+        prepareData()
         let rightItem = UIBarButtonItem.init(image: UIImage.init(named: "scan_btn")?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(scanCode(item:)))
         self.navigationItem.rightBarButtonItem = rightItem
         
         
         NotificationCenter.default.addObserver(self, selector: #selector(textChange(not:)), name: .UITextFieldTextDidChange, object: nil)
     }
+    
+    private func prepareData() {
+        URLSessionClient().alamofireSend(UserBalanceRequest(parameter: ["access_token": access_token]),  handler: { [weak self] (models, error) in
+            if error == nil {
+                self?.balance = models[0]!.user_money
+                self?.tableView.reloadSections(IndexSet.init(integer: 1), with: .automatic)
+            }else {
+                MBProgressHUD.showErrorAdded(message: (error?.getInfo())!, to: self?.view)
+            }
+        })
+    }
+    
     
     @objc private func scanCode(item: UIBarButtonItem) {
         self.performSegue(withIdentifier: "transfer_code", sender: self)
@@ -151,7 +165,7 @@ extension TransferViewController: UITableViewDelegate, UITableViewDataSource {
             view.addSubview(label)
             label.font = CCTextFont
             label.textColor = UIColor(red:0.88, green:0.05, blue:0.00, alpha:1.00)
-            label.text = "您最多可转账8000积分"
+            label.text = String.init(format: "您最多可转账%.0f积分", balance)
             label.snp.makeConstraints({ (make) in
                 make.centerY.height.top.equalToSuperview()
                 make.left.equalTo(15)
@@ -255,8 +269,8 @@ extension TransferViewController: UITextFieldDelegate {
     }
     
     func valid(textField: UITextField) -> Bool {
-        if let num = Float(textField.text!), num > 8000.0 {
-            MBProgressHUD.showErrorAdded(message: "您最多可转账8000积分", to: self.view)
+        if let num = Float(textField.text!), num > balance {
+            MBProgressHUD.showErrorAdded(message: String.init(format: "您最多可转账%.0f积分", balance), to: self.view)
             return false
         }
         return true
@@ -278,7 +292,7 @@ extension TransferViewController {
             hud.hide(animated: true)
             if error == nil {
                 self?.isVerification = true
-                self?.verificatedPhone = (models[0]?.real_name)!
+                self?.verificatedPhone = phoneNum
                 let cell = self?.tableView.cellForRow(at: IndexPath.init(row: 1, section: 0)) as! TextFieldTableViewCell
                 cell.real_name = (models[0]?.real_name)!
                 textField.isEnabled = false

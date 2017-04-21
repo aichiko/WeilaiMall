@@ -229,9 +229,9 @@ extension OrderDetailViewController: UITableViewDelegate, UITableViewDataSource 
             cell?.textLabel?.text = "订单编号：\((model?.order_sn)!)"
         }else if row == 1 {
             cell?.textLabel?.textColor = CCGrayTextColor
-            let formatter = DateFormatter.init()
-            formatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
-            cell?.textLabel?.text = "订单时间：" + formatter.string(from: (model?.add_time)!)
+//            let formatter = DateFormatter.init()
+//            formatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+            cell?.textLabel?.text = "订单时间：" + (model?.add_time ?? "")
         }
     }
 }

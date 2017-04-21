@@ -35,14 +35,14 @@ var access_token: String = {
 let firstLaunch = UserDefaults.init().value(forKey: "firstLaunch") as? Bool ?? false
 
 /// 用户是否登录
-var isLogin: Bool {
-    get {
-        //return true
-        return UserDefaults.init().value(forKey: "isLogin") as? Bool ?? false
-    }
-}
+var isLogin: Bool = {
+    return UserDefaults.init().value(forKey: "isLogin") as? Bool ?? false
+}()
 
 let RefreshInfo = NSNotification.Name(rawValue: "refreshUserInfo")
+
+let ReloadHeadView = NSNotification.Name(rawValue: "reloadHeadView")
+
 
 typealias CCButtonAction = (_ button: UIButton) -> Void
 

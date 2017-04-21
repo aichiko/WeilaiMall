@@ -40,7 +40,7 @@ struct OperationRecordModel {
     /// 累计消费
     var pay_points: Float
     /// 账户变动时间
-    var change_time: Date
+    var change_time: String
     /// 账户变动原因
     var change_desc: String
     
@@ -54,10 +54,10 @@ struct OperationRecordModel {
         pay_points = value["pay_points"].floatValue
         
         //let formatter = DateFormatter.init()
-        var date = Date.init(timeIntervalSince1970: TimeInterval.init(value["change_time"].intValue))
-        let interval = TimeZone.current.secondsFromGMT()
-        date.addTimeInterval(TimeInterval(interval))
-        change_time = date
+//        var date = Date.init(timeIntervalSince1970: TimeInterval.init(value["change_time"].intValue))
+//        let interval = TimeZone.current.secondsFromGMT()
+//        date.addTimeInterval(TimeInterval(interval))
+        change_time = value["change_time"].stringValue
         
         change_desc = value["change_desc"].stringValue
     }

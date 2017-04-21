@@ -386,6 +386,10 @@ extension ClearingPayViewController: UITextFieldDelegate {
             if text.characters.count > 8 {
                 return false
             }
+            if let num = Float(text), num*Float(pay_ratio) > balance {
+                MBProgressHUD.showErrorAdded(message: String.init(format: "您最多可转账%.0f积分", balance), to: self.view)
+                return false
+            }
         }
         return true
     }
@@ -422,7 +426,7 @@ extension ClearingPayViewController {
             hud.hide(animated: true)
             if error == nil {
                 self?.isVerification = true
-                self?.verificatedPhone = (models[0]?.shop_name)!
+                self?.verificatedPhone = phoneNum
                 let cell = self?.tableView.cellForRow(at: IndexPath.init(row: 1, section: 0)) as! TextFieldTableViewCell
                 cell.real_name = (models[0]?.shop_name)!
                 textField.isEnabled = false
