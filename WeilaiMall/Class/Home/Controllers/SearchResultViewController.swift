@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WebKit
 
 class SearchResultViewController: ViewController {
     
@@ -22,9 +23,13 @@ class SearchResultViewController: ViewController {
         navigationBarShow(with: false)
     }
     
+    var path = ""
+    
     var resetDelegate: (() -> Void)?
     
     var searchKey: String!
+    
+    var webView: WKWebView = WKWebView(frame: CGRect.zero, configuration: WKWebViewConfiguration.init())
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +37,10 @@ class SearchResultViewController: ViewController {
         // Do any additional setup after loading the view.
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.init(named: "back_icon")?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(resultBackAction(_:)))
+        
+        webView = configWebView(path: path + (path.contains("?") ?"&":"?") + "keyword="+searchKey)
+        
+        print("RequestURL == ", webView.url?.description ?? "")
     }
     
     

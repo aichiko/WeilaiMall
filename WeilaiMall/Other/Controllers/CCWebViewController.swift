@@ -50,6 +50,20 @@ class CCWebViewController: ViewController, CCWebViewProtocol {
         
         // Do any additional setup after loading the view.
         loadWebview()
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.init(named: "back_icon")?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(webViewBackAction(_:)))
+    }
+    
+    func webViewBackAction(_ item: UIBarButtonItem) {
+        if webView.canGoBack {
+            webView.goBack()
+        }else {
+            self.pop()
+        }
+    }
+    
+    func closeAction() {
+        _ = self.navigationController?.popViewController(animated: true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,6 +76,8 @@ class CCWebViewController: ViewController, CCWebViewProtocol {
         webView.removeObserver(self, forKeyPath: "estimatedProgress")
         webView.removeObserver(self, forKeyPath: "title")
         progress.removeFromSuperview()
+        webView.configuration.userContentController.removeScriptMessageHandler(forName: "push")
+        webView.configuration.userContentController.removeScriptMessageHandler(forName: "pop")
     }
 
     /*
@@ -79,6 +95,17 @@ class CCWebViewController: ViewController, CCWebViewProtocol {
 extension CCWebViewController {
     fileprivate func loadWebview() {
         
+        let configuration = WKWebViewConfiguration()
+        let userContent = WKUserContentController()
+        userContent.add(self, name: "push")
+        userContent.add(self, name: "pop")
+        
+        configuration.userContentController = userContent
+        webView = WKWebView(frame: CGRect.zero, configuration: configuration)
+        
+        webView.uiDelegate = self
+        webView.navigationDelegate = self
+        
         self.navigationController?.navigationBar.subviews.first?.addSubview(progress)
         progress.snp.updateConstraints { (make) in
             make.left.right.bottom.equalTo(0)
@@ -92,9 +119,9 @@ extension CCWebViewController {
         if requestURL != nil {
             webView.load(URLRequest.init(url: URL.init(string: requestURL!)!))
         }else {
-            webView.load(URLRequest.init(url: URL.init(string: webViewHost+path)!))
+            
+            webView.load(URLRequest.init(url: URL.init(string: webViewHost+path.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!))
         }
-        
         
         webView.addObserver(self, forKeyPath: "loading", options: .new, context: nil)
         webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
@@ -109,7 +136,35 @@ extension CCWebViewController {
             self.progress.isHidden = (change?[NSKeyValueChangeKey.newKey] as! Float) == 1
         }else if keyPath == "title" {
             self.navigationItem.title = self.webView.title;
+        }else if keyPath == "loading" {
+            if self.navigationItem.leftBarButtonItems!.count == 1 {
+                if webView.canGoBack {
+                    updateNavigationItems()
+                }
+            }
         }
     }
     
+    func updateNavigationItems() {
+        
+        let backItem = UIBarButtonItem.init(image: UIImage.init(named: "")?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(webViewBackAction(_:)))
+        
+        let closeItem = UIBarButtonItem.init(title: "关闭", style: .plain, target: self, action: #selector(closeAction))
+        closeItem.tintColor = UIColor.black
+        
+        self.navigationItem.leftBarButtonItems = [backItem, closeItem]
+    }
+    
+}
+
+extension CCWebViewController: WKScriptMessageHandler, WKNavigationDelegate, WKUIDelegate {
+    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        if message.name == "push" {
+            print(message.body)
+            push(path: message.body as! String)
+        }else if message.name == "pop" {
+            print(message.body)
+            pop(root: message.body as! Bool)
+        }
+    }
 }

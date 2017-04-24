@@ -64,6 +64,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
+    
+    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        if url.host == "safepay" {
+            AlipaySDK.defaultService().processOrder(withPaymentResult: url, standbyCallback: { (resultDic) in
+//                print("result = \(resultDic)");
+                NotificationCenter.default.post(name: ALIPayResult, object: self, userInfo: ["response": resultDic!])
+            })
+        }
+        
+        return true
+    }
+    
+    // NOTE: 9.0以后使用新API接口
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        if url.host == "safepay" {
+            AlipaySDK.defaultService().processOrder(withPaymentResult: url, standbyCallback: { (resultDic) in
+//                print("result = \(resultDic)");
+                NotificationCenter.default.post(name: ALIPayResult, object: self, userInfo: ["response": resultDic!])
+            })
+        }
+        return true
+    }
+    
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.

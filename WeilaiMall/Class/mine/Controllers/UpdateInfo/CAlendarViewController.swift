@@ -12,6 +12,10 @@ class CAlendarViewController: ViewController {
 
     var calendarView = CACalendar(frame: CGRect.zero)
     
+    typealias DateCallback = (Date) -> Void
+    
+    var dateSelect: DateCallback?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,6 +25,15 @@ class CAlendarViewController: ViewController {
         calendarView.backgroundColor = UIColor.white
         self.view.addSubview(calendarView)
         self.automaticallyAdjustsScrollViewInsets = false
+        
+        calendarView.dateSelect = {
+            [unowned self] date in
+            print(date)
+            if self.dateSelect != nil {
+                self.dateSelect!(date)
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
         
         calendarView.snp.makeConstraints { (make) in
             make.center.equalTo(self.view)

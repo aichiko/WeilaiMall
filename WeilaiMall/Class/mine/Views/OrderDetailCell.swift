@@ -39,7 +39,7 @@ class OrderDetailCell: UITableViewCell {
             }
             let styleHead = style == .address ?"收货信息：":"物流方式："
             if style == .address {
-                styleLabel.text = styleHead + "\((model?.user_name)!) \((model?.mobile)!)"
+                styleLabel.text = styleHead + "\((model?.user_name)!) \((model?.mobile_phone)!)"
             }else {
                 styleLabel.text = styleHead + (model?.shipping_name)!
             }

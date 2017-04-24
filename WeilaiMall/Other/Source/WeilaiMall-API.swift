@@ -63,3 +63,7 @@ let cargolist = "Rest/order/cargolist"
 let suborder = "Rest/order/suborder"
 /// aes解密
 let aesdecrypt = "Rest/user/aesdecrypt"
+/// 生成支付宝充值订单
+let recharge = "Rest/pay/recharge"
+/// 判断充值成功与否
+let checkpay = "Rest/pay/checkpay"

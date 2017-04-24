@@ -84,7 +84,7 @@ struct OrderDetailModel {
     /// 0：待发货  1:待收货 2:已收货
     var state: Int
     
-    var mobile: Int
+    var mobile_phone: Int
     
     /// 订单时间
     var add_time: String
@@ -108,7 +108,7 @@ struct OrderDetailModel {
         shop_name = value["shop_name"].stringValue
         
         order_sn = value["order_sn"].intValue
-        mobile = value["mobile"].intValue
+        mobile_phone = value["mobile_phone"].intValue
 //        var date = Date.init(timeIntervalSince1970: TimeInterval.init(value["add_time"].intValue))
 //        let interval = TimeZone.current.secondsFromGMT()
 //        date.addTimeInterval(TimeInterval(interval))

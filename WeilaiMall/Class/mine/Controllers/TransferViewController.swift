@@ -47,6 +47,10 @@ class CCSureButton: UIButton {
 /// 转账
 class TransferViewController: ViewController {
 
+    typealias refreshData = () -> Void
+    
+    var refresh: refreshData?
+    
     let cellIdentifier = "TransferCell"
     
     var tableView = UITableView(frame: CGRect.zero, style: .grouped)
@@ -144,10 +148,9 @@ class TransferViewController: ViewController {
             let controller = segue.destination as! ScanCodeViewController
             controller.codeMessage = {
                 message in
-                let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
-                let action = UIAlertAction(title: "done", style: .default, handler: nil)
-                alertController.addAction(action)
-                self.present(alertController, animated: true, completion: nil)
+                let strIndex = message.index(message.startIndex, offsetBy: 4)
+                let phoneNum = message.substring(from: strIndex)
+                self.decode(with: phoneNum)
             }
         }
     }
@@ -281,6 +284,24 @@ extension TransferViewController: UITextFieldDelegate {
 // MARK: - request
 extension TransferViewController {
     
+    /// 解密 手机号
+    func decode(with phoneNum: String) {
+        
+        let request = AesdecryptRequest(parameter: ["encrypt_phone": phoneNum])
+        URLSessionClient().alamofireSend(request) { [weak self] (phones, error) in
+            if error == nil {
+                let phoneNumber = phones[0]
+                if let textFeild = self?.view.viewWithTag(100) as? UITextField {
+                    textFeild.text = phoneNumber
+                    self?.verificatePhone(phoneNum: phoneNumber!, textField: textFeild)
+                }
+            }else{
+                MBProgressHUD.showErrorAdded(message: (error?.getInfo())!, to: self?.view)
+            }
+        }
+        
+    }
+    
     func verificatePhone(phoneNum: String, textField: UITextField) {
         
         guard phoneNum.characters.count > 0 else {
@@ -310,13 +331,17 @@ extension TransferViewController {
         let pay_pass = cell2.textField.text!
         
         let request = TransferRequest(parameter: ["access_token": access_token, "mobile_phone": verificatedPhone, "user_money": user_money, "pay_pass": pay_pass])
-        
+        let hud = MBProgressHUD.showMessage(message: "", view: self.view)
         URLSessionClient().alamofireSend(request) { [weak self] (models, error) in
+            hud.hide(animated: true)
             if error == nil {
                 MBProgressHUD.showErrorAdded(message: "转账成功", to: self?.view)
                 
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: { 
                     _ = self?.navigationController?.popViewController(animated: true)
+                    if self?.refresh != nil {
+                        self?.refresh!()
+                    }
                 })
                 
             }else {

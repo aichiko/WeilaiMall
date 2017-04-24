@@ -33,7 +33,7 @@ class OperationRecordCell: UITableViewCell {
         didSet {
             incomingsLabel.textColor =  (incomings >= 0) ?UIColor.colorWithString("009900") :UIColor.colorWithString("cc3300")
             let str = (incomings >= 0) ?"+":""
-            incomingsLabel.text = str+String.init(format: "%.2f", str, incomings)
+            incomingsLabel.text = str+String.init(format: "%.2f", incomings)
         }
     }
     /// 带返积分

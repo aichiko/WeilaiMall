@@ -43,6 +43,7 @@ let RefreshInfo = NSNotification.Name(rawValue: "refreshUserInfo")
 
 let ReloadHeadView = NSNotification.Name(rawValue: "reloadHeadView")
 
+let ALIPayResult = NSNotification.Name(rawValue: "ALIPayResult")
 
 typealias CCButtonAction = (_ button: UIButton) -> Void
 

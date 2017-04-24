@@ -106,6 +106,21 @@ class MineViewController: ViewController {
             }
             let viewController = segue.destination as! MineInfoViewController
             viewController.model = model
+        }else if segue.identifier == "transfer" {
+            let controller = segue.destination as! TransferViewController
+            controller.refresh = {
+                self.refreshInfo()
+            }
+        }else if segue.identifier == "clearing" {
+            let controller = segue.destination as! ClearingPayViewController
+            controller.refresh = {
+                self.refreshInfo()
+            }
+        }else if segue.identifier == "Recharge" {
+            let controller = segue.destination as! RechargeViewController
+            controller.refresh = {
+                self.refreshInfo()
+            }
         }
     }
 

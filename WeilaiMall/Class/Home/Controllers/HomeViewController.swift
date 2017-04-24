@@ -14,6 +14,7 @@ class HomeViewController: ViewController, CCWebViewProtocol {
     func push(path: String) {
         let controller = CCWebViewController()
         controller.path = path
+        controller.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
@@ -25,7 +26,7 @@ class HomeViewController: ViewController, CCWebViewProtocol {
         }
     }
 
-    var path: String = "local"
+    var path: String = ""
     
     var webView = WKWebView(frame: CGRect.zero, configuration: WKWebViewConfiguration.init())
     
@@ -50,7 +51,21 @@ class HomeViewController: ViewController, CCWebViewProtocol {
         
         navigationAttribute()
         
-        webView = configWebView(path: path)
+        let configuration = WKWebViewConfiguration()
+        let userContent = WKUserContentController()
+        userContent.add(self, name: "push")
+        userContent.add(self, name: "pop")
+        
+        configuration.userContentController = userContent
+        
+        webView = WKWebView(frame: CGRect.zero, configuration: configuration)
+        webView.load(URLRequest.init(url: URL.init(string: webViewHost+path)!))
+        self.view.addSubview(webView)
+        webView.snp.updateConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        webView.uiDelegate = self
+        webView.navigationDelegate = self
     }
     
     override func didReceiveMemoryWarning() {
@@ -58,6 +73,10 @@ class HomeViewController: ViewController, CCWebViewProtocol {
         // Dispose of any resources that can be recreated.
     }
     
+    deinit {
+        webView.configuration.userContentController.removeScriptMessageHandler(forName: "push")
+        webView.configuration.userContentController.removeScriptMessageHandler(forName: "pop")
+    }
 
     // MARK: - Navigation
 
@@ -73,6 +92,11 @@ class HomeViewController: ViewController, CCWebViewProtocol {
                 let action = UIAlertAction(title: "done", style: .default, handler: nil)
                 alertController.addAction(action)
                 self.present(alertController, animated: true, completion: nil)
+            }
+        }else if segue.identifier == "home_search" {
+            if let controller = segue.destination as? UINavigationController {
+                let searchVC = controller.visibleViewController as! HomeSearchViewController
+                searchVC.path = path
             }
         }
     }
@@ -124,3 +148,16 @@ extension HomeViewController {
     }
     
 }
+
+extension HomeViewController: WKScriptMessageHandler, WKNavigationDelegate, WKUIDelegate {
+    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        if message.name == "push" {
+            print(message.body)
+            push(path: message.body as! String)
+        }else if message.name == "pop" {
+            print(message.body)
+            pop(root: message.body as! Bool)
+        }
+    }
+}
+

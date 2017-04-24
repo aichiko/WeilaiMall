@@ -118,6 +118,9 @@ class ClearingPayViewController: ViewController {
     
     var codeMessage = ""
     
+    typealias refreshData = () -> Void
+    
+    var refresh: refreshData?
     
     /// 是否验证 转账前需要先填写用户手机号，确认后才能进行后续的转账
     var isVerification = false
@@ -279,6 +282,7 @@ class ClearingPayViewController: ViewController {
         
     }
     
+    /// 解密 手机号
     func decode(with phoneNum: String) {
         
         let request = AesdecryptRequest(parameter: ["encrypt_phone": phoneNum])
@@ -286,6 +290,7 @@ class ClearingPayViewController: ViewController {
             if error == nil {
                 let phoneNumber = phones[0]
                 if let textFeild = self?.view.viewWithTag(100) as? UITextField {
+                    textFeild.text = phoneNumber
                     self?.verificatePhone(phoneNum: phoneNumber!, textField: textFeild)
                 }
             }else{
@@ -444,13 +449,17 @@ extension ClearingPayViewController {
         let pay_pass = cell2.textField.text!
         
         let request = PaymentRequest(parameter: ["access_token": access_token, "mobile_phone": verificatedPhone, "user_money": user_money, "pay_pass": pay_pass])
-        
+        let hud = MBProgressHUD.showMessage(message: "", view: self.view)
         URLSessionClient().alamofireSend(request) { [weak self] (models, error) in
+            hud.hide(animated: true)
             if error == nil {
                 MBProgressHUD.showErrorAdded(message: "支付成功", to: self?.view)
                 
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: {
                     _ = self?.navigationController?.popViewController(animated: true)
+                    if self?.refresh != nil {
+                        self?.refresh!()
+                    }
                 })
                 
             }else {

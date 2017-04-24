@@ -12,6 +12,10 @@ private let cellIdentifier = "cell"
 
 class CACalendar: UIView, UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, CalendarCalculator {
 
+    typealias DateCallback = (Date) -> Void
+    
+    var dateSelect: DateCallback?
+    
     var headLabel = UILabel()
     
     let headView = CACalendarWeekdayView()
@@ -87,6 +91,9 @@ class CACalendar: UIView, UIScrollViewDelegate, UICollectionViewDataSource, UICo
                 cell?.isSelected = false
                 (cell as! CACalendarCell).shapeLayerUpdate()
             }
+        }
+        if dateSelect != nil {
+            dateSelect!(currentDate(with: indexPath))
         }
     }
     
@@ -193,6 +200,34 @@ extension CACalendar {
         return months
     }
     
+    
+    /// 点击的cell 的具体date
+    ///
+    /// - Parameter indexPath: 点击cell的indexPath
+    /// - Returns: 返回具体的时间
+    func currentDate(with indexPath: IndexPath) -> Date {
+        var minimumDate = formatter.date(from: "1970-01-01")
+        //加入当前时区
+        let zone = TimeZone.current
+        let interval = zone.secondsFromGMT(for: Date())
+        minimumDate?.addTimeInterval(TimeInterval(interval))
+        if indexPath.section == -1 {
+            //返回当前的时间 月份
+            let currentDate = Date().addingTimeInterval(TimeInterval(interval))
+            return currentDate
+        }else {
+            
+            let month = gregorian.date(byAdding: .month, value: indexPath.section, to: minimumDate!)
+            let currentWeekday = gregorian.component(.weekday, from: month!)//得出当前日期的星期数
+            var index = ((currentWeekday - gregorian.firstWeekday) + 7) % 7
+            if index == 0 {
+                index = 7
+            }
+            let startDate = gregorian.date(byAdding: .day, value: -index, to: month!)
+            let currentDate = gregorian.date(byAdding: .day, value: indexPath.item, to: startDate!)
+            return currentDate!
+        }
+    }
     
     func currentDate(_ section: Int) -> String? {
         var minimumDate = formatter.date(from: "1970-01-01")

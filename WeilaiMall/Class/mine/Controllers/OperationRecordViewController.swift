@@ -67,6 +67,8 @@ class OperationCellHeadView: UITableViewHeaderFooterView {
 /// 操作记录 页面
 class OperationRecordViewController: ViewController {
 
+    var controller: CAlendarViewController? = nil
+    
     var tableView = UITableView(frame: CGRect.zero, style: .grouped)
     
     let cellIdentifier = "OperationCell"
@@ -103,7 +105,7 @@ class OperationRecordViewController: ViewController {
     }
     
     
-    private func prepareData(_ style: CCRequestStyle) {
+    private func prepareData(_ style: CCRequestStyle, date: Date? = nil) {
         var page: Int = parameters["p"] as? Int ?? 1
         if style == .refreshData {
             page = 1
@@ -114,7 +116,13 @@ class OperationRecordViewController: ViewController {
         }
         parameters.updateValue(access_token, forKey: "access_token")
         
-        //let timeValue = Date().timeIntervalSince1970
+        if let selectDate = date {
+            let timeValue: Int = Int(selectDate.timeIntervalSince1970)
+            print(timeValue)
+            parameters.updateValue(timeValue, forKey: "time")
+        }else {
+            parameters.removeValue(forKey: "time")
+        }
         
         URLSessionClient().alamofireSend(OperationRecordRequest(parameter: parameters), handler: { [weak self] (models, error) in
             if error == nil {
@@ -127,7 +135,11 @@ class OperationRecordViewController: ViewController {
     }
     
     @objc private func calendarAction(_ item: UIBarButtonItem) {
-        self.performSegue(withIdentifier: "calendar_select", sender: self)
+        if controller == nil {
+            self.performSegue(withIdentifier: "calendar_select", sender: self)
+        }else {
+            self.navigationController?.pushViewController(controller!, animated: true)
+        }
     }
     
     
@@ -137,15 +149,23 @@ class OperationRecordViewController: ViewController {
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "calendar_select" {
+            let controller = segue.destination as! CAlendarViewController
+            self.controller = controller
+            controller.dateSelect = {
+                [weak self] date in
+                self?.prepareData(.refreshData, date: date)
+            }
+        }
     }
-    */
+    
 
 }
 
@@ -191,7 +211,6 @@ extension OperationRecordViewController: UITableViewDelegate, UITableViewDataSou
         return cell!
     }
 }
-
 
 extension OperationRecordViewController {
     func cellAttribute(with cell: OperationRecordCell, _ indexPath: IndexPath) {

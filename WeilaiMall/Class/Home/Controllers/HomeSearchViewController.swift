@@ -12,6 +12,7 @@ class HomeSearchViewController: ViewController {
 
     lazy var searchBar = UISearchBar.init()
     
+    var path = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +49,7 @@ class HomeSearchViewController: ViewController {
             searchBar.delegate = nil
             searchBar.delegate = controller
             controller.searchKey = searchBar.text
+            controller.path = path
             controller.resetDelegate = {
                 [weak self] in
                 guard self != nil else {

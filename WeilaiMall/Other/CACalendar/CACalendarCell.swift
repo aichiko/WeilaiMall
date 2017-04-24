@@ -8,6 +8,11 @@
 
 import UIKit
 
+/// 点击的cell 的月份
+///
+/// - previous: 上个月
+/// - current: 当前月份
+/// - next: 下个月
 enum MonthPosition {
     case previous;
     case current;
