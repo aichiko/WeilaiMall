@@ -81,6 +81,13 @@ class ShoppingCartViewController: ViewController, CCTableViewProtocol {
     func prepareData(_ style: CCRequestStyle){
         
         guard isLogin else {
+            if #available(iOS 10.0, *) {
+                self.tableView.refreshControl?.endRefreshing()
+            } else {
+                // Fallback on earlier versions
+                //iOS 8.0 使用MJRefresh
+                self.tableView.mj_header.endRefreshing()
+            }
             return
         }
         let hub = MBProgressHUD.showAdded(to: self.view, animated: true)
@@ -341,9 +348,10 @@ extension ShoppingCartViewController {
             IDArray.append(String(model.rec_id))
         }
         let str = IDArray.joined(separator: ",")
-        
+        let hud = MBProgressHUD.showMessage(message: "", view: self.view)
         let request = CarGoListRequest(parameter: ["access_token":access_token ,"rec_id":str])
         URLSessionClient().alamofireSend(request) { [weak self] (models, error) in
+            hud.hide(animated: true)
             if error == nil {
                 self?.selectedCells.removeAll()
                 self?.deleteGoods(with: selectedModels)

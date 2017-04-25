@@ -28,6 +28,8 @@ let updateuser = "Rest/user/updateuser"
 let updatepass = "Rest/auth/updatepass"
 /// 修改支付密码
 let updatepaypass = "Rest/auth/updatepaypass"
+/// 找回密码
+let findpass = "Rest/auth/findpass"
 
 /// 检查用户获取用户姓名
 let getrealname = "Rest/user/getrealname"

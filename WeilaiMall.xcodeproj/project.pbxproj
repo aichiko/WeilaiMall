@@ -102,6 +102,7 @@
 		D5E3C8151E630D160012FD7C /* WeilaiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E3C8141E630D160012FD7C /* WeilaiViewController.swift */; };
 		D5F0D5211E8A6C4F006CBBA4 /* ShoppingCarListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F0D5201E8A6C4F006CBBA4 /* ShoppingCarListModel.swift */; };
 		D5F4C1371E87A31C001D2BED /* TransferUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F4C1361E87A31C001D2BED /* TransferUserModel.swift */; };
+		D5FDFD961EAEF17C004BDFD5 /* ForgetPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5FDFD951EAEF17C004BDFD5 /* ForgetPasswordController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -308,6 +309,7 @@
 		D5E3C8141E630D160012FD7C /* WeilaiViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeilaiViewController.swift; sourceTree = "<group>"; };
 		D5F0D5201E8A6C4F006CBBA4 /* ShoppingCarListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingCarListModel.swift; sourceTree = "<group>"; };
 		D5F4C1361E87A31C001D2BED /* TransferUserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransferUserModel.swift; sourceTree = "<group>"; };
+		D5FDFD951EAEF17C004BDFD5 /* ForgetPasswordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPasswordController.swift; sourceTree = "<group>"; };
 		F23BE5254FD0591D5EEAF8A7 /* Pods_WeilaiMall.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeilaiMall.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -415,6 +417,7 @@
 				D51FBF681E893F7E002BF075 /* ChangeUserInfoViewController.swift */,
 				D5351AF21EA7498E005A35CD /* CCPayCodeViewController.swift */,
 				D517BE5D1EA8A70400CE7A2A /* CAlendarViewController.swift */,
+				D5FDFD951EAEF17C004BDFD5 /* ForgetPasswordController.swift */,
 			);
 			path = UpdateInfo;
 			sourceTree = "<group>";
@@ -1046,6 +1049,7 @@
 				D524A84F1E8F783B004157BB /* ShoppingCarClearModel.swift in Sources */,
 				D5A9FE121EAC92610056DEAB /* RSADataVerifier.m in Sources */,
 				D5E3C7FC1E6302460012FD7C /* CCWebViewController.swift in Sources */,
+				D5FDFD961EAEF17C004BDFD5 /* ForgetPasswordController.swift in Sources */,
 				D51FBF691E893F7E002BF075 /* ChangeUserInfoViewController.swift in Sources */,
 				D517BE5C1EA8A4DA00CE7A2A /* CACalendarWeekdayView.swift in Sources */,
 				D5D8541F1E9671AD00DCDEC7 /* CCScanCodeView.swift in Sources */,

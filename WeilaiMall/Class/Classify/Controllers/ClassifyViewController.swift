@@ -83,7 +83,7 @@ extension ClassifyViewController: WKScriptMessageHandler, WKNavigationDelegate, 
             push(path: message.body as! String)
         }else if message.name == "pop" {
             print(message.body)
-            pop(root: message.body as! Bool)
+            pop(root: message.body as? Bool ?? false)
         }
     }
 }

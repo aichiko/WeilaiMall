@@ -28,6 +28,19 @@ struct UpdatePassMessage: CustomCCError {
     }
 }
 
+struct FindPassRequest: CCRequest {
+    let path: String = findpass
+    
+    var parameter: [String: Any]
+    typealias Response = UpdatePassMessage
+    
+    func JSONParse(value: JSON) -> [UpdatePassMessage?]? {
+        return [UpdatePassMessage.init(value: value)]
+    }
+}
+
+
+
 struct UpdatePassRequest: CCRequest {
     let path: String = updatepass
     

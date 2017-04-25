@@ -194,10 +194,19 @@ extension OrderClearViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section == 0 {
             //没有地址则进入新建地址， 有地址则选择地址
             let cell = tableView.cellForRow(at: indexPath) as! AdressTableViewCell
             let webViewVC = CCWebViewController()
+            
+            webViewVC.address = {
+                [unowned self] model in
+                if let cell = self.tableView.cellForRow(at: indexPath) as? AdressTableViewCell {
+                    cell.adress = model
+                    self.clearModel.address = model
+                }
+            }
             
             if cell.style == .noAdress {
                 //http://139.196.124.0/#/address/index?token=

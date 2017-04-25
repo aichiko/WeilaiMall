@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import SwiftyJSON
 
 protocol CCWebViewProtocol: NSObjectProtocol {
     var path: String { get set }
@@ -41,6 +42,8 @@ class CCWebViewController: ViewController, CCWebViewProtocol {
     var progress = UIProgressView(progressViewStyle: .bar)
     
     var path: String = ""
+    
+    var address: ((ShoppingCartAdress) -> Void)?
     
     /// 一个是通过 code扫描出来的网址进入，一个是根据path来进入
     var requestURL: String?
@@ -78,6 +81,7 @@ class CCWebViewController: ViewController, CCWebViewProtocol {
         progress.removeFromSuperview()
         webView.configuration.userContentController.removeScriptMessageHandler(forName: "push")
         webView.configuration.userContentController.removeScriptMessageHandler(forName: "pop")
+        webView.configuration.userContentController.removeScriptMessageHandler(forName: "address")
     }
 
     /*
@@ -99,6 +103,10 @@ extension CCWebViewController {
         let userContent = WKUserContentController()
         userContent.add(self, name: "push")
         userContent.add(self, name: "pop")
+        
+        if path.contains("address") {
+            userContent.add(self, name: "address")
+        }
         
         configuration.userContentController = userContent
         webView = WKWebView(frame: CGRect.zero, configuration: configuration)
@@ -164,7 +172,21 @@ extension CCWebViewController: WKScriptMessageHandler, WKNavigationDelegate, WKU
             push(path: message.body as! String)
         }else if message.name == "pop" {
             print(message.body)
-            pop(root: message.body as! Bool)
+            pop(root: message.body as? Bool ?? false)
+        }else if message.name == "address" {
+            print(message.body)
+            if let dic = message.body as? [String: Any] {
+                print(dic)
+                if address != nil {
+                    let value = JSON(dic)
+                    let model = ShoppingCartAdress(value: value)
+                    address!(model!)
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
+            
+            
+//            pop(root: message.body as! Bool)
         }
     }
 }
