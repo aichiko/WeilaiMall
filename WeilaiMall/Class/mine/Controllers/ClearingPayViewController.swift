@@ -267,6 +267,7 @@ class ClearingPayViewController: ViewController {
         // Pass the selected object to the new view controller.
         if segue.identifier == "clearing_code" {
             let controller = segue.destination as! ScanCodeViewController
+            controller.isHome = false
             controller.codeMessage = {
                 message in
                 

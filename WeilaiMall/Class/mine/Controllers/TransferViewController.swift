@@ -146,6 +146,7 @@ class TransferViewController: ViewController {
         // Pass the selected object to the new view controller.
         if segue.identifier == "transfer_code" {
             let controller = segue.destination as! ScanCodeViewController
+            controller.isHome = false
             controller.codeMessage = {
                 message in
                 let strIndex = message.index(message.startIndex, offsetBy: 4)

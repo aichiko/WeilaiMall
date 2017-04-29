@@ -11,21 +11,34 @@ import WebKit
 
 class SearchResultViewController: ViewController {
     
+    func push(path: String) {
+        let controller = CCWebViewController()
+        controller.path = path
+        controller.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func pop(root: Bool = false) {
+        if root {
+            self.navigationController?.popToRootViewController(animated: true)
+        }else {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //print("viewWillAppear")
-        navigationBarShow(with: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        //print("viewWillDisappear")
-        navigationBarShow(with: false)
     }
+    
+    lazy var searchBar = UISearchBar.init()
     
     var path = ""
     
-    var resetDelegate: (() -> Void)?
+    var resetSearchKey: ((String) -> Void)?
     
     var searchKey: String!
     
@@ -36,15 +49,50 @@ class SearchResultViewController: ViewController {
 
         // Do any additional setup after loading the view.
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.init(named: "back_icon")?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(resultBackAction(_:)))
+        setWebView()
         
-        webView = configWebView(path: path + (path.contains("?") ?"&":"?") + "keyword="+searchKey)
+        navigationAttribute()
+    }
+    
+    func setWebView() {
+        let configuration = WKWebViewConfiguration()
+        let userContent = WKUserContentController()
+        userContent.add(self, name: "push")
+        userContent.add(self, name: "pop")
+        
+        configuration.userContentController = userContent
+        
+        webView = WKWebView(frame: CGRect.zero, configuration: configuration)
+        webView.load(URLRequest.init(url: URL.init(string: webViewHost+path + (path.contains("?") ?"&":"?") + "keyword="+searchKey)!))
+        self.view.addSubview(webView)
+        self.automaticallyAdjustsScrollViewInsets = false
+        webView.snp.updateConstraints { (make) in
+            make.left.right.bottom.equalToSuperview()
+            make.top.equalTo(64)
+        }
+        webView.uiDelegate = self
+        webView.navigationDelegate = self
         
         print("RequestURL == ", webView.url?.description ?? "")
     }
     
+    func navigationAttribute() {
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage.init(named: "back_icon")?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(resultBackAction(_:)))
+        
+        searchBar.showsCancelButton = true
+        searchBar.delegate = self
+        
+        self.navigationItem.titleView = searchBar
+        searchBar.becomeFirstResponder()
+        searchBar.text = searchKey
+    }
+    
     
     @objc private func resultBackAction(_ item: UIBarButtonItem) {
+        if resetSearchKey != nil {
+            resetSearchKey!(searchBar.text ?? "")
+        }
         _ = self.navigationController?.popViewController(animated: false)
     }
 
@@ -54,9 +102,6 @@ class SearchResultViewController: ViewController {
     }
     
     deinit {
-        if resetDelegate != nil {
-            resetDelegate!()
-        }
         print("\(self) deinit ")
     }
     
@@ -76,32 +121,33 @@ extension SearchResultViewController: UISearchBarDelegate {
     
     public func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        if resetDelegate != nil {
-            resetDelegate!()
+        if resetSearchKey != nil {
+            resetSearchKey!(searchBar.text ?? "")
         }
         self.dismiss(animated: false, completion: nil)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        //self.performSegue(withIdentifier: "search_result", sender: self)
-        print(searchBar)
+        
+        if let key = searchBar.text {
+            searchKey = key
+            webView.load(URLRequest.init(url: URL.init(string: webViewHost+path + (path.contains("?") ?"&":"?") + "keyword="+searchKey)!))
+            webView.reload()
+        }
+        
+        
     }
 }
 
-
-extension SearchResultViewController {
+extension SearchResultViewController: WKScriptMessageHandler, WKNavigationDelegate, WKUIDelegate {
     
-    /// 根据 appear 来改变 navigationBar 的显示风格
-    ///
-    /// - Parameter appear: 是否为显示  true为显示，false为消失
-    func navigationBarShow(with appear: Bool) {
-        let leftpadding = appear ?60:10
-        for view in (navigationController?.navigationBar.subviews)! {
-            if view is UISearchBar, let searchbar = view as? UISearchBar {
-                searchbar.snp.updateConstraints({ (make) in
-                    make.left.equalTo(leftpadding)
-                })
-            }
+    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        if message.name == "push" {
+            print(message.body)
+            push(path: message.body as! String)
+        }else if message.name == "pop" {
+            print(message.body)
+            pop(root: message.body as? Bool ?? false)
         }
     }
 }

@@ -133,7 +133,7 @@ class WeilaiViewController: ViewController {
         if segue.identifier == "weilai_search" {
             if let controller = segue.destination as? UINavigationController {
                 let searchVC = controller.visibleViewController as! HomeSearchViewController
-                searchVC.path = path
+                searchVC.path = "classifyList"
             }
         }
     }

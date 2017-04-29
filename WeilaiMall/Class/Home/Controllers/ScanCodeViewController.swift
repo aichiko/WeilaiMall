@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import MBProgressHUD
 
 /// 扫描二维码 页面
 class ScanCodeViewController: ViewController {
@@ -17,6 +18,9 @@ class ScanCodeViewController: ViewController {
     typealias CodeCallback = (_ code: String) -> Void
     
     var codeMessage: CodeCallback?
+    
+    /// 是否从首页 或者 进入的扫码
+    var isHome = true
     
     //    回话层对象
     lazy var session : AVCaptureSession = AVCaptureSession()
@@ -206,10 +210,25 @@ extension ScanCodeViewController : AVCaptureMetadataOutputObjectsDelegate
         scanCodeView.stopAnimate()
         
         if object.stringValue.hasPrefix("pay:") {
-            // 付款和结账
-            if codeMessage != nil {
-                self.navigationController?.popViewController(animated: true)
-                codeMessage!(object.stringValue)
+            
+            if isHome {
+                
+                guard isLogin else {
+                    MBProgressHUD.showErrorAdded(message: "登录后才能使用", to: self.view)
+                    return
+                }
+                
+                let clearVC = ClearingPayViewController()
+                let strIndex = object.stringValue.index(object.stringValue.startIndex, offsetBy: 4)
+                let phoneNum = object.stringValue.substring(from: strIndex)
+                clearVC.decode(with: phoneNum)
+                self.navigationController?.pushViewController(clearVC, animated: true)
+            }else {
+                // 付款和结账
+                if codeMessage != nil {
+                    self.navigationController?.popViewController(animated: true)
+                    codeMessage!(object.stringValue)
+                }
             }
         }else if object.stringValue.hasPrefix("http") {
             // 打开URL

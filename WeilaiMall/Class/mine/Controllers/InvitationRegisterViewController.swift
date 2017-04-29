@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class InvitationRegisterViewController: ViewController {
 
@@ -42,7 +43,34 @@ class InvitationRegisterViewController: ViewController {
 
     @IBAction func shareCodeAction(_ sender: Any) {
         
+        UIImageWriteToSavedPhotosAlbum(cutImageWithView(view: self.view), self, #selector(savedPhotosAlbum(image:didFinishSavingWithError:contextInfo:)), nil)
+        
     }
+    
+    //保存图片
+    func savedPhotosAlbum(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo: AnyObject) {
+        if error != nil {
+            MBProgressHUD.showErrorAdded(message: "保存失败", to: self.view)
+        } else {
+            MBProgressHUD.showErrorAdded(message: "保存成功,你可以相册查看", to: self.view)
+        }
+    }
+    
+    /// 截屏
+    ///
+    /// - Parameters:
+    ///   - view: 要截屏的view
+    /// - Returns: 一个UIImage
+    func cutImageWithView(view:UIView) -> UIImage
+    {
+        // 参数①：截屏区域  参数②：是否透明  参数③：清晰度
+        UIGraphicsBeginImageContextWithOptions(view.frame.size, true, UIScreen.main.scale)
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext();
+        return image;
+    }
+    
     /*
     // MARK: - Navigation
 

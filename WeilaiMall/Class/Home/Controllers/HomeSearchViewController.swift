@@ -46,16 +46,12 @@ class HomeSearchViewController: ViewController {
         
         if segue.identifier == "search_result" {
             let controller = segue.destination as! SearchResultViewController
-            searchBar.delegate = nil
-            searchBar.delegate = controller
             controller.searchKey = searchBar.text
             controller.path = path
-            controller.resetDelegate = {
-                [weak self] in
-                guard self != nil else {
-                    return
-                }
-                self?.searchBar.delegate = self
+            controller.resetSearchKey = {
+                [unowned self] text in
+                self.searchBar.becomeFirstResponder()
+                self.searchBar.text = text
             }
         }
     }
@@ -66,18 +62,14 @@ extension HomeSearchViewController {
         
         searchBar.showsCancelButton = true
         searchBar.delegate = self
-        navigationController?.navigationBar.addSubview(searchBar)
-        searchBar.snp.updateConstraints { (make) in
-            make.right.top.bottom.equalToSuperview()
-            make.left.equalTo(20)
-        }
+        
+        self.navigationItem.titleView = searchBar
         searchBar.becomeFirstResponder()
     }
 }
 
 extension HomeSearchViewController: UISearchBarDelegate {
     public func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
         self.dismiss(animated: false, completion: nil)
     }
     

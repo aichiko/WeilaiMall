@@ -96,7 +96,7 @@ class HomeViewController: ViewController, CCWebViewProtocol {
         }else if segue.identifier == "home_search" {
             if let controller = segue.destination as? UINavigationController {
                 let searchVC = controller.visibleViewController as! HomeSearchViewController
-                searchVC.path = path
+                searchVC.path = "classifyList"
             }
         }
     }
