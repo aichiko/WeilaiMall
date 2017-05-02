@@ -8,12 +8,17 @@
 
 import UIKit
 import WebKit
+import MJRefresh
 
 class HomeViewController: ViewController, CCWebViewProtocol {
 
     func push(path: String) {
         let controller = CCWebViewController()
         controller.path = path
+        if path.hasPrefix("http") {
+            // 传入完整的网址的情况下，直接打开相应的地址
+            controller.requestURL = path
+        }
         controller.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(controller, animated: true)
     }
@@ -33,6 +38,8 @@ class HomeViewController: ViewController, CCWebViewProtocol {
     var leftItem = UIBarButtonItem()
     
     var rightItem = UIBarButtonItem()
+    
+    lazy var refreshControl = UIRefreshControl()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -61,12 +68,27 @@ class HomeViewController: ViewController, CCWebViewProtocol {
         webView = WKWebView(frame: CGRect.zero, configuration: configuration)
         webView.load(URLRequest.init(url: URL.init(string: webViewHost+path)!))
         self.view.addSubview(webView)
+        self.automaticallyAdjustsScrollViewInsets = false
         webView.snp.updateConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.left.right.bottom.equalToSuperview()
+            make.top.equalTo(64)
         }
         webView.uiDelegate = self
         webView.navigationDelegate = self
+        
+        if #available(iOS 10.0, *) {
+            refreshControl.addTarget(self, action: #selector(refreshWebView), for: .valueChanged)
+            webView.scrollView.refreshControl = refreshControl
+        } else {
+            // Fallback on earlier versions
+            webView.scrollView.mj_header = MJRefreshNormalHeader.init(refreshingTarget: self, refreshingAction: #selector(refreshWebView))
+        }
     }
+    
+    func refreshWebView() {
+        webView.reloadFromOrigin()
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -140,7 +162,7 @@ extension HomeViewController {
     }
     
     @objc private func catelogShow(item: UIBarButtonItem) {
-        
+        push(path: "classify")
     }
     
     @objc private func searchShow(tap: UITapGestureRecognizer) {
@@ -157,6 +179,25 @@ extension HomeViewController: WKScriptMessageHandler, WKNavigationDelegate, WKUI
         }else if message.name == "pop" {
             print(message.body)
             pop(root: message.body as? Bool ?? false)
+        }
+    }
+    
+    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        if #available(iOS 10.0, *) {
+            refreshControl.endRefreshing()
+        } else {
+            // Fallback on earlier versions
+            webView.scrollView.mj_header.endRefreshing()
+        }
+    }
+    
+    
+    public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        if #available(iOS 10.0, *) {
+            refreshControl.endRefreshing()
+        } else {
+            // Fallback on earlier versions
+            webView.scrollView.mj_header.endRefreshing()
         }
     }
 }

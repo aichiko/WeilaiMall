@@ -14,6 +14,10 @@ class WeilaiViewController: ViewController {
     func push(path: String) {
         let controller = CCWebViewController()
         controller.path = path
+        if path.hasPrefix("http") {
+            // 传入完整的网址的情况下，直接打开相应的地址
+            controller.requestURL = path
+        }
         controller.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(controller, animated: true)
     }
@@ -53,8 +57,10 @@ class WeilaiViewController: ViewController {
         webView = WKWebView(frame: CGRect.zero, configuration: configuration)
         webView.load(URLRequest.init(url: URL.init(string: webViewHost+path)!))
         self.view.addSubview(webView)
+        self.automaticallyAdjustsScrollViewInsets = false
         webView.snp.updateConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.left.right.bottom.equalToSuperview()
+            make.top.equalTo(64)
         }
         webView.uiDelegate = self
         webView.navigationDelegate = self

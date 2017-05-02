@@ -8,6 +8,7 @@
 
 import UIKit
 import MBProgressHUD
+import MJRefresh
 
 enum PushIdentifier: String {
     case transfer = "transfer"
@@ -50,20 +51,14 @@ class MineViewController: ViewController {
     
     var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
+    lazy var refreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         self.navigationController?.isNavigationBarHidden = true
         configSubviews()
-        if isLogin {
-            if let userModel = CoreDataManager().getUserModel() {
-                self.headView.style = .logged
-                self.headView.userModel = userModel
-                self.userModel = userModel
-            }
-            getUserInfo()
-        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(refreshInfo), name: RefreshInfo, object: nil)
         
@@ -95,6 +90,7 @@ class MineViewController: ViewController {
         if segue.identifier == "settingup" {
             let controller = segue.destination as! SettingupViewController
             controller.cancelLogin = {
+                isLogin = false
                 self.headView.style = .notlogin
             }
         }else if segue.identifier == "mineInfo" {
@@ -133,6 +129,13 @@ extension MineViewController {
         let request = UserInfoRequest(parameter: ["access_token": access_token])
         
         URLSessionClient().alamofireSend(request) { [unowned self] (models, error) in
+            if #available(iOS 10.0, *) {
+                self.refreshControl.endRefreshing()
+            } else {
+                // Fallback on earlier versions
+                self.collectionView.mj_header.endRefreshing()
+            }
+            
             if error == nil && models.count > 0 {
                 //存储用户数据
                 CoreDataManager().updateData(user: models[0]!)
@@ -153,47 +156,98 @@ extension MineViewController {
     }
     
     fileprivate func configSubviews() {
-        self.view.addSubview(headView)
+        
+        self.automaticallyAdjustsScrollViewInsets = false
+        //self.view.addSubview(headView)
         self.view.addSubview(collectionView)
-        headView.style = .notlogin
-        headView.snp.updateConstraints { (make) in
-            make.top.left.right.equalToSuperview()
-            make.height.equalTo(230)
-        }
-        
-        headView.click = {
-            [unowned self] in
-            if self.headView.style == .notlogin {
-                let loginVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "login")
-                self.navigationController?.pushViewController(loginVC, animated: true)
-            }else {
-                self.performSegue(withIdentifier: "mineInfo", sender:self)
-            }
-        }
-        
+//        self.view.backgroundColor = UIColor.orange
         collectionView.snp.updateConstraints { (make) in
-            make.top.equalTo(self.headView.snp.bottom)
-            make.bottom.equalToSuperview()
-            make.left.right.equalToSuperview()
+            make.edges.equalToSuperview()
         }
         
         collectionView.backgroundColor = CCbackgroundColor
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(UINib.init(nibName: "MineCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: cellIdentifier)
+        
+        collectionView.register(MineHeadView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "headView")
+        
+        if #available(iOS 10.0, *) {
+            refreshControl.addTarget(self, action: #selector(refreshHeadView), for: .valueChanged)
+            collectionView.refreshControl = refreshControl
+        } else {
+            // Fallback on earlier versions
+            collectionView.mj_header = MJRefreshNormalHeader.init(refreshingTarget: self, refreshingAction: #selector(refreshHeadView))
+        }
+        
+    }
+    
+    func refreshHeadView() {
+        guard isLogin else {
+            if #available(iOS 10.0, *) {
+                self.refreshControl.endRefreshing()
+            } else {
+                // Fallback on earlier versions
+                self.collectionView.mj_header.endRefreshing()
+            }
+            return
+        }
+        refreshInfo()
     }
 }
 
-extension MineViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension MineViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        //头部拖拽拉伸效果
+        let y = scrollView.contentOffset.y
+        if y<0 {
+            var frame = headView.frame
+            frame.origin.y = y
+            frame.size.height = 230 - y
+            headView.frame = frame
+            
+            headView.headView.snp.updateConstraints({ (make) in
+                make.height.equalTo(145-y)
+            })
+        }
+    }
     
     @available(iOS 6.0, *)
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionElementKindSectionHeader {
+            headView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "headView", for: indexPath) as! MineHeadView
+            headView.style = isLogin ? .logged: .notlogin
+            if isLogin {
+                if let userModel = CoreDataManager().getUserModel() {
+                    self.headView.userModel = userModel
+                    self.userModel = userModel
+                }
+                getUserInfo()
+            }
+            headView.click = {
+                [unowned self] in
+                if self.headView.style == .notlogin {
+                    let loginVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "login")
+                    self.navigationController?.pushViewController(loginVC, animated: true)
+                }else {
+                    self.performSegue(withIdentifier: "mineInfo", sender:self)
+                }
+            }
+            return headView
+        }else {
+            return UICollectionReusableView()
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         return CGSize(width: width-1, height: 100)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        return UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -205,7 +259,7 @@ extension MineViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 10)
+        return CGSize(width: collectionView.bounds.width, height: 230)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -233,5 +287,4 @@ extension MineViewController: UICollectionViewDelegate, UICollectionViewDataSour
             self.navigationController?.pushViewController(loginVC, animated: true)
         }
     }
-    
 }

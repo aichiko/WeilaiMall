@@ -9,6 +9,7 @@
 import UIKit
 import WebKit
 import SwiftyJSON
+import MJRefresh
 
 protocol CCWebViewProtocol: NSObjectProtocol {
     var path: String { get set }
@@ -26,6 +27,10 @@ class CCWebViewController: ViewController, CCWebViewProtocol {
     func push(path: String) {
         let controller = CCWebViewController()
         controller.path = path
+        if path.hasPrefix("http") {
+            // 传入完整的网址的情况下，直接打开相应的地址
+            controller.requestURL = path
+        }
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
@@ -36,6 +41,10 @@ class CCWebViewController: ViewController, CCWebViewProtocol {
             self.navigationController?.popViewController(animated: true)
         }
     }
+    
+    func showAddCart(goods_id: Int) {
+        
+    }
 
     var webView = WKWebView(frame: CGRect.zero, configuration: WKWebViewConfiguration.init())
     
@@ -44,6 +53,8 @@ class CCWebViewController: ViewController, CCWebViewProtocol {
     var path: String = ""
     
     var address: ((ShoppingCartAdress) -> Void)?
+    
+    lazy var refreshControl = UIRefreshControl()
     
     /// 一个是通过 code扫描出来的网址进入，一个是根据path来进入
     var requestURL: String?
@@ -104,6 +115,8 @@ extension CCWebViewController {
         userContent.add(self, name: "push")
         userContent.add(self, name: "pop")
         
+        userContent.add(self, name: "addcart")
+        
         if path.contains("address") {
             userContent.add(self, name: "address")
         }
@@ -121,19 +134,33 @@ extension CCWebViewController {
         }
         view.addSubview(webView)
         
+        self.automaticallyAdjustsScrollViewInsets = false
         webView.snp.updateConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.left.right.bottom.equalToSuperview()
+            make.top.equalTo(64)
         }
         if requestURL != nil {
             webView.load(URLRequest.init(url: URL.init(string: requestURL!)!))
         }else {
-            
             webView.load(URLRequest.init(url: URL.init(string: webViewHost+path.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!))
         }
         
         webView.addObserver(self, forKeyPath: "loading", options: .new, context: nil)
         webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         webView.addObserver(self, forKeyPath: "title", options: .new, context: nil)
+        
+        if #available(iOS 10.0, *) {
+            refreshControl.addTarget(self, action: #selector(refreshWebView), for: .valueChanged)
+            webView.scrollView.refreshControl = refreshControl
+        } else {
+            // Fallback on earlier versions
+            webView.scrollView.mj_header = MJRefreshNormalHeader.init(refreshingTarget: self, refreshingAction: #selector(refreshWebView))
+        }
+    }
+    
+    func refreshWebView() {
+        self.progress.setProgress(0, animated: false)
+        webView.reloadFromOrigin()
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -155,7 +182,7 @@ extension CCWebViewController {
     
     func updateNavigationItems() {
         
-        let backItem = UIBarButtonItem.init(image: UIImage.init(named: "")?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(webViewBackAction(_:)))
+        let backItem = UIBarButtonItem.init(image: UIImage.init(named: "back_icon")?.withRenderingMode(.alwaysOriginal), style: .done, target: self, action: #selector(webViewBackAction(_:)))
         
         let closeItem = UIBarButtonItem.init(title: "关闭", style: .plain, target: self, action: #selector(closeAction))
         closeItem.tintColor = UIColor.black
@@ -184,9 +211,28 @@ extension CCWebViewController: WKScriptMessageHandler, WKNavigationDelegate, WKU
                     self.navigationController?.popViewController(animated: true)
                 }
             }
+        }else if message.name == "addcart" {
             
-            
-//            pop(root: message.body as! Bool)
+        }
+    }
+    
+    
+    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        if #available(iOS 10.0, *) {
+            refreshControl.endRefreshing()
+        } else {
+            // Fallback on earlier versions
+            webView.scrollView.mj_header.endRefreshing()
+        }
+    }
+    
+    
+    public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        if #available(iOS 10.0, *) {
+            refreshControl.endRefreshing()
+        } else {
+            // Fallback on earlier versions
+            webView.scrollView.mj_header.endRefreshing()
         }
     }
 }

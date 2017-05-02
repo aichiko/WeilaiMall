@@ -165,7 +165,7 @@ extension RechargeViewController: UITableViewDelegate, UITableViewDataSource {
                 textField.keyboardType = .decimalPad
                 textField.tag = 222
                 textField.font = UIFont.CCsetfont(16)
-                textField.placeholder = "3000"
+                textField.placeholder = "300"
                 textField.snp.updateConstraints({ (make) in
                     make.left.equalTo((cell?.textLabel?.snp.right)!).offset(10)
                     make.right.equalTo(-10)
@@ -244,8 +244,6 @@ extension RechargeViewController {
     
     func buyAction() {
         
-        
-        
         var amount: Float = 0
         if let textField = view.viewWithTag(222) as? UITextField {
             if textField.text == "" {
@@ -258,6 +256,7 @@ extension RechargeViewController {
             MBProgressHUD.showErrorAdded(message: "充值金额不能少于0.01", to: self.view)
             return
         }
+        
         let hud = MBProgressHUD.showMessage(message: "", view: self.view)
         let request = CCALiPaymentRequest(parameter: ["amount": String.init(format: "%.2f", amount), "access_token": access_token])
         URLSessionClient().alamofireSend(request) { [weak self] (models, error) in

@@ -1234,8 +1234,8 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: shi bizhu (DGB5UE9KV4)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: shi bizhu (DGB5UE9KV4)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Future Life Plus (Beijing) Network Technology Co., Ltd. (2YAA6DB7V2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Future Life Plus (Beijing) Network Technology Co., Ltd. (2YAA6DB7V2)";
 				DEVELOPMENT_TEAM = 2YAA6DB7V2;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1257,8 +1257,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.weilai.mall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f406f9dd-086f-442a-aa6b-68272e69d632";
-				PROVISIONING_PROFILE_SPECIFIER = weilai_Development;
+				PROVISIONING_PROFILE = "9b3e590e-8a70-48f1-9a0d-fa08fb4c8532";
+				PROVISIONING_PROFILE_SPECIFIER = weilai_Distribution_beta;
 				SWIFT_OBJC_BRIDGING_HEADER = "WeilaiMall/Other/Source/WeilaiMall-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1272,8 +1272,8 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: shi bizhu (DGB5UE9KV4)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: shi bizhu (DGB5UE9KV4)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Future Life Plus (Beijing) Network Technology Co., Ltd. (2YAA6DB7V2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Future Life Plus (Beijing) Network Technology Co., Ltd. (2YAA6DB7V2)";
 				DEVELOPMENT_TEAM = 2YAA6DB7V2;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1295,8 +1295,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.weilai.mall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f406f9dd-086f-442a-aa6b-68272e69d632";
-				PROVISIONING_PROFILE_SPECIFIER = weilai_Development;
+				PROVISIONING_PROFILE = "9b3e590e-8a70-48f1-9a0d-fa08fb4c8532";
+				PROVISIONING_PROFILE_SPECIFIER = weilai_Distribution_beta;
 				SWIFT_OBJC_BRIDGING_HEADER = "WeilaiMall/Other/Source/WeilaiMall-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

@@ -114,7 +114,7 @@ enum LoginStyle {
     case logged
 }
 
-class MineHeadView: UIView {
+class MineHeadView: UICollectionReusableView {
 
     /*
     // Only override draw() if you perform custom drawing.
@@ -170,6 +170,9 @@ class MineHeadView: UIView {
     
     var click: (() -> Void)?
 
+    
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.white
@@ -189,7 +192,8 @@ extension MineHeadView {
         headView.backgroundColor = UIColor.orange
         addSubview(headView)
         headView.snp.updateConstraints { (make) in
-            make.left.right.top.equalTo(0)
+            make.left.right.top.equalToSuperview()
+//            make.left.right.equalTo(0)
             make.height.equalTo(145)
         }
         
@@ -255,13 +259,13 @@ extension MineHeadView {
         moneyLabel.text = String.init(format: "余额：%.2f", 222.2)
         
         nameLabel.snp.updateConstraints { (make) in
-            make.left.equalTo(self.imageView.snp.right).offset(20)
-            make.top.equalTo(50)
+            make.left.equalTo(imageView.snp.right).offset(20)
+            make.top.equalTo(imageView.snp.top).offset(10)
         }
         
         moneyLabel.snp.updateConstraints { (make) in
             make.left.equalTo(self.nameLabel)
-            make.top.equalTo(self.nameLabel.snp.bottom).offset(20)
+            make.top.equalTo(self.nameLabel.snp.bottom).offset(15)
         }
     }
     
@@ -286,6 +290,7 @@ extension MineHeadView {
             view.integral = 100
             view.snp.updateConstraints({ (make) in
                 make.top.equalTo(self.headView.snp.bottom)
+//                make.bottom.equalToSuperview()
                 make.width.equalToSuperview().multipliedBy(0.25)
                 make.height.equalTo(85)
                 make.left.equalTo(CGFloat(i!)*UIScreen.main.bounds.width/4.0)
