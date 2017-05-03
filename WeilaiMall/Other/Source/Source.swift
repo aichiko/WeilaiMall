@@ -174,6 +174,10 @@ extension String {
     
     static func MD5(with parameter: [String: Any]) -> String {
         
+        guard parameter.count > 0 else {
+            return "key=weilai8088".MD5()
+        }
+        
         let dic = parameter
         var array: [String] = []
         if dic.first?.key == "type" {
@@ -183,6 +187,7 @@ extension String {
             array.append("\(item.key)=\(item.value)")
         }
         array.sort()
+        
         var resultStr: String = array.joined(separator: "&")
         resultStr.append("&key=weilai8088")
         

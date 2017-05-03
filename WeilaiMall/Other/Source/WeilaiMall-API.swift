@@ -53,6 +53,13 @@ let affirmorder = "Rest/order/affirmorder"
 /// 用户余额
 let getusermoney = "Rest/user/getusermoney"
 
+/// 热搜词语
+let hotsearch = "Rest/public/hotsearch"
+
+/// 添加购物车
+let addcart = "Rest/order/addcart"
+/// 购物车数量
+let getcartnum = "Rest/order/getcartnum"
 /// 购物车
 let cartlist = "Rest/order/cartlist"
 /// 购物车更改数量

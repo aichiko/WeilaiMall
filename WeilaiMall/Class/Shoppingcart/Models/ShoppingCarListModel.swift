@@ -9,6 +9,31 @@
 import Foundation
 import SwiftyJSON
 
+struct ShoppingCartNumRequest: CCRequest {
+    let path: String = getcartnum
+    
+    var parameter: [String: Any]
+    typealias Response = Int
+    
+    func JSONParse(value: JSON) -> [Int?]? {
+        return [value["data"]["num"].intValue]
+    }
+}
+
+
+struct ShoppingCartAddRequest: CCRequest {
+    let path: String = addcart
+    
+    var parameter: [String: Any]
+    typealias Response = Int
+    
+    func JSONParse(value: JSON) -> [Int?]? {
+        return [value["data"]["num"].intValue]
+    }
+}
+
+
+
 struct ShoppingCartListRequest: CCRequest {
     let path: String = cartlist
     

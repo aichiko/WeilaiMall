@@ -22,6 +22,8 @@ class ShoppingCartViewController: ViewController, CCTableViewProtocol {
 
     var tableView: UITableView = UITableView(frame: CGRect.zero, style: .grouped)
     
+    var noTabbar = true
+    
     let shoppingBar = CCShoppingBar()
     
     /// 商品数量的字典， 记录cell中的个数，防止cell复用带来的问题
@@ -133,13 +135,15 @@ class ShoppingCartViewController: ViewController, CCTableViewProtocol {
     }
     
     internal func configTableView() {
+        self.automaticallyAdjustsScrollViewInsets = false
         tableView.backgroundColor = CCbackgroundColor
         self.view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.snp.updateConstraints({ (make) in
-            make.left.right.top.equalToSuperview()
-            make.bottom.equalTo(-48)
+            make.left.right.equalToSuperview()
+            make.top.equalTo(64)
+            make.bottom.equalTo(-48-(noTabbar ?48:0))
         })
 //        tableView.separatorColor = UIColor.white
 //        tableView.separatorStyle = .singleLine
@@ -159,7 +163,6 @@ class ShoppingCartViewController: ViewController, CCTableViewProtocol {
                 [unowned self] in
                 self.prepareData(.refreshData)
             })
-            
         }
     }
     
@@ -171,8 +174,8 @@ class ShoppingCartViewController: ViewController, CCTableViewProtocol {
         self.view.addSubview(shoppingBar)
         shoppingBar.selectButton.addTarget(self, action: #selector(BarButtonAction(_:)), for: .touchUpInside)
         shoppingBar.snp.updateConstraints { (make) in
-            make.left.right.equalTo(0)
-            make.bottom.equalTo(-48)
+            make.left.right.equalToSuperview()
+            make.top.equalTo(tableView.snp.bottom)
             make.height.equalTo(48)
         }
         

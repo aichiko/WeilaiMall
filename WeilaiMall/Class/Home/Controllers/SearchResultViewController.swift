@@ -63,7 +63,8 @@ class SearchResultViewController: ViewController {
         configuration.userContentController = userContent
         
         webView = WKWebView(frame: CGRect.zero, configuration: configuration)
-        webView.load(URLRequest.init(url: URL.init(string: webViewHost+path + (path.contains("?") ?"&":"?") + "keyword="+searchKey)!))
+        
+        webView.load(URLRequest.init(url: URL.init(string: webViewHost+path + (path.contains("?") ?"&":"?") + "keyword="+searchKey.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!))
         self.view.addSubview(webView)
         self.automaticallyAdjustsScrollViewInsets = false
         webView.snp.updateConstraints { (make) in
@@ -84,7 +85,7 @@ class SearchResultViewController: ViewController {
         searchBar.delegate = self
         
         self.navigationItem.titleView = searchBar
-        searchBar.becomeFirstResponder()
+        //searchBar.becomeFirstResponder()
         searchBar.text = searchKey
     }
     

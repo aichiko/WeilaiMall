@@ -10,6 +10,111 @@ import UIKit
 import WebKit
 import SwiftyJSON
 import MJRefresh
+import MBProgressHUD
+
+class BuyToolBar: UIToolbar {
+    
+    var shopcarBar = UIButton(type: .custom)
+    
+    var buyBar = UIButton(type: .custom)
+    
+    var shopcarNumBar = UIButton(type: .custom)
+    
+    var numberLabel = UILabel()
+    
+    var pushcar: (() -> Void)?
+    
+    var buyGoods: ((Bool) ->Void)?
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        initialization()
+        
+    }
+    
+    func initialization() {
+        
+        self.addSubview(shopcarNumBar)
+        self.addSubview(shopcarBar)
+        self.addSubview(buyBar)
+        shopcarNumBar.backgroundColor = UIColor.white
+        shopcarBar.backgroundColor = UIColor.colorWithString("#FFA526")
+        buyBar.backgroundColor = CCOrangeColor
+        
+        shopcarNumBar.setImage(UIImage.init(named: "play_shopping"), for: .normal)
+        
+        shopcarBar.setTitle("加入购物车", for: .normal)
+        shopcarBar.setTitleColor(UIColor.white, for: .normal)
+        shopcarBar.setTitleColor(UIColor.lightGray, for: .highlighted)
+        shopcarBar.titleLabel?.font = UIFont.CCsetfont(14)
+        shopcarBar.tag = 100
+        buyBar.setTitle("立即购买", for: .normal)
+        buyBar.setTitleColor(UIColor.white, for: .normal)
+        buyBar.setTitleColor(UIColor.lightGray, for: .highlighted)
+        buyBar.titleLabel?.font = UIFont.CCsetfont(14)
+        buyBar.tag = 101
+        
+        shopcarNumBar.addTarget(self, action: #selector(gotoShopcar(_:)), for: .touchUpInside)
+        shopcarBar.addTarget(self, action: #selector(buyAction(_:)), for: .touchUpInside)
+        buyBar.addTarget(self, action: #selector(buyAction(_:)), for: .touchUpInside)
+        
+        shopcarNumBar.snp.updateConstraints { (make) in
+            
+            make.centerY.left.top.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(115.0/375.0)
+        }
+        
+        shopcarBar.snp.updateConstraints { (make) in
+            make.centerY.top.equalToSuperview()
+            make.left.equalTo(shopcarNumBar.snp.right)
+            make.width.equalToSuperview().multipliedBy(130.0/375.0)
+        }
+        
+        buyBar.snp.updateConstraints { (make) in
+            make.right.top.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.left.equalTo(shopcarBar.snp.right)
+        }
+        
+        numberLabel.backgroundColor = CCOrangeColor
+        numberLabel.layer.masksToBounds = true
+        numberLabel.layer.cornerRadius = 7.5
+        numberLabel.text = "0"
+        numberLabel.textColor = UIColor.white
+        numberLabel.font = UIFont.CCsetfont(11)
+        numberLabel.textAlignment = .center
+        numberLabel.isHidden = numberLabel.text == "0"
+        
+        shopcarNumBar.addSubview(numberLabel)
+        numberLabel.snp.updateConstraints { (make) in
+            
+            make.centerX.equalTo(shopcarNumBar.snp.centerX).offset(10)
+            make.centerY.equalTo(shopcarNumBar.snp.centerY).offset(-10)
+            make.width.height.equalTo(15)
+        }
+        
+    }
+    
+    func gotoShopcar(_ button: UIButton) {
+        if pushcar != nil {
+            debugPrint("跳转到购物车")
+            pushcar!()
+        }
+    }
+    
+    func buyAction(_ button: UIButton) {
+        if buyGoods != nil {
+            debugPrint("加入购物车和立即购买")
+            buyGoods!(button.tag == 101)
+        }
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}
+
 
 protocol CCWebViewProtocol: NSObjectProtocol {
     var path: String { get set }
@@ -18,8 +123,8 @@ protocol CCWebViewProtocol: NSObjectProtocol {
     func push(path: String) -> Void
     /// 提供给H5 的pop方法
     func pop(root: Bool) -> Void
+    
 }
-
 
 /// web 页面
 class CCWebViewController: ViewController, CCWebViewProtocol {
@@ -42,10 +147,114 @@ class CCWebViewController: ViewController, CCWebViewProtocol {
         }
     }
     
-    func showAddCart(goods_id: Int) {
+    func showBuyToolbar(goods_id: String) {
+        
+        func addShopCart(goods_id: String, join: Bool) {
+            guard isLogin else {
+                return
+            }
+            let request = ShoppingCartAddRequest(parameter: ["access_token": access_token, "goods_id": goods_id, "goods_num": 1])
+            let hud = MBProgressHUD.showMessage(message: "", view: self.view)
+            URLSessionClient().alamofireSend(request) { [weak self] (models, error) in
+                hud.hide(animated: true)
+                if error == nil {
+                    if models.count > 0, let number = models[0] {
+                        if number == 0  {
+                            self?.toolBar.numberLabel.isHidden = true
+                        }else if number>9 {
+                            self?.toolBar.numberLabel.isHidden = false
+                            self?.toolBar.numberLabel.text = "9+"
+                        }else {
+                            self?.toolBar.numberLabel.isHidden = false
+                            self?.toolBar.numberLabel.text = number.description
+                        }
+                    }
+                    if join {
+                        //立即购买后进入购物车页面
+                        let shopVC = ShoppingCartViewController()
+                        shopVC.noTabbar = false
+                        self?.navigationController?.pushViewController(shopVC, animated: true)
+                    }else{
+                        MBProgressHUD.showErrorAdded(message: "添加成功", to: self?.view)
+                    }
+                }else {
+                    MBProgressHUD.showErrorAdded(message: (error?.getInfo())!, to: self?.view)
+                }
+            }
+        }
+        
+        func shopCartNum() {
+            
+            guard isLogin else {
+                return
+            }
+            
+            let request = ShoppingCartNumRequest(parameter: ["access_token": access_token])
+            URLSessionClient().alamofireSend(request) { [weak self] (models, error) in
+                if error == nil {
+                    if models.count > 0, let number = models[0] {
+                        if number == 0  {
+                            self?.toolBar.numberLabel.isHidden = true
+                        }else if number>9 {
+                            self?.toolBar.numberLabel.isHidden = false
+                            self?.toolBar.numberLabel.text = "9+"
+                        }else {
+                            self?.toolBar.numberLabel.isHidden = false
+                            self?.toolBar.numberLabel.text = number.description
+                        }
+                    }
+                }else {
+                    MBProgressHUD.showErrorAdded(message: (error?.getInfo())!, to: self?.view)
+                }
+            }
+        }
+        
+        self.view.addSubview(toolBar)
+        toolBar.snp.updateConstraints { (make) in
+            make.bottom.equalTo(44)
+            make.left.right.equalToSuperview()
+            make.height.equalTo(0)
+        }
+        self.view.layoutIfNeeded()
+        toolBar.snp.updateConstraints { (make) in
+            make.left.right.bottom.equalToSuperview()
+            make.height.equalTo(44)
+        }
+        UIView.animate(withDuration: 0.2) {
+            self.view.layoutIfNeeded()
+        }
+        shopCartNum()
+        
+        toolBar.pushcar = {
+            [weak self] in
+            guard isLogin else {
+                let loginVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "login")
+                self?.navigationController?.pushViewController(loginVC, animated: true)
+                return
+            }
+            let shopVC = ShoppingCartViewController()
+            shopVC.noTabbar = false
+            self?.navigationController?.pushViewController(shopVC, animated: true)
+        }
+        
+        toolBar.buyGoods = {
+            [weak self] join in
+            
+            guard isLogin else {
+                let loginVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "login")
+                self?.navigationController?.pushViewController(loginVC, animated: true)
+                return
+            }
+            
+            addShopCart(goods_id: goods_id, join: join)
+            
+        }
+        
         
     }
 
+    lazy var toolBar = BuyToolBar(frame: CGRect.zero)
+    
     var webView = WKWebView(frame: CGRect.zero, configuration: WKWebViewConfiguration.init())
     
     var progress = UIProgressView(progressViewStyle: .bar)
@@ -115,7 +324,7 @@ extension CCWebViewController {
         userContent.add(self, name: "push")
         userContent.add(self, name: "pop")
         
-        userContent.add(self, name: "addcart")
+        userContent.add(self, name: "goods_buy")
         
         if path.contains("address") {
             userContent.add(self, name: "address")
@@ -211,8 +420,8 @@ extension CCWebViewController: WKScriptMessageHandler, WKNavigationDelegate, WKU
                     self.navigationController?.popViewController(animated: true)
                 }
             }
-        }else if message.name == "addcart" {
-            
+        }else if message.name == "goods_buy" {
+            showBuyToolbar(goods_id: message.body as? String ?? "")
         }
     }
     
