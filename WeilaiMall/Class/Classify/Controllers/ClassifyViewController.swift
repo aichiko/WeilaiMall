@@ -85,10 +85,10 @@ class ClassifyViewController: ViewController, CCWebViewProtocol {
 extension ClassifyViewController: WKScriptMessageHandler, WKNavigationDelegate, WKUIDelegate {
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if message.name == "push" {
-            print(message.body)
+            //print(message.body)
             push(path: message.body as! String)
         }else if message.name == "pop" {
-            print(message.body)
+            //print(message.body)
             pop(root: message.body as? Bool ?? false)
         }
     }

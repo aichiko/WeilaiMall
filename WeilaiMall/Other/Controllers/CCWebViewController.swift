@@ -354,6 +354,8 @@ extension CCWebViewController {
             webView.load(URLRequest.init(url: URL.init(string: webViewHost+path.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!))
         }
         
+        debugPrint(webView.url!)
+        
         webView.addObserver(self, forKeyPath: "loading", options: .new, context: nil)
         webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         webView.addObserver(self, forKeyPath: "title", options: .new, context: nil)

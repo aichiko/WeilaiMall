@@ -363,7 +363,16 @@ extension ShoppingCartViewController {
                     self?.updateDictionary()
                     self?.calculatePrice()
                 }
-                self?.performSegue(withIdentifier: "orderClear", sender: ["rec_id": str, "dataArray": models])
+                if (self?.noTabbar)! {
+                    self?.performSegue(withIdentifier: "orderClear", sender: ["rec_id": str, "dataArray": models])
+                }else {
+                    let clearVC = OrderClearViewController()
+                    clearVC.clearRec_id = str
+                    let arr = models
+                    clearVC.clearModel = arr[0]
+                    self?.navigationController?.pushViewController(clearVC, animated: true)
+                }
+                
                 
             }else {
                 MBProgressHUD.showErrorAdded(message: (error?.getInfo())!, to: self?.view)

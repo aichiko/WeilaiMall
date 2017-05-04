@@ -197,7 +197,7 @@ extension OrderClearViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section == 0 {
             //没有地址则进入新建地址， 有地址则选择地址
-            let cell = tableView.cellForRow(at: indexPath) as! AdressTableViewCell
+            //let cell = tableView.cellForRow(at: indexPath) as! AdressTableViewCell
             let webViewVC = CCWebViewController()
             
             webViewVC.address = {
@@ -208,12 +208,7 @@ extension OrderClearViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
             
-            if cell.style == .noAdress {
-                //http://139.196.124.0/#/address/index?token=
-                webViewVC.path = "address/add"
-            }else {
-                webViewVC.path = "address/index?token="+access_token
-            }
+            webViewVC.path = "address/index?token="+access_token
             self.navigationController?.pushViewController(webViewVC, animated: true)
         }
     }

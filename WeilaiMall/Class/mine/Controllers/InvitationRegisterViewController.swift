@@ -28,7 +28,7 @@ class InvitationRegisterViewController: ViewController {
             if let userinfo = CoreDataManager().getCoreData() {
                 mobile_phone = String(userinfo.mobile_phone)
             }
-            let image = self.generateCode("http://139.196.124.0/#/register?invite_code="+mobile_phone)
+            let image = self.generateCode(webViewHost+"register?invite_code="+mobile_phone)
             DispatchQueue.main.async {
                 self.codeImageView.image = image
             }

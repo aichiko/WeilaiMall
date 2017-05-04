@@ -122,6 +122,7 @@ class AdressTableViewCell: UITableViewCell {
         contentView.addSubview(button)
         
         button.titleEdgeInsets.left = 15
+        button.titleEdgeInsets.right = -15
         
         button.snp.updateConstraints { (make) in
             make.left.equalTo(15)

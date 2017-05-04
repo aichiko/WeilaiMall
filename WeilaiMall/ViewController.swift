@@ -37,7 +37,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func reloadWebView(path:String, webView: WKWebView) {
-        webView.load(URLRequest.init(url: URL.init(string: "http://139.196.124.0/#/"+path)!))
+        webView.load(URLRequest.init(url: URL.init(string: webViewHost+path)!))
     }
     
     @objc private func backAction(_ item: UIBarButtonItem) {
