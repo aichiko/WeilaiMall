@@ -280,11 +280,16 @@ extension MineViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath)
         collectionView.deselectItem(at: indexPath, animated: true)
-        if isLogin {
+        if indexPath.item == 7 {
             self.performSegue(withIdentifier: identifiers[indexPath.item], sender: self)
         }else {
-            let loginVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "login")
-            self.navigationController?.pushViewController(loginVC, animated: true)
+            if isLogin {
+                self.performSegue(withIdentifier: identifiers[indexPath.item], sender: self)
+            }else {
+                let loginVC = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "login")
+                self.navigationController?.pushViewController(loginVC, animated: true)
+            }
         }
+        
     }
 }

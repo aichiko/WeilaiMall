@@ -677,7 +677,7 @@
         <!--关于-->
         <scene sceneID="nSb-le-rlY">
             <objects>
-                <viewController title="关于" hidesBottomBarWhenPushed="YES" id="WQS-fa-pbJ" sceneMemberID="viewController">
+                <viewController title="关于" hidesBottomBarWhenPushed="YES" id="WQS-fa-pbJ" customClass="CCWebViewController" customModule="WeilaiMall" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="t5l-ar-lob"/>
                         <viewControllerLayoutGuide type="bottom" id="AHR-GZ-WUC"/>
@@ -687,6 +687,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="path" value="about"/>
+                    </userDefinedRuntimeAttributes>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VbF-qp-aoZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1500,7 +1503,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="gLL-wN-91N"/>
-        <segue reference="IwX-c2-eVb"/>
         <segue reference="0Bk-zu-u1f"/>
+        <segue reference="TMa-C8-HR4"/>
     </inferredMetricsTieBreakers>
 </document>

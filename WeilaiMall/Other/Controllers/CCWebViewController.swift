@@ -29,7 +29,6 @@ class BuyToolBar: UIToolbar {
     override init(frame: CGRect) {
         super.init(frame: frame)
         initialization()
-        
     }
     
     func initialization() {
@@ -79,6 +78,7 @@ class BuyToolBar: UIToolbar {
         numberLabel.backgroundColor = CCOrangeColor
         numberLabel.layer.masksToBounds = true
         numberLabel.layer.cornerRadius = 7.5
+        numberLabel.adjustsFontSizeToFitWidth = true
         numberLabel.text = "0"
         numberLabel.textColor = UIColor.white
         numberLabel.font = UIFont.CCsetfont(11)
@@ -427,8 +427,8 @@ extension CCWebViewController: WKScriptMessageHandler, WKNavigationDelegate, WKU
         }
     }
     
-    
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        self.progress.setProgress(0, animated: false)
         if #available(iOS 10.0, *) {
             refreshControl.endRefreshing()
         } else {
@@ -437,8 +437,8 @@ extension CCWebViewController: WKScriptMessageHandler, WKNavigationDelegate, WKU
         }
     }
     
-    
     public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        self.progress.setProgress(0, animated: false)
         if #available(iOS 10.0, *) {
             refreshControl.endRefreshing()
         } else {

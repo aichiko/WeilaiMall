@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import IQKeyboardManager
+import SwiftyJSON
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -30,6 +31,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window?.makeKeyAndVisible()
         
+        //版本更新提示，每次进入app都会调用
+        DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + 5) { 
+            self.versionUpdate()
+        }
+        
         /// 第一次进入时的引导图
         if firstLaunch {
             let mainVC
@@ -45,6 +51,68 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         return true
+    }
+    
+    func versionUpdate() {
+        
+        struct VersionMessage {
+            /// 是否最新版本  0 否 ； 1 是
+            var renew: Bool
+            /// 版本号
+            var version: String
+            /// 版本更新内容
+            var content: String
+            /// 下载地址
+            var url: String
+            /// 是否强制更新  0 否   1是
+            var type: Bool
+            
+            init(value: JSON) {
+                renew = value["renew"].boolValue
+                version = value["version"].stringValue
+                content = value["content"].stringValue
+                url = value["url"].stringValue
+                type = value["type"].boolValue
+            }
+        }
+        
+        struct VersionUpdateRequest: CCRequest {
+            let path: String = checkversion
+            
+            var parameter: [String: Any]
+            typealias Response = VersionMessage
+            
+            func JSONParse(value: JSON) -> [VersionMessage?]? {
+                return [VersionMessage.init(value: value["data"])]
+            }
+        }
+        
+        func versionUpdateInfo(with model: VersionMessage) -> ()->Void {
+            if model.renew {
+                let alertController = UIAlertController.init(title: "版本更新", message: model.content, preferredStyle: .alert)
+                let sureAction = UIAlertAction.init(title: "确定", style: .default, handler: { (alert) in
+                    UIApplication.shared.openURL(URL.init(string: model.url)!)
+                })
+                let cancelAction = UIAlertAction.init(title: "取消", style: .cancel, handler: nil)
+                alertController.addAction(sureAction)
+                alertController.addAction(cancelAction)
+                window?.rootViewController?.present(alertController, animated: true, completion: nil)
+            }
+            return {}
+        }
+        
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+        
+        let request = VersionUpdateRequest(parameter: ["phonetype":2, "version": version])
+        URLSessionClient().alamofireSend(request) { (models, error) in
+            if error == nil {
+                if models.count > 0, let model = models[0] {
+                    versionUpdateInfo(with: model)()
+                }
+            }
+        }
+        
+        
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

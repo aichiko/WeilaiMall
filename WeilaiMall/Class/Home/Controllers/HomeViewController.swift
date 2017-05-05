@@ -70,8 +70,9 @@ class HomeViewController: ViewController, CCWebViewProtocol {
         self.view.addSubview(webView)
         self.automaticallyAdjustsScrollViewInsets = false
         webView.snp.updateConstraints { (make) in
-            make.left.right.bottom.equalToSuperview()
+            make.left.right.equalToSuperview()
             make.top.equalTo(64)
+            make.bottom.equalTo(-48)
         }
         webView.uiDelegate = self
         webView.navigationDelegate = self

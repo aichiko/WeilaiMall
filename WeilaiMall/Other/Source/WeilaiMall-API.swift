@@ -14,6 +14,9 @@ let testHost = "http://114.215.19.98/api/web/"
 
 // API 列表
 
+/// 版本更新
+let checkversion = "Rest/user/checkversion"
+
 /// 获取验证码
 let obtaincode = "Rest/auth/obtaincode"
 
