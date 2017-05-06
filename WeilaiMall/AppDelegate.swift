@@ -15,17 +15,9 @@ import SwiftyJSON
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-    let mapManager = BMKMapManager()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
-        // 如果要关注网络及授权验证事件，请设定generalDelegate参数
-        let ret = mapManager.start("eBfIuW2Y1GMQ5fMiIXNfNAchP1HowbG3", generalDelegate: nil)
-        if ret == false {
-            NSLog("manager start failed!")
-        }
         
         IQKeyboardManager.shared().isEnableAutoToolbar = false
         
@@ -33,6 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //版本更新提示，每次进入app都会调用
         DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + 5) { 
+            self.versionUpdate()
+        }
+        
+        //版本更新提示，每次进入app都会调用
+        DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + 5) {
             self.versionUpdate()
         }
         
@@ -88,9 +85,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         func versionUpdateInfo(with model: VersionMessage) -> ()->Void {
-            if model.renew {
+            if !model.renew {
                 let alertController = UIAlertController.init(title: "版本更新", message: model.content, preferredStyle: .alert)
                 let sureAction = UIAlertAction.init(title: "确定", style: .default, handler: { (alert) in
+                    guard model.url.characters.count > 0 else {
+                        return
+                    }
                     UIApplication.shared.openURL(URL.init(string: model.url)!)
                 })
                 let cancelAction = UIAlertAction.init(title: "取消", style: .cancel, handler: nil)

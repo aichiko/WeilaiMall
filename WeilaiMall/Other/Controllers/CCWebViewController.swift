@@ -302,6 +302,7 @@ class CCWebViewController: ViewController, CCWebViewProtocol {
         webView.configuration.userContentController.removeScriptMessageHandler(forName: "push")
         webView.configuration.userContentController.removeScriptMessageHandler(forName: "pop")
         webView.configuration.userContentController.removeScriptMessageHandler(forName: "address")
+        webView.configuration.userContentController.removeScriptMessageHandler(forName: "goods_buy")
     }
 
     /*

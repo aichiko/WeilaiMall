@@ -14,6 +14,9 @@
 
 
 #import "APayAuthInfo.h"
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 typedef enum {
     ALIPAY_TIDFACTOR_IMEI,
     ALIPAY_TIDFACTOR_IMSI,

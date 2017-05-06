@@ -20,7 +20,11 @@ let CCOrangeColor = UIColor.colorWithString("#FF6B26")
 // button 不可用 时的背景颜色
 let CCButtonGrayColor = UIColor(red:0.80, green:0.81, blue:0.81, alpha:1.00)
 
-let webViewHost = "http://139.196.124.0/#/"
+let webViewHost = webViewHost_production
+
+let webViewHost_test = "http://139.196.124.0/#/"
+
+let webViewHost_production = "http://www.weccmall.com/h5/#/"
 
 // 常用字体
 let CCTextFont = UIFont.CCsetfont(14)
@@ -29,8 +33,6 @@ var access_token: String = {
     return UserDefaults.init().value(forKey: "access_token") as! String
     
 }()
-
-//var access_token = "4297f44b13955235245b2497399d7a93"
 
 let firstLaunch = UserDefaults.init().value(forKey: "firstLaunch") as? Bool ?? false
 

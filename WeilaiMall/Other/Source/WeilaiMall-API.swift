@@ -8,9 +8,11 @@
 
 import Foundation
 
-let requestHost = testHost
+let requestHost = productionHost
 
 let testHost = "http://114.215.19.98/api/web/"
+
+let productionHost = "http://www.weccmall.com/api/web/"
 
 // API 列表
 

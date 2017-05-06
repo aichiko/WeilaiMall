@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import CoreLocation
 
 class WeilaiViewController: ViewController {
 
@@ -34,7 +35,6 @@ class WeilaiViewController: ViewController {
     
     let manager = CLLocationManager()
     
-    let locService = BMKLocationService()
     
     var webView = WKWebView(frame: CGRect.zero, configuration: WKWebViewConfiguration.init())
     

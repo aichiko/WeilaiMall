@@ -27,6 +27,8 @@ class RechargeViewController: ViewController {
     
     var refresh: refreshData?
     
+    let textField = UITextField.init()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -160,7 +162,6 @@ extension RechargeViewController: UITableViewDelegate, UITableViewDataSource {
             
             
             if indexPath.row == 0 {
-                let textField = UITextField.init()
                 cell?.contentView.addSubview(textField)
                 textField.keyboardType = .decimalPad
                 textField.tag = 222
@@ -171,7 +172,7 @@ extension RechargeViewController: UITableViewDelegate, UITableViewDataSource {
                     make.right.equalTo(-10)
                     make.height.equalToSuperview()
                 })
-                
+                textField.isEnabled = WXApi.isWXAppInstalled()
                 addInputView(textField: textField)
             }
         }
@@ -257,19 +258,23 @@ extension RechargeViewController {
             return
         }
         
-        let hud = MBProgressHUD.showMessage(message: "", view: self.view)
-        let request = CCALiPaymentRequest(parameter: ["amount": String.init(format: "%.2f", amount), "access_token": access_token])
-        URLSessionClient().alamofireSend(request) { [weak self] (models, error) in
-            hud.hide(animated: true)
-            if error == nil {
-                if models.count > 0 {
-                    if let model = models[0] {
-                        self?.aliPayAction(model: model)
+        if WXApi.isWXAppInstalled() {
+            let hud = MBProgressHUD.showMessage(message: "", view: self.view)
+            let request = CCALiPaymentRequest(parameter: ["amount": String.init(format: "%.2f", amount), "access_token": access_token])
+            URLSessionClient().alamofireSend(request) { [weak self] (models, error) in
+                hud.hide(animated: true)
+                if error == nil {
+                    if models.count > 0 {
+                        if let model = models[0] {
+                            self?.aliPayAction(model: model)
+                        }
                     }
+                }else {
+                    MBProgressHUD.showErrorAdded(message: (error?.getInfo())!, to: self?.view)
                 }
-            }else {
-                MBProgressHUD.showErrorAdded(message: (error?.getInfo())!, to: self?.view)
             }
+        }else{
+            IAPPayAction()
         }
     }
     
@@ -418,7 +423,7 @@ extension RechargeViewController: SKProductsRequestDelegate, SKPaymentTransactio
     func IAPPayAction() {
         //先询问用户是否允许应用内支付
         if SKPaymentQueue.canMakePayments() {
-            let set: Set<String> = Set.init(["24HMB_MEET"])
+            let set: Set<String> = Set.init(["weilai"])
             let request =  SKProductsRequest.init(productIdentifiers: set)
             request.delegate = self;
             request.start()
@@ -447,7 +452,7 @@ extension RechargeViewController: SKProductsRequestDelegate, SKPaymentTransactio
             NSLog("%@", pro.price);
             NSLog("%@", pro.productIdentifier);
             
-            if pro.productIdentifier == "24HMB_MEET"{
+            if pro.productIdentifier == "weilai"{
                 p = pro;
             }
         }
