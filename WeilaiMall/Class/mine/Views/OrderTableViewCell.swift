@@ -27,7 +27,7 @@ class OrderTableViewCell: UITableViewCell {
             }
             goodImageView.kf.setImage(with: URL(string: (model?.goods_img)!), placeholder: UIImage.init(named: ""))
             goodnameLabel.text = model?.goods_name
-            goodpriceLabel.text = String.init(format: "¥ %.2f", (model?.goods_price)!)
+            goodpriceLabel.text = String.init(format: "%.0f", (model?.goods_price)!)
             goodnumberLabel.text = String.init(format: "x%d", (model?.goods_num)!)
         }
     }

@@ -51,7 +51,9 @@ class WeilaiViewController: ViewController {
         let userContent = WKUserContentController()
         userContent.add(self, name: "push")
         userContent.add(self, name: "pop")
-        
+        let preferences = WKPreferences.init()
+        preferences.javaScriptCanOpenWindowsAutomatically = true
+        configuration.preferences = preferences
         configuration.userContentController = userContent
         
         webView = WKWebView(frame: CGRect.zero, configuration: configuration)
@@ -172,7 +174,8 @@ extension WeilaiViewController: CLLocationManagerDelegate {
                     self.path.append("?long=\(userLocation.coordinate.longitude)&lat=\(userLocation.coordinate.latitude)")
                 }
                 print(self.path)
-                self.reloadWebView(path: self.path, webView: self.webView)
+                self.webView.load(URLRequest.init(url: URL.init(string: webViewHost+self.path)!))
+                self.webView.reload()
             }
         }
     }
@@ -224,6 +227,12 @@ extension WeilaiViewController: BMKLocationServiceDelegate {
  */
 
 extension WeilaiViewController: WKScriptMessageHandler, WKNavigationDelegate, WKUIDelegate {
+    
+    public func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Swift.Void) {
+        completionHandler()
+        debugPrint(message)
+    }
+    
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if message.name == "push" {
             print(message.body)

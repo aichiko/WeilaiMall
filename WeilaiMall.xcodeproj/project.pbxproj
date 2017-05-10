@@ -1257,7 +1257,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.weilai.mall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "200567f0-22b3-4bb2-9631-a8161eb2c820";
+				PROVISIONING_PROFILE = "2c5a852a-9086-43cf-9b7f-31a2c89a0742";
 				PROVISIONING_PROFILE_SPECIFIER = weilai_Distribution_beta;
 				SWIFT_OBJC_BRIDGING_HEADER = "WeilaiMall/Other/Source/WeilaiMall-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1295,7 +1295,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.weilai.mall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "200567f0-22b3-4bb2-9631-a8161eb2c820";
+				PROVISIONING_PROFILE = "2c5a852a-9086-43cf-9b7f-31a2c89a0742";
 				PROVISIONING_PROFILE_SPECIFIER = weilai_Distribution_beta;
 				SWIFT_OBJC_BRIDGING_HEADER = "WeilaiMall/Other/Source/WeilaiMall-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

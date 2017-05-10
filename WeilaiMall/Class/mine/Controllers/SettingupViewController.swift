@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WebKit
 
 class SettingupViewController: ViewController {
     
@@ -105,8 +106,30 @@ extension SettingupViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.row == 2 {
-            
+            showAlertController {
+                debugPrint("清除缓存")
+                if #available(iOS 9.0, *)
+                {
+                    let websiteDataTypes = NSSet(array: [WKWebsiteDataTypeDiskCache, WKWebsiteDataTypeMemoryCache])
+                    let date = NSDate(timeIntervalSince1970: 0)
+                    
+                    WKWebsiteDataStore.default().removeData(ofTypes: websiteDataTypes as! Set<String>, modifiedSince: date as Date, completionHandler:{ })
+                }
+                else
+                {
+                    var libraryPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.libraryDirectory, FileManager.SearchPathDomainMask.userDomainMask, false).first!
+                    libraryPath += "/Cookies"
+                    
+                    do {
+                        try FileManager.default.removeItem(atPath: libraryPath)
+                    } catch {
+                        print("error")
+                    }
+                    URLCache.shared.removeAllCachedResponses()
+                }
+            }
         }else {
             if isLogin {
                 self.performSegue(withIdentifier: identifiers[indexPath.row], sender: self)
@@ -115,5 +138,16 @@ extension SettingupViewController: UITableViewDelegate, UITableViewDataSource {
                 self.navigationController?.pushViewController(loginVC, animated: true)
             }
         }
+    }
+    
+    func showAlertController(action: @escaping () -> Void) {
+        let alertController = UIAlertController.init(title: "提示", message: "是否清除缓存", preferredStyle: .alert)
+        let suerAction = UIAlertAction.init(title: "确定", style: .default) { (alertAction) in
+            action()
+        }
+        let cancelAction = UIAlertAction.init(title: "取消", style: .cancel, handler: nil)
+        alertController.addAction(suerAction)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
     }
 }

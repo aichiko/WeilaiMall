@@ -102,6 +102,10 @@ class MineViewController: ViewController {
             }
             let viewController = segue.destination as! MineInfoViewController
             viewController.model = model
+            viewController.updateUserImage = {
+                [weak self] in
+                self?.refreshInfo()
+            }
         }else if segue.identifier == "transfer" {
             let controller = segue.destination as! TransferViewController
             controller.refresh = {

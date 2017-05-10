@@ -430,7 +430,6 @@ class OrderCenterViewController: ViewController {
                 let state = self.scrollView.contentOffset.x/self.view.bounds.width
                 self.prepareData(.refreshData, state: Int(state)-1)
             })
-            
         }
         
         tableView.mj_footer = MJRefreshAutoNormalFooter.init(refreshingBlock: {

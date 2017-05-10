@@ -62,7 +62,9 @@ class HomeViewController: ViewController, CCWebViewProtocol {
         let userContent = WKUserContentController()
         userContent.add(self, name: "push")
         userContent.add(self, name: "pop")
-        
+        let preferences = WKPreferences.init()
+        preferences.javaScriptCanOpenWindowsAutomatically = true
+        configuration.preferences = preferences
         configuration.userContentController = userContent
         
         webView = WKWebView(frame: CGRect.zero, configuration: configuration)

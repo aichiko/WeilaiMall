@@ -223,6 +223,13 @@ class CCWebViewController: ViewController, CCWebViewProtocol {
         UIView.animate(withDuration: 0.2) {
             self.view.layoutIfNeeded()
         }
+        UIView.animate(withDuration: 0.2, animations: { 
+            self.view.layoutIfNeeded()
+        }) { (complete) in
+            self.webView.snp.updateConstraints({ (make) in
+                make.bottom.equalTo(-44)
+            })
+        }
         shopCartNum()
         
         toolBar.pushcar = {
@@ -247,7 +254,6 @@ class CCWebViewController: ViewController, CCWebViewProtocol {
             }
             
             addShopCart(goods_id: goods_id, join: join)
-            
         }
         
         

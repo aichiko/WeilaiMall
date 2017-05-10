@@ -9,6 +9,7 @@
 import UIKit
 import MBProgressHUD
 import Alamofire
+import SwiftyJSON
 
 /// 选择器的类型
 ///
@@ -170,6 +171,8 @@ class MineInfoViewController: ViewController, CCTableViewProtocol {
         imagePickerVC.allowsEditing = true
         return imagePickerVC
     }()
+    
+    var updateUserImage: (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -435,6 +438,7 @@ extension MineInfoViewController: UIImagePickerControllerDelegate, UINavigationC
         func cameraGet() {
             if UIImagePickerController.isSourceTypeAvailable(.camera) {
                 imagePickerController.sourceType = .camera
+                imagePickerController.videoQuality = .typeLow
                 present(imagePickerController, animated: true, completion: nil)
             }else {
                 print("模拟器中不能打开相机")
@@ -443,6 +447,7 @@ extension MineInfoViewController: UIImagePickerControllerDelegate, UINavigationC
         
         func photoGet() {
             imagePickerController.sourceType = .photoLibrary
+            imagePickerController.videoQuality = .typeLow
             present(imagePickerController, animated: true, completion: nil)
         }
         
@@ -472,27 +477,53 @@ extension MineInfoViewController: UIImagePickerControllerDelegate, UINavigationC
             let cell = self.tableView.cellForRow(at: IndexPath.init(row: 0, section: 0))
             for view in (cell?.accessoryView?.subviews)! {
                 if view is UIImageView {
+                    MBProgressHUD.showErrorAdded(message: "修改成功", to: self.view)
                     (view as! UIImageView).image = image
+                    if updateUserImage != nil {
+                        updateUserImage!()
+                    }
                 }
             }
         }
         
-        let request = UpdateInfoRequest(parameter: ["access_token": access_token, "user_picture": UIImageJPEGRepresentation(image, 0.5)!])
+//        let request = UpdateInfoRequest(parameter: ["access_token": access_token, "user_picture": UIImageJPEGRepresentation(image, 0.5)!])
+        let imageData = UIImagePNGRepresentation(image)!
         let hub = MBProgressHUD.showAdded(to: self.view, animated: true)
         
-        
-        URLSessionClient().alamofireSend(request) { [weak self] (models, error) in
-            hub.hide(animated: true)
-            if error == nil {
-                changeImageView()
-            }else {
-                MBProgressHUD.showErrorAdded(message: (error?.getInfo())!, to: self?.view)
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            multipartFormData.append(imageData, withName: "user_picture", fileName: "UserPic.jpg", mimeType: "image/png")
+            multipartFormData.append(access_token.data(using: .utf8)!, withName: "access_token")
+            multipartFormData.append(String.MD5(with: ["access_token": access_token]).data(using: .utf8)!, withName: "sign")
+        }, to: requestHost+updateuser) { (encodingResult) in
+            switch encodingResult {
+            case .success(let upload, _, _):
+                upload.responseJSON(completionHandler: { (response) in
+                    hub.hide(animated: true)
+                    debugPrint(response.result)
+                    if response.result.isSuccess {
+                        let value = JSON(response.result.value!)
+                        if value["status"].intValue == 0 {
+                            changeImageView()
+                        }else {
+                            let error = RequestError.init(status: value["status"].intValue, info: value["info"].stringValue)
+                            MBProgressHUD.showErrorAdded(message: error.getInfo(), to: self.view)
+                        }
+                    }else {
+                        if let error = response.result.error {
+                            MBProgressHUD.showErrorAdded(message: (error as NSError).domain, to: self.view)
+                        }
+                    }
+                })
+            case .failure(let encodingError):
+                hub.hide(animated: true)
+                MBProgressHUD.showErrorAdded(message: (encodingError as NSError).domain, to: self.view)
+                print(encodingError)
             }
         }
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let image = info[UIImagePickerControllerOriginalImage]
+        let image = info[UIImagePickerControllerEditedImage]
         print(image!)
         updateImageView(image: image as! UIImage)
         self.dismiss(animated: true, completion: nil)

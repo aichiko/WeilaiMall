@@ -8,6 +8,7 @@
 
 import UIKit
 import MBProgressHUD
+import MJRefresh
 
 class OperationCellHeadView: UITableViewHeaderFooterView {
     
@@ -102,6 +103,12 @@ class OperationRecordViewController: ViewController {
         
         tableView.register(UINib.init(nibName: "OperationRecordCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         tableView.register(OperationCellHeadView.self, forHeaderFooterViewReuseIdentifier: headIdentifier)
+        
+        tableView.mj_footer = MJRefreshAutoNormalFooter.init(refreshingBlock: {
+            [unowned self] in
+            self.prepareData(.moreData)
+        })
+        tableView.mj_footer.isAutomaticallyHidden = true
     }
     
     
@@ -126,9 +133,20 @@ class OperationRecordViewController: ViewController {
         
         URLSessionClient().alamofireSend(OperationRecordRequest(parameter: parameters), handler: { [weak self] (models, error) in
             if error == nil {
-                self?.dataArray = models as! [OperationRecordModel]
+                if models.count == 0 {
+                    self?.tableView.mj_footer.endRefreshingWithNoMoreData()
+                }
+                if style == .refreshData {
+                    self?.dataArray = models as! [OperationRecordModel]
+                }else {
+                    for model in models {
+                        self?.dataArray.append(model!)
+                    }
+                }
                 self?.tableView.reloadData()
+                
             }else {
+                self?.tableView.mj_footer.endRefreshing()
                 MBProgressHUD.showErrorAdded(message: (error?.getInfo())!, to: self?.view)
             }
         })

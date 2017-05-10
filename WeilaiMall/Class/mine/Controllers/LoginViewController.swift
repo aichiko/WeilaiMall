@@ -56,6 +56,10 @@ class LoginViewController: ViewController {
         // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor.colorWithString("f14501")
         subviewsAttribute()
+        
+        if let userModel = CoreDataManager().getUserModel() {
+            userTextField.text = userModel.user_name
+        }
     }
 
     override func didReceiveMemoryWarning() {
