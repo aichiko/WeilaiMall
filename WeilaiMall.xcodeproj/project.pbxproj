@@ -59,6 +59,8 @@
 		D545FF341E6D94770081EAF8 /* CCShoppingCarHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D545FF2F1E6D94770081EAF8 /* CCShoppingCarHeadView.swift */; };
 		D545FF351E6D94770081EAF8 /* CCShoppingNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D545FF301E6D94770081EAF8 /* CCShoppingNumberView.swift */; };
 		D54B1D771E8516FB00DAD246 /* WeilaiMall-API.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54B1D761E8516FB00DAD246 /* WeilaiMall-API.swift */; };
+		D5567CF91EC6944B00BD1C23 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D5567CF81EC6944B00BD1C23 /* libsqlite3.0.tbd */; };
+		D5567CFB1EC6946300BD1C23 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5567CFA1EC6946300BD1C23 /* Security.framework */; };
 		D556B7B31E95D05E00150614 /* ConfirmPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D556B7B21E95D05E00150614 /* ConfirmPasswordViewController.swift */; };
 		D55A7B601E82BA28000490CA /* RechargeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55A7B5F1E82BA28000490CA /* RechargeModel.swift */; };
 		D55F42DB1EAB599300C079AC /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D55F42DA1EAB599300C079AC /* libc++.tbd */; };
@@ -183,6 +185,8 @@
 		D545FF2F1E6D94770081EAF8 /* CCShoppingCarHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCShoppingCarHeadView.swift; sourceTree = "<group>"; };
 		D545FF301E6D94770081EAF8 /* CCShoppingNumberView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCShoppingNumberView.swift; sourceTree = "<group>"; };
 		D54B1D761E8516FB00DAD246 /* WeilaiMall-API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WeilaiMall-API.swift"; sourceTree = "<group>"; };
+		D5567CF81EC6944B00BD1C23 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		D5567CFA1EC6946300BD1C23 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		D556B7B21E95D05E00150614 /* ConfirmPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmPasswordViewController.swift; sourceTree = "<group>"; };
 		D55A7B5F1E82BA28000490CA /* RechargeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RechargeModel.swift; sourceTree = "<group>"; };
 		D55F42DA1EAB599300C079AC /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
@@ -318,6 +322,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5567CFB1EC6946300BD1C23 /* Security.framework in Frameworks */,
+				D5567CF91EC6944B00BD1C23 /* libsqlite3.0.tbd in Frameworks */,
 				D5A9FE1C1EAC981B0056DEAB /* Foundation.framework in Frameworks */,
 				D5A9FE1A1EAC98150056DEAB /* UIKit.framework in Frameworks */,
 				D55F42E71EAB59DF00C079AC /* CoreMotion.framework in Frameworks */,
@@ -355,6 +361,8 @@
 		0D26F7F67203F43DC57052BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D5567CFA1EC6946300BD1C23 /* Security.framework */,
+				D5567CF81EC6944B00BD1C23 /* libsqlite3.0.tbd */,
 				D5A9FE1B1EAC981B0056DEAB /* Foundation.framework */,
 				D5A9FE191EAC98150056DEAB /* UIKit.framework */,
 				D55F42E61EAB59DF00C079AC /* CoreMotion.framework */,
@@ -1254,6 +1262,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/WeilaiMall/Other/ALiPay",
+					"$(PROJECT_DIR)/WeilaiMall/Other/WeixinPay",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.weilai.mall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1292,6 +1301,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/WeilaiMall/Other/ALiPay",
+					"$(PROJECT_DIR)/WeilaiMall/Other/WeixinPay",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.weilai.mall;
 				PRODUCT_NAME = "$(TARGET_NAME)";

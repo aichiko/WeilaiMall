@@ -356,7 +356,7 @@ extension CCWebViewController {
             make.top.equalTo(64)
         }
         if requestURL != nil {
-            webView.load(URLRequest.init(url: URL.init(string: requestURL!)!))
+            webView.load(URLRequest.init(url: URL.init(string: requestURL!.replacingOccurrences(of: " ", with: ""))!))
         }else {
             webView.load(URLRequest.init(url: URL.init(string: webViewHost+path.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!))
         }
@@ -425,6 +425,10 @@ extension CCWebViewController: WKScriptMessageHandler, WKNavigationDelegate, WKU
                 if address != nil {
                     let value = JSON(dic)
                     let model = ShoppingCartAdress(value: value)
+                    guard model != nil else {
+                        MBProgressHUD.showErrorAdded(message: "地址为空", to: self.view)
+                        return
+                    }
                     address!(model!)
                     self.navigationController?.popViewController(animated: true)
                 }

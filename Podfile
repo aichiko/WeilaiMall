@@ -19,6 +19,6 @@ pod 'MJRefresh'
 
 pod 'IQKeyboardManager'
 
-pod ‘WechatOpenSDK’
+pod 'WechatOpenSDK'
 
 end

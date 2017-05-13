@@ -185,7 +185,7 @@ extension RechargeViewController: UITableViewDelegate, UITableViewDataSource {
             configTextField(cell: cell)
         }
         cell?.textLabel?.text = titles[indexPath.row]
-        cell?.detailTextLabel?.text = indexPath.row == 0 ?nil:"支付宝"
+        cell?.detailTextLabel?.text = indexPath.row == 0 ?nil:(WXApi.isWXAppInstalled() ? "支付宝": "")
         cell?.selectionStyle = .none
         return cell!
     }
@@ -258,6 +258,7 @@ extension RechargeViewController {
             return
         }
         
+        print(WXApi.isWXAppInstalled())
         if WXApi.isWXAppInstalled() {
             let hud = MBProgressHUD.showMessage(message: "", view: self.view)
             let request = CCALiPaymentRequest(parameter: ["amount": String.init(format: "%.2f", amount), "access_token": access_token])

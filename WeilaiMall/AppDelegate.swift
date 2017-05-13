@@ -47,6 +47,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.window?.rootViewController = mainVC
             }
         }
+        
+        WXApi.registerApp("wx4f78b3936551e90c")
         return true
     }
     

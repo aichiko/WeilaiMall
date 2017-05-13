@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import MJRefresh
 
 class ClassifyViewController: ViewController, CCWebViewProtocol {
 
@@ -33,6 +34,7 @@ class ClassifyViewController: ViewController, CCWebViewProtocol {
     var path: String = "classify"
     
     var webView = WKWebView(frame: CGRect.zero, configuration: WKWebViewConfiguration.init())
+    lazy var refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +61,19 @@ class ClassifyViewController: ViewController, CCWebViewProtocol {
         }
         webView.uiDelegate = self
         webView.navigationDelegate = self
+        
+        if #available(iOS 10.0, *) {
+            refreshControl.addTarget(self, action: #selector(refreshWebView), for: .valueChanged)
+            webView.scrollView.refreshControl = refreshControl
+        } else {
+            // Fallback on earlier versions
+            webView.scrollView.mj_header = MJRefreshNormalHeader.init(refreshingTarget: self, refreshingAction: #selector(refreshWebView))
+        }
     }
+    func refreshWebView() {
+        webView.reloadFromOrigin()
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -91,6 +105,25 @@ extension ClassifyViewController: WKScriptMessageHandler, WKNavigationDelegate, 
         }else if message.name == "pop" {
             //print(message.body)
             pop(root: message.body as? Bool ?? false)
+        }
+    }
+    
+    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        if #available(iOS 10.0, *) {
+            refreshControl.endRefreshing()
+        } else {
+            // Fallback on earlier versions
+            webView.scrollView.mj_header.endRefreshing()
+        }
+    }
+    
+    
+    public func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        if #available(iOS 10.0, *) {
+            refreshControl.endRefreshing()
+        } else {
+            // Fallback on earlier versions
+            webView.scrollView.mj_header.endRefreshing()
         }
     }
 }

@@ -12,13 +12,13 @@ let webViewHost = webViewHost_production
 
 let webViewHost_test = "http://139.196.124.0/#/"
 
-let webViewHost_production = "http://www.weccmall.com/h5/#/"
+let webViewHost_production = "https://www.weccmall.com/h5/#/"
 
 let requestHost = productionHost
 
 let testHost = "http://114.215.19.98/api/web/"
 
-let productionHost = "http://www.weccmall.com/api/web/"
+let productionHost = "https://www.weccmall.com/api/web/"
 
 // API 列表
 
