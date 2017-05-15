@@ -110,6 +110,8 @@ class OrderCellFootView: UITableViewHeaderFooterView {
         }
     }
     
+    var confirmOrder: (() -> Void)?
+    
     var state: Int = 0 {
         didSet {
             if state == 1 {
@@ -152,6 +154,7 @@ class OrderCellFootView: UITableViewHeaderFooterView {
         sureButton.layer.masksToBounds = true
         sureButton.layer.cornerRadius = 4
         contentView.addSubview(sureButton)
+        sureButton.addTarget(self, action: #selector(affirmorder(_:)), for: .touchUpInside)
         
         sureButton.snp.updateConstraints { (make) in
             make.right.equalTo(-15)
@@ -161,6 +164,12 @@ class OrderCellFootView: UITableViewHeaderFooterView {
         }
         sureButton.isHidden = state == 1
         
+    }
+    
+    func affirmorder(_ button: UIButton) {
+        if confirmOrder != nil {
+            confirmOrder!()
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -340,7 +349,8 @@ class OrderCenterViewController: ViewController {
     func prepareData(_ style: CCRequestStyle, state: Int = -1) {
         
         if state == -1 {
-            parameters.removeValue(forKey: "state")
+            //parameters.removeValue(forKey: "state")
+            parameters.updateValue(4, forKey: "state")
         }else {
             parameters.updateValue(state, forKey: "state")
         }
@@ -460,6 +470,9 @@ class OrderCenterViewController: ViewController {
         if segue.identifier == "orderDetail" {
             let controller = segue.destination as! OrderDetailViewController
             controller.orderid = sender as! Int
+        }else if segue.identifier == "orderCenter_confirm" {
+            let controller = segue.destination as! ConfirmPasswordViewController
+            controller.style = sender as! ConfirmPasswordViewController.ConfirmStyle
         }
     }
 
@@ -478,6 +491,7 @@ class OrderCenterViewController: ViewController {
 extension OrderCenterViewController {
     func affirmorder(_ button: UIButton) {
         
+//        self.performSegue(withIdentifier: "orderCenter_confirm", sender: ConfirmPasswordViewController.ConfirmStyle.order(model!.order_id))
     }
 }
 
@@ -504,6 +518,12 @@ extension OrderCenterViewController: UITableViewDelegate, UITableViewDataSource,
         let footView = tableView.dequeueReusableHeaderFooterView(withIdentifier: footIdentifier) as! OrderCellFootView
         footView.state = dataArray[section].state
         footView.goodAttribute = (dataArray[section].goods_num, dataArray[section].goods_price)
+        if footView.state == 1 {
+            footView.confirmOrder = {
+                [weak self] in
+                self?.performSegue(withIdentifier: "orderCenter_confirm", sender: ConfirmPasswordViewController.ConfirmStyle.order((self?.dataArray[section].order_id)!))
+            }
+        }
         return footView
     }
     

@@ -75,7 +75,7 @@ extension CCShoppingNumberView {
         addButton.addTarget(self, action: #selector(changeNumber(_:)), for: .touchUpInside)
         minusButton.addTarget(self, action: #selector(changeNumber(_:)), for: .touchUpInside)
         
-        numberTextField.font = UIFont.CCsetfont(14, "PingFang-SC-Medium")
+        numberTextField.font = UIFont.CCsetfont(14)
         numberTextField.textColor = CCTitleTextColor
         numberTextField.text = "1"
         numberTextField.textAlignment = .center

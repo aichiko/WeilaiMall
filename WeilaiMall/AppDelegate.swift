@@ -24,11 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         //版本更新提示，每次进入app都会调用
-        DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + 5) { 
-            self.versionUpdate()
-        }
-        
-        //版本更新提示，每次进入app都会调用
         DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + 5) {
             self.versionUpdate()
         }
@@ -205,7 +200,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
     //iOS9下的 Core Data stack
     lazy var managedObjectModel: NSManagedObjectModel = {
-        let modelURL = Bundle.main.url(forResource: "WeilaiMall", withExtension: "xcdatamodeld")!
+        let modelURL = Bundle.main.url(forResource: "WeilaiMall", withExtension: "momd")!
         return NSManagedObjectModel(contentsOf: modelURL)!
     }()
     

@@ -59,7 +59,7 @@ extension UIFont {
         
         let family = fontFamily ?? "PingFang-SC-Regular"
         let font = UIFont.init(name: family, size: realSize)
-        return font!
+        return font ?? UIFont.CCsetfont(realSize)
     }
 }
 

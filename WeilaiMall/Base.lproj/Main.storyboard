@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="5dy-Mm-lEM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="5dy-Mm-lEM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -362,6 +362,7 @@
                     </view>
                     <connections>
                         <segue destination="1s8-mf-AYi" kind="show" identifier="orderDetail" id="GeO-aX-3GM"/>
+                        <segue destination="hhj-mD-8aN" kind="show" identifier="orderCenter_confirm" id="Wyd-uW-Uvm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oqt-dF-WrY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1502,8 +1503,8 @@
         <image name="login_logo" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gLL-wN-91N"/>
         <segue reference="0Bk-zu-u1f"/>
-        <segue reference="TMa-C8-HR4"/>
+        <segue reference="gLL-wN-91N"/>
+        <segue reference="Wyd-uW-Uvm"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -132,7 +132,7 @@ extension CCShoppingBar {
         clearingButton.setTitle("结算", for: .normal)
         clearingButton.setTitleColor(UIColor.white, for: .normal)
         clearingButton.setTitleColor(UIColor.lightGray, for: .highlighted)
-        clearingButton.titleLabel?.font = UIFont.CCsetfont(16, "PingFang-SC-Medium")
+        clearingButton.titleLabel?.font = UIFont.CCsetfont(16)
     }
 }
 
