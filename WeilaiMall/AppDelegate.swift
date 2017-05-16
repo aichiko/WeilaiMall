@@ -44,8 +44,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         WXApi.registerApp("wx4f78b3936551e90c")
+        
+        MobClick.setLogEnabled(true)
+        UMAnalyticsConfig.sharedInstance().appKey = "5919778a1061d230d0001b45"
+        MobClick.start(withConfigure: UMAnalyticsConfig.sharedInstance())
+        
         return true
     }
+
     
     func versionUpdate() {
         

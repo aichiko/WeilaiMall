@@ -6,6 +6,7 @@ PODS:
   - MJRefresh (3.1.12)
   - SnapKit (3.0.2)
   - SwiftyJSON (3.1.4)
+  - UMengAnalytics (4.2.4)
   - WechatOpenSDK (1.7.7)
 
 DEPENDENCIES:
@@ -16,6 +17,7 @@ DEPENDENCIES:
   - MJRefresh
   - SnapKit (~> 3.0.2)
   - SwiftyJSON
+  - UMengAnalytics
   - WechatOpenSDK
 
 SPEC CHECKSUMS:
@@ -26,8 +28,9 @@ SPEC CHECKSUMS:
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  UMengAnalytics: ef8d45f94c0e5771dc364cf6a5731d9d3b101da2
   WechatOpenSDK: cbd332148eb792d444ed4eec94f421d98f2046ee
 
-PODFILE CHECKSUM: e37a3388a8e09acfd5c2967ee8b75442c84dbdd4
+PODFILE CHECKSUM: 89d16e95da95fa9c79cc716db28ef0c142aefa69
 
 COCOAPODS: 1.1.1

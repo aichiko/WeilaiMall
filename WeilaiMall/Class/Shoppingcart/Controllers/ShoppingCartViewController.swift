@@ -224,7 +224,7 @@ extension ShoppingCartViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            deleteGoods(indexPath)
+            requestDeleteGood(with: indexPath)
         }
     }
     
@@ -356,6 +356,7 @@ extension ShoppingCartViewController {
         URLSessionClient().alamofireSend(request) { [weak self] (models, error) in
             hud.hide(animated: true)
             if error == nil {
+                /*
                 self?.selectedCells.removeAll()
                 self?.deleteGoods(with: selectedModels)
                 self?.updateBarStatus(false)
@@ -363,6 +364,7 @@ extension ShoppingCartViewController {
                     self?.updateDictionary()
                     self?.calculatePrice()
                 }
+                */
                 if (self?.noTabbar)! {
                     self?.performSegue(withIdentifier: "orderClear", sender: ["rec_id": str, "dataArray": models])
                 }else {
@@ -372,8 +374,6 @@ extension ShoppingCartViewController {
                     clearVC.clearModel = arr[0]
                     self?.navigationController?.pushViewController(clearVC, animated: true)
                 }
-                
-                
             }else {
                 MBProgressHUD.showErrorAdded(message: (error?.getInfo())!, to: self?.view)
             }

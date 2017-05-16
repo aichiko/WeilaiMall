@@ -97,7 +97,6 @@ class OrderClearViewController: ViewController, CCTableViewProtocol {
                     rec_idArr.append(str)
                 }
             }
-            
             return rec_idArr.joined(separator: ",")
         }
         

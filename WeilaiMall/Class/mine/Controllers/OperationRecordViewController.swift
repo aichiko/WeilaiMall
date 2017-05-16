@@ -135,6 +135,8 @@ class OperationRecordViewController: ViewController {
             if error == nil {
                 if models.count == 0 {
                     self?.tableView.mj_footer.endRefreshingWithNoMoreData()
+                }else {
+                    self?.tableView.mj_footer.endRefreshing()
                 }
                 if style == .refreshData {
                     self?.dataArray = models as! [OperationRecordModel]

@@ -65,7 +65,7 @@ struct RequestError: CC_Error {
         case 1000:
             return info
         case 1001:
-            return "access_token非法"
+            return "登录已失效，请重新登录！"
         case 1002:
             return "sign验证失败"
         case 1003:

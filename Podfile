@@ -21,4 +21,6 @@ pod 'IQKeyboardManager'
 
 pod 'WechatOpenSDK'
 
+pod 'UMengAnalytics'
+
 end

@@ -9,3 +9,5 @@
 #import "RSADataSigner.h"
 
 #import "WXApi.h"
+
+#import <UMMobClick/MobClick.h>

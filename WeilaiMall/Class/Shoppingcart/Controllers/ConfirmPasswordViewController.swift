@@ -63,7 +63,6 @@ class ConfirmPasswordViewController: ViewController {
         case .order(let order_id):
             print(order_id)
             orderConfirmGoods(order_id)
-            
         }
     }
     
