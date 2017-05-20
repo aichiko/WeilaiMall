@@ -99,6 +99,7 @@ extension ConfirmPasswordViewController {
             hud.hide(animated: true)
             if error == nil {
                 MBProgressHUD.showErrorAdded(message: "支付成功", to: self?.view)
+                NotificationCenter.default.post(name: RefreshShoppingCart, object: nil)
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: {
                     self?.navigationController?.popToRootViewController(animated: true)
                 })

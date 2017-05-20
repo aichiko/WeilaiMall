@@ -235,11 +235,11 @@ extension OperationRecordViewController: UITableViewDelegate, UITableViewDataSou
 extension OperationRecordViewController {
     func cellAttribute(with cell: OperationRecordCell, _ indexPath: IndexPath) {
         let model = dataArray[indexPath.section]
-        cell.incomings = model.user_money
-        cell.amount = model.highreward
-        cell.amountGive = model.payin
-        cell.backintergral = model.rebate
-        cell.cumulative = model.pay_points
+        cell.user_money = model.user_money
+        cell.highreward = model.highreward
+        cell.payin = model.payin
+        cell.rebate = model.rebate
+        cell.pay_points = model.pay_points
         cell.accountLabel.text = model.change_desc
     }
 }

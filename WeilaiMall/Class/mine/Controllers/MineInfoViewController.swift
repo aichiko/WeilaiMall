@@ -399,6 +399,7 @@ extension MineInfoViewController {
                     self?.detailTitles[2] = birthday
                     let cell = self?.tableView.cellForRow(at: IndexPath.init(row: 2, section: 0))
                     cell?.detailTextLabel?.text = birthday
+                    self?.model.birthday = birthday
                 }catch {
                     MBProgressHUD.showErrorAdded(message: (error as NSError).domain , to: self?.view)
                 }
@@ -419,6 +420,7 @@ extension MineInfoViewController {
                 }catch {
                     MBProgressHUD.showErrorAdded(message: (error as NSError).domain , to: self?.view)
                 }
+                self?.model.sex = sex
                 let sexTitle = self?.sexs[sex]
                 self?.detailTitles[3] = sexTitle!
                 let cell = self?.tableView.cellForRow(at: IndexPath.init(row: 3, section: 0))

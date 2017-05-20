@@ -22,7 +22,7 @@ extension UITabBarItem {
 fileprivate let centerSize: CGFloat = 100.0
 
 class CCTabBar: UITabBar {
-
+    
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -78,7 +78,6 @@ class CCTabBar: UITabBar {
                 print(item.frame)
             }
         }
-        
         print(self.subviews)
     
     }

@@ -29,44 +29,60 @@ class OperationRecordCell: UITableViewCell {
     @IBOutlet weak var amountGiveLabel: UILabel!
     
     /// 收入支出
-    var incomings: Float = 0 {
+    var user_money: String = "" {
         didSet {
-            incomingsLabel.textColor =  (incomings >= 0) ?UIColor.colorWithString("009900") :UIColor.colorWithString("cc3300")
-            let str = (incomings >= 0) ?"+":""
-            incomingsLabel.text = str+String.init(format: "%.2f", incomings)
+            guard let number = Float(user_money) else {
+                return
+            }
+            incomingsLabel.textColor =  (number >= 0) ?UIColor.colorWithString("009900") :UIColor.colorWithString("cc3300")
+            let str = (number > 0) ?"+":""
+            incomingsLabel.text = str+user_money
         }
     }
     /// 带返积分
-    var backintergral: Float = 0 {
+    var rebate: String = "" {
         didSet {
-            backintergralLabel.textColor =  (backintergral >= 0) ?UIColor.colorWithString("009900") :UIColor.colorWithString("cc3300")
-            let str = (backintergral >= 0) ?"+":""
-            backintergralLabel.text = str+String.init(format: "%.0f", str, backintergral)
+            guard let number = Float(rebate) else {
+                return
+            }
+            backintergralLabel.textColor =  (number >= 0) ?UIColor.colorWithString("009900") :UIColor.colorWithString("cc3300")
+            let str = (number >= 0) ?"+":""
+            backintergralLabel.text = str+rebate
         }
     }
     /// 累计消费
-    var cumulative: Float = 0 {
+    var pay_points: String = "" {
         didSet {
-            cumulativeLabel.textColor =  (cumulative >= 0) ?UIColor.colorWithString("009900") :UIColor.colorWithString("cc3300")
-            let str = (cumulative >= 0) ?"+":""
-            cumulativeLabel.text = str+String.init(format: "%.2f", str, cumulative)
+            guard let number = Float(pay_points) else {
+                return
+            }
+            cumulativeLabel.textColor =  (number >= 0) ?UIColor.colorWithString("009900") :UIColor.colorWithString("cc3300")
+            let str = (number >= 0) ?"+":""
+            cumulativeLabel.text = str+pay_points
         }
     }
     /// 推广额度
-    var amount: Float = 0 {
+    var highreward: String = "" {
         didSet {
-            amountLabel.textColor =  (amount >= 0) ?UIColor.colorWithString("009900") :UIColor.colorWithString("cc3300")
-            let str = (amount >= 0) ?"+":""
-            amountLabel.text = str+String.init(format: "%.0f", str, amount)
+            guard let number = Float(highreward) else {
+                return
+            }
+            amountLabel.textColor =  (number >= 0) ?UIColor.colorWithString("009900") :UIColor.colorWithString("cc3300")
+            let str = (number >= 0) ?"+":""
+            amountLabel.text = str+highreward
         }
     }
     /// 推广赠送
-    var amountGive: Float = 0 {
+    var payin: String = "" {
         didSet {
-            amountGiveLabel.textColor =  (amountGive >= 0) ?UIColor.colorWithString("009900") :UIColor.colorWithString("cc3300")
+            guard let number = Float(payin) else {
+                return
+            }
+            amountGiveLabel.textColor =  (number >= 0) ?UIColor.colorWithString("009900") :UIColor.colorWithString("cc3300")
             
-            let str = (amountGive >= 0) ?"+":""
-            amountGiveLabel.text = str+String.init(format: "%.0f", str, amountGive)
+            let str = (number >= 0) ?"+":""
+            
+            amountGiveLabel.text = str+payin
         }
     }
     

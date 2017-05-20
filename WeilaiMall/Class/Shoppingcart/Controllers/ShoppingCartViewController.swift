@@ -78,6 +78,8 @@ class ShoppingCartViewController: ViewController, CCTableViewProtocol {
         configToolBar()
         
         prepareData(.refreshData)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: RefreshShoppingCart, object: nil)
     }
 
     func prepareData(_ style: CCRequestStyle){

@@ -35,6 +35,8 @@ var isLogin: Bool = {
     return UserDefaults.init().value(forKey: "isLogin") as? Bool ?? false
 }()
 
+let RefreshShoppingCart = NSNotification.Name(rawValue: "RefreshShoppingCart")
+
 let RefreshInfo = NSNotification.Name(rawValue: "refreshUserInfo")
 
 let ReloadHeadView = NSNotification.Name(rawValue: "reloadHeadView")

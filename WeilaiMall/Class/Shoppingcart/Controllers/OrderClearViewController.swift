@@ -100,9 +100,14 @@ class OrderClearViewController: ViewController, CCTableViewProtocol {
             return rec_idArr.joined(separator: ",")
         }
         
-        self.performSegue(withIdentifier: "shopping_confirm", sender: ConfirmPasswordViewController.ConfirmStyle.shopping(getRec_id(), clearModel.address!.address_id))
+//        let controller = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "")
+        let rec_id = getRec_id()
+        
+        let controller = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "confirm_password") as! ConfirmPasswordViewController
+        self.navigationController?.pushViewController(controller, animated: true)
+        controller.style = ConfirmPasswordViewController.ConfirmStyle.shopping(rec_id, clearModel.address!.address_id)
+//        self.performSegue(withIdentifier: "shopping_confirm", sender: ConfirmPasswordViewController.ConfirmStyle.shopping(rec_id, clearModel.address!.address_id))
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -121,7 +126,6 @@ class OrderClearViewController: ViewController, CCTableViewProtocol {
             let controller = segue.destination as! ConfirmPasswordViewController
             controller.style = sender as! ConfirmPasswordViewController.ConfirmStyle
         }
-        
     }
 }
 

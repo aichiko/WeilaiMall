@@ -87,7 +87,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="hhj-mD-8aN" kind="show" identifier="shopping_confirm" id="TMa-C8-HR4"/>
+                        <segue destination="hhj-mD-8aN" kind="show" identifier="shopping_confirm" id="kUq-Sg-dXB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Oz-90-t6R" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -97,7 +97,7 @@
         <!--确认支付密码-->
         <scene sceneID="dXg-9a-HfN">
             <objects>
-                <viewController title="确认支付密码" hidesBottomBarWhenPushed="YES" id="hhj-mD-8aN" customClass="ConfirmPasswordViewController" customModule="WeilaiMall" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="confirm_password" title="确认支付密码" hidesBottomBarWhenPushed="YES" id="hhj-mD-8aN" customClass="ConfirmPasswordViewController" customModule="WeilaiMall" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0Yg-DT-VeQ"/>
                         <viewControllerLayoutGuide type="bottom" id="RM5-oc-mI6"/>
@@ -1503,8 +1503,8 @@
         <image name="login_logo" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="kUq-Sg-dXB"/>
         <segue reference="0Bk-zu-u1f"/>
         <segue reference="gLL-wN-91N"/>
-        <segue reference="Wyd-uW-Uvm"/>
     </inferredMetricsTieBreakers>
 </document>
