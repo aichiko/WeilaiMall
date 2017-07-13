@@ -172,7 +172,7 @@ extension RechargeViewController: UITableViewDelegate, UITableViewDataSource {
                     make.right.equalTo(-10)
                     make.height.equalToSuperview()
                 })
-                textField.isEnabled = WXApi.isWXAppInstalled()
+                //textField.isEnabled = WXApi.isWXAppInstalled()
                 addInputView(textField: textField)
             }
         }
@@ -185,7 +185,8 @@ extension RechargeViewController: UITableViewDelegate, UITableViewDataSource {
             configTextField(cell: cell)
         }
         cell?.textLabel?.text = titles[indexPath.row]
-        cell?.detailTextLabel?.text = indexPath.row == 0 ?nil:(WXApi.isWXAppInstalled() ? "支付宝": "")
+        //cell?.detailTextLabel?.text = indexPath.row == 0 ?nil:(WXApi.isWXAppInstalled() ? "支付宝": "")
+        cell?.detailTextLabel?.text = indexPath.row == 0 ? nil:"支付宝"
         cell?.selectionStyle = .none
         return cell!
     }
@@ -258,7 +259,23 @@ extension RechargeViewController {
             return
         }
         
-        print(WXApi.isWXAppInstalled())
+        //print(WXApi.isWXAppInstalled())
+        
+        let hud = MBProgressHUD.showMessage(message: "", view: self.view)
+        let request = CCALiPaymentRequest(parameter: ["amount": String.init(format: "%.2f", amount), "access_token": access_token])
+        URLSessionClient().alamofireSend(request) { [weak self] (models, error) in
+            hud.hide(animated: true)
+            if error == nil {
+                if models.count > 0 {
+                    if let model = models[0] {
+                        self?.aliPayAction(model: model)
+                    }
+                }
+            }else {
+                MBProgressHUD.showErrorAdded(message: (error?.getInfo())!, to: self?.view)
+            }
+        }
+        /*
         if WXApi.isWXAppInstalled() {
             let hud = MBProgressHUD.showMessage(message: "", view: self.view)
             let request = CCALiPaymentRequest(parameter: ["amount": String.init(format: "%.2f", amount), "access_token": access_token])
@@ -277,6 +294,7 @@ extension RechargeViewController {
         }else{
             IAPPayAction()
         }
+         */
     }
     
     func aliPayAction(model: CCALiPaymentRequest.AliPayment) {
@@ -349,7 +367,12 @@ extension RechargeViewController {
             AlipaySDK.defaultService().payOrder(orderString, fromScheme: appScheme, callback: { [unowned self] (resultDic) in
                 //windowtemp.hidden = YES;
                 print("reslut = %@",resultDic!)
-                self.changeOrderStatus(with: resultDic?["resultStatus"] as? Int ?? 4000)
+                if let dic = resultDic as? [String: Any] {
+                    print("dic = %@",dic)
+                    self.changeOrderStatus(with: Int.init(dic["resultStatus"] as! String) ?? 4000)
+                }else {
+                   self.changeOrderStatus(with: 4000)
+                }
             })
         }
     }

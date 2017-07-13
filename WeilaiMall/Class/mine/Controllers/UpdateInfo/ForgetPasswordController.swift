@@ -60,7 +60,9 @@ class ForgetPasswordController: ViewController {
             //设置要处理的事件, 在我们上面创建的queue队列中进行执行
             codeButton.titleLabel?.adjustsFontSizeToFitWidth = true
             codeButton.isEnabled = false
+            
             source.setEventHandler {
+                
                 print(Thread.current)
                 if(timeout <= 1) {
                     source.cancel()

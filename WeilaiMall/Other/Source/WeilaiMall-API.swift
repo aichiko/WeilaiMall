@@ -8,9 +8,9 @@
 
 import Foundation
 
-let webViewHost = webViewHost_production
+let webViewHost = webViewHost_test
 
-let webViewHost_test = "http://139.196.124.0/#/"
+let webViewHost_test = "http://139.196.124.0/h5/#/"
 
 let webViewHost_production = "https://www.weccmall.com/h5/#/"
 
